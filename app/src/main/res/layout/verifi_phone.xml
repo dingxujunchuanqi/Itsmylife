@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/back_click"
+        android:layout_width="@dimen/back_width"
+        android:layout_height="@dimen/view_hight"
+        >
+
+        <ImageView
+            android:id="@+id/image_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/back_button" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/view_hight"
+        android:background="@color/gray" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
+        android:layout_marginTop="93dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/phone_icon" />
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin1"
+            android:text="@string/phone_number"
+            android:textColor="@color/text_apha"
+            android:textSize="@dimen/text_size" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
+        android:layout_marginTop="@dimen/login_ed"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/phone_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="@string/input_number"
+            android:inputType="number"
+            android:maxLength="11"
+            android:phoneNumber="true"
+            android:textSize="@dimen/hint_size" />
+
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/margintop"
+            android:background="@color/dark_gray" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
+        android:layout_marginTop="189dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/sms_icon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin1"
+            android:text="@string/sms_Verify"
+            android:textColor="@color/text_apha"
+            android:textSize="@dimen/text_size" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/lineyout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
+        android:layout_marginTop="226dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/verifi_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="@string/sms_text"
+            android:inputType="number"
+            android:maxLength="11"
+            android:textSize="@dimen/hint_size" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/margintop"
+            android:background="@color/dark_gray" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/verifi_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/lineyout"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="226dp"
+        android:text="@string/getverify_number"
+        android:textColor="@color/yellow1"
+        android:textSize="@dimen/hint_size" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="@dimen/hint_size"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="226dp"
+
+        android:layout_toStartOf="@id/verifi_send"
+        android:background="@color/gray" />
+</RelativeLayout>

@@ -18,7 +18,6 @@ public class StudyFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_study_pager,container,false);
         return view;
     }
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

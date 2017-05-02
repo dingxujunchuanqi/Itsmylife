@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:fadeScrollbars="true">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/verifi_phone" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
+        android:layout_marginTop="285dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/password_lock" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin1"
+            android:text="@string/password"
+            android:textColor="@color/text_apha"
+            android:textSize="@dimen/text_size" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_hight">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/register"
+            android:textColor="@color/text_apha80"
+            android:textSize="@dimen/text_size" />
+    </FrameLayout>
+    <LinearLayout
+        android:id="@+id/ly"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin"
+        android:layout_marginRight="@dimen/margin"
+        android:layout_marginTop="325dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/password_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="@string/register_pasword"
+            android:maxLength="11"
+            android:password="true"
+            android:textSize="@dimen/hint_size"
+
+            />
+
+        <View
+            android:id="@+id/live"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="@dimen/margintop"
+            android:background="@color/gray" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/ly"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/margin"
+        android:src="@drawable/password_hide_icon" />
+
+    <Button
+        android:id="@+id/register_andlogin"
+        android:layout_width="@dimen/button_below_with"
+        android:layout_height="@dimen/button_below_high"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="35dp"
+        android:background="@drawable/login_shape"
+        android:text="@string/register_andlogin"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size3" />
+
+    <RelativeLayout
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+
+        >
+
+        <CheckBox
+            android:id="@+id/agree_xieyi"
+            style="@style/LoginCheckBoxTheme"
+            android:layout_width="@dimen/text_size"
+            android:layout_height="@dimen/text_size"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:id="@+id/text_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="13dp"
+            android:layout_toRightOf="@+id/agree_xieyi"
+            android:text="同意《"
+            android:textColor="@color/text_apha50"
+            android:textSize="@dimen/text_size2" />
+
+        <TextView
+            android:id="@+id/xieyi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/text_1"
+            android:text="蓝领驿家用户"
+            android:textColor="@color/blue_light"
+            android:textSize="@dimen/text_size2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/xieyi"
+            android:text="》协议"
+            android:textColor="@color/text_apha50"
+            android:textSize="@dimen/text_size2" />
+    </RelativeLayout>
+</RelativeLayout>
+    </ScrollView>

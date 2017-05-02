@@ -1,0 +1,2411 @@
+Index: app/src/main/res/layout/forgetpsw_activity.xml
+===================================================================
+--- app/src/main/res/layout/forgetpsw_activity.xml	(revision )
++++ app/src/main/res/layout/forgetpsw_activity.xml	(revision )
+@@ -1,35 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    android:layout_width="match_parent"
+-    android:layout_height="match_parent"
+-    android:background="@color/white"
+-    android:fitsSystemWindows="true"
+-    android:orientation="vertical"
+-    >
+-
+-   <include
+-       layout="@layout/verifi_phone"
+-      />
+-    <FrameLayout
+-        android:layout_width="match_parent"
+-        android:layout_height="@dimen/view_hight">
+-        <TextView
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:layout_gravity="center"
+-            android:text="@string/forget_password"
+-            android:textColor="@color/text_apha80"
+-            android:textSize="@dimen/text_size" />
+-    </FrameLayout>
+-    <Button
+-        android:id="@+id/next_step"
+-        android:layout_width="@dimen/button_below_with"
+-        android:layout_height="@dimen/button_below_high"
+-        android:layout_alignParentBottom="true"
+-        android:layout_centerInParent="true"
+-        android:layout_marginBottom="@dimen/button_below"
+-        android:background="@drawable/login_shape"
+-        android:text="@string/next_step"
+-        android:textColor="@color/white"
+-        android:textSize="@dimen/text_size3" />
+-    </RelativeLayout>
+\ No newline at end of file
+Index: app/src/main/res/layout/register_activity.xml
+===================================================================
+--- app/src/main/res/layout/register_activity.xml	(revision )
++++ app/src/main/res/layout/register_activity.xml	(revision )
+@@ -1,148 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+-    android:layout_width="match_parent" android:layout_height="match_parent"
+-    android:fillViewport="true"
+-    android:fadeScrollbars="true">
+-<RelativeLayout
+-    android:layout_width="match_parent"
+-    android:layout_height="match_parent"
+-    android:background="@color/white"
+-    android:fitsSystemWindows="true"
+-    android:orientation="vertical">
+-
+-    <include layout="@layout/verifi_phone" />
+-
+-
+-    <LinearLayout
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:layout_marginLeft="@dimen/margin"
+-        android:layout_marginRight="@dimen/margin"
+-        android:layout_marginTop="285dp"
+-        android:orientation="horizontal">
+-
+-        <ImageView
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:src="@drawable/password_lock" />
+-
+-        <TextView
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:layout_marginLeft="@dimen/margin1"
+-            android:text="@string/password"
+-            android:textColor="@color/text_apha"
+-            android:textSize="@dimen/text_size" />
+-
+-    </LinearLayout>
+-
+-    <FrameLayout
+-        android:layout_width="match_parent"
+-        android:layout_height="@dimen/view_hight">
+-        <TextView
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:layout_gravity="center"
+-            android:text="@string/register"
+-            android:textColor="@color/text_apha80"
+-            android:textSize="@dimen/text_size" />
+-    </FrameLayout>
+-    <LinearLayout
+-        android:id="@+id/ly"
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:layout_marginLeft="@dimen/margin"
+-        android:layout_marginRight="@dimen/margin"
+-        android:layout_marginTop="325dp"
+-        android:orientation="vertical">
+-
+-        <EditText
+-            android:id="@+id/password_edit"
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:background="@null"
+-            android:hint="@string/register_pasword"
+-            android:maxLength="11"
+-            android:password="true"
+-            android:textSize="@dimen/hint_size"
+-
+-            />
+-
+-        <View
+-            android:id="@+id/live"
+-            android:layout_width="match_parent"
+-            android:layout_height="2dp"
+-            android:layout_marginTop="@dimen/margintop"
+-            android:background="@color/gray" />
+-
+-    </LinearLayout>
+-
+-    <ImageView
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:layout_alignBottom="@id/ly"
+-        android:layout_alignParentRight="true"
+-        android:layout_marginRight="@dimen/margin"
+-        android:src="@drawable/password_hide_icon" />
+-
+-    <Button
+-        android:id="@+id/register_andlogin"
+-        android:layout_width="@dimen/button_below_with"
+-        android:layout_height="@dimen/button_below_high"
+-        android:layout_alignParentBottom="true"
+-        android:layout_centerInParent="true"
+-        android:layout_marginBottom="35dp"
+-        android:background="@drawable/login_shape"
+-        android:text="@string/register_andlogin"
+-        android:textColor="@color/white"
+-        android:textSize="@dimen/text_size3" />
+-
+-    <RelativeLayout
+-
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:layout_alignParentBottom="true"
+-        android:layout_centerHorizontal="true"
+-        android:layout_marginBottom="10dp"
+-
+-        >
+-
+-        <CheckBox
+-            android:id="@+id/agree_xieyi"
+-            style="@style/LoginCheckBoxTheme"
+-            android:layout_width="@dimen/text_size"
+-            android:layout_height="@dimen/text_size"
+-            android:layout_centerVertical="true" />
+-
+-        <TextView
+-            android:id="@+id/text_1"
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:layout_centerVertical="true"
+-            android:layout_marginLeft="13dp"
+-            android:layout_toRightOf="@+id/agree_xieyi"
+-            android:text="Í¬Òâ¡¶"
+-            android:textColor="@color/text_apha50"
+-            android:textSize="@dimen/text_size2" />
+-
+-        <TextView
+-            android:id="@+id/xieyi"
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:layout_centerVertical="true"
+-            android:layout_toRightOf="@+id/text_1"
+-            android:text="À¶Áìæä¼ÒÓÃ»§"
+-            android:textColor="@color/blue_light"
+-            android:textSize="@dimen/text_size2" />
+-
+-        <TextView
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:layout_centerVertical="true"
+-            android:layout_toRightOf="@+id/xieyi"
+-            android:text="¡·Ð­Òé"
+-            android:textColor="@color/text_apha50"
+-            android:textSize="@dimen/text_size2" />
+-    </RelativeLayout>
+-</RelativeLayout>
+-    </ScrollView>
+\ No newline at end of file
+Index: app/src/main/res/layout/forgetpsw_second_activity.xml
+===================================================================
+--- app/src/main/res/layout/forgetpsw_second_activity.xml	(revision )
++++ app/src/main/res/layout/forgetpsw_second_activity.xml	(revision )
+@@ -1,157 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    android:layout_width="match_parent"
+-    android:layout_height="match_parent"
+-    android:background="@color/white"
+-    android:fitsSystemWindows="true"
+-    android:orientation="vertical">
+-
+-    <RelativeLayout
+-        android:layout_width="@dimen/back_width"
+-        android:layout_height="@dimen/view_hight">
+-
+-        <ImageView
+-            android:id="@+id/image_back"
+-            android:layout_width="20dp"
+-            android:layout_height="20dp"
+-            android:layout_centerVertical="true"
+-            android:layout_marginLeft="20dp"
+-            android:src="@drawable/back_button" />
+-    </RelativeLayout>
+-
+-    <View
+-        android:layout_width="match_parent"
+-        android:layout_height="1dp"
+-        android:layout_marginTop="@dimen/view_hight"
+-        android:background="@color/gray" />
+-
+-    <LinearLayout
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:layout_marginLeft="@dimen/margin"
+-        android:layout_marginRight="@dimen/margin"
+-        android:layout_marginTop="93dp"
+-        android:orientation="horizontal">
+-
+-        <ImageView
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:src="@drawable/password_lock" />
+-
+-        <TextView
+-
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:layout_marginLeft="@dimen/margin1"
+-            android:text="@string/password"
+-            android:textColor="@color/text_apha"
+-            android:textSize="@dimen/text_size" />
+-
+-
+-    </LinearLayout>
+-
+-    <LinearLayout
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:layout_marginLeft="@dimen/margin"
+-        android:layout_marginRight="@dimen/margin"
+-        android:layout_marginTop="@dimen/login_ed"
+-        android:orientation="vertical">
+-
+-        <EditText
+-            android:id="@+id/password_edit"
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content"
+-            android:background="@null"
+-            android:hint="@string/register_pasword"
+-            android:inputType="number"
+-            android:maxLength="11"
+-            android:phoneNumber="true"
+-            android:textSize="@dimen/hint_size" />
+-
+-        <View
+-
+-            android:layout_width="match_parent"
+-            android:layout_height="1dp"
+-            android:layout_marginTop="@dimen/margintop"
+-            android:background="@color/dark_gray" />
+-
+-    </LinearLayout>
+-
+-    <LinearLayout
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:layout_marginLeft="@dimen/margin"
+-        android:layout_marginRight="@dimen/margin"
+-        android:layout_marginTop="189dp"
+-        android:orientation="horizontal">
+-
+-        <ImageView
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:src="@drawable/password_lock" />
+-
+-        <TextView
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:layout_marginLeft="@dimen/margin1"
+-            android:text="@string/confirm_password"
+-            android:textColor="@color/text_apha"
+-            android:textSize="@dimen/text_size" />
+-
+-    </LinearLayout>
+-
+-
+-    <LinearLayout
+-        android:id="@+id/lineyout"
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:layout_marginLeft="@dimen/margin"
+-        android:layout_marginRight="@dimen/margin"
+-        android:layout_marginTop="226dp"
+-        android:orientation="vertical">
+-
+-        <EditText
+-            android:id="@+id/confirm_password"
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:background="@null"
+-            android:hint="@string/again_register_pasword"
+-            android:inputType="number"
+-            android:maxLength="11"
+-            android:textSize="@dimen/hint_size" />
+-
+-        <View
+-            android:layout_width="match_parent"
+-            android:layout_height="1dp"
+-            android:layout_marginTop="@dimen/margintop"
+-            android:background="@color/dark_gray" />
+-
+-    </LinearLayout>
+-
+-
+-    <FrameLayout
+-        android:layout_width="match_parent"
+-        android:layout_height="@dimen/view_hight">
+-
+-        <TextView
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:layout_gravity="center"
+-            android:text="@string/forget_password"
+-            android:textColor="@color/text_apha80"
+-            android:textSize="@dimen/text_size" />
+-    </FrameLayout>
+-
+-    <Button
+-        android:id="@+id/commit_button"
+-        android:layout_width="@dimen/button_below_with"
+-        android:layout_height="@dimen/button_below_high"
+-        android:layout_alignParentBottom="true"
+-        android:layout_centerInParent="true"
+-        android:layout_marginBottom="@dimen/button_below"
+-        android:background="@drawable/login_shape"
+-        android:text="@string/commit"
+-        android:textColor="@color/white"
+-        android:textSize="@dimen/text_size3" />
+-</RelativeLayout>
+Index: app/src/main/res/layout/activity_personal_center.xml
+===================================================================
+--- app/src/main/res/layout/activity_personal_center.xml	(revision )
++++ app/src/main/res/layout/activity_personal_center.xml	(revision )
+@@ -1,14 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    android:layout_width="match_parent"
+-    android:layout_height="match_parent"
+-    android:orientation="vertical">
+-
+-    <TextView
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:gravity="center_horizontal"
+-        android:layout_centerVertical="true"
+-        android:text="ÎÒÊÇ¸öÈËÖÐÐÄ"
+-        android:textSize="28dp" />
+-</RelativeLayout>
+\ No newline at end of file
+Index: app/src/main/res/layout/verifi_phone.xml
+===================================================================
+--- app/src/main/res/layout/verifi_phone.xml	(revision )
++++ app/src/main/res/layout/verifi_phone.xml	(revision )
+@@ -1,155 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    android:layout_width="match_parent"
+-    android:layout_height="match_parent"
+-    android:background="@color/white"
+-    android:fitsSystemWindows="true"
+-    android:orientation="vertical">
+-
+-    <RelativeLayout
+-        android:id="@+id/back_click"
+-        android:layout_width="@dimen/back_width"
+-        android:layout_height="@dimen/view_hight"
+-        >
+-
+-        <ImageView
+-            android:id="@+id/image_back"
+-            android:layout_width="20dp"
+-            android:layout_height="20dp"
+-            android:layout_gravity="center_vertical"
+-            android:layout_marginLeft="20dp"
+-            android:layout_centerVertical="true"
+-            android:src="@drawable/back_button" />
+-
+-    </RelativeLayout>
+-
+-    <View
+-        android:layout_width="match_parent"
+-        android:layout_height="1dp"
+-        android:layout_marginTop="@dimen/view_hight"
+-        android:background="@color/gray" />
+-
+-    <LinearLayout
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:layout_marginLeft="@dimen/margin"
+-        android:layout_marginRight="@dimen/margin"
+-        android:layout_marginTop="93dp"
+-        android:orientation="horizontal">
+-
+-        <ImageView
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:src="@drawable/phone_icon" />
+-
+-        <TextView
+-
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:layout_marginLeft="@dimen/margin1"
+-            android:text="@string/phone_number"
+-            android:textColor="@color/text_apha"
+-            android:textSize="@dimen/text_size" />
+-
+-
+-    </LinearLayout>
+-
+-    <LinearLayout
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:layout_marginLeft="@dimen/margin"
+-        android:layout_marginRight="@dimen/margin"
+-        android:layout_marginTop="@dimen/login_ed"
+-        android:orientation="vertical">
+-
+-        <EditText
+-            android:id="@+id/phone_edit"
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content"
+-            android:background="@null"
+-            android:hint="@string/input_number"
+-            android:inputType="number"
+-            android:maxLength="11"
+-            android:phoneNumber="true"
+-            android:textSize="@dimen/hint_size" />
+-
+-        <View
+-
+-            android:layout_width="match_parent"
+-            android:layout_height="1dp"
+-            android:layout_marginTop="@dimen/margintop"
+-            android:background="@color/dark_gray" />
+-
+-    </LinearLayout>
+-
+-    <LinearLayout
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:layout_marginLeft="@dimen/margin"
+-        android:layout_marginRight="@dimen/margin"
+-        android:layout_marginTop="189dp"
+-        android:orientation="horizontal">
+-
+-        <ImageView
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:src="@drawable/sms_icon" />
+-
+-        <TextView
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:layout_marginLeft="@dimen/margin1"
+-            android:text="@string/sms_Verify"
+-            android:textColor="@color/text_apha"
+-            android:textSize="@dimen/text_size" />
+-
+-    </LinearLayout>
+-
+-
+-    <LinearLayout
+-        android:id="@+id/lineyout"
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:layout_marginLeft="@dimen/margin"
+-        android:layout_marginRight="@dimen/margin"
+-        android:layout_marginTop="226dp"
+-        android:orientation="vertical">
+-
+-        <EditText
+-            android:id="@+id/verifi_edit"
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content"
+-            android:background="@null"
+-            android:hint="@string/sms_text"
+-            android:inputType="number"
+-            android:maxLength="11"
+-            android:textSize="@dimen/hint_size" />
+-
+-        <View
+-            android:layout_width="match_parent"
+-            android:layout_height="1dp"
+-            android:layout_marginTop="@dimen/margintop"
+-            android:background="@color/dark_gray" />
+-
+-    </LinearLayout>
+-
+-    <TextView
+-        android:id="@+id/verifi_send"
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:layout_alignEnd="@id/lineyout"
+-        android:layout_marginRight="10dp"
+-        android:layout_marginTop="226dp"
+-        android:text="@string/getverify_number"
+-        android:textColor="@color/yellow1"
+-        android:textSize="@dimen/hint_size" />
+-
+-    <View
+-        android:layout_width="2dp"
+-        android:layout_height="@dimen/hint_size"
+-        android:layout_marginRight="10dp"
+-        android:layout_marginTop="226dp"
+-
+-        android:layout_toStartOf="@id/verifi_send"
+-        android:background="@color/gray" />
+-</RelativeLayout>
+Index: app/src/main/res/layout/activity_login.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_login.xml	(revision )
++++ app/src/main/res/layout/activity_login.xml	(revision )
+@@ -1,155 +1,179 @@
+ <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    android:fitsSystemWindows="true">
+-
++    android:fitsSystemWindows="true"
++    >
+     <RelativeLayout
++        android:background="@drawable/background"
+         android:layout_width="match_parent"
+-        android:layout_height="match_parent"
+-        android:background="@drawable/background">
+-
++        android:layout_height="match_parent">
+-        <LinearLayout
+-            android:id="@+id/phone_number"
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:layout_marginLeft="@dimen/margin"
+-            android:layout_marginTop="93dp"
+-            android:orientation="horizontal">
++    <LinearLayout
++        android:id="@+id/phone_number"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginLeft="@dimen/margin"
++        android:layout_marginTop="93dp"
++        android:orientation="horizontal">
+ 
+-            <ImageView
+-                android:layout_width="@dimen/image_size"
+-                android:layout_height="@dimen/image_size"
+-                android:src="@drawable/phone_icon" />
++        <ImageView
++            android:layout_width="@dimen/image_size"
++            android:layout_height="@dimen/image_size"
++            android:src="@drawable/phone_icon" />
+ 
+-            <TextView
+-                android:layout_width="wrap_content"
+-                android:layout_height="wrap_content"
+-                android:layout_marginLeft="10dp"
+-                android:text="@string/phone_number"
+-                android:textColor="@color/text_apha"
+-                android:textSize="@dimen/text_size" />
+-        </LinearLayout>
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginLeft="10dp"
++            android:text="@string/phone_number"
++            android:textColor="@color/text_apha"
++            android:textSize="@dimen/text_size" />
++    </LinearLayout>
+ 
+-        <RelativeLayout
++    <RelativeLayout
+-            android:id="@+id/relativeLayout"
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:layout_marginLeft="@dimen/margin"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginLeft="@dimen/margin"
+-            android:layout_marginRight="@dimen/margin">
++        android:layout_marginRight="@dimen/margin"
++        android:id="@+id/relativeLayout">
+ 
+-            <EditText
+-                android:id="@+id/phone_edit"
+-                android:layout_width="match_parent"
+-                android:layout_height="wrap_content"
+-                android:layout_marginTop="@dimen/login_ed"
+-                android:background="@null"
+-                android:hint="@string/input_number"
+-                android:inputType="number"
+-                android:maxLength="11"
++        <EditText
++            android:id="@+id/phone_edit"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_marginTop="@dimen/login_ed"
++            android:background="@null"
++            android:hint="@string/input_number"
++            android:inputType="number"
++            android:maxLength="11"
+ 
+-                android:textColorHint="@color/gray"
+-                android:textSize="@dimen/hint_size" />
++            android:textColorHint="@color/gray"
++            android:textSize="@dimen/hint_size" />
+ 
+-            <View
+-                android:id="@+id/view"
+-                android:layout_width="match_parent"
++        <View
++            android:id="@+id/view"
++            android:layout_width="match_parent"
+-                android:layout_height="1dp"
++            android:layout_height="2dp"
+-                android:layout_marginTop="156dp"
++            android:layout_marginTop="156dp"
+-                android:background="@color/dark_gray" />
++            android:background="@color/gray"/>
+-        </RelativeLayout>
++    </RelativeLayout>
+ 
+-        <LinearLayout
++    <LinearLayout
+-            android:id="@+id/linearLayout"
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content"
+-            android:layout_marginTop="189dp"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content"
++        android:layout_marginTop="189dp"
+-            android:orientation="horizontal">
++        android:orientation="horizontal"
++        android:id="@+id/linearLayout">
+ 
+-            <ImageView
+-                android:layout_width="@dimen/image_size"
+-                android:layout_height="@dimen/image_size"
+-                android:layout_marginLeft="@dimen/margin"
+-                android:src="@drawable/password_lock" />
++        <ImageView
++            android:layout_width="@dimen/image_size"
++            android:layout_height="@dimen/image_size"
++            android:layout_marginLeft="@dimen/margin"
++            android:src="@drawable/password_lock" />
+ 
+-            <TextView
+-                android:layout_width="wrap_content"
+-                android:layout_height="wrap_content"
+-                android:layout_marginLeft="10dp"
+-                android:text="@string/password"
+-                android:textColor="@color/text_apha"
+-                android:textSize="@dimen/text_size" />
+-        </LinearLayout>
++        <TextView
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginLeft="10dp"
++            android:text="@string/password"
++            android:textColor="@color/text_apha"
++            android:textSize="@dimen/text_size" />
++    </LinearLayout>
+ 
+-        <RelativeLayout
++    <RelativeLayout
+-            android:id="@+id/relativeLayout_login"
+-            android:layout_width="match_parent"
++        android:id="@+id/relativeLayout_mima"
++        android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
++        android:layout_height="wrap_content"
+-            android:layout_below="@+id/relativeLayout_mima">
++        android:layout_marginLeft="@dimen/margin"
++        android:layout_marginRight="@dimen/margin"
++        android:layout_below="@+id/linearLayout"
++        >
+ 
++        <EditText
++            android:id="@+id/password_edit"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:background="@null"
++            android:hint="@string/input_pasword"
++            android:password="true"
++            android:layout_centerVertical="true"
++            android:textColorHint="@color/gray"
++            android:textSize="@dimen/hint_size"
++            android:layout_alignBottom="@+id/view2"
++            android:layout_alignParentLeft="true"
++            android:layout_alignParentStart="true"
++            android:layout_marginBottom="11dp" />
++        <View
++            android:layout_width="match_parent"
++            android:layout_height="2dp"
++            android:layout_marginTop="46dp"
++            android:background="@color/gray"/>
++    </RelativeLayout>
++    <RelativeLayout
++        android:layout_below="@+id/relativeLayout_mima"
++        android:id="@+id/relativeLayout_login"
++        android:layout_width="match_parent"
++        android:layout_height="wrap_content">
+-            <Button
+-                android:id="@+id/login_button"
+-                android:layout_width="@dimen/button_below_with"
+-                android:layout_height="@dimen/button_below_high"
+-                android:layout_centerHorizontal="true"
+-                android:layout_marginTop="50dp"
++    <Button
++        android:id="@+id/login_button"
++        android:layout_width="@dimen/button_below_with"
++        android:layout_height="@dimen/button_below_high"
++        android:layout_centerHorizontal="true"
++        android:layout_marginTop="50dp"
+-                android:background="@drawable/login_shape"
+-                android:text="@string/login_text"
+-                android:textColor="@color/white"
++        android:textColor="@color/white"
++        android:textStyle="bold"
+-                android:textSize="@dimen/text_size"
++        android:textSize="@dimen/text_size"
+-                android:textStyle="bold" />
+-
++        android:background="@drawable/login_shape"
++        android:text="@string/login_text" />
+-        </RelativeLayout>
+-        <LinearLayout
++    </RelativeLayout>
++    <LinearLayout
++        android:layout_below="@+id/relativeLayout_login"
+-            android:layout_width="match_parent"
+-            android:layout_height="60dp"
++        android:layout_width="match_parent"
++        android:layout_height="60dp"
+-
+-            android:gravity="center"
++        android:paddingTop="30dp"
+-            android:orientation="horizontal"
++        android:orientation="horizontal"
+-            android:paddingTop="30dp">
+-
++        android:gravity="center" >
+-            <TextView
++        <TextView
++            android:paddingRight="10dp"
++            android:layout_gravity=""
+-                android:id="@+id/forget_password"
+-                android:layout_width="150dp"
+-                android:layout_height="30dp"
++        android:id="@+id/forget_password"
++        android:layout_width="150dp"
++        android:layout_height="30dp"
+-                android:layout_gravity=""
+-                android:gravity="right|center_vertical"
++            android:gravity="right|center_vertical"
+-                android:paddingRight="10dp"
+-                android:text="@string/forget_password"
+-                android:textColor="@color/text_apha80"
+-                android:textSize="@dimen/text_size1" />
++        android:text="@string/forget_password"
++        android:textColor="@color/text_apha80"
++        android:textSize="@dimen/text_size1" />
+-
+-            <View
++        <View
++        android:background="@color/gray_slate"
+-                android:layout_width="2dp"
++        android:layout_width="2dp"
+-                android:layout_height="10dp"
+-                android:background="@color/gray_slate" />
+-
++        android:layout_height="10dp"/>
+-            <TextView
++        <TextView
++            android:paddingLeft="10dp"
+-                android:id="@+id/register"
++        android:id="@+id/register"
++            android:gravity="left|center_vertical"
+-                android:layout_width="150dp"
+-                android:layout_height="30dp"
++        android:layout_width="150dp"
++        android:layout_height="30dp"
+-                android:gravity="left|center_vertical"
+-                android:paddingLeft="10dp"
+-                android:text="@string/register_at"
+-                android:textColor="@color/text_apha80"
+-                android:textSize="@dimen/text_size1" />
+-        </LinearLayout>
++        android:text="@string/register_at"
++        android:textColor="@color/text_apha80"
++        android:textSize="@dimen/text_size1" />
++    </LinearLayout>
+ 
+ 
+-        <!--<RelativeLayout
++    <RelativeLayout
++        android:layout_alignParentBottom="true"
+-            android:layout_width="wrap_content"
+-            android:layout_height="40dp"
++        android:layout_width="wrap_content"
++        android:layout_height="40dp"
+-            android:layout_alignParentBottom="true"
+-            android:layout_centerHorizontal="true"
++        android:layout_marginTop="15dp"
+-            android:layout_marginBottom="50dp"
++        android:layout_marginBottom="50dp"
+-            android:layout_marginTop="15dp">
++        android:layout_centerHorizontal="true"
++        >
+-            <CheckBox
++        <CheckBox
+             android:layout_centerVertical="true"
+             android:id="@+id/agree_xieyi"
+             android:layout_width="@dimen/text_size"
+             android:layout_height="@dimen/text_size"
+             style="@style/LoginCheckBoxTheme"
+             />
+-            <TextView
++        <TextView
+             android:layout_centerVertical="true"
+             android:id="@+id/text_1"
+             android:layout_toRightOf="@+id/agree_xieyi"
+@@ -159,7 +183,7 @@
+             android:text="Í¬Òâ¡¶"
+             android:textColor="@color/text_apha50"
+             android:textSize="@dimen/text_size2" />
+-            <TextView
++        <TextView
+             android:layout_centerVertical="true"
+             android:id="@+id/xieyi"
+             android:layout_toRightOf="@+id/text_1"
+@@ -168,7 +192,7 @@
+             android:text="À¶Áìæä¼ÒÓÃ»§"
+             android:textColor="@color/blue_light"
+             android:textSize="@dimen/text_size2" />
+-            <TextView
++        <TextView
+             android:layout_centerVertical="true"
+             android:layout_toRightOf="@+id/xieyi"
+             android:layout_width="wrap_content"
+@@ -176,36 +200,6 @@
+             android:text="¡·Ð­Òé"
+             android:textColor="@color/text_apha50"
+             android:textSize="@dimen/text_size2" />
+-        </RelativeLayout>
+--->
+-        <RelativeLayout
+-            android:layout_marginLeft="@dimen/margin"
+-            android:layout_marginRight="@dimen/margin"
+-            android:id="@+id/relativeLayout_mima"
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:layout_below="@+id/linearLayout"
+-          >
+-
+-            <View
+-                android:layout_width="match_parent"
+-                android:layout_height="1dp"
+-                android:layout_marginTop="46dp"
+-                android:background="@color/dark_gray" />
+-
+-            <EditText
+-                android:id="@+id/password_edit"
+-                android:layout_width="match_parent"
+-                android:layout_height="wrap_content"
+-                android:background="@null"
+-                android:hint="@string/input_pasword"
+-
+-                android:password="true"
+-                android:textColorHint="@color/gray"
+-                android:textSize="@dimen/hint_size"
+-                android:layout_centerVertical="true"
+-                android:layout_alignParentLeft="true"
+-                android:layout_alignParentStart="true" />
+-        </RelativeLayout>
+-    </RelativeLayout>
++    </RelativeLayout>
++        </RelativeLayout>
+ </RelativeLayout>
+\ No newline at end of file
+Index: app/src/main/res/layout/layout_main_header.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/layout_main_header.xml	(revision )
++++ app/src/main/res/layout/layout_main_header.xml	(revision )
+@@ -27,13 +27,5 @@
+         android:text="@string/app_name"
+         android:textColor="@color/text_color_black"
+         android:textSize="@dimen/text_size_20" />
+-    <ImageView
+-        android:id="@+id/user"
+-        android:layout_alignParentRight="true"
+-        android:layout_marginRight="15dp"
+-        android:layout_centerVertical="true"
+-        android:layout_width="wrap_content"
+-        android:layout_height="wrap_content"
+-        android:src="@drawable/widget_bar_user_bg"
+-        android:visibility="gone"/>
++
+ </RelativeLayout>
+\ No newline at end of file
+Index: app/src/main/res/values/colors.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/colors.xml	(revision )
++++ app/src/main/res/values/colors.xml	(revision )
+@@ -62,7 +62,6 @@
+     <color name="red">#FF0000</color>
+     <color name="gold">#FFD700</color>
+     <color name="yellow">#FFFF00</color>
+-    <color name="yellow1">#DAA520</color>
+     <color name="green">#008000</color>
+     <color name="blue">#0000FF</color>
+     <color name="purple">#800080</color>
+@@ -72,7 +71,7 @@
+     <color name="gray_white">#F5F5F5</color>
+     <color name="gray_slate">#708090</color>
+     <color name="blue_light">#0083FF</color>
+-    <color name="gray1">#F2F2F2</color>
++
+     <color name="button_blue">#1C86EE</color>
+     <color name="text_apha">#ef000000</color>
+     <color name="text_apha80">#cf000000</color>
+Index: app/src/main/res/values/dimens.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/dimens.xml	(revision )
++++ app/src/main/res/values/dimens.xml	(revision )
+@@ -96,5 +96,4 @@
+ 	<dimen name="text_size3">18dp</dimen>
+ 	<dimen name="button_below">35dp</dimen>
+ 	<dimen name="view_hight">46dp</dimen>
+-	<dimen name="back_width">50dp</dimen>
+ </resources>
+Index: app/src/main/res/drawable-hdpi/personal_center.png
+===================================================================
+--- app/src/main/res/drawable-hdpi/personal_center.png	(revision )
++++ app/src/main/res/drawable-hdpi/personal_center.png	(revision )
+@@ -1,11 +0,0 @@
+-?PNG
+-
+-   
+-IHDR   '   0   ?pc   tEXtSoftware Adobe ImageReadyq?e<  *iTXtXML:com.adobe.xmp     <?xpacket begin="?" id="W5M0MpCehiHzreSzNTczkc9d"?> <x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.6-c132 79.159284, 2016/04/19-13:13:40        "> <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"> <rdf:Description rdf:about="" xmlns:xmp="http://ns.adobe.com/xap/1.0/" xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/" xmlns:stRef="http://ns.adobe.com/xap/1.0/sType/ResourceRef#" xmp:CreatorTool="Adobe Photoshop CC 2015.5 (Macintosh)" xmpMM:InstanceID="xmp.iid:1F1F0E38D70211E69A88A57D7F5AD29D" xmpMM:DocumentID="xmp.did:2469D792D70211E69A88A57D7F5AD29D"> <xmpMM:DerivedFrom stRef:instanceID="xmp.iid:1F1F0E36D70211E69A88A57D7F5AD29D" stRef:documentID="xmp.did:1F1F0E37D70211E69A88A57D7F5AD29D"/> </rdf:Description> </rdf:RDF> </x:xmpmeta> <?xpacket end="r"?>!?]R  ?IDATx??[?Lq??;?ap?rIg????Qr-ri?(/k]S??fS?x?DR??Kr)K?
+-%	/?'??J??????m;;s????????tf?|???????????2F???????x	?s}A&???XED?l??§Ý??0???
+-pnz?D??z4??e1?????eHG???z????4???Po[?'\?Je??0??]???O_????n?4?r?a????6?d~?q 7?M??M?C_S????*???6?"???T?#????T?
+-|q w??????~C?????rW?-?F?dIL??^?O%???jAn3??-?f?GC??6????\?B8??1]NT
+-+t?}????p&?"((e??D?`^?"??????k?np?@}?"????w:???}?o??aGNz???
+-<?Qn???{?F.?[??<?)??#zN?>2??9???Z#?k*?????m??`?B?6?vU?L?&??I?pL72???????T?*~?2z??d?
+-R?K=?C??d?Y?Jçh??P??F/?Yn???1???nOVN&m?? Wq?????q}?Ed?UFn?R??X?[??	"7*?r???M?:?]???T????\??]?G1?f??}S?c????~????*
+-?L8[b)?Om%bu????<Lu?v???d?Q7???e?` cP?8h?`    IEND?B`?
+\ No newline at end of file
+Index: app/src/main/res/drawable-hdpi/back_button.png
+===================================================================
+--- app/src/main/res/drawable-hdpi/back_button.png	(revision )
++++ app/src/main/res/drawable-hdpi/back_button.png	(revision )
+@@ -1,6 +0,0 @@
+-?PNG
+-
+-   
+-IHDR   $   $   ? ??   tEXtSoftware Adobe ImageReadyq?e<  &iTXtXML:com.adobe.xmp     <?xpacket begin="?" id="W5M0MpCehiHzreSzNTczkc9d"?> <x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.6-c138 79.159824, 2016/09/14-01:09:01        "> <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"> <rdf:Description rdf:about="" xmlns:xmp="http://ns.adobe.com/xap/1.0/" xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/" xmlns:stRef="http://ns.adobe.com/xap/1.0/sType/ResourceRef#" xmp:CreatorTool="Adobe Photoshop CC 2017 (Windows)" xmpMM:InstanceID="xmp.iid:8EBF7B87DEB311E694468FC6A9BC9BB5" xmpMM:DocumentID="xmp.did:8EBF7B88DEB311E694468FC6A9BC9BB5"> <xmpMM:DerivedFrom stRef:instanceID="xmp.iid:8EBF7B85DEB311E694468FC6A9BC9BB5" stRef:documentID="xmp.did:8EBF7B86DEB311E694468FC6A9BC9BB5"/> </rdf:Description> </rdf:RDF> </x:xmpmeta> <?xpacket end="r"?>H???  `IDATx???AN1?q?=?+??C?$?]?? ? '?????I?a???{m?A`?/}?uT?eI?PJ%L?i!3??l¦Ï/???"_H?6?E";4?	?????%X??@??;???L
+-?E?01@??? +&$?K{?0??¦¦uhe?? s?2??.?U?H?ja?@?1 ?"?*n?7???= ?F?U??/?ral ?~h???_K6P?%?E^?+?? ?X%cGq???Qcd??xtx???w??R?S???s(?R?1A9J???
+-??VB?j?Q!?AN??E+*?QZ???T???M??Q????+j?RB?8???A?W??2?  ?nr?A??    IEND?B`?
+\ No newline at end of file
+Index: app/src/main/res/drawable-xhdpi/personal_center.png
+===================================================================
+--- app/src/main/res/drawable-xhdpi/personal_center.png	(revision )
++++ app/src/main/res/drawable-xhdpi/personal_center.png	(revision )
+@@ -1,13 +0,0 @@
+-?PNG
+-
+-   
+-IHDR   ;   I   ??^y   tEXtSoftware Adobe ImageReadyq?e<  *iTXtXML:com.adobe.xmp     <?xpacket begin="?" id="W5M0MpCehiHzreSzNTczkc9d"?> <x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.6-c132 79.159284, 2016/04/19-13:13:40        "> <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"> <rdf:Description rdf:about="" xmlns:xmp="http://ns.adobe.com/xap/1.0/" xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/" xmlns:stRef="http://ns.adobe.com/xap/1.0/sType/ResourceRef#" xmp:CreatorTool="Adobe Photoshop CC 2015.5 (Macintosh)" xmpMM:InstanceID="xmp.iid:1F1F0E34D70211E69A88A57D7F5AD29D" xmpMM:DocumentID="xmp.did:1F1F0E35D70211E69A88A57D7F5AD29D"> <xmpMM:DerivedFrom stRef:instanceID="xmp.iid:1F1F0E32D70211E69A88A57D7F5AD29D" stRef:documentID="xmp.did:1F1F0E33D70211E69A88A57D7F5AD29D"/> </rdf:Description> </rdf:RDF> </x:xmpmeta> <?xpacket end="r"?>'?  IDATx??{??e????:????;???j??(?]L?R???b??????V??EDAe)ABJ?E*?t?????V??%l?TVwu????m???~????o<???3???^?9[V]]-E?7???np'?:???????4???H&?)?
+-?$???,?@'???28?V?`=?????40??6~{TxmK?lK?ZGr6?????
+-6????,Gp>x
+-T?<S?/????V??fn??L?6???I??x?A??W?`z@??x,=l?&?M<?[L?1??Q6.?}sU ?h??E???e???u??n`?lRv?n36?1=???
+-~???lDwp????F?s????nd??,???????????0?I?Un??nd??hoB6?e?2????Q:iB?/p¦Â?)?	Y&?~?,?D?.??@?Z?=?/s?4?]?$? ~u?Vcf?vX???`r????d???&e9?????m2(??PZQ1??Pq???>?oy?	??t?
+-xI??M??R??_z9?{=.r:?	^?? ??SE?3?¦§>UxN]$NE`??sk???.x=??Y?_?G?.~N?W?-????*???gt?y?oS??q?? ~o?^z??g4?Yf ?c?y?8???ynL??Y??O?A?l(?? ?<X?`¦·C?g???nnS??x?S?Y?{@??7O?#tQ???<?[B?'?l?h?)?c?:?=O7/?L#3????`qY?(0?\????=??z?M??xqZ
+-L?F]???V?~fo?t?m#????b?B6?lR???!?<p<?}????S?R0H???J???~?r??-N?D??/?e?(???y??j=? ?+w?[?<?F??[?p}F?,?H??;???????X?N0????ukF??.FQe??ea:??Y?l??Z?J4?
+-&?!\^?? ]??Z?b??D=??~?8'?N?%?d!?G?SID\?^l? ????S????8??z????8?%b"[?W¦¡???\?????H??v?IrNw???K?
+-?n?~?S?T*?{y?`{?mE????E?6>'????`t?J?$????eG??i?QC?J@??!?????t?I?vRQE??%"?(??i?????,?/[??)??8?XOa?;'[W??Sv?8?
+-1‡À	??????t???1?lN???.5J3?S?D????2?LcN??R>;?n?GY?q?lH{?W??W??=o???K?w??q?=?????l??~? _??B???\0i?§¾?W?l?ag?W?4??Q?zN?k???  c?%??o?    IEND?B`?
+\ No newline at end of file
+Index: app/src/main/res/drawable-xhdpi/back_button.png
+===================================================================
+--- app/src/main/res/drawable-xhdpi/back_button.png	(revision )
++++ app/src/main/res/drawable-xhdpi/back_button.png	(revision )
+@@ -1,12 +0,0 @@
+-?PNG
+-
+-   
+-IHDR   6   6   ?Ej?   tEXtSoftware Adobe ImageReadyq?e<  &iTXtXML:com.adobe.xmp     <?xpacket begin="?" id="W5M0MpCehiHzreSzNTczkc9d"?> <x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 5.6-c138 79.159824, 2016/09/14-01:09:01        "> <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"> <rdf:Description rdf:about="" xmlns:xmp="http://ns.adobe.com/xap/1.0/" xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/" xmlns:stRef="http://ns.adobe.com/xap/1.0/sType/ResourceRef#" xmp:CreatorTool="Adobe Photoshop CC 2017 (Windows)" xmpMM:InstanceID="xmp.iid:8EA85476DEB311E6BD31FC432DEFE1B1" xmpMM:DocumentID="xmp.did:8EA85477DEB311E6BD31FC432DEFE1B1"> <xmpMM:DerivedFrom stRef:instanceID="xmp.iid:8EA85474DEB311E6BD31FC432DEFE1B1" stRef:documentID="xmp.did:8EA85475DEB311E6BD31FC432DEFE1B1"/> </rdf:Description> </rdf:RDF> </x:xmpmeta> <?xpacket end="r"?>???  ?IDATx???AN?0?$5???6e???p?8m??? ?M????0?l	!O?8??x???"??????]Zy?g?u??|?S?z??,?z?\C
+-???Q?Z??=CS?i?2([g?g?0??@???\??/J
+-?FP?%V?^	??
+-#C¨½?)Q?`??D????a?	??FP?,?P;?4??["(E???iTE	?P
+-?
+-6?????F??a(¨­
+-	s=???THXeP?????P@??PsabQs`?Q?0?(_?7???5??|?	*???????y_mR?Y?Bpu?1\#7?=&b?1?[??mc?B??E?B???Q|A??Q?y`/q?[??u@p;?????e?0?S\K??Z?g?q?`????q?b?hZ\O?????\O???yj??+
+-?J?
+-???*e??=N?Y??8I???W?p??\?7???????? O???? e??8?3    IEND?B`?
+\ No newline at end of file
+Index: app/src/main/java/com/sinoautodiagnoseos/utils/ToastUtils.java
+===================================================================
+--- app/src/main/java/com/sinoautodiagnoseos/utils/ToastUtils.java	(revision )
++++ app/src/main/java/com/sinoautodiagnoseos/utils/ToastUtils.java	(revision )
+@@ -1,67 +0,0 @@
+-package com.sinoautodiagnoseos.utils;
+-
+-import android.content.Context;
+-import android.view.Gravity;
+-import android.widget.Toast;
+-
+-///////////////////////////////////////////////////////////////////////////
+-// ÍÁË¾¹¤¾ßÀà
+-///////////////////////////////////////////////////////////////////////////
+-public class ToastUtils {
+-	
+-	private static Toast shortToast = null;
+-
+-	public static void makeShortText(String msg, Context context) {
+-		if (context == null) {
+-			return;
+-		}
+-
+-		if (shortToast == null) {
+-			shortToast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
+-		} else {
+-			shortToast.setText(msg);
+-		}
+-		shortToast.show();
+-	}
+-	
+-	
+-	private static Toast longToast = null;
+-
+-	public static void makeLongText(String msg, Context context) {
+-		if (context == null) {
+-			return;
+-		}
+-
+-		if (longToast == null) {
+-			longToast = Toast.makeText(context, msg, Toast.LENGTH_LONG);
+-		} else {
+-			longToast.setText(msg);
+-		}
+-		longToast.show();
+-	}
+-
+-
+-
+-	public static void showLong(Context context, String msg){
+-		makeLongText(msg, context);
+-	}
+-	
+-	public static void showLong(Context context, int id){
+-		makeLongText(context.getResources().getString(id), context);
+-	}
+-	
+-	public static void showShort(Context context, String msg){
+-		makeShortText(msg, context);
+-	}
+-	
+-	public static void showShort(Context context, int id){
+-		makeShortText(context.getResources().getString(id), context);
+-	}
+-	
+-	
+-	public static void showCenterToast(Context context, String msg) {
+-		Toast toast = Toast.makeText(context, msg,  Toast.LENGTH_SHORT);
+-		toast.setGravity(Gravity.CENTER, 0, 0);
+-		toast.show();
+-	}
+-}
+Index: app/src/main/java/com/sinoautodiagnoseos/utils/LogUtils.java
+===================================================================
+--- app/src/main/java/com/sinoautodiagnoseos/utils/LogUtils.java	(revision )
++++ app/src/main/java/com/sinoautodiagnoseos/utils/LogUtils.java	(revision )
+@@ -1,28 +0,0 @@
+-package com.sinoautodiagnoseos.utils;
+-
+-import android.util.Log;
+-
+-/**
+- *
+- * 	log°ïÖú³ÌÐòÔ±·ÖÎö´úÂë,½â¾öbug.
+-
+- 1. ¶àÈË¿ª·¢,ÈçºÎÆÁ±ÎÆäËûÈËµÄlog
+-
+- 2. ÉÏÏßÖ®ºó,ÈçºÎÆÁ±Î
+- */
+-public class LogUtils {
+-    //¿ª¹Ø
+-    public static boolean isDebug = true; // ¿ª·¢½×¶Îtrue,¿ÉÒÔ¿´µ½log ,ÉÏÏß½×¶Îfalse
+-
+-    public static void info(String tag ,String msg){
+-        if(isDebug){
+-            Log.i(tag, "----------------"+msg);
+-        }
+-    }
+-    public static void deBug(String tag ,String msg){
+-        if(isDebug){
+-            Log.d(tag, "++++++++++++++++++"+msg);
+-        }
+-    }
+-
+-}
+Index: app/src/main/java/com/sinoautodiagnoseos/utils/VerifyCodeManager.java
+===================================================================
+--- app/src/main/java/com/sinoautodiagnoseos/utils/VerifyCodeManager.java	(revision )
++++ app/src/main/java/com/sinoautodiagnoseos/utils/VerifyCodeManager.java	(revision )
+@@ -1,162 +0,0 @@
+-package com.sinoautodiagnoseos.utils;
+-
+-import android.content.Context;
+-import android.graphics.Color;
+-import android.os.Handler;
+-import android.text.TextUtils;
+-import android.widget.EditText;
+-import android.widget.TextView;
+-import com.sinoautodiagnoseos.R;
+-
+-import java.util.Timer;
+-import java.util.TimerTask;
+-
+-public class VerifyCodeManager {
+-	
+-	public final static int REGISTER = 1;
+-	public final static int RESET_PWD = 2;
+-	public final static int BIND_PHONE = 3;
+-
+-	private Context mContext;
+-	private int recLen = 60;
+-	private Timer timer = new Timer();
+-	private Handler mHandler = new Handler();
+-	private String phone;
+-	private EditText phoneEdit;
+-	private TextView getVerifiCodeButton;
+-	
+-	public VerifyCodeManager(Context context, EditText editText, TextView textView) {
+-		this.mContext = context;
+-		this.phoneEdit = editText;
+-		this.getVerifiCodeButton = textView;
+-	}
+-
+-	public void getVerifyCode(int type) {
+-		// »ñÈ¡ÑéÖ¤ÂëÖ®Ç°ÏÈÅÐ¶ÏÊÖ»úºÅ
+-
+-		phone = phoneEdit.getText().toString().trim();
+-
+-		if (TextUtils.isEmpty(phone)) {
+-			ToastUtils.showShort(mContext, R.string.tip_please_input_phone);
+-			return;
+-		} else if (phone.length() < 11) {
+-			ToastUtils.showShort(mContext, R.string.tip_phone_regex_not_right);
+-			return;
+-		} else if (!RegexUtils.checkMobile(phone)) {
+-			ToastUtils.showShort(mContext, R.string.tip_phone_regex_not_right);
+-			return;
+-		}else {//Ìá½»ÊÖ»úºÅµ½Èý·½SDK½øÐÐÑéÖ¤£¬ÒÔ·¢ËÍÑéÖ¤Âë
+-			//SMSSDK.getVerificationCode("86", phoneEdit.getText().toString().trim());
+-
+-		}
+-		// Á½ÖÖ·½Ê½£º1.¼¯³ÉµÚÈý·½SDK£¬µ÷ÓÃskdµÄ·½·¨»ñÈ¡ÑéÖ¤Âë
+-		// SMSSDK.getVerificationCode("86", phone);
+-
+-
+-		// 2. ÇëÇó·þÎñ¶Ë£¬ÓÉ·þÎñ¶ËÎª¿Í»§¶Ë·¢ËÍÑéÖ¤Âë
+-       //HttpRequestHelper.getInstance().getVerifyCode(mContext, phone, type,
+-      //getVerifyCodeHandler);
+-
+-		TimerTask task = new TimerTask() {
+-			@Override
+-			public void run() {
+-				mHandler.post(new Runnable() {
+-					@Override
+-					public void run() {
+-						setButtonStatusOff();
+-						if (recLen < 1) {
+-							setButtonStatusOn();
+-						}
+-					}
+-				});
+-			}
+-		};
+-
+-		timer = new Timer();
+-		timer.schedule(task, 0, 1000);
+-
+-	}
+-
+-	private void setButtonStatusOff() {
+-		getVerifiCodeButton.setText(String.format(
+-				mContext.getResources().getString(R.string.count_down), recLen--));
+-		getVerifiCodeButton.setClickable(false);
+-		getVerifiCodeButton.setTextColor(Color.parseColor("#f3f4f8"));
+-		getVerifiCodeButton.setBackgroundColor(Color.parseColor("#b1b1b3"));
+-	}
+-
+-	private void setButtonStatusOn() {
+-		timer.cancel();
+-		getVerifiCodeButton.setText("ÖØÐÂ·¢ËÍ");
+-		getVerifiCodeButton.setTextColor(Color.parseColor("#b1b1b3"));
+-		getVerifiCodeButton.setBackgroundColor(Color.parseColor("#f3f4f8"));
+-		recLen = 60;
+-		getVerifiCodeButton.setClickable(true);
+-	}
+-
+-//	private AsyncHttpResponseHandler getVerifyCodeHandler = new AsyncHttpResponseHandler() {
+-//
+-//		@Override
+-//		public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
+-//			try {
+-//				if (arg2 != null) {
+-//					String respone = new String(arg2);
+-//					LogUtils.e("verifyCode", respone);
+-//					// {"status":"false","code":15,"message":"\u8be5\u7535\u8bdd\u53f7\u7801\u5df2\u88ab\u5360\u7528\uff0c\u8bf7\u91cd\u65b0\u9009\u62e9"}
+-//					JSONObject jsonObject = new JSONObject(respone);
+-//					jsonObject.optBoolean("status");
+-//					int code = jsonObject.optInt("code");
+-//					switch (code) {
+-//					case 15: // ÕËºÅÒÑ´æÔÚ
+-//						ToastUtils.showShort(mContext,
+-//								R.string.tip_phone_exist_please_login);
+-//						setButtonStatusOn();
+-//						break;
+-//					case 0:
+-//						ToastUtils.showShort(mContext, "ÑéÖ¤Âë·¢ËÍ³É¹¦");
+-//						break;
+-//					case 6:
+-//						ToastUtils.showShort(mContext, "ÊÖ»úºÅ²»´æÔÚ£¬Çë×¢²á");
+-//						setButtonStatusOn();
+-//						break;
+-//					case 2003: // ÕËºÅ²»´æÔÚ
+-//						ToastUtils.showShort(mContext,
+-//								R.string.tip_phone_not_exist);
+-//						setButtonStatusOn();
+-//						break;
+-//					case 2015: // ÊÖ»úÕËºÅÒÑ¾­°ó¶¨
+-//						ToastUtils.showShort(mContext, "ÊÖ»úºÅÒÑ±»°ó¶¨£¬ÇëÖ±½ÓÊ¹ÓÃ¸ÃÊÖ»úºÅµÇÂ¼");
+-//						break;
+-//					case 1001: // ¿Í»§¶ËÑéÖ¤´íÎó
+-//						ToastUtils.showShort(mContext, "¿Í»§¶ËÑéÖ¤Ê§°Ü");
+-//						break;
+-//					case 1005: // ÑéÖ¤Âë´íÎó
+-//						ToastUtils.showShort(mContext, "ÑéÖ¤Âë²»ÕýÈ·");
+-//						break;
+-//					case 2007: // ÓÃ»§±£´æÊ§°Ü
+-//
+-//						break;
+-//
+-//					default:
+-//						ToastUtils.showShort(mContext, "·¢ËÍÑéÖ¤ÂëÊ§°Ü£¬ÇëÖØÊÔ");
+-//						setButtonStatusOn();
+-//						break;
+-//					}
+-//
+-//				}
+-//			} catch (JSONException e) {
+-//				e.printStackTrace();
+-//			}
+-//		}
+-//
+-//		@Override
+-//		public void onFailure(int arg0, Header[] arg1, byte[] arg2,
+-//				Throwable arg3) {
+-//			if (arg2 != null) {
+-//				ToastUtils.showShort(mContext, "·¢ËÍÑéÖ¤ÂëÊ§°Ü£¬ÇëÖØÊÔ");
+-//				setButtonStatusOn();
+-//			}
+-//		}
+-//	};
+-
+-}
+Index: app/src/main/java/com/sinoautodiagnoseos/utils/RegexUtils.java
+===================================================================
+--- app/src/main/java/com/sinoautodiagnoseos/utils/RegexUtils.java	(revision )
++++ app/src/main/java/com/sinoautodiagnoseos/utils/RegexUtils.java	(revision )
+@@ -1,200 +0,0 @@
+-package com.sinoautodiagnoseos.utils;
+-
+-import java.util.regex.Matcher;
+-import java.util.regex.Pattern;
+-
+-/**
+- * ÕýÔò¹¤¾ßÀà Ìá¹©ÑéÖ¤ÓÊÏä¡¢ÊÖ»úºÅ¡¢µç»°ºÅÂë¡¢Éí·ÝÖ¤ºÅÂë¡¢Êý×ÖµÈ·½·¨
+- */
+-public final class RegexUtils {
+-
+-	/**
+-	 * ÑéÖ¤Email
+-	 * 
+-	 * @param email
+-	 *            emailµØÖ·£¬¸ñÊ½£ºzhangsan@sina.com£¬zhangsan@xxx.com.cn£¬xxx´ú±íÓÊ¼þ·þÎñÉÌ
+-	 * @return ÑéÖ¤³É¹¦·µ»Øtrue£¬ÑéÖ¤Ê§°Ü·µ»Øfalse ^ £ºÆ¥ÅäÊäÈëµÄ¿ªÊ¼Î»ÖÃ¡£ \£º½«ÏÂÒ»¸ö×Ö·û±ê¼ÇÎªÌØÊâ×Ö·û»ò×ÖÃæÖµ¡£
+-	 *         £ºÆ¥ÅäÇ°Ò»¸ö×Ö·ûÁã´Î»ò¼¸´Î¡£ + £ºÆ¥ÅäÇ°Ò»¸ö×Ö·ûÒ»´Î»ò¶à´Î¡£ (pattern) ÓëÄ£Ê½Æ¥Åä²¢¼Ç×¡Æ¥Åä¡£ x|y£ºÆ¥Åä x »ò
+-	 *         y¡£ [a-z] £º±íÊ¾Ä³¸ö·¶Î§ÄÚµÄ×Ö·û¡£ÓëÖ¸¶¨Çø¼äÄÚµÄÈÎºÎ×Ö·ûÆ¥Åä¡£ \w £ºÓëÈÎºÎµ¥´Ê×Ö·ûÆ¥Åä£¬°üÀ¨ÏÂ»®Ïß¡£
+-	 * 
+-	 *         {n,m} ×îÉÙÆ¥Åä n ´ÎÇÒ×î¶àÆ¥Åä m ´Î $ £ºÆ¥ÅäÊäÈëµÄ½áÎ²¡£
+-	 */
+-	public static boolean checkEmail(String email) {
+-		String regex = "^(\\w)+(\\.\\w+)*@(\\w)+((\\.\\w{2,3}){1,3})$";
+-		return Pattern.matches(regex, email);
+-	}
+-
+-	/**
+-	 * ÑéÖ¤Éí·ÝÖ¤ºÅÂë
+-	 * 
+-	 * @param idCard
+-	 *            ¾ÓÃñÉí·ÝÖ¤ºÅÂë15Î»»ò18Î»£¬×îºóÒ»Î»¿ÉÄÜÊÇÊý×Ö»ò×ÖÄ¸
+-	 * @return ÑéÖ¤³É¹¦·µ»Øtrue£¬ÑéÖ¤Ê§°Ü·µ»Øfalse
+-	 */
+-	public static boolean checkIdCard(String idCard) {
+-		String regex = "[1-9]\\d{13,16}[a-zA-Z0-9]{1}";
+-		return Pattern.matches(regex, idCard);
+-	}
+-
+-	/**
+-	 * ÑéÖ¤ÊÖ»úºÅÂë£¨Ö§³Ö¹ú¼Ê¸ñÊ½£¬+86135xxxx...£¨ÖÐ¹úÄÚµØ£©£¬+00852137xxxx...£¨ÖÐ¹úÏã¸Û£©£©
+-	 * 
+-	 * @param mobile
+-	 *            ÒÆ¶¯¡¢ÁªÍ¨¡¢µçÐÅÔËÓªÉÌµÄºÅÂë¶Î
+-	 *            <p>
+-	 *            ÒÆ¶¯µÄºÅ¶Î£º134(0-8)¡¢135¡¢136¡¢137¡¢138¡¢139¡¢147£¨Ô¤¼ÆÓÃÓÚTDÉÏÍø¿¨£©
+-	 *            ¡¢150¡¢151¡¢152¡¢157£¨TD×¨ÓÃ£©¡¢158¡¢159¡¢187£¨Î´ÆôÓÃ£©¡¢188£¨TD×¨ÓÃ£©
+-	 *            </p>
+-	 *            <p>
+-	 *            ÁªÍ¨µÄºÅ¶Î£º130¡¢131¡¢132¡¢155¡¢156£¨ÊÀ½ç·ç×¨ÓÃ£©¡¢185£¨Î´ÆôÓÃ£©¡¢186£¨3g£©
+-	 *            </p>
+-	 *            <p>
+-	 *            µçÐÅµÄºÅ¶Î£º133¡¢153¡¢180£¨Î´ÆôÓÃ£©¡¢189
+-	 *            </p>
+-	 * @return ÑéÖ¤³É¹¦·µ»Øtrue£¬ÑéÖ¤Ê§°Ü·µ»Øfalse
+-	 */
+-	public static boolean checkMobile(String mobile) {
+-		String regex = "(\\+\\d+)?1[3458]\\d{9}$";
+-		return Pattern.matches(regex, mobile);
+-	}
+-
+-	/**
+-	 * ÑéÖ¤¹Ì¶¨µç»°ºÅÂë
+-	 * 
+-	 * @param phone
+-	 *            µç»°ºÅÂë£¬¸ñÊ½£º¹ú¼Ò£¨µØÇø£©µç»°´úÂë + ÇøºÅ£¨³ÇÊÐ´úÂë£© + µç»°ºÅÂë£¬Èç£º+8602085588447
+-	 *            <p>
+-	 *            <b>¹ú¼Ò£¨µØÇø£© ´úÂë £º</b>±êÊ¶µç»°ºÅÂëµÄ¹ú¼Ò£¨µØÇø£©µÄ±ê×¼¹ú¼Ò£¨µØÇø£©´úÂë¡£Ëü°üº¬´Ó 0 µ½ 9
+-	 *            µÄÒ»Î»»ò¶àÎ»Êý×Ö£¬ Êý×ÖÖ®ºóÊÇ¿Õ¸ñ·Ö¸ôµÄ¹ú¼Ò£¨µØÇø£©´úÂë¡£
+-	 *            </p>
+-	 *            <p>
+-	 *            <b>ÇøºÅ£¨³ÇÊÐ´úÂë£©£º</b>Õâ¿ÉÄÜ°üº¬Ò»¸ö»ò¶à¸ö´Ó 0 µ½ 9 µÄÊý×Ö£¬µØÇø»ò³ÇÊÐ´úÂë·ÅÔÚÔ²À¨ºÅ¡ª¡ª
+-	 *            ¶Ô²»Ê¹ÓÃµØÇø»ò³ÇÊÐ´úÂëµÄ¹ú¼Ò£¨µØÇø£©£¬ÔòÊ¡ÂÔ¸Ã×é¼þ¡£
+-	 *            </p>
+-	 *            <p>
+-	 *            <b>µç»°ºÅÂë£º</b>Õâ°üº¬´Ó 0 µ½ 9 µÄÒ»¸ö»ò¶à¸öÊý×Ö
+-	 *            </p>
+-	 * @return ÑéÖ¤³É¹¦·µ»Øtrue£¬ÑéÖ¤Ê§°Ü·µ»Øfalse
+-	 */
+-	public static boolean checkPhone(String phone) {
+-		// String regex = "(\\+\\d+)?(\\d{3,4}\\-?)?\\d{7,8}$";
+-		String regex = "^1\\d{10}$";
+-		return Pattern.matches(regex, phone);
+-	}
+-
+-	/**
+-	 * ÑéÖ¤ÕûÊý£¨ÕýÕûÊýºÍ¸ºÕûÊý£©
+-	 * 
+-	 * @param digit
+-	 *            Ò»Î»»ò¶àÎ»0-9Ö®¼äµÄÕûÊý
+-	 * @return ÑéÖ¤³É¹¦·µ»Øtrue£¬ÑéÖ¤Ê§°Ü·µ»Øfalse
+-	 */
+-	public static boolean checkDigit(String digit) {
+-		String regex = "\\-?[1-9]\\d+";
+-		return Pattern.matches(regex, digit);
+-	}
+-
+-	/**
+-	 * ÑéÖ¤ÕûÊýºÍ¸¡µãÊý£¨Õý¸ºÕûÊýºÍÕý¸º¸¡µãÊý£©
+-	 * 
+-	 * @param decimals
+-	 *            Ò»Î»»ò¶àÎ»0-9Ö®¼äµÄ¸¡µãÊý£¬Èç£º1.23£¬233.30
+-	 * @return ÑéÖ¤³É¹¦·µ»Øtrue£¬ÑéÖ¤Ê§°Ü·µ»Øfalse
+-	 */
+-	public static boolean checkDecimals(String decimals) {
+-		String regex = "\\-?[1-9]\\d+(\\.\\d+)?";
+-		return Pattern.matches(regex, decimals);
+-	}
+-
+-	/**
+-	 * ÑéÖ¤¿Õ°××Ö·û
+-	 * 
+-	 * @param blankSpace
+-	 *            ¿Õ°××Ö·û£¬°üÀ¨£º¿Õ¸ñ¡¢\t¡¢\n¡¢\r¡¢\f¡¢\x0B
+-	 * @return ÑéÖ¤³É¹¦·µ»Øtrue£¬ÑéÖ¤Ê§°Ü·µ»Øfalse
+-	 */
+-	public static boolean checkBlankSpace(String blankSpace) {
+-		String regex = "\\s+";
+-		return Pattern.matches(regex, blankSpace);
+-	}
+-
+-	/**
+-	 * ÑéÖ¤ÖÐÎÄ
+-	 * 
+-	 * @param chinese
+-	 *            ÖÐÎÄ×Ö·û
+-	 * @return ÑéÖ¤³É¹¦·µ»Øtrue£¬ÑéÖ¤Ê§°Ü·µ»Øfalse
+-	 */
+-	public static boolean checkChinese(String chinese) {
+-		String regex = "^[\u4E00-\u9FA5]+$";
+-		return Pattern.matches(regex, chinese);
+-	}
+-
+-	/**
+-	 * ÑéÖ¤ÈÕÆÚ£¨ÄêÔÂÈÕ£©
+-	 * 
+-	 * @param birthday
+-	 *            ÈÕÆÚ£¬¸ñÊ½£º1992-09-03£¬»ò1992.09.03
+-	 * @return ÑéÖ¤³É¹¦·µ»Øtrue£¬ÑéÖ¤Ê§°Ü·µ»Øfalse
+-	 */
+-	public static boolean checkBirthday(String birthday) {
+-		String regex = "[1-9]{4}([-./])\\d{1,2}\\1\\d{1,2}";
+-		return Pattern.matches(regex, birthday);
+-	}
+-
+-	/**
+-	 * ÑéÖ¤URLµØÖ·
+-	 * 
+-	 * @param url
+-	 *            ¸ñÊ½£ºhttp://blog.csdn.net:80/xyang81/article/details/7705960? »ò
+-	 *            http://www.csdn.net:80
+-	 * @return ÑéÖ¤³É¹¦·µ»Øtrue£¬ÑéÖ¤Ê§°Ü·µ»Øfalse
+-	 */
+-	public static boolean checkURL(String url) {
+-		String regex = "(https?://(w{3}\\.)?)?\\w+\\.\\w+(\\.[a-zA-Z]+)*(:\\d{1,5})?(/\\w*)*(\\??(.+=.*)?(&.+=.*)?)?";
+-		return Pattern.matches(regex, url);
+-	}
+-
+-	/**
+-	 * Æ¥ÅäÖÐ¹úÓÊÕþ±àÂë
+-	 * 
+-	 * @param postcode
+-	 *            ÓÊÕþ±àÂë
+-	 * @return ÑéÖ¤³É¹¦·µ»Øtrue£¬ÑéÖ¤Ê§°Ü·µ»Øfalse
+-	 */
+-	public static boolean checkPostcode(String postcode) {
+-		String regex = "[1-9]\\d{5}";
+-		return Pattern.matches(regex, postcode);
+-	}
+-
+-	/**
+-	 * Æ¥ÅäIPµØÖ·(¼òµ¥Æ¥Åä£¬¸ñÊ½£¬Èç£º192.168.1.1£¬127.0.0.1£¬Ã»ÓÐÆ¥ÅäIP¶ÎµÄ´óÐ¡)
+-	 * 
+-	 * @param ipAddress
+-	 *            IPv4±ê×¼µØÖ·
+-	 * @return ÑéÖ¤³É¹¦·µ»Øtrue£¬ÑéÖ¤Ê§°Ü·µ»Øfalse
+-	 */
+-	public static boolean checkIpAddress(String ipAddress) {
+-		String regex = "[1-9](\\d{1,2})?\\.(0|([1-9](\\d{1,2})?))\\.(0|([1-9](\\d{1,2})?))\\.(0|([1-9](\\d{1,2})?))";
+-		return Pattern.matches(regex, ipAddress);
+-	}
+-
+-	public static boolean checkNickname(String nickname) {
+-		String regex = "^[a-zA-Z0-9\u4E00-\u9FA5_]+$";
+-		return Pattern.matches(regex, nickname);
+-	}
+-	
+-
+-    public static boolean hasCrossSciptRiskInAddress(String str) {
+-        String regx = "[`~!@#$%^&*+=|{}':;',\\[\\].<>~£¡@#£¤%¡­¡­&*¡ª¡ª+|{}¡¾¡¿¡®£»£º¡±¡°¡¯¡££¬¡¢£¿-]";
+-        if (str != null) {
+-            str = str.trim();
+-            Pattern p = Pattern.compile(regx, Pattern.CASE_INSENSITIVE);
+-            Matcher m = p.matcher(str);
+-            return m.find();
+-        }
+-        return false;
+-    }
+-
+-
+-}
+Index: app/src/main/java/com/sinoautodiagnoseos/activity/ForgetPsswordActivity.java
+===================================================================
+--- app/src/main/java/com/sinoautodiagnoseos/activity/ForgetPsswordActivity.java	(revision )
++++ app/src/main/java/com/sinoautodiagnoseos/activity/ForgetPsswordActivity.java	(revision )
+@@ -1,122 +0,0 @@
+-package com.sinoautodiagnoseos.activity;
+-
+-import android.content.Intent;
+-import android.os.Bundle;
+-import android.os.Handler;
+-import android.os.Message;
+-import android.text.TextUtils;
+-import android.view.View;
+-import android.view.WindowManager;
+-import android.widget.Button;
+-import android.widget.EditText;
+-import android.widget.ImageView;
+-import android.widget.RelativeLayout;
+-import android.widget.TextView;
+-import android.widget.Toast;
+-
+-import com.sinoautodiagnoseos.R;
+-import com.sinoautodiagnoseos.ui.loginui.SwipeBackActivity;
+-import com.sinoautodiagnoseos.utils.OnMultiClickListener;
+-import com.sinoautodiagnoseos.utils.RegexUtils;
+-import com.sinoautodiagnoseos.utils.ToastUtils;
+-import com.sinoautodiagnoseos.utils.VerifyCodeManager;
+-
+-import org.json.JSONObject;
+-
+-import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
+-import static com.sinoautodiagnoseos.R.id.image_back;
+-
+-/**
+- * Created by ¾ªÏÅÁËÊ±¹â on 2017/4/23.
+- */
+-
+-public class ForgetPsswordActivity extends SwipeBackActivity implements View.OnClickListener {
+-
+-    private EditText verifi_edit;
+-    private EditText phone_edit;
+-    private Button nextstep;
+-    private VerifyCodeManager verifyCodeManager;
+-    private TextView verifi_send;
+-    private RelativeLayout image_back;
+-
+-    @Override
+-    protected void onCreate(Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-        setContentView(R.layout.forgetpsw_activity);
+-        int mode= WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN;
+-        getWindow().setSoftInputMode(mode);
+-        initView();
+-        initListenerOclick();
+-    }
+-
+-    private void initListenerOclick() {
+-        image_back.setOnClickListener(this);
+-        verifi_send.setOnClickListener(new OnMultiClickListener() {
+-            @Override
+-            public void onMultiClick(View v) {
+-                //TODO:ÇëÇóÈý·½½Ó¿Ú·¢ËÍÑéÖ¤Âë
+-                //·¢ËÍÖ®Ç°¶ÔºÅÂë½øÐÐÑéÖ¤
+-                verifyCodeManager.getVerifyCode(VerifyCodeManager.RESET_PWD);
+-            }
+-        });
+-        nextstep.setOnClickListener(new OnMultiClickListener() {
+-            @Override
+-            public void onMultiClick(View v) {
+-                commit();
+-            }
+-        });
+-
+-    }
+-
+-    private void initView() {
+-        phone_edit = (EditText) findViewById(R.id.phone_edit);
+-        verifi_edit = (EditText) findViewById(R.id.verifi_edit);
+-        verifi_send = (TextView) findViewById(R.id.verifi_send);
+-        nextstep = (Button) findViewById(R.id.next_step);
+-        image_back = (RelativeLayout) findViewById(R.id.back_click);
+-        verifyCodeManager = new VerifyCodeManager(this, phone_edit, verifi_send);
+-    }
+-
+-    private void commit() {
+-        String phone = phone_edit.getText().toString().trim();
+-        String verifi_code = verifi_edit.getText().toString().trim();
+-
+-//        if (checkInput(phone, verifi_code)) {
+-        //TODO:ÇëÇóÈý·½½Ó¿Ú·¢ËÍÑéÖ¤Âë
+-        //·¢ËÍÖ®Ç°¶ÔºÅÂë½øÐÐÑéÖ¤, Ìá½»ÊÖ»úºÅ£¬ÑéÖ¤Âë
+-        //  SMSSDK.submitVerificationCode("86", phone, verifi_code);
+-        Intent intent = new Intent(ForgetPsswordActivity.this, ForgetPswSecondActivity.class);
+-        startActivity(intent);
+-        // finish();
+-        ToastUtils.showShort(ForgetPsswordActivity.this, "»¶Ó­ÏÂÒ»²½");
+-//        }
+-    }
+-
+-    private boolean checkInput(String phone, String code) {
+-        if (TextUtils.isEmpty(phone)) { // µç»°ºÅÂëÎª¿Õ
+-            ToastUtils.showShort(this, R.string.tip_phone_can_not_be_empty);
+-        } else {
+-            if (!RegexUtils.checkMobile(phone)) { // µç»°ºÅÂë¸ñÊ½ÓÐÎó
+-                ToastUtils.showShort(this, R.string.tip_phone_regex_not_right);
+-            } else if (TextUtils.isEmpty(code)) { // ÑéÖ¤Âë²»ÕýÈ·
+-                ToastUtils.showShort(this, R.string.tip_please_input_code);
+-
+-            } else {
+-                return true;
+-
+-            }
+-        }
+-        return false;
+-    }
+-
+-    @Override
+-    public void onClick(View view) {
+-        switch (view.getId()) {
+-            case R.id.image_back:
+-                finish();
+-                break;
+-            default:
+-                break;
+-        }
+-    }
+-}
+\ No newline at end of file
+Index: app/src/main/java/com/sinoautodiagnoseos/activity/RegisterActivity.java
+===================================================================
+--- app/src/main/java/com/sinoautodiagnoseos/activity/RegisterActivity.java	(revision )
++++ app/src/main/java/com/sinoautodiagnoseos/activity/RegisterActivity.java	(revision )
+@@ -1,128 +0,0 @@
+-package com.sinoautodiagnoseos.activity;
+-
+-import android.content.Intent;
+-import android.os.Bundle;
+-import android.text.TextUtils;
+-import android.view.KeyEvent;
+-import android.view.View;
+-import android.view.WindowManager;
+-import android.view.inputmethod.EditorInfo;
+-import android.widget.Button;
+-import android.widget.EditText;
+-import android.widget.ImageView;
+-import android.widget.TextView;
+-
+-import com.sinoautodiagnoseos.R;
+-import com.sinoautodiagnoseos.ui.loginui.SwipeBackActivity;
+-import com.sinoautodiagnoseos.utils.OnMultiClickListener;
+-import com.sinoautodiagnoseos.utils.RegexUtils;
+-import com.sinoautodiagnoseos.utils.ToastUtils;
+-
+-/**
+- * ×¢²áµÄÒ³Ãæ
+- * Created by dingxujun on 2017/4/20.
+- */
+-
+-public class RegisterActivity extends SwipeBackActivity implements View.OnClickListener {
+-
+-    private ImageView image_back;
+-    private EditText phone_edit, password_edit, verifi_edit;
+-    private TextView verifi_send;
+-    private Button register_andlogin;
+-
+-    @Override
+-    protected void onCreate(Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-        setContentView(R.layout.register_activity);
+-        int mode= WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN;
+-        getWindow().setSoftInputMode(mode);
+-        initView();//³õÊ¼»¯Êý¾Ý
+-        initListenerOclick();//°´Å¥µã»÷¼àÌý
+-    }
+-
+-    private void initListenerOclick() {
+-        image_back.setOnClickListener(this);
+-        verifi_send.setOnClickListener(new OnMultiClickListener() {
+-            @Override
+-            public void onMultiClick(View v) {
+-                //TODO:ÇëÇóÈý·½½Ó¿Ú·¢ËÍÑéÖ¤Âë
+-                //·¢ËÍÖ®Ç°¶ÔºÅÂë½øÐÐÑéÖ¤
+-                // verifyCodeManager.getVerifyCode(VerifyCodeManager.REGISTER);
+-            }
+-        });
+-        register_andlogin.setOnClickListener(new OnMultiClickListener() {
+-            @Override
+-            public void onMultiClick(View v) {
+-                commit();//Ìá½»×¢²áµÄÊý¾Ý
+-            }
+-        });
+-
+-        password_edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+-            @Override
+-            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+-                //µã»÷ÐéÄâ¼üÅÌÏÖµÄÐ§¹û,ÓÒÏÂ½ÇÊÇÍê³É»ò¿ªÊ¼
+-                if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_GO) {
+-                    commit();
+-                }
+-                return false;
+-            }
+-        });
+-    }
+-
+-    private void initView() {
+-        image_back = (ImageView) findViewById(R.id.image_back);
+-        phone_edit = (EditText) findViewById(R.id.phone_edit);
+-        password_edit = (EditText) findViewById(R.id.password_edit);
+-        verifi_edit = (EditText) findViewById(R.id.verifi_edit);
+-        verifi_send = (TextView) findViewById(R.id.verifi_send);
+-        register_andlogin = (Button) findViewById(R.id.register_andlogin);
+-    }
+-
+-
+-    //×¢²áÌá½»Êý¾Ý
+-    public void commit() {
+-        String phone = phone_edit.getText().toString().trim();
+-        String password = password_edit.getText().toString().trim();
+-        String verification = verifi_edit.getText().toString().trim();
+-        if (checkInput(phone, password, verification)) {
+-            //TODO£ºÑéÖ¤Êý¾Ý³É¹¦ºó£¬ÇëÇó·þÎñ¶Ë×¢²áÕËºÅ,²¢Ìá½»×¢²áÊý¾Ý
+-            //SMSSDK.submitVerificationCode("86", phone, verification);
+-            Intent intent = new Intent(this, LoginActivity.class);
+-            startActivity(intent);
+-            ToastUtils.showShort(this, "×¢²á³É¹¦£¬¸Ï¿ìµÇÂ¼°É");
+-        }
+-
+-    }
+-
+-    /**
+-     * ¼ì²é×¢²áÊäÈëµÄÄÚÈÝ
+-     */
+-    public boolean checkInput(String phone, String password, String verification) {
+-        if (TextUtils.isEmpty(phone)) {
+-            ToastUtils.showShort(this, R.string.tip_phone_can_not_be_empty);
+-        } else if (!RegexUtils.checkMobile(phone)) {
+-            ToastUtils.showShort(this, R.string.tip_phone_regex_not_right);
+-
+-        } else if (TextUtils.isEmpty(verification)) {//ÑéÖ¤Âë²»ÄÜÎª¿Õ
+-            ToastUtils.showShort(this, R.string.tip_please_input_code);
+-        } else if (password.length() < 6 || password.length() > 32 || TextUtils.isEmpty(password)) {
+-            ToastUtils.showShort(this, R.string.tip_please_input_6_32_password);
+-        } else {
+-            return true;
+-        }
+-
+-        return false;
+-    }
+-
+-
+-    @Override
+-    public void onClick(View view) {
+-        switch (view.getId()) {
+-            case R.id.image_back:
+-                finish();
+-                break;
+-            default:
+-                break;
+-        }
+-    }
+-}
+Index: app/src/main/java/com/sinoautodiagnoseos/activity/ForgetPswSecondActivity.java
+===================================================================
+--- app/src/main/java/com/sinoautodiagnoseos/activity/ForgetPswSecondActivity.java	(revision )
++++ app/src/main/java/com/sinoautodiagnoseos/activity/ForgetPswSecondActivity.java	(revision )
+@@ -1,106 +0,0 @@
+-package com.sinoautodiagnoseos.activity;
+-
+-import android.content.Intent;
+-import android.os.Bundle;
+-import android.text.TextUtils;
+-import android.view.View;
+-import android.view.WindowManager;
+-import android.widget.Button;
+-import android.widget.EditText;
+-import android.widget.ImageView;
+-import android.widget.RelativeLayout;
+-
+-import com.sinoautodiagnoseos.R;
+-import com.sinoautodiagnoseos.ui.loginui.SwipeBackActivity;
+-import com.sinoautodiagnoseos.utils.OnMultiClickListener;
+-import com.sinoautodiagnoseos.utils.ToastUtils;
+-
+-import static com.sinoautodiagnoseos.R.id.image_back;
+-
+-/**
+- * Created by ¾ªÏÅÁËÊ±¹â on 2017/4/24.
+- */
+-
+-public class ForgetPswSecondActivity extends SwipeBackActivity implements View.OnClickListener {
+-
+-    private EditText password;
+-    private EditText confirmpwd;
+-    private Button commit_bt;
+-    private RelativeLayout image_back;
+-
+-    @Override
+-    protected void onCreate(Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-        setContentView(R.layout.forgetpsw_second_activity);
+-        int mode= WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN;
+-        getWindow().setSoftInputMode(mode);
+-        initView();
+-        initListenerOclick();
+-    }
+-
+-    private void initListenerOclick() {
+-        image_back.setOnClickListener(this);
+-        commit_bt.setOnClickListener(new OnMultiClickListener() {
+-            @Override
+-            public void onMultiClick(View v) {
+-                commit();
+-            }
+-        });
+-
+-    }
+-
+-
+-    private void initView() {
+-        password = (EditText) findViewById(R.id.password_edit);
+-        confirmpwd = (EditText) findViewById(R.id.confirm_password);
+-        commit_bt = (Button) findViewById(R.id.commit_button);
+-        image_back = (RelativeLayout) findViewById(R.id.back_click);
+-
+-    }
+-
+-    /**
+-     * ¼ì²é×¢²áÊäÈëµÄÄÚÈÝ
+-     */
+-    public boolean checkInput(String password, String confpwd) {
+-        if (TextUtils.isEmpty(password)) {
+-            ToastUtils.showShort(this, R.string.register_pasword);
+-        } else if (password.length() < 6 || password.length() > 32 || TextUtils.isEmpty(password)) {
+-            ToastUtils.showShort(this, R.string.tip_please_input_6_32_password);
+-
+-        } else if (TextUtils.isEmpty(confpwd)) {
+-            ToastUtils.showShort(this, R.string.again_register_pasword);
+-        } else if (!TextUtils.isEmpty(password) && !TextUtils.isEmpty(confpwd)) {
+-            if (!password.equals(confpwd)) {
+-                ToastUtils.showShort(this, "Á½´ÎÃÜÂë²»Ò»ÖÂ°¡");
+-            } else {
+-                return true;
+-            }
+-        } else {
+-            return true;
+-        }
+-
+-        return false;
+-    }
+-
+-    private void commit() {
+-        String pwd = password.getText().toString().trim();
+-        String confpwd = confirmpwd.getText().toString();
+-        if (checkInput(pwd, confpwd)) {
+-            Intent intent = new Intent(this, LoginActivity.class);
+-            startActivity(intent);
+-            ToastUtils.showShort(this, R.string.modify_successfully);
+-            finish();
+-        }
+-    }
+-
+-    @Override
+-    public void onClick(View view) {
+-        switch (view.getId()) {
+-            case R.id.image_back:
+-                finish();
+-                break;
+-            default:
+-                break;
+-        }
+-    }
+-}
+Index: app/src/main/java/com/sinoautodiagnoseos/activity/PersonalCenterActivity.java
+===================================================================
+--- app/src/main/java/com/sinoautodiagnoseos/activity/PersonalCenterActivity.java	(revision )
++++ app/src/main/java/com/sinoautodiagnoseos/activity/PersonalCenterActivity.java	(revision )
+@@ -1,19 +0,0 @@
+-package com.sinoautodiagnoseos.activity;
+-
+-import android.os.Bundle;
+-
+-import com.sinoautodiagnoseos.R;
+-import com.sinoautodiagnoseos.ui.loginui.SwipeBackActivity;
+-
+-/**
+- * ¸öÈËÖÐÐÄ½çÃæ
+- * Created by ¾ªÏÅÁËÊ±¹â on 2017/5/2.
+- */
+-
+-public class PersonalCenterActivity extends SwipeBackActivity {
+-    @Override
+-    protected void onCreate(Bundle savedInstanceState) {
+-        super.onCreate(savedInstanceState);
+-        setContentView(R.layout.activity_personal_center);
+-    }
+-}
+Index: app/src/main/java/com/sinoautodiagnoseos/activity/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/sinoautodiagnoseos/activity/MainActivity.java	(revision )
++++ app/src/main/java/com/sinoautodiagnoseos/activity/MainActivity.java	(revision )
+@@ -1,14 +1,11 @@
+ package com.sinoautodiagnoseos.activity;
+ 
+-import android.content.Intent;
+ import android.os.Bundle;
+ import android.support.v4.app.Fragment;
+ import android.support.v4.app.FragmentManager;
+ import android.support.v4.app.FragmentTransaction;
+ import android.util.Log;
+ import android.view.KeyEvent;
+-import android.view.View;
+-import android.widget.ImageView;
+ import android.widget.RadioGroup;
+ import android.widget.TextView;
+ 
+@@ -18,14 +15,10 @@
+ import com.sinoautodiagnoseos.fragment.ImFragment;
+ import com.sinoautodiagnoseos.fragment.StudyFragment;
+ import com.sinoautodiagnoseos.ui.UIHelper;
+-import com.sinoautodiagnoseos.utils.OnMultiClickListener;
+ 
+ import java.util.ArrayList;
+ import java.util.Arrays;
+ 
+-import static com.sinoautodiagnoseos.R.id.user;
+-import static com.sinoautodiagnoseos.R.id.view;
+-
+ public class MainActivity extends BaseFragmentActivity {
+ 
+     private static final String TAG = MainActivity.class.getSimpleName();
+@@ -35,7 +28,6 @@
+     private RadioGroup group;
+     private ArrayList<String> fragmentTags;
+     private FragmentManager fragmentManager;
+-    private ImageView user;
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+@@ -44,11 +36,8 @@
+         fragmentManager = getSupportFragmentManager();
+         initData(savedInstanceState);
+         initView();
+-        initListenerOclick();
+     }
+ 
+-
+-
+     @Override
+     public void onSaveInstanceState(Bundle outState) {
+         super.onSaveInstanceState(outState);
+@@ -67,13 +56,12 @@
+     private void hideSavedFragment() {
+         Fragment fragment = fragmentManager.findFragmentByTag(fragmentTags.get(currIndex));
+         if (fragment!=null){
+-            fragmentManager.beginTransaction().hide(fragment).commit();//Òþ²Øfragment
++            fragmentManager.beginTransaction().hide(fragment).commit();
+         }
+     }
+ 
+     private TextView textHeadTitle;
+     private void initView() {
+-        user = (ImageView)findViewById(R.id.user);
+         textHeadTitle= (TextView) findViewById(R.id.textHeadTitle);
+         textHeadTitle.setText("È¦×Ó");
+         group = (RadioGroup) findViewById(R.id.group);
+@@ -84,22 +72,18 @@
+                     case R.id.foot_bar_circle:
+                         currIndex=0;
+                         textHeadTitle.setText("È¦×Ó");
+-                        user.setVisibility(View.GONE);
+                         break;
+                     case R.id.foot_bar_diagnose:
+                         currIndex=1;
+                         textHeadTitle.setText("ÔÆÕï");
+-                        user.setVisibility(View.VISIBLE);
+                         break;
+                     case R.id.foot_bar_im:
+                         currIndex=2;
+                         textHeadTitle.setText("ÏûÏ¢");
+-                        user.setVisibility(View.GONE);
+                         break;
+                     case R.id.main_footbar_study:
+                         currIndex=3;
+                         textHeadTitle.setText("Ñ§Ï°");
+-                        user.setVisibility(View.GONE);
+                         break;
+                     default:break;
+                 }
+@@ -108,15 +92,7 @@
+         });
+         showFragment();
+     }
+-    private void initListenerOclick() {
+-        user.setOnClickListener(new OnMultiClickListener() {
+-            @Override
+-            public void onMultiClick(View v) {
+-                Intent intent = new Intent(MainActivity.this, PersonalCenterActivity.class);
+-                startActivity(intent);
+-            }
+-        });
+-    }
++
+     private void showFragment() {
+ //        //Ìø×ªµ½È¦×ÓÒ³Ãæ ÐèµÇÂ¼
+ //        if (currIndex==0){
+Index: app/src/main/java/com/sinoautodiagnoseos/activity/LoginActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/sinoautodiagnoseos/activity/LoginActivity.java	(revision )
++++ app/src/main/java/com/sinoautodiagnoseos/activity/LoginActivity.java	(revision )
+@@ -1,114 +1,37 @@
+ package com.sinoautodiagnoseos.activity;
+ 
+-import android.content.Intent;
+ import android.os.Bundle;
+-import android.text.TextUtils;
+ import android.view.View;
+-import android.view.WindowManager;
+ import android.widget.Button;
+-import android.widget.EditText;
+ import android.widget.TextView;
+ 
+ import com.sinoautodiagnoseos.R;
+-import com.sinoautodiagnoseos.ui.UIHelper;
+ import com.sinoautodiagnoseos.ui.loginui.SwipeBackActivity;
+-import com.sinoautodiagnoseos.utils.LogUtils;
+ import com.sinoautodiagnoseos.utils.OnMultiClickListener;
+-import com.sinoautodiagnoseos.utils.RegexUtils;
+-import com.sinoautodiagnoseos.utils.ToastUtils;
+ 
+ /**
++ * µÇÂ¼Ò³
+  * Created by HQ_Demos on 2017/4/27.
+  */
+-public class LoginActivity extends SwipeBackActivity implements View.OnClickListener {
++public class LoginActivity extends SwipeBackActivity{
+     private Button bt_login;
+-    private TextView forget_pwd, register;
+-    private EditText phone_edit, password_edit;
+-
+-
++    private TextView fgp_psd,rgt_psd;
+     @Override
+-    protected void onCreate(Bundle savedInstanceState) {  
++    protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_login);
+-        int mode= WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN;
+-        getWindow().setSoftInputMode(mode);
++        
+         initView();
+-        initListenerOclick();
+     }
+ 
+-    public void initView() {
++    private void initView() {
+-        bt_login = (Button) findViewById(R.id.login_button);
++        bt_login= (Button) findViewById(R.id.login_button);
+-        register = (TextView) findViewById(R.id.register);
+-        forget_pwd = (TextView) findViewById(R.id.forget_password);
+-        phone_edit = (EditText) findViewById(R.id.phone_edit);
+-        password_edit = (EditText) findViewById(R.id.password_edit);
+-    }
+ 
+-    private void initListenerOclick() {
+-        forget_pwd.setOnClickListener(this);
+-        register.setOnClickListener(this);
+         bt_login.setOnClickListener(new OnMultiClickListener() {
+             @Override
+             public void onMultiClick(View v) {
+-                onClickLongin();
+-                LogUtils.deBug("login", "------------------");
++
+             }
+         });
+     }
+-
+-    @Override
+-    public void onClick(View view) {
+-        switch (view.getId()) {
+-            case R.id.forget_password:
+-                Intent intent_pwd = new Intent(this, ForgetPsswordActivity.class);
+-                startActivity(intent_pwd);
+-                break;
+-            case R.id.register:
+-                Intent intent_rg = new Intent(this, RegisterActivity.class);
+-                startActivity(intent_rg);
+-                break;
+-            default:
+-                break;
+-        }
++}
+-    }
+-
+-    private void onClickLongin() {
+-        String phonenumber = phone_edit.getText().toString();
+-        String password = password_edit.getText().toString();
+-        if (checkInput(phonenumber, password)) {
+-
+-            // TODO: ÇëÇó·þÎñÆ÷µÇÂ¼ÕËºÅ
+-
+-            if (true) {
+-//                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+-//                startActivity(intent);
+-//                finish();
+-                UIHelper.showStudy(this);
+-
+-            } else {
+-                ToastUtils.showShort(this, R.string.username_orpassword_error);
+-            }
+-        }
+-
+-
+-    }
+-
+-    /**
+-     * ¼ì²é×¢²áÊäÈëµÄÄÚÈÝ
+-     */
+-    public boolean checkInput(String phone, String password) {
+-        if (TextUtils.isEmpty(phone)) {
+-            ToastUtils.showShort(this, R.string.tip_phone_can_not_be_empty);
+-        } else if (!RegexUtils.checkMobile(phone)) {
+-            ToastUtils.showShort(this, R.string.tip_phone_regex_not_right);
+-
+-        } else if (password.length() < 6 || password.length() > 32 || TextUtils.isEmpty(password)) {
+-            ToastUtils.showShort(this, R.string.tip_please_input_6_32_password);
+-        } else {
+-            return true;
+-        }
+-
+-        return false;
+-    }
+-}
+-
+Index: app/src/main/java/com/sinoautodiagnoseos/activity/BaseFragmentActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/sinoautodiagnoseos/activity/BaseFragmentActivity.java	(revision )
++++ app/src/main/java/com/sinoautodiagnoseos/activity/BaseFragmentActivity.java	(revision )
+@@ -5,10 +5,8 @@
+ import android.os.Build;
+ import android.os.Bundle;
+ import android.support.v4.app.FragmentActivity;
+-import android.view.View;
+ import android.view.Window;
+ import android.view.WindowManager;
+-import android.widget.ImageView;
+ 
+ import com.readystatesoftware.systembartint.SystemBarTintManager;
+ import com.sinoautodiagnoseos.R;
+Index: app/src/main/java/com/sinoautodiagnoseos/fragment/StudyFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/sinoautodiagnoseos/fragment/StudyFragment.java	(revision )
++++ app/src/main/java/com/sinoautodiagnoseos/fragment/StudyFragment.java	(revision )
+@@ -18,6 +18,7 @@
+         View view = inflater.inflate(R.layout.fragment_study_pager,container,false);
+         return view;
+     }
++
+     @Override
+     public void onActivityCreated(Bundle savedInstanceState) {
+         super.onActivityCreated(savedInstanceState);
+Index: app/src/main/java/com/sinoautodiagnoseos/fragment/DiagnoseFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/sinoautodiagnoseos/fragment/DiagnoseFragment.java	(revision )
++++ app/src/main/java/com/sinoautodiagnoseos/fragment/DiagnoseFragment.java	(revision )
+@@ -1,15 +1,12 @@
+ package com.sinoautodiagnoseos.fragment;
+ 
+-import android.content.Intent;
+ import android.os.Bundle;
+ import android.support.v4.app.Fragment;
+ import android.view.LayoutInflater;
+ import android.view.View;
+ import android.view.ViewGroup;
+-import android.widget.ImageView;
+ 
+ import com.sinoautodiagnoseos.R;
+-import com.sinoautodiagnoseos.activity.PersonalCenterActivity;
+ 
+ /**
+  * ÔÆÕïÒ³Ãæ
+@@ -18,10 +15,10 @@
+ 
+ public class DiagnoseFragment extends Fragment {
+ 
++
+     @Override
+     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+-
+-        View view = inflater.inflate(R.layout.fragment_diagnose_pager, container, false);
++        View view = inflater.inflate(R.layout.fragment_diagnose_pager,container,false);
+         return view;
+     }
+ 
+@@ -29,5 +26,4 @@
+     public void onActivityCreated(Bundle savedInstanceState) {
+         super.onActivityCreated(savedInstanceState);
+     }
+-
+ }
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/AndroidManifest.xml	(revision )
++++ app/src/main/AndroidManifest.xml	(revision )
+@@ -41,10 +41,6 @@
+         <activity android:name=".activity.MainActivity" android:launchMode="singleTask"
+             android:screenOrientation="portrait"/>
+         <activity android:name=".activity.LoginActivity" android:screenOrientation="portrait"/>
+-        <activity android:name=".activity.RegisterActivity"/>
+-        <activity android:name=".activity.ForgetPsswordActivity"/>
+-        <activity android:name=".activity.ForgetPswSecondActivity"/>
+-        <activity android:name=".activity.PersonalCenterActivity"/>
+     </application>
+ 
+ </manifest>
+\ No newline at end of file
+Index: .idea/inspectionProfiles/Project_Default.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/inspectionProfiles/Project_Default.xml	(revision )
++++ .idea/inspectionProfiles/Project_Default.xml	(revision )
+@@ -0,0 +1,11 @@
++<component name="InspectionProjectProfileManager">
++  <profile version="1.0">
++    <option name="myName" value="Project Default" />
++    <inspection_tool class="AndroidLintRtlCompat" enabled="false" level="ERROR" enabled_by_default="false" />
++    <inspection_tool class="AndroidLintUnknownId" enabled="false" level="ERROR" enabled_by_default="false" />
++    <inspection_tool class="LoggerInitializedWithForeignClass" enabled="false" level="WARNING" enabled_by_default="false">
++      <option name="loggerClassName" value="org.apache.log4j.Logger,org.slf4j.LoggerFactory,org.apache.commons.logging.LogFactory,java.util.logging.Logger" />
++      <option name="loggerFactoryMethodName" value="getLogger,getLogger,getLog,getLogger" />
++    </inspection_tool>
++  </profile>
++</component>
+\ No newline at end of file
+Index: .idea/inspectionProfiles/profiles_settings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/inspectionProfiles/profiles_settings.xml	(revision )
++++ .idea/inspectionProfiles/profiles_settings.xml	(revision )
+@@ -0,0 +1,7 @@
++<component name="InspectionProjectProfileManager">
++  <settings>
++    <option name="PROJECT_PROFILE" value="Project Default" />
++    <option name="USE_PROJECT_PROFILE" value="true" />
++    <version value="1.0" />
++  </settings>
++</component>
+\ No newline at end of file
+Index: .idea/vcs.xml
+===================================================================
+--- .idea/vcs.xml	(revision )
++++ .idea/vcs.xml	(revision )
+@@ -1,6 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="VcsDirectoryMappings">
+-    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/encodings.xml
+===================================================================
+--- .idea/encodings.xml	(revision )
++++ .idea/encodings.xml	(revision )
+@@ -1,6 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="Encoding">
+-    <file url="PROJECT" charset="UTF-8" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/misc.xml	(revision )
++++ .idea/misc.xml	(revision )
+@@ -43,23 +43,4 @@
+   <component name="ProjectType">
+     <option name="id" value="Android" />
+   </component>
+-  <component name="SvnConfiguration">
+-    <configuration>C:\Users\¾ªÏÅÁËÊ±¹â\AppData\Roaming\Subversion</configuration>
+-  </component>
+-  <component name="masterDetails">
+-    <states>
+-      <state key="ProjectJDKs.UI">
+-        <settings>
+-          <last-edited>1.8</last-edited>
+-          <splitter-proportions>
+-            <option name="proportions">
+-              <list>
+-                <option value="0.19694868" />
+-              </list>
+-            </option>
+-          </splitter-proportions>
+-        </settings>
+-      </state>
+-    </states>
+-  </component>
+ </project>
+\ No newline at end of file
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/gradle.xml	(revision )
++++ .idea/gradle.xml	(revision )
+@@ -1,0 +1,0 @@
+Index: .gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .gitignore	(revision )
++++ .gitignore	(revision )
+@@ -7,57 +7,3 @@
+ /build
+ /captures
+ .externalNativeBuild
+-### Android template
+-# Built application files
+-*.apk
+-*.ap_
+-
+-# Files for the ART/Dalvik VM
+-*.dex
+-
+-# Java class files
+-*.class
+-
+-# Generated files
+-bin/
+-gen/
+-out/
+-
+-# Gradle files
+-.gradle/
+-build/
+-
+-# Local configuration file (sdk path, etc)
+-local.properties
+-
+-# Proguard folder generated by Eclipse
+-proguard/
+-
+-# Log Files
+-*.log
+-
+-# Android Studio Navigation editor temp files
+-.navigation/
+-
+-# Android Studio captures folder
+-captures/
+-
+-# Intellij
+-.idea/workspace.xml
+-.idea/tasks.xml
+-.idea/gradle.xml
+-.idea/dictionaries
+-.idea/libraries
+-
+-# Keystore files
+-*.jks
+-
+-# External native build folder generated in Android Studio 2.2 and later
+-
+-# Google Services (e.g. APIs or Firebase)
+-google-services.json
+-
+-# Freeline
+-freeline.py
+-freeline/
+-freeline_project_description.json

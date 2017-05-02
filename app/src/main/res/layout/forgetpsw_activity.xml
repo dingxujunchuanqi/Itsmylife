@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    >
+
+   <include
+       layout="@layout/verifi_phone"
+      />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_hight">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/forget_password"
+            android:textColor="@color/text_apha80"
+            android:textSize="@dimen/text_size" />
+    </FrameLayout>
+    <Button
+        android:id="@+id/next_step"
+        android:layout_width="@dimen/button_below_with"
+        android:layout_height="@dimen/button_below_high"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="@dimen/button_below"
+        android:background="@drawable/login_shape"
+        android:text="@string/next_step"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size3" />
+    </RelativeLayout>

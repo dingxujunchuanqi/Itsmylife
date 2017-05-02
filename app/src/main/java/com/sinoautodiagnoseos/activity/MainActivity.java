@@ -1,11 +1,14 @@
 package com.sinoautodiagnoseos.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -15,9 +18,13 @@ import com.sinoautodiagnoseos.fragment.DiagnoseFragment;
 import com.sinoautodiagnoseos.fragment.ImFragment;
 import com.sinoautodiagnoseos.fragment.StudyFragment;
 import com.sinoautodiagnoseos.ui.UIHelper;
+import com.sinoautodiagnoseos.utils.OnMultiClickListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import static com.sinoautodiagnoseos.R.id.user;
+import static com.sinoautodiagnoseos.R.id.view;
 
 public class MainActivity extends BaseFragmentActivity {
 
@@ -28,6 +35,7 @@ public class MainActivity extends BaseFragmentActivity {
     private RadioGroup group;
     private ArrayList<String> fragmentTags;
     private FragmentManager fragmentManager;
+    private ImageView user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +44,10 @@ public class MainActivity extends BaseFragmentActivity {
         fragmentManager = getSupportFragmentManager();
         initData(savedInstanceState);
         initView();
+        initListenerOclick();
     }
+
+
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -56,12 +67,13 @@ public class MainActivity extends BaseFragmentActivity {
     private void hideSavedFragment() {
         Fragment fragment = fragmentManager.findFragmentByTag(fragmentTags.get(currIndex));
         if (fragment!=null){
-            fragmentManager.beginTransaction().hide(fragment).commit();
+            fragmentManager.beginTransaction().hide(fragment).commit();//隐藏fragment
         }
     }
 
     private TextView textHeadTitle;
     private void initView() {
+        user = (ImageView)findViewById(R.id.user);
         textHeadTitle= (TextView) findViewById(R.id.textHeadTitle);
         textHeadTitle.setText("圈子");
         group = (RadioGroup) findViewById(R.id.group);
@@ -72,18 +84,22 @@ public class MainActivity extends BaseFragmentActivity {
                     case R.id.foot_bar_circle:
                         currIndex=0;
                         textHeadTitle.setText("圈子");
+                        user.setVisibility(View.GONE);
                         break;
                     case R.id.foot_bar_diagnose:
                         currIndex=1;
                         textHeadTitle.setText("云诊");
+                        user.setVisibility(View.VISIBLE);
                         break;
                     case R.id.foot_bar_im:
                         currIndex=2;
                         textHeadTitle.setText("消息");
+                        user.setVisibility(View.GONE);
                         break;
                     case R.id.main_footbar_study:
                         currIndex=3;
                         textHeadTitle.setText("学习");
+                        user.setVisibility(View.GONE);
                         break;
                     default:break;
                 }
@@ -92,7 +108,15 @@ public class MainActivity extends BaseFragmentActivity {
         });
         showFragment();
     }
-
+    private void initListenerOclick() {
+        user.setOnClickListener(new OnMultiClickListener() {
+            @Override
+            public void onMultiClick(View v) {
+                Intent intent = new Intent(MainActivity.this, PersonalCenterActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
     private void showFragment() {
 //        //跳转到圈子页面 需登录
 //        if (currIndex==0){

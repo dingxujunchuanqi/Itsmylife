@@ -10,6 +10,7 @@ import com.sinoautodiagnoseos.ui.loginui.SwipeBackActivity;
 import com.sinoautodiagnoseos.utils.OnMultiClickListener;
 
 /**
+ * 登录页
  * Created by HQ_Demos on 2017/4/27.
  */
 public class LoginActivity extends SwipeBackActivity{

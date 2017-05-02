@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">蓝领驿家二期</string>
+    <string name="main_navigation_circle">圈子</string>
+    <string name="main_navigation_diagnose">云诊</string>
+    <string name="main_navigation_im">消息</string>
+    <string name="main_navigation_study">学习</string>
+
+    <!--登录 注册 修改密码-->
+    <string name="phone_number">手机号</string>
+    <string name="input_number">请输入您的手机号</string>
+    <string name="sms_text">请输入验证码</string>
+    <string name="input_pasword">请输入您的密码</string>
+    <string name="register_pasword">请输入您的账号密码</string>
+    <string name="getverify_number">获取验证码</string>
+    <string name="password">密码</string>
+    <string name="login_text">登录</string>
+    <string name="tip_phone_can_not_be_empty">手机号码不能为空哦</string>
+    <string name="forget_password">忘记密码</string>
+    <string name="register_at">立即注册</string>
+    <string name="home_page">我是首页</string>
+    <string name="register">注册</string>
+    <string name="sms_Verify">短信验证码</string>
+    <string name="register_andlogin">注册并登录</string>
+    <string name="tip_phone_regex_not_right">手机号码格式不正确</string>
+    <string name="tip_please_input_code">请输入验证码</string>
+    <string name="tip_please_input_6_32_password">请输入6至32位密码</string>
+    <string name="tip_please_input_phone">请输入手机号码</string>
+    <string name="count_down">%s秒后重发</string>
+    <string name="commit">提交</string>
+    <string name="next_step">下一步</string>
+    <string name="confirm_password">确认密码</string>
+    <string name="again_register_pasword">请再次输入您的账号密码</string>
+    <string name="username_orpassword_error">用户名或者密码错误，请重新输入！</string>
+    <string name="modify_successfully">恭喜修改成功！</string>
+</resources>

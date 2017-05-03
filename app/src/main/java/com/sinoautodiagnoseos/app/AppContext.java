@@ -4,6 +4,8 @@ import android.app.Application;
 
 import com.squareup.leakcanary.LeakCanary;
 
+import cn.jpush.android.api.JPushInterface;
+
 public class AppContext extends Application {
 
     private static AppContext app;
@@ -24,6 +26,10 @@ public class AppContext extends Application {
         super.onCreate();
         LeakCanary.install(this);
         registerUncaughtExceptionHandler();
+
+        JPushInterface.setDebugMode(false); 	// 发布正式版本,关闭日志文件
+        JPushInterface.init(this);     		// 初始化 JPush
+        System.out.println("--------JPush初始化成功----------------");
     }
 
     // 注册App异常崩溃处理器

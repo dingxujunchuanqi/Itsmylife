@@ -8,10 +8,14 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.sinoautodiagnoseos.R;
 import com.sinoautodiagnoseos.app.AppContext;
+import com.sinoautodiagnoseos.entity.User.Skill;
 import com.sinoautodiagnoseos.entity.User.Token;
+import com.sinoautodiagnoseos.entity.User.UserInfo;
 import com.sinoautodiagnoseos.net.requestApi.HttpRequestApi;
 import com.sinoautodiagnoseos.net.requestSubscribers.HttpSubscriber;
 import com.sinoautodiagnoseos.net.requestSubscribers.SubscriberOnListener;
@@ -24,6 +28,12 @@ import com.sinoautodiagnoseos.utils.RegexUtils;
 import com.sinoautodiagnoseos.utils.SharedPreferences;
 import com.sinoautodiagnoseos.utils.StringUtils;
 import com.sinoautodiagnoseos.utils.ToastUtils;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 import static com.sinoautodiagnoseos.ui.UIHelper.ToastMessage;
 
@@ -43,6 +53,7 @@ public class LoginActivity extends SwipeBackActivity implements View.OnClickList
         int mode = WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN;
         getWindow().setSoftInputMode(mode);
         initView();
+//        registerMessageReceiver();
         initListenerOclick();
     }
 
@@ -82,9 +93,25 @@ public class LoginActivity extends SwipeBackActivity implements View.OnClickList
         }
     }
 
+//    private MyReceiver myReceiver;
+//    public static final String MESSAGE_RECEIVED_ACTION = "com.sinoautodiagnoseos.MESSAGE_RECEIVED_ACTION";
+//    public void registerMessageReceiver() {
+//        myReceiver = new MyReceiver();
+//        IntentFilter filter = new IntentFilter();
+//        filter.setPriority(IntentFilter.SYSTEM_HIGH_PRIORITY);
+//        filter.addAction(MESSAGE_RECEIVED_ACTION);
+//        registerReceiver(myReceiver, filter);
+//    }
+
     private void onClickLongin() {
         final String phonenumber = phone_edit.getText().toString();
         final String password = password_edit.getText().toString();
+//        String rid = JPushInterface.getRegistrationID(AppContext.getInstance());
+//        if (!rid.isEmpty()) {
+//            SharedPreferences.getInstance().putString("RegistrationId",rid);
+//        } else {
+//            ToastMessage(AppContext.getInstance(),"始化失败，请退出应用程序重新登录");
+//        }
         if (checkInput(phonenumber, password)) {
 
             // TODO: 请求服务器登录账号
@@ -96,8 +123,11 @@ public class LoginActivity extends SwipeBackActivity implements View.OnClickList
                     @Override
                     public void onSucceed(Token data) {
                         ToastMessage(AppContext.getInstance(),"登陆成功");
+                        saveRegistion();
+                        SharedPreferences.getInstance().putString("token", "Bearer " + data.getToken());
                         SharedPreferences.getInstance().putString("account",phonenumber);
                         SharedPreferences.getInstance().putString("password",password);
+                        UIHelper.showDiagnose(LoginActivity.this);
                     }
 
                     @Override
@@ -108,8 +138,6 @@ public class LoginActivity extends SwipeBackActivity implements View.OnClickList
 //                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
 //                startActivity(intent);
 //                finish();
-                UIHelper.showDiagnose(this);
-
             } else {
                 ToastUtils.showShort(this, R.string.username_orpassword_error);
             }
@@ -135,5 +163,93 @@ public class LoginActivity extends SwipeBackActivity implements View.OnClickList
 
         return false;
     }
+
+    public void getUserInfo(){
+        Constant.TOKEN=SharedPreferences.getInstance().getString("token","");
+        Constant.REGISTRATION=SharedPreferences.getInstance().getString("RegistrationId","");
+        HttpRequestApi.getInstance().getUserInfo(new HttpSubscriber<UserInfo>(new SubscriberOnListener<UserInfo>() {
+            @Override
+            public void onSucceed(UserInfo data) {
+                /**
+                 * 获取用户信息
+                 */
+                System.out.println("--------请求用户信息成功-----------");
+                Constant.USERROLE = data.getData().getRoleName();
+                Constant.MEMBERID = data.getData().getMemberId();
+
+                SharedPreferences.getInstance().putString("userId", data.getData().getUserId());
+
+                System.out.println("用户ID=======" + data.getData().getUserId());
+                System.out.println("用户权限-" + data.getData().getRoleName());
+                /**
+                 * 更新用户在线状态
+                 */
+                ChageUserState(1);
+            }
+
+            @Override
+            public void onError(int code, String msg) {
+                if (Constant.RESPONSECODE == 500) {
+                    Toast.makeText(LoginActivity.this, "服务器异常请稍后再试！", Toast.LENGTH_SHORT).show();
+                } else if (Constant.RESPONSECODE == 417) {
+                }
+            }
+        }, LoginActivity.this));
+    }
+
+    /**
+     * 更新用户状态
+     *
+     * @param state 1-在线 2-占线 3-离线
+     */
+    public void ChageUserState(int state) {
+        Constant.TOKEN = SharedPreferences.getInstance().getString("token", "");
+        Constant.REGISTRATION=SharedPreferences.getInstance().getString("RegistrationId","");
+        HttpRequestApi.getInstance().onLine(new HttpSubscriber<Skill>(new SubscriberOnListener<Skill>() {
+            @Override
+            public void onSucceed(Skill data) {
+            }
+
+            @Override
+            public void onError(int code, String msg) {
+
+            }
+        }, LoginActivity.this));
+    }
+
+
+    /**
+     * 保存唯一识别码
+     * 用于校验唯一登录
+     */
+    private void saveRegistion() {
+        Constant.TOKEN=SharedPreferences.getInstance().getString("token","");
+        Constant.REGISTRATION=SharedPreferences.getInstance().getString("RegistrationId","");
+        final Map<String, Object> map = new HashMap<>();
+        map.put("deviceType", "Android");
+        map.put("registrationID",Constant.REGISTRATION );
+        Gson gson = new Gson();
+        String loginJson = gson.toJson(map);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), loginJson);
+        HttpRequestApi.getInstance().postId(requestBody, new HttpSubscriber<UserInfo>(new SubscriberOnListener<UserInfo>() {
+
+            @Override
+            public void onSucceed(UserInfo data) {
+                System.out.println("------执行了-----onSucceed---");
+                getUserInfo();
+            }
+
+            @Override
+            public void onError(int code, String msg) {
+                System.out.println("-------onError----------" + msg);
+                if (code == -1003) {
+                    getUserInfo();
+                }
+            }
+        }, AppContext.getInstance()));
+
+    }
+
+
 }
 

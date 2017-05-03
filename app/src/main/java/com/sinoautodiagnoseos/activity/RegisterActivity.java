@@ -9,7 +9,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.sinoautodiagnoseos.R;
@@ -24,17 +24,16 @@ import com.sinoautodiagnoseos.utils.ToastUtils;
  */
 
 public class RegisterActivity extends SwipeBackActivity implements View.OnClickListener {
-
-    private ImageView image_back;
     private EditText phone_edit, password_edit, verifi_edit;
     private TextView verifi_send;
     private Button register_andlogin;
+    private RelativeLayout image_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_activity);
-        int mode= WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN;
+        int mode = WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN;
         getWindow().setSoftInputMode(mode);
         initView();//初始化数据
         initListenerOclick();//按钮点击监听
@@ -70,11 +69,11 @@ public class RegisterActivity extends SwipeBackActivity implements View.OnClickL
     }
 
     private void initView() {
-        image_back = (ImageView) findViewById(R.id.image_back);
         phone_edit = (EditText) findViewById(R.id.phone_edit);
         password_edit = (EditText) findViewById(R.id.password_edit);
         verifi_edit = (EditText) findViewById(R.id.verifi_edit);
         verifi_send = (TextView) findViewById(R.id.verifi_send);
+        image_back = (RelativeLayout) findViewById(R.id.back_click);
         register_andlogin = (Button) findViewById(R.id.register_andlogin);
     }
 
@@ -118,7 +117,7 @@ public class RegisterActivity extends SwipeBackActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.image_back:
+            case R.id.back_click:
                 finish();
                 break;
             default:

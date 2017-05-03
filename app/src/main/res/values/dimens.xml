@@ -88,13 +88,15 @@
 	<dimen name="button_below_high">50dp</dimen>
 	<dimen name="margintop">12dp</dimen>
 	<dimen name="margin1">10dp</dimen>
-	<dimen name="image_size">30dp</dimen>
+	<dimen name="image_size">20dp</dimen>
 	<dimen name="text_size">17dp</dimen>
 	<dimen name="text_size1">15dp</dimen>
 	<dimen name="text_size2">13dp</dimen>
 	<dimen name="hint_size">14dp</dimen>
 	<dimen name="text_size3">18dp</dimen>
-	<dimen name="button_below">35dp</dimen>
+	<dimen name="button_below">50dp</dimen>
 	<dimen name="view_hight">46dp</dimen>
 	<dimen name="back_width">50dp</dimen>
+	<dimen name="margin_rl">105dp</dimen>
+	<dimen name="view_hight1">20dp</dimen>
 </resources>

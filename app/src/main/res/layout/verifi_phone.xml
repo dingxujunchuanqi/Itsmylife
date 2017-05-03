@@ -9,16 +9,14 @@
     <RelativeLayout
         android:id="@+id/back_click"
         android:layout_width="@dimen/back_width"
-        android:layout_height="@dimen/view_hight"
-        >
+        android:layout_height="@dimen/view_hight">
 
         <ImageView
-            android:id="@+id/image_back"
             android:layout_width="20dp"
             android:layout_height="20dp"
+            android:layout_centerVertical="true"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
-            android:layout_centerVertical="true"
             android:src="@drawable/back_button" />
 
     </RelativeLayout>
@@ -38,8 +36,8 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/image_size"
+            android:layout_height="@dimen/image_size"
             android:src="@drawable/phone_icon" />
 
         <TextView
@@ -71,6 +69,7 @@
             android:inputType="number"
             android:maxLength="11"
             android:phoneNumber="true"
+            android:textColorHint="@color/gray"
             android:textSize="@dimen/hint_size" />
 
         <View
@@ -91,9 +90,10 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/sms_icon" />
+            android:layout_width="@dimen/image_size"
+            android:layout_height="@dimen/image_size"
+            android:src="@drawable/sms_icon"
+            android:id="@+id/imageView" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -123,6 +123,7 @@
             android:hint="@string/sms_text"
             android:inputType="number"
             android:maxLength="11"
+            android:textColorHint="@color/gray"
             android:textSize="@dimen/hint_size" />
 
         <View
@@ -145,11 +146,10 @@
         android:textSize="@dimen/hint_size" />
 
     <View
-        android:layout_width="2dp"
-        android:layout_height="@dimen/hint_size"
+        android:layout_width="1dp"
+        android:layout_height="@dimen/view_hight1"
         android:layout_marginRight="10dp"
         android:layout_marginTop="226dp"
-
         android:layout_toStartOf="@id/verifi_send"
-        android:background="@color/gray" />
+        android:background="@color/dark_gray" />
 </RelativeLayout>

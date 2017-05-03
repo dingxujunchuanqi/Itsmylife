@@ -2,17 +2,13 @@ package com.sinoautodiagnoseos.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.sinoautodiagnoseos.R;
 import com.sinoautodiagnoseos.ui.loginui.SwipeBackActivity;
@@ -20,11 +16,6 @@ import com.sinoautodiagnoseos.utils.OnMultiClickListener;
 import com.sinoautodiagnoseos.utils.RegexUtils;
 import com.sinoautodiagnoseos.utils.ToastUtils;
 import com.sinoautodiagnoseos.utils.VerifyCodeManager;
-
-import org.json.JSONObject;
-
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
-import static com.sinoautodiagnoseos.R.id.image_back;
 
 /**
  * Created by 惊吓了时光 on 2017/4/23.
@@ -43,7 +34,7 @@ public class ForgetPsswordActivity extends SwipeBackActivity implements View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forgetpsw_activity);
-        int mode= WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN;
+        int mode = WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN;
         getWindow().setSoftInputMode(mode);
         initView();
         initListenerOclick();
@@ -88,6 +79,7 @@ public class ForgetPsswordActivity extends SwipeBackActivity implements View.OnC
         Intent intent = new Intent(ForgetPsswordActivity.this, ForgetPswSecondActivity.class);
         startActivity(intent);
         // finish();
+        System.out.println("---------------");
         ToastUtils.showShort(ForgetPsswordActivity.this, "欢迎下一步");
 //        }
     }
@@ -112,7 +104,7 @@ public class ForgetPsswordActivity extends SwipeBackActivity implements View.OnC
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.image_back:
+            case R.id.back_click:
                 finish();
                 break;
             default:

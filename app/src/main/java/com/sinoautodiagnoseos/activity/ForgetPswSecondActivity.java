@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.sinoautodiagnoseos.R;
@@ -15,7 +14,6 @@ import com.sinoautodiagnoseos.ui.loginui.SwipeBackActivity;
 import com.sinoautodiagnoseos.utils.OnMultiClickListener;
 import com.sinoautodiagnoseos.utils.ToastUtils;
 
-import static com.sinoautodiagnoseos.R.id.image_back;
 
 /**
  * Created by 惊吓了时光 on 2017/4/24.
@@ -32,7 +30,7 @@ public class ForgetPswSecondActivity extends SwipeBackActivity implements View.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forgetpsw_second_activity);
-        int mode= WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN;
+        int mode = WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN;
         getWindow().setSoftInputMode(mode);
         initView();
         initListenerOclick();
@@ -96,7 +94,7 @@ public class ForgetPswSecondActivity extends SwipeBackActivity implements View.O
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.image_back:
+            case R.id.back_click:
                 finish();
                 break;
             default:

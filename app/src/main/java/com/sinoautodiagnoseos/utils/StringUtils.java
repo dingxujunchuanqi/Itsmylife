@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import Decoder.BASE64Encoder;
+
 public class StringUtils {
 
     private final static NumberFormat numberFormat = NumberFormat.getNumberInstance();
@@ -428,6 +430,21 @@ public class StringUtils {
             }
         }
         return sb.toString();
+    }
+
+    public static String getBASE64(String s) {
+        String encode = base64Encode(s.getBytes());
+        System.out.println("转换后：" + encode);
+        return encode;
+    }
+
+    /**
+     * base 64 encode
+     * @param bytes 待编码的byte[]
+     * @return 编码后的base 64 code
+     */
+    public static String base64Encode(byte[] bytes) {
+        return new BASE64Encoder().encode(bytes);
     }
 
 }

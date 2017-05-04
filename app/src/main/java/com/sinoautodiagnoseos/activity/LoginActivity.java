@@ -118,13 +118,15 @@ public class LoginActivity extends SwipeBackActivity implements View.OnClickList
 
             if (true) {
                 Constant.TOKEN = "Basic " + StringUtils.getBASE64(phonenumber + ":" + password);
+                SharedPreferences.getInstance().putString("token",Constant.TOKEN);
                 System.out.println("token=" + Constant.TOKEN);
                 HttpRequestApi.getInstance().getToken(new HttpSubscriber<Token>(new SubscriberOnListener<Token>() {
                     @Override
                     public void onSucceed(Token data) {
                         ToastMessage(AppContext.getInstance(),"登陆成功");
+                        SharedPreferences.getInstance().putString("checktoken", "Bearer " + data.getToken());
                         saveRegistion();
-                        SharedPreferences.getInstance().putString("token", "Bearer " + data.getToken());
+
                         SharedPreferences.getInstance().putString("account",phonenumber);
                         SharedPreferences.getInstance().putString("password",password);
                         UIHelper.showDiagnose(LoginActivity.this);
@@ -166,7 +168,7 @@ public class LoginActivity extends SwipeBackActivity implements View.OnClickList
 
     //用户个人信息接口
     public void getUserInfo(){
-        Constant.TOKEN=SharedPreferences.getInstance().getString("token","");
+        Constant.TOKEN=SharedPreferences.getInstance().getString("checktoken","");
         Constant.REGISTRATION=SharedPreferences.getInstance().getString("RegistrationId","");
         HttpRequestApi.getInstance().getUserInfo(new HttpSubscriber<UserInfo>(new SubscriberOnListener<UserInfo>() {
             @Override
@@ -174,12 +176,15 @@ public class LoginActivity extends SwipeBackActivity implements View.OnClickList
                 /**
                  * 获取用户信息
                  */
+              // data.getData().getName();
                 System.out.println("--------请求用户信息成功-----------");
                 Constant.USERROLE = data.getData().getRoleName();
                 Constant.MEMBERID = data.getData().getMemberId();
-
                 SharedPreferences.getInstance().putString("userId", data.getData().getUserId());
-
+                SharedPreferences.getInstance().putString("userName",data.getData().getName());
+                SharedPreferences.getInstance().putString("mobile",data.getData().getMobile());
+                SharedPreferences.getInstance().putString("starRating",data.getData().getOtherInfo().getStarRating());
+                SharedPreferences.getInstance().putString("avatar",data.getData().getAvatar());
                 System.out.println("用户ID=======" + data.getData().getUserId());
                 System.out.println("用户权限-" + data.getData().getRoleName());
                 /**
@@ -204,7 +209,7 @@ public class LoginActivity extends SwipeBackActivity implements View.OnClickList
      * @param state 1-在线 2-占线 3-离线
      */
     public void ChageUserState(int state) {
-        Constant.TOKEN = SharedPreferences.getInstance().getString("token", "");
+        Constant.TOKEN = SharedPreferences.getInstance().getString("checktoken", "");
         Constant.REGISTRATION=SharedPreferences.getInstance().getString("RegistrationId","");
         HttpRequestApi.getInstance().onLine(new HttpSubscriber<Skill>(new SubscriberOnListener<Skill>() {
             @Override
@@ -224,7 +229,7 @@ public class LoginActivity extends SwipeBackActivity implements View.OnClickList
      * 用于校验唯一登录
      */
     private void saveRegistion() {
-        Constant.TOKEN=SharedPreferences.getInstance().getString("token","");
+        Constant.TOKEN=SharedPreferences.getInstance().getString("checktoken","");
         Constant.REGISTRATION=SharedPreferences.getInstance().getString("RegistrationId","");
         final Map<String, Object> map = new HashMap<>();
         map.put("deviceType", "Android");

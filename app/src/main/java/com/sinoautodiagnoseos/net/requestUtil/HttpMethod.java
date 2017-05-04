@@ -4,6 +4,7 @@ import com.sinoautodiagnoseos.app.AppContext;
 import com.sinoautodiagnoseos.interceptor.LoggingInterceptor;
 import com.sinoautodiagnoseos.utils.Constant;
 import com.sinoautodiagnoseos.utils.NetUtil;
+import com.sinoautodiagnoseos.utils.SharedPreferences;
 
 import java.io.File;
 import java.io.IOException;

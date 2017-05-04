@@ -18,6 +18,7 @@ import java.util.regex.Pattern;
 
 import Decoder.BASE64Encoder;
 
+
 public class StringUtils {
 
     private final static NumberFormat numberFormat = NumberFormat.getNumberInstance();

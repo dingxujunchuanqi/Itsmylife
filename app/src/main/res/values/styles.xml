@@ -48,10 +48,16 @@
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
-
     <!--登录页同意协议checkbox样式 -->
     <style name="LoginCheckBoxTheme" parent="Widget.AppCompat.CompoundButton.CheckBox">
         <item name="android:button">@drawable/login_checked</item>
     </style>
+    <!--星星样式-->
+<style name="RadingStyle" parent="@android:style/Widget.RatingBar"
+    >
+<!-- 定义星星图片大小以防显示不完全 -->
+<item name="android:progressDrawable">@drawable/rating_bar</item>
 
+
+</style>
 </resources>

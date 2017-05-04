@@ -37,4 +37,7 @@
     <string name="voice_help">语音求助</string>
     <string name="video_help">视频求组</string>
     <string name="tel_record">呼叫记录</string>
+    <string name="personal_centter">个人中心</string>
+    <string name="user_name">张三</string>
+    <string name="more_content">更多内容敬请期待!!!</string>
 </resources>

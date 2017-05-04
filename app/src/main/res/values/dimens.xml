@@ -99,4 +99,6 @@
 	<dimen name="back_width">50dp</dimen>
 	<dimen name="margin_rl">105dp</dimen>
 	<dimen name="view_hight1">20dp</dimen>
+	<dimen name="image_marg">20dp</dimen>
+	<dimen name="user_image_size">60dp</dimen>
 </resources>

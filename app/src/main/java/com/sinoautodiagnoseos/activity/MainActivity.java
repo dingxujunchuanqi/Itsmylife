@@ -10,6 +10,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.sinoautodiagnoseos.R;
@@ -35,7 +36,7 @@ public class MainActivity extends BaseFragmentActivity {
     private RadioGroup group;
     private ArrayList<String> fragmentTags;
     private FragmentManager fragmentManager;
-    private ImageView user;
+    private RelativeLayout user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +74,7 @@ public class MainActivity extends BaseFragmentActivity {
 
     private TextView textHeadTitle;
     private void initView() {
-        user = (ImageView)findViewById(R.id.user);
+        user = (RelativeLayout)findViewById(R.id.user);
         textHeadTitle= (TextView) findViewById(R.id.textHeadTitle);
         textHeadTitle.setText("圈子");
         group = (RadioGroup) findViewById(R.id.group);

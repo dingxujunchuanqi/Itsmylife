@@ -10,7 +10,7 @@
     <Button
         android:id="@+id/btnBack"
         style="@style/title_base_button"
-        android:background="@drawable/btn_back"
+        android:background="@drawable/personal_center"
         android:visibility="gone" />
 
     <TextView
@@ -27,13 +27,17 @@
         android:text="@string/app_name"
         android:textColor="@color/text_color_black"
         android:textSize="@dimen/text_size_20" />
-    <ImageView
+    <RelativeLayout
         android:id="@+id/user"
         android:layout_alignParentRight="true"
+        android:layout_width="@dimen/view_hight"
+        android:layout_height="@dimen/view_hight">
+    <ImageView
         android:layout_marginRight="15dp"
         android:layout_centerVertical="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/widget_bar_user_bg"
-        android:visibility="gone"/>
+        android:layout_width="@dimen/image_size"
+        android:layout_height="@dimen/image_size"
+        android:src="@drawable/personal_center"
+        />
+    </RelativeLayout>
 </RelativeLayout>

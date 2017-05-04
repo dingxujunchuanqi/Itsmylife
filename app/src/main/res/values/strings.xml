@@ -32,4 +32,7 @@
     <string name="again_register_pasword">请再次输入您的账号密码</string>
     <string name="username_orpassword_error">用户名或者密码错误，请重新输入！</string>
     <string name="modify_successfully">恭喜修改成功！</string>
+    <string name="personal_centter">个人中心</string>
+    <string name="user_name">张三</string>
+    <string name="more_content">更多内容敬请期待!!!</string>
 </resources>

@@ -7,13 +7,6 @@ import android.widget.Toast;
 
 import com.sinoautodiagnoseos.activity.LoginActivity;
 import com.sinoautodiagnoseos.activity.MainActivity;
-import com.sinoautodiagnoseos.app.AppContext;
-import com.sinoautodiagnoseos.entity.User.Token;
-import com.sinoautodiagnoseos.net.requestApi.HttpRequestApi;
-import com.sinoautodiagnoseos.net.requestSubscribers.HttpSubscriber;
-import com.sinoautodiagnoseos.net.requestSubscribers.SubscriberOnListener;
-import com.sinoautodiagnoseos.utils.Constant;
-import com.sinoautodiagnoseos.utils.StringUtils;
 
 /**
  * 应用程序UI工具包：封装UI相关的一些操作
@@ -71,23 +64,5 @@ public class UIHelper {
         Intent intent = new Intent(context, LoginActivity.class);
         context.startActivity(intent);
 //        ToastMessage(AppContext.getInstance().getApplicationContext(),"此处需要登录");
-    }
-    static boolean is_login;
-    public static boolean isLogin(String username,String password){
-        Constant.TOKEN = "Basic " + StringUtils.getBASE64(username + ":" + password);
-        System.out.println("token=" + Constant.TOKEN);
-        HttpRequestApi.getInstance().getToken(new HttpSubscriber<Token>(new SubscriberOnListener<Token>() {
-            @Override
-            public void onSucceed(Token data) {
-                ToastMessage(AppContext.getInstance(),"登陆成功");
-                is_login=true;
-            }
-
-            @Override
-            public void onError(int code, String msg) {
-                is_login=false;
-            }
-        },AppContext.getInstance()));
-        return is_login;
     }
 }

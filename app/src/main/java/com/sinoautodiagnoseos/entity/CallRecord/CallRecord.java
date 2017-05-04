@@ -82,6 +82,16 @@ public class CallRecord {
             public String stationName;
             public String userId;
 
+            public String getDate_time() {
+                return date_time;
+            }
+
+            public void setDate_time(String date_time) {
+                this.date_time = date_time;
+            }
+
+            public String date_time;
+
             public void setAvatar(String avatar) {
                 this.avatar = avatar;
             }

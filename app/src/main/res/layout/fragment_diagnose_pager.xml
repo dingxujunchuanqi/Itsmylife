@@ -1,14 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
-	android:background="@null">
+	android:orientation="vertical">
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="80dp"
+		android:orientation="horizontal" android:weightSum="2">
+		<LinearLayout
+			android:id="@+id/btn_voice"
+			android:paddingTop="10dp"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:gravity="center"
+			android:orientation="vertical" android:layout_weight="1">
+			<ImageView
+				android:layout_width="40dp"
+				android:layout_height="40dp"
+				android:src="@drawable/voice_help"/>
+			<TextView
+				android:paddingTop="5dp"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:text="@string/voice_help"
+				android:textSize="@dimen/text_max"
+				android:textColor="@color/black"/>
+		</LinearLayout>
+		<View
+			android:layout_width="1.5dp"
+			android:layout_height="60dp"
+			android:layout_gravity="center_vertical"
+			android:background="@color/gray"/>
+		<LinearLayout
+			android:id="@+id/btn_video"
+			android:paddingTop="10dp"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:gravity="center"
+			android:orientation="vertical" android:layout_weight="1">
+			<ImageView
+				android:layout_width="40dp"
+				android:layout_height="40dp"
+				android:src="@drawable/video"/>
+			<TextView
+				android:paddingTop="5dp"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:text="@string/video_help"
+				android:textSize="@dimen/text_max"
+				android:textColor="@color/black"/>
+		</LinearLayout>
+	</LinearLayout>
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/text_large"
+		android:gravity="center_vertical"
+		android:background="@color/gray_light" android:orientation="vertical">
+		<TextView
+			android:paddingLeft="20dp"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/tel_record"
+			android:textSize="@dimen/text_size_15"/>
+	</LinearLayout>
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="5dp"
+		android:background="@color/white"/>
+	<ListView
+		android:id="@+id/listView"
+		android:background="@color/gray"
+		android:scrollbars="none"
+		android:divider="@null"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"/>
 
-	<TextView
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:text="云诊"
-		android:layout_centerInParent="true"
-		/>
-
-</RelativeLayout>
+</LinearLayout>

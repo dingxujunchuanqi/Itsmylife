@@ -2,6 +2,13 @@ package com.sinoautodiagnoseos.app;
 
 import android.app.Application;
 
+import com.sinoautodiagnoseos.entity.User.Token;
+import com.sinoautodiagnoseos.net.requestApi.HttpRequestApi;
+import com.sinoautodiagnoseos.net.requestSubscribers.HttpSubscriber;
+import com.sinoautodiagnoseos.net.requestSubscribers.SubscriberOnListener;
+import com.sinoautodiagnoseos.utils.Constant;
+import com.sinoautodiagnoseos.utils.SharedPreferences;
+import com.sinoautodiagnoseos.utils.StringUtils;
 import com.squareup.leakcanary.LeakCanary;
 
 import cn.jpush.android.api.JPushInterface;
@@ -35,6 +42,29 @@ public class AppContext extends Application {
     // 注册App异常崩溃处理器
     private void registerUncaughtExceptionHandler() {
         Thread.setDefaultUncaughtExceptionHandler(AppException.getAppExceptionHandler());
+    }
+
+    /**
+     * 自动登录
+     *
+     */
+    boolean AuthLogin = false;
+    public boolean AuthLogin() {
+        Constant.TOKEN = "Basic " + StringUtils.getBASE64(SharedPreferences.getInstance().getString("account", "")
+                + ":" + SharedPreferences.getInstance().getString("password", ""));
+        Constant.REGISTRATION=SharedPreferences.getInstance().getString("RegistrationId","");
+        HttpRequestApi.getInstance().getToken(new HttpSubscriber<Token>(new SubscriberOnListener<Token>() {
+            @Override
+            public void onSucceed(Token data) {
+                AuthLogin = true;
+            }
+
+            @Override
+            public void onError(int code, String msg) {
+                AuthLogin = false;
+            }
+        }, AppContext.getInstance()));
+        return AuthLogin;
     }
 
 }

@@ -12,19 +12,31 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.sinoautodiagnoseos.R;
+import com.sinoautodiagnoseos.app.AppContext;
+import com.sinoautodiagnoseos.entity.User.Skill;
+import com.sinoautodiagnoseos.entity.User.UserInfo;
 import com.sinoautodiagnoseos.fragment.CircleFragment;
 import com.sinoautodiagnoseos.fragment.DiagnoseFragment;
 import com.sinoautodiagnoseos.fragment.ImFragment;
 import com.sinoautodiagnoseos.fragment.StudyFragment;
+import com.sinoautodiagnoseos.net.requestApi.HttpRequestApi;
+import com.sinoautodiagnoseos.net.requestSubscribers.HttpSubscriber;
+import com.sinoautodiagnoseos.net.requestSubscribers.SubscriberOnListener;
 import com.sinoautodiagnoseos.ui.UIHelper;
+import com.sinoautodiagnoseos.utils.Constant;
 import com.sinoautodiagnoseos.utils.OnMultiClickListener;
+import com.sinoautodiagnoseos.utils.SharedPreferences;
+import com.sinoautodiagnoseos.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
-import static com.sinoautodiagnoseos.R.id.user;
-import static com.sinoautodiagnoseos.R.id.view;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 public class MainActivity extends BaseFragmentActivity {
 
@@ -124,7 +136,12 @@ public class MainActivity extends BaseFragmentActivity {
 //        }
         //跳转到云诊页面 可浏览 操作需登录
         if (currIndex==1){
-            UIHelper.showLogin(MainActivity.this);
+            Log.e("--------",AppContext.getInstance().AuthLogin()+"");
+            if (AppContext.getInstance().AuthLogin()){
+                saveRegistion();
+            }else {
+                UIHelper.showLogin(MainActivity.this);
+            }
         }
 //        //跳转到IM页面 需登录
 //        if (currIndex==2){
@@ -180,4 +197,91 @@ public class MainActivity extends BaseFragmentActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    /**
+     * 保存唯一识别码
+     * 用于校验唯一登录
+     */
+    private void saveRegistion() {
+        Constant.TOKEN= SharedPreferences.getInstance().getString("token","");
+        Constant.REGISTRATION=SharedPreferences.getInstance().getString("RegistrationId","");
+        final Map<String, Object> map = new HashMap<>();
+        map.put("deviceType", "Android");
+        map.put("registrationID",Constant.REGISTRATION );
+        Gson gson = new Gson();
+        String loginJson = gson.toJson(map);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), loginJson);
+        HttpRequestApi.getInstance().postId(requestBody, new HttpSubscriber<UserInfo>(new SubscriberOnListener<UserInfo>() {
+
+            @Override
+            public void onSucceed(UserInfo data) {
+                System.out.println("------执行了-----onSucceed---");
+                getUserInfo();
+            }
+
+            @Override
+            public void onError(int code, String msg) {
+                System.out.println("-------onError----------" + msg);
+                if (code == -1003) {
+                    getUserInfo();
+                }
+            }
+        }, AppContext.getInstance()));
+
+    }
+
+    //用户个人信息接口
+    public void getUserInfo(){
+        Constant.TOKEN=SharedPreferences.getInstance().getString("token","");
+        Constant.REGISTRATION=SharedPreferences.getInstance().getString("RegistrationId","");
+        HttpRequestApi.getInstance().getUserInfo(new HttpSubscriber<UserInfo>(new SubscriberOnListener<UserInfo>() {
+            @Override
+            public void onSucceed(UserInfo data) {
+                /**
+                 * 获取用户信息
+                 */
+                System.out.println("--------请求用户信息成功-----------");
+                Constant.USERROLE = data.getData().getRoleName();
+                Constant.MEMBERID = data.getData().getMemberId();
+
+                SharedPreferences.getInstance().putString("userId", data.getData().getUserId());
+
+                System.out.println("用户ID=======" + data.getData().getUserId());
+                System.out.println("用户权限-" + data.getData().getRoleName());
+                /**
+                 * 更新用户在线状态
+                 */
+                ChageUserState(1);
+            }
+
+            @Override
+            public void onError(int code, String msg) {
+                if (Constant.RESPONSECODE == 500) {
+                    ToastUtils.makeShortText( "服务器异常请稍后再试！",MainActivity.this);
+                } else if (Constant.RESPONSECODE == 417) {
+                }
+            }
+        }, MainActivity.this));
+    }
+
+    /**
+     * 更新用户状态
+     *
+     * @param state 1-在线 2-占线 3-离线
+     */
+    public void ChageUserState(int state) {
+        Constant.TOKEN = SharedPreferences.getInstance().getString("token", "");
+        Constant.REGISTRATION=SharedPreferences.getInstance().getString("RegistrationId","");
+        HttpRequestApi.getInstance().onLine(new HttpSubscriber<Skill>(new SubscriberOnListener<Skill>() {
+            @Override
+            public void onSucceed(Skill data) {
+            }
+
+            @Override
+            public void onError(int code, String msg) {
+
+            }
+        }, MainActivity.this));
+    }
+
 }

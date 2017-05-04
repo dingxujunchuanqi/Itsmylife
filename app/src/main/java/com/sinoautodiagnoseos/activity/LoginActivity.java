@@ -164,6 +164,7 @@ public class LoginActivity extends SwipeBackActivity implements View.OnClickList
         return false;
     }
 
+    //用户个人信息接口
     public void getUserInfo(){
         Constant.TOKEN=SharedPreferences.getInstance().getString("token","");
         Constant.REGISTRATION=SharedPreferences.getInstance().getString("RegistrationId","");

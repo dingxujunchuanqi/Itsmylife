@@ -29,4 +29,5 @@ public class Constant {
     public static boolean is_push =false;//是否已上传好的文件的标识
 //    public static List<FileDownload> file_list = new ArrayList<>();
     public static boolean is_close = false;
+    public static final int PAGE_SIZE = 10;
 }

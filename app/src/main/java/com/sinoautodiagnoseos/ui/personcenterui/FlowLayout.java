@@ -36,6 +36,7 @@ public class FlowLayout extends RelativeLayout {
     private int textSize = sp2px(15);
     // 关键字颜色
     private int textColor = Color.BLACK;
+    private int textColor1 = Color.BLUE;
     // 关键字背景框
     private int backgroundResource = R.drawable.bg_frame;
     // 关键字水平padding，单位为dp
@@ -249,7 +250,7 @@ public class FlowLayout extends RelativeLayout {
             // 设置TextView属性
             tv.setText(list.get(i));
             tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-            tv.setTextColor(textColor);
+            tv.setTextColor(textColor1);
             tv.setGravity(Gravity.CENTER);
             tv.setPadding(textPaddingH, textPaddingV, textPaddingH, textPaddingV);
 

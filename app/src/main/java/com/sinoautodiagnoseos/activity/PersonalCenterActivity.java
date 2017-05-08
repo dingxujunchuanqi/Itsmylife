@@ -9,7 +9,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sinoautodiagnoseos.R;
-import com.sinoautodiagnoseos.entity.User.UserInfo;
 import com.sinoautodiagnoseos.ui.UIHelper;
 import com.sinoautodiagnoseos.ui.loginui.SwipeBackActivity;
 import com.sinoautodiagnoseos.ui.personcenterui.FlowLayout;
@@ -53,7 +52,12 @@ public class PersonalCenterActivity extends SwipeBackActivity implements View.On
         String avatar = SharedPreferences.getInstance().getString("avatar", "");
         user_name.setText(userName);
         user_grade.setText(starRating);
-        ratingbar.setRating(Float.parseFloat(starRating));
+        System.out.println(starRating);
+        if (starRating.equals("")){
+            starRating="0";
+        }
+        float star_num=Float.valueOf(starRating);
+        ratingbar.setRating(star_num);
     }
 
     private void initView() {

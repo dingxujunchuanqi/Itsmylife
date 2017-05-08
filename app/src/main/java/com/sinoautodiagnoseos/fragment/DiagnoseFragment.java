@@ -82,7 +82,7 @@ public class DiagnoseFragment extends Fragment {
     //获取最新三条记录
     private void getCallRecord() {
         experts_list=new ArrayList<>();
-        Constant.TOKEN= SharedPreferences.getInstance().getString("token","");
+        Constant.TOKEN= SharedPreferences.getInstance().getString("checktoken","");
         Constant.REGISTRATION=SharedPreferences.getInstance().getString("RegistrationId","");
         HttpRequestApi.getInstance().getCallRecord(new HttpSubscriber<CallRecord>(new SubscriberOnListener<CallRecord>() {
             @Override

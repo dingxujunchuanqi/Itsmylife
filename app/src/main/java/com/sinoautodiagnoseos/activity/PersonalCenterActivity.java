@@ -1,5 +1,6 @@
 package com.sinoautodiagnoseos.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,12 +17,15 @@ import com.sinoautodiagnoseos.entity.User.UserInfo;
 import com.sinoautodiagnoseos.ui.UIHelper;
 import com.sinoautodiagnoseos.ui.loginui.SwipeBackActivity;
 import com.sinoautodiagnoseos.ui.personcenterui.FlowLayout;
+import com.sinoautodiagnoseos.utils.LogUtils;
 import com.sinoautodiagnoseos.utils.PicassoUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static android.R.attr.data;
 
 
 /**
@@ -31,6 +35,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PersonalCenterActivity extends SwipeBackActivity implements View.OnClickListener {
 
+    private static  String USER_DATA ="user";
     private FlowLayout flow_layout;
     private List list;
     private CircleImageView image_user;
@@ -39,9 +44,13 @@ public class PersonalCenterActivity extends SwipeBackActivity implements View.On
     private FrameLayout image_back;
     private TextView mobile_number, car_shop, person_tv;
     private ImageView setting_image;
-    private String userName, starRating, mobile, avatar;
+    private String name, starRating, mobile, avatar;
     private String stationName;
     private RelativeLayout rl_goin;
+    private String roleName;
+    private ImageView right_arrow;
+    private ImageView right_arrow1;
+    private UserInfo userData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,13 +67,28 @@ public class PersonalCenterActivity extends SwipeBackActivity implements View.On
     }
 
     private void userInfo() {
-        UserInfo userData = AppContext.userInfo;
+        userData = AppContext.userInfo;
+        System.out.println(userData.getData().getRoleName()+"--------------");
         if (userData != null) {
-            userName = userData.getData().getName();
-            mobile = userData.getData().getMobile();
-            starRating = userData.getData().getOtherInfo().getStarRating();
-            avatar = userData.getData().getAvatar();
-            stationName = userData.getData().getStationName();
+            if (userData.getData() != null) {
+                mobile = userData.getData().getMobile();
+                stationName = userData.getData().getStationName();
+                roleName = userData.getData().getRoleName();
+                avatar = userData.getData().getAvatar();
+                name = userData.getData().getName();
+                if (userData.getData().getOtherInfo() != null) {
+                    starRating = userData.getData().getOtherInfo().getStarRating();
+                }
+            }
+        }
+
+        if (mobile != null && roleName.equals("普通用户")) {
+            mobile_number.setText(mobile);
+            flow_layout.setVisibility(View.GONE);
+            ratingbar.setVisibility(View.GONE);
+            user_grade.setVisibility(View.GONE);
+        } else {
+            shoWexperTauthority();
         }
 //            String userName = SharedPreferences.getInstance().getString("userName", "");
 //            String mobile = SharedPreferences.getInstance().getString("mobile", "");
@@ -73,25 +97,31 @@ public class PersonalCenterActivity extends SwipeBackActivity implements View.On
 //            String stationName = SharedPreferences.getInstance().getString("stationName", "");
         setting_image.setImageResource(R.drawable.setting);
         person_tv.setText(R.string.personal_centter);
-        user_name.setText(userName);
-        user_grade.setText(starRating);
-        System.out.println(starRating);
-        if (starRating.equals("")){
-            starRating="0";
+
+    }
+
+    private void shoWexperTauthority() {
+        if (name != null) {
+            user_name.setText(name);
         }
-        float star_num=Float.valueOf(starRating);
-        ratingbar.setRating(star_num);
-        car_shop.setText(stationName);
-        car_shop.setVisibility(View.VISIBLE);
-        mobile_number.setText(mobile);
+        if (mobile != null) {
+            mobile_number.setText(mobile);
+        }
+        if (stationName != null) {
+            car_shop.setText(stationName);
+            car_shop.setVisibility(View.VISIBLE);
+        }
 
         if (avatar != null && !TextUtils.isEmpty(avatar)) {
             PicassoUtils.loadImageView(this, avatar, image_user);
-        } else if (starRating != null && !TextUtils.isEmpty(starRating)) {
+        }
+        if (starRating != null && !TextUtils.isEmpty(starRating)) {
 
             ratingbar.setRating(Float.parseFloat(starRating));
             user_grade.setText(starRating);
         }
+        right_arrow.setVisibility(View.VISIBLE);
+        right_arrow1.setVisibility(View.GONE);
     }
 
     private void initView() {
@@ -116,6 +146,8 @@ public class PersonalCenterActivity extends SwipeBackActivity implements View.On
         person_tv = (TextView) findViewById(R.id.person_tv);
         setting_image = (ImageView) findViewById(R.id.setting_image);
         rl_goin = (RelativeLayout) findViewById(R.id.re_layout);
+        right_arrow = (ImageView) findViewById(R.id.arrow_right);
+        right_arrow1 = (ImageView) findViewById(R.id.arrow_right1);
         flow_layout.setFlowLayout(list, new FlowLayout.OnItemClickListener() {
             @Override
             public void onItemClick(String content) {
@@ -131,7 +163,7 @@ public class PersonalCenterActivity extends SwipeBackActivity implements View.On
                 UIHelper.showIm(this);
                 break;
             case R.id.re_layout:
-                UIHelper.showPersonInfo(this);
+                UIHelper.showPersonInfo(this,userData);
                 break;
             default:
                 break;

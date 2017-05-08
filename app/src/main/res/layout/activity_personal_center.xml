@@ -12,41 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/view_hight">
 
-        <FrameLayout
-            android:id="@+id/back_click"
-            android:layout_width="@dimen/back_width"
-            android:layout_height="@dimen/view_hight">
-
-            <ImageView
-                android:layout_width="@dimen/view_hight1"
-                android:layout_height="@dimen/view_hight1"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/image_marg"
-                android:src="@drawable/back_button" />
-        </FrameLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/personal_centter"
-            android:textColor="@color/text_apha80"
-            android:textSize="@dimen/text_size" />
-
-        <ImageView
-            android:layout_width="@dimen/view_hight1"
-            android:layout_height="@dimen/view_hight1"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/image_marg"
-            android:src="@drawable/setting" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/gray" />
+        <include layout="@layout/action_title" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -56,7 +22,7 @@
         android:layout_below="@id/rela_abov"
         android:layout_marginTop="15dp">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/image_user"
             android:layout_width="@dimen/user_image_size"
             android:layout_height="@dimen/user_image_size"
@@ -74,6 +40,29 @@
             android:textColor="@color/text_apha80"
             android:textSize="@dimen/text_size" />
 
+        <TextView
+            android:id="@+id/mobile_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/user_name"
+            android:layout_marginLeft="@dimen/image_marg"
+            android:layout_marginTop="@dimen/space_15"
+            android:layout_toRightOf="@id/image_user"
+            android:text=""
+            android:textColor="@color/text_apha80" />
+
+        <TextView
+            android:id="@+id/car_shop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mobile_number"
+            android:layout_marginLeft="@dimen/image_marg"
+            android:layout_marginTop="@dimen/space_15"
+            android:layout_toRightOf="@id/image_user"
+            android:text=""
+            android:textColor="@color/text_apha80"
+            android:visibility="invisible" />
+
         <RatingBar
             android:id="@+id/ratingbar"
             style="@style/RadingStyle"
@@ -84,19 +73,8 @@
             android:layout_toRightOf="@id/user_name"
             android:isIndicator="true"
             android:numStars="5"
-            android:rating="2.5"
+            android:rating="0.0"
             android:stepSize="0.5" />
-
-        <TextView
-            android:id="@+id/user_grade"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="2dp"
-            android:layout_toRightOf="@id/ratingbar"
-            android:text="2.0"
-            android:textColor="@color/orange1"
-            android:textSize="@dimen/text_size_14" />
 
         <ImageView
             android:layout_width="@dimen/image_size"
@@ -111,13 +89,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="15dp"
             android:layout_marginLeft="@dimen/image_marg"
             android:layout_marginRight="80dp"
             android:layout_toRightOf="@id/image_user"
             app:itemColor="@color/colorAccent"
             app:itemSize="14dp" />
+
+        <TextView
+            android:id="@+id/user_grade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/user_name"
+            android:layout_alignBottom="@+id/user_name"
+            android:layout_marginLeft="13dp"
+            android:layout_marginStart="13dp"
+            android:layout_toEndOf="@+id/ratingbar"
+            android:layout_toRightOf="@+id/ratingbar"
+            android:text="0.0"
+            android:textColor="@color/orange1"
+            android:textSize="@dimen/text_size_14" />
 
     </RelativeLayout>
 

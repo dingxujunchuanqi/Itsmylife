@@ -3,6 +3,7 @@ package com.sinoautodiagnoseos.app;
 import android.app.Application;
 
 import com.sinoautodiagnoseos.entity.User.Token;
+import com.sinoautodiagnoseos.entity.User.UserInfo;
 import com.sinoautodiagnoseos.net.requestApi.HttpRequestApi;
 import com.sinoautodiagnoseos.net.requestSubscribers.HttpSubscriber;
 import com.sinoautodiagnoseos.net.requestSubscribers.SubscriberOnListener;
@@ -16,7 +17,8 @@ import cn.jpush.android.api.JPushInterface;
 public class AppContext extends Application {
 
     private static AppContext app;
-
+    //用户信息
+    public static UserInfo userInfo;
     public AppContext() {
         app = this;
     }

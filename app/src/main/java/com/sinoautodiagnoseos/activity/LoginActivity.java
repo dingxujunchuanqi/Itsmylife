@@ -181,10 +181,12 @@ public class LoginActivity extends SwipeBackActivity implements View.OnClickList
                 Constant.USERROLE = data.getData().getRoleName();
                 Constant.MEMBERID = data.getData().getMemberId();
                 SharedPreferences.getInstance().putString("userId", data.getData().getUserId());
-                SharedPreferences.getInstance().putString("userName",data.getData().getName());
-                SharedPreferences.getInstance().putString("mobile",data.getData().getMobile());
-                SharedPreferences.getInstance().putString("starRating",data.getData().getOtherInfo().getStarRating());
-                SharedPreferences.getInstance().putString("avatar",data.getData().getAvatar());
+                AppContext.userInfo=data;
+//                SharedPreferences.getInstance().putString("userName",data.getData().getName());
+//                SharedPreferences.getInstance().putString("mobile",data.getData().getMobile());
+//                SharedPreferences.getInstance().putString("starRating",data.getData().getOtherInfo().getStarRating());
+//                SharedPreferences.getInstance().putString("avatar",data.getData().getAvatar());
+//                SharedPreferences.getInstance().putString("stationName",data.getData().getStationName());
                 System.out.println("用户ID=======" + data.getData().getUserId());
                 System.out.println("用户权限-" + data.getData().getRoleName());
                 /**

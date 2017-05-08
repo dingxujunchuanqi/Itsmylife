@@ -54,6 +54,7 @@
         <activity android:name=".activity.ForgetPsswordActivity"/>
         <activity android:name=".activity.ForgetPswSecondActivity"/>
         <activity android:name=".activity.PersonalCenterActivity"/>
+        <activity android:name=".activity.PersonalInfoActivity"/>
 
 
 

@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fadeScrollbars="true"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true">
+<!--加上fadeScrollbars,fillViewport,fitsSystemWindows以确保布局兼容-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/action_title" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/gray1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/image_marg"
+                android:text="@string/basic_info"
+                android:textColor="@color/text_apha50"
+                android:textSize="@dimen/hint_size" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/personInf_height"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <View style="@style/person_center_view" />
+
+        <RelativeLayout style="@style/person_center_Rl">
+
+            <TextView
+                style="@style/person_center_tv"
+                android:text="@string/head_portrait"
+                android:textColor="@color/text_apha50"
+                android:textSize="@dimen/text_size_15" />
+
+            <ImageView
+                android:id="@+id/right_back"
+                style="@style/person_center_image" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="@dimen/user_image_size"
+                android:layout_height="@dimen/user_image_size"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/view_hight1"
+                android:layout_toLeftOf="@id/right_back"
+                android:src="@drawable/ic_img_user_default" />
+
+            <View style="@style/person_center_view" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout style="@style/person_center_Rl">
+
+            <TextView
+                style="@style/person_center_tv"
+                android:text="@string/pet_name"
+                android:textColor="@color/text_apha50"
+                android:textSize="@dimen/text_size_15" />
+
+            <ImageView
+                android:id="@+id/right_back1"
+                style="@style/person_center_image" />
+
+            <TextView
+                style="@style/person_center_tv"
+                android:layout_marginRight="@dimen/view_hight1"
+                android:layout_toLeftOf="@id/right_back1"
+                android:text="@string/to_set_up" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/gray" />
+        </RelativeLayout>
+
+        <RelativeLayout style="@style/person_center_Rl">
+
+            <TextView
+                style="@style/person_center_tv"
+                android:text="@string/date_birth"
+                android:textColor="@color/text_apha50"
+                android:textSize="@dimen/text_size_15" />
+
+            <ImageView
+                android:id="@+id/right_back2"
+                style="@style/person_center_image" />
+
+            <TextView
+                android:id="@+id/day"
+                style="@style/person_center_tv"
+                android:layout_marginRight="@dimen/view_hight1"
+                android:layout_toLeftOf="@id/right_back2"
+                android:text="08"
+                android:textColor="@color/text_color_black"
+                android:textSize="@dimen/text_size_17" />
+
+            <TextView
+                style="@style/person_center_tv"
+                android:layout_marginRight="2.5dp"
+                android:layout_toLeftOf="@id/day"
+                android:text="—"
+                android:textColor="@color/text_color_black"
+                android:textSize="@dimen/text_size_17" />
+
+            <TextView
+                android:id="@+id/month"
+                style="@style/person_center_tv"
+                android:layout_marginRight="@dimen/view_hight1"
+                android:layout_toLeftOf="@id/day"
+                android:text="08"
+                android:textColor="@color/text_color_black"
+                android:textSize="@dimen/text_size_17" />
+
+            <TextView
+                style="@style/person_center_tv"
+                android:layout_marginRight="2.5dp"
+                android:layout_toLeftOf="@id/month"
+                android:text="—"
+                android:textColor="@color/text_color_black"
+                android:textSize="@dimen/text_size_17" />
+
+            <TextView
+                android:id="@+id/year"
+                style="@style/person_center_tv"
+                android:layout_marginRight="@dimen/view_hight1"
+                android:layout_toLeftOf="@id/month"
+                android:text="1988"
+                android:textColor="@color/text_color_black"
+                android:textSize="@dimen/text_size_17" />
+
+            <View style="@style/person_center_view" />
+        </RelativeLayout>
+
+        <RelativeLayout style="@style/person_center_Rl">
+
+            <TextView
+                style="@style/person_center_tv"
+                android:text="@string/address"
+                android:textColor="@color/text_apha50"
+                android:textSize="@dimen/text_size_15" />
+
+            <ImageView
+                android:id="@+id/right_back3"
+                style="@style/person_center_image" />
+
+            <TextView
+                android:id="@+id/country_tv"
+                style="@style/person_center_tv"
+                android:layout_marginRight="@dimen/view_hight1"
+                android:layout_toLeftOf="@id/right_back3"
+                android:background="@drawable/address_shape"
+                android:text="@string/county"
+                android:textColor="@color/text_color_black"
+                android:textSize="@dimen/text_size_17" />
+
+
+            <TextView
+                android:id="@+id/city_tv"
+                style="@style/person_center_tv"
+                android:layout_marginRight="@dimen/view_hight1"
+                android:layout_toLeftOf="@id/country_tv"
+                android:background="@drawable/address_shape"
+                android:text="@string/city"
+                android:textColor="@color/text_color_black"
+                android:textSize="@dimen/text_size_17" />
+
+            <TextView
+                style="@style/person_center_tv"
+                android:layout_marginRight="2.5dp"
+                android:layout_toLeftOf="@id/country_tv"
+                android:text="—"
+                android:textColor="@color/text_color_black"
+                android:textSize="@dimen/text_size_17" />
+
+            <TextView
+                android:id="@+id/provincial_tv"
+                style="@style/person_center_tv"
+                android:layout_marginRight="@dimen/view_hight1"
+                android:layout_toLeftOf="@id/city_tv"
+                android:background="@drawable/address_shape"
+                android:text="@string/provincial"
+                android:textColor="@color/text_color_black"
+                android:textSize="@dimen/text_size_17" />
+
+            <TextView
+                style="@style/person_center_tv"
+                android:layout_marginRight="2.5dp"
+                android:layout_toLeftOf="@id/city_tv"
+                android:text="—"
+                android:textColor="@color/text_color_black"
+                android:textSize="@dimen/text_size_17" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="@color/gray1">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentTop="true"
+                android:background="@color/gray" />
+
+            <View style="@style/person_center_view" />
+        </RelativeLayout>
+
+        <RelativeLayout style="@style/person_center_Rl">
+
+            <TextView
+                android:id="@+id/tech_certifi"
+                style="@style/person_center_tv"
+                android:text="@string/technic_certificat"
+                android:textColor="@color/text_apha50"
+                android:textSize="@dimen/text_size_15" />
+
+            <TextView
+                style="@style/person_center_tv"
+                android:layout_marginLeft="@dimen/certifi_commit10"
+                android:layout_toRightOf="@id/tech_certifi"
+                android:text="@string/commit_certificat_info"
+                android:textColor="@color/red1"
+                android:textSize="@dimen/text_size_12" />
+
+            <ImageView
+                android:id="@+id/right_back4"
+                style="@style/person_center_image" />
+
+            <TextView
+                style="@style/person_center_tv"
+                android:layout_marginRight="@dimen/view_hight1"
+                android:layout_toLeftOf="@id/right_back4"
+                android:text="@string/go_authentication"
+                android:textColor="@color/text_color_blue1"
+                android:textSize="@dimen/text_size_17" />
+
+            <View style="@style/person_center_view" />
+        </RelativeLayout>
+
+        <RelativeLayout style="@style/person_center_Rl">
+
+            <TextView
+                android:id="@+id/specialist_certifi"
+                style="@style/person_center_tv"
+                android:text="@string/specialist_certificat"
+                android:textColor="@color/text_apha50"
+                android:textSize="@dimen/text_size_15" />
+
+            <TextView
+                style="@style/person_center_tv"
+                android:layout_marginLeft="@dimen/certifi_commit10"
+                android:layout_toRightOf="@id/specialist_certifi"
+                android:text="@string/commit_certificat_info"
+                android:textColor="@color/red1"
+                android:textSize="@dimen/text_size_12" />
+
+            <ImageView
+                android:id="@+id/right_back5"
+                style="@style/person_center_image" />
+
+            <TextView
+                style="@style/person_center_tv"
+                android:layout_marginRight="@dimen/view_hight1"
+                android:layout_toLeftOf="@id/right_back5"
+                android:text="@string/go_authentication"
+                android:textColor="@color/text_color_blue1"
+                android:textSize="@dimen/text_size_17" />
+
+            <View style="@style/person_center_view" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

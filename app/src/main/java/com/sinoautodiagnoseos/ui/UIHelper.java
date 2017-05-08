@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.sinoautodiagnoseos.activity.LoginActivity;
 import com.sinoautodiagnoseos.activity.MainActivity;
+import com.sinoautodiagnoseos.activity.PersonalInfoActivity;
 
 /**
  * 应用程序UI工具包：封装UI相关的一些操作
@@ -59,7 +60,14 @@ public class UIHelper {
         Intent intent = new Intent(context, MainActivity.class);
         context.startActivity(intent);
     }
-
+       /*
+        * 跳到个人信息界面
+        *
+        */
+    public static void showPersonInfo(Activity context){
+        Intent intent = new Intent(context, PersonalInfoActivity.class);
+        context.startActivity(intent);
+    }
     public static void showLogin(Activity context){
         Intent intent = new Intent(context, LoginActivity.class);
         context.startActivity(intent);

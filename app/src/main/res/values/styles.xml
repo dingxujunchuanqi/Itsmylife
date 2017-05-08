@@ -57,7 +57,31 @@
     >
 <!-- 定义星星图片大小以防显示不完全 -->
 <item name="android:progressDrawable">@drawable/rating_bar</item>
-
-
+    <!--个人信息页面样式-->
 </style>
+    <style name="person_center_Rl" >
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/personInf_height1</item>
+        <item name="android:layout_marginLeft">@dimen/image_marg</item>
+        <item name="android:layout_marginRight">@dimen/image_marg</item>
+    </style>
+    <style name="person_center_tv">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+    <style name="person_center_view">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:background">@color/gray</item>
+    </style>
+    <style name="person_center_image">
+        <item name="android:layout_width">@dimen/image_size</item>
+        <item name="android:layout_height">@dimen/image_size</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:src">@drawable/right_arrow</item>
+    </style>
+
 </resources>

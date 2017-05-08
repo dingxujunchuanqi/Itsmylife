@@ -108,4 +108,9 @@
 	<dimen name="view_hight1">20dp</dimen>
 	<dimen name="image_marg">20dp</dimen>
 	<dimen name="user_image_size">60dp</dimen>
+	<dimen name="personInf_height">37dp</dimen>
+	<!--个人信息-->
+	<dimen name="pinfo_height75">75dp</dimen>
+	<dimen name="personInf_height1">44dp</dimen>
+	<dimen name="certifi_commit10">5dp</dimen>
 </resources>

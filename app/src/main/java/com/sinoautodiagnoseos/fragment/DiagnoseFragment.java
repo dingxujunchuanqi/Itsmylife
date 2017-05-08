@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,7 @@ import java.util.List;
  */
 
 public class DiagnoseFragment extends Fragment {
+    private final String TAG=DiagnoseFragment.class.getSimpleName();
     private MainActivity context;
 //    private int pno = 1;
 //    private boolean isLoadAll;
@@ -92,7 +94,7 @@ public class DiagnoseFragment extends Fragment {
                     experts=new Experts_datas();
                     String date_time=data.getData().get(i).getBeginOnUtc();
                     experts.setDate_time(date_time);
-                    experts_list.add(experts);
+//                    experts_list.add(experts);
                     for (int j =0;j<data.getData().get(i).getExpertList().size();j++){
                         String avatar=data.getData().get(i).getExpertList().get(j).getAvatar();
                         String brandInfo=data.getData().get(i).getExpertList().get(j).getBrandInfo();
@@ -104,9 +106,10 @@ public class DiagnoseFragment extends Fragment {
                         experts.setNickName(nickName);
                         experts.setSkillInfo(skillInfo);
                         experts.setStationName(stationName);
-                        experts_list.add(experts);
                     }
                 }
+                experts_list.add(experts);
+                Log.e(TAG,experts_list.size()+"");
                 initView();
             }
 

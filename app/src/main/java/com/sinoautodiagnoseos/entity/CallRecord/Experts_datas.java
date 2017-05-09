@@ -69,4 +69,14 @@ public class Experts_datas {
     public String stationName;
     public String userId;
     public String date_time;
+
+    public String getExperts_id() {
+        return experts_id;
+    }
+
+    public void setExperts_id(String experts_id) {
+        this.experts_id = experts_id;
+    }
+
+    public String experts_id;
 }

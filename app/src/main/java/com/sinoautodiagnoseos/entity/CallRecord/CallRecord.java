@@ -27,6 +27,25 @@ public class CallRecord {
     }
 
     public class Record{
+        public String id;
+
+        public String getCallHistoryId() {
+            return callHistoryId;
+        }
+
+        public void setCallHistoryId(String callHistoryId) {
+            this.callHistoryId = callHistoryId;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String callHistoryId;
         public String beginOnUtc;
         public String carBrandInfo;
         public String faultRangeInfo;
@@ -81,6 +100,16 @@ public class CallRecord {
             public String skillInfo;
             public String stationName;
             public String userId;
+
+            public String getExpertId() {
+                return expertId;
+            }
+
+            public void setExpertId(String expertId) {
+                this.expertId = expertId;
+            }
+
+            public String expertId;
 
             public String getDate_time() {
                 return date_time;

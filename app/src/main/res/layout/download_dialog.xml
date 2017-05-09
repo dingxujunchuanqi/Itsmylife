@@ -1,0 +1,54 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <GridView
+        android:id="@+id/grid_view"
+        android:numColumns="2"
+        android:columnWidth="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"/>
+    <!--<de.hdodenhof.circleimageview.CircleImageView-->
+        <!--android:id="@+id/download_pic"-->
+        <!--android:paddingTop="10dp"-->
+        <!--android:layout_width="72dp"-->
+        <!--android:layout_height="72dp"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:src="@drawable/none"/>-->
+    <!--<TextView-->
+        <!--android:id="@+id/download_filename"-->
+        <!--android:paddingTop="10dp"-->
+        <!--android:singleLine="true"-->
+        <!--android:maxEms="5"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center"-->
+        <!--/>-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp" >
+        <com.sinoautodiagnoseos.propeller.ui.specialProgressBar.SpecialProgressBarView
+            android:id="@+id/d_ls"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            app:startDrawable="@drawable/ic_file_upload_white_36dp"
+            app:endSuccessDrawable="@drawable/ic_done_white_36dp"
+            app:textSize="12sp"
+            app:textColorSuccess="#66A269"
+            app:textColorNormal="#491C14"
+            app:textColorError="#BC5246"
+            app:progressBarHeight="4dp"
+            app:progressBarBgColor="#491C14"
+            app:progressBarColor="#ffffff"
+            app:canReBackable="true"
+            app:canDragable="false" />
+    </RelativeLayout>
+</LinearLayout>

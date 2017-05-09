@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" android:layout_weight="1">
+    <RelativeLayout
+    android:id="@+id/r_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" android:layout_centerVertical="true">
+    <de.hdodenhof.circleimageview.CircleImageView
+    android:layout_width="72dp"
+    android:layout_height="72dp" android:id="@+id/avatar"
+    android:paddingTop="12dp" android:paddingBottom="12dp"
+    android:src="@drawable/ic_launcher"
+    />
+    <TextView
+    android:id="@+id/user_name" android:paddingLeft="20dp"
+    android:layout_below="@+id/avatar" android:ellipsize="end"
+    android:textSize="12dp"  android:singleLine="true"
+    android:layout_width="70dp" android:textColor="@color/dark_black"
+    android:layout_height="wrap_content" android:text=""/>
+    </RelativeLayout>
+    <com.sinoautodiagnoseos.propeller.ui.RatingBar
+    android:id="@+id/rb"
+    android:layout_toRightOf="@+id/r_layout"
+    android:layout_centerInParent="true"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    app:starCount="5"
+    app:starEmpty="@drawable/star_grey"
+    app:starFill="@drawable/star_red"
+    app:starImageSize="35dp"
+    app:starPadding="5dp"
+    app:starStep="0"
+    />
+    </RelativeLayout>
+</LinearLayout>

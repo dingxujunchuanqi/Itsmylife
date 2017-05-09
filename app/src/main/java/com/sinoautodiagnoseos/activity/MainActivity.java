@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -59,7 +58,6 @@ public class MainActivity extends BaseFragmentActivity {
         initView();
         initListenerOclick();
     }
-
 
 
     @Override

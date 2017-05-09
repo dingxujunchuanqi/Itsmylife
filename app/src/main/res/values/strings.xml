@@ -1,4 +1,7 @@
 <resources>
+    <!-- 欢迎页txt-->
+    <string name="logo_txt">华汽投资控股有限公司</string>
+
     <string name="app_name">蓝领驿家二期</string>
     <string name="main_navigation_circle">圈子</string>
     <string name="main_navigation_diagnose">云诊</string>
@@ -55,4 +58,42 @@
     <string name="commit_certificat_info">*提交认证信息可升级为技师哦</string>
     <string name="go_authentication">去认证</string>
     <string name="specialist_certificat">专家认证</string>
+
+    <!-- 直通-->
+    <string name="str_wait">等待倒计时</string>
+
+    // DO NOT TRANSLATE
+    <string name="bit_rate_value_with_unit">%d kbps</string>
+    <string name="frame_rate_value_with_unit">%d fps</string>
+
+    <string name="score_str">感谢您的评分!</string>
+    <string name="ceshi_str">王仁</string>
+    <string name="search_finish">完成搜索</string>
+
+    <!-- 邀请专家界面 -->
+    <string name="str_cancle">取消</string>
+    <string name="str_request_others">邀请他人</string>
+    <string name="str_confirm">确定</string>
+
+    <!-- 呼叫专家页面 -->
+    <string name="call_experts">呼叫专家</string>
+
+    <string name="str_content">邀请您会诊</string>
+    <string name="str_title">您好!</string>
+    <string name="str_request_success">邀请成功,耐心等待!</string>
+
+    <string name="str_experts_name">张三</string>
+    <string name="str_zhenduan">邀请您诊断</string>
+
+    <string name="str_agree_zhenduan">同意您的邀请</string>
+
+    <string name="str_hand_up">拒绝</string>
+    <string name="str_answer">接听</string>
+
+    <string name="label_send">Send</string>
+
+    <string name="msg_say_something">Say something…</string>
+    <string name="msg_no_network_connection">No network connection, please check the network settings</string>
+
+    <string name="not_response_from_experts">目前暂无空闲的专家为您诊断，请稍后再试</string>
 </resources>

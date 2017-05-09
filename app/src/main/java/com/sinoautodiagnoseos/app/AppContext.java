@@ -7,6 +7,7 @@ import com.sinoautodiagnoseos.entity.User.UserInfo;
 import com.sinoautodiagnoseos.net.requestApi.HttpRequestApi;
 import com.sinoautodiagnoseos.net.requestSubscribers.HttpSubscriber;
 import com.sinoautodiagnoseos.net.requestSubscribers.SubscriberOnListener;
+import com.sinoautodiagnoseos.openvcall.model.WorkerThread;
 import com.sinoautodiagnoseos.utils.Constant;
 import com.sinoautodiagnoseos.utils.SharedPreferences;
 import com.sinoautodiagnoseos.utils.StringUtils;
@@ -29,6 +30,31 @@ public class AppContext extends Application {
         }
         return app;
     }
+
+    private WorkerThread mWorkerThread;
+
+    public synchronized void initWorkerThread() {
+        if (mWorkerThread == null) {
+            mWorkerThread = new WorkerThread(getApplicationContext());
+            mWorkerThread.start();
+            mWorkerThread.waitForReady();
+        }
+    }
+    public synchronized WorkerThread getWorkerThread() {
+        return mWorkerThread;
+    }
+
+    public synchronized void deInitWorkerThread() {
+        mWorkerThread.exit();
+        try {
+            mWorkerThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        mWorkerThread = null;
+    }
+
+
 
     @Override
     public void onCreate() {

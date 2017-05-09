@@ -89,6 +89,7 @@ public class DiagnoseFragment extends Fragment {
         HttpRequestApi.getInstance().getCallRecord(new HttpSubscriber<CallRecord>(new SubscriberOnListener<CallRecord>() {
             @Override
             public void onSucceed(CallRecord data) {
+                Log.e(TAG,"----"+data.getData().size()+"");
                 for (int i = 0;i<data.getData().size();i++)
                 {
                     experts=new Experts_datas();
@@ -101,15 +102,17 @@ public class DiagnoseFragment extends Fragment {
                         String nickName=data.getData().get(i).getExpertList().get(j).getNickName();
                         String skillInfo=data.getData().get(i).getExpertList().get(j).getSkillInfo();
                         String stationName=data.getData().get(i).getExpertList().get(j).getStationName();
+                        String experts_id =data.getData().get(i).getExpertList().get(j).getExpertId();
                         experts.setAvatar(avatar);
                         experts.setBrandInfo(brandInfo);
                         experts.setNickName(nickName);
                         experts.setSkillInfo(skillInfo);
                         experts.setStationName(stationName);
+                        experts.setExperts_id(experts_id);
+                        experts_list.add(experts);
                     }
                 }
-                experts_list.add(experts);
-                Log.e(TAG,experts_list.size()+"");
+//                Log.e(TAG,experts_list.size()+"");
                 initView();
             }
 

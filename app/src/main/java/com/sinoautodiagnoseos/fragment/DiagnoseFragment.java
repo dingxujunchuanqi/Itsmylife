@@ -8,8 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 
 import com.sinoautodiagnoseos.R;
 import com.sinoautodiagnoseos.activity.MainActivity;
@@ -18,7 +18,7 @@ import com.sinoautodiagnoseos.entity.CallRecord.Experts_datas;
 import com.sinoautodiagnoseos.net.requestApi.HttpRequestApi;
 import com.sinoautodiagnoseos.net.requestSubscribers.HttpSubscriber;
 import com.sinoautodiagnoseos.net.requestSubscribers.SubscriberOnListener;
-import com.sinoautodiagnoseos.ui.adapter.DiagnoseAdapter;
+import com.sinoautodiagnoseos.ui.adapter.DiagnoseBaseAdapter;
 import com.sinoautodiagnoseos.utils.Constant;
 import com.sinoautodiagnoseos.utils.OnMultiClickListener;
 import com.sinoautodiagnoseos.utils.SharedPreferences;
@@ -38,16 +38,17 @@ public class DiagnoseFragment extends Fragment {
     private MainActivity context;
 //    private int pno = 1;
 //    private boolean isLoadAll;
-    private ListView listView;
+    private ExpandableListView listView;
 //    QuickAdapter<CallRecord.Record.Expert> adapter;
-    private DiagnoseAdapter adapter;
+//    private DiagnoseAdapter adapter;
+    private DiagnoseBaseAdapter adapter;
     LinearLayout voice_btn,video_btn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_diagnose_pager, container, false);
-        listView= (ListView) view.findViewById(R.id.listView);
+        listView= (ExpandableListView) view.findViewById(R.id.listView);
         voice_btn= (LinearLayout) view.findViewById(R.id.btn_voice);
         video_btn= (LinearLayout) view.findViewById(R.id.btn_video);
         voice_btn.setOnClickListener(listener);
@@ -79,40 +80,49 @@ public class DiagnoseFragment extends Fragment {
     private void initData() {
         getCallRecord();
     }
-    Experts_datas experts;
+//    Experts_datas experts;
     List<Experts_datas>experts_list;
+    List<CallRecord.Record> callRecord;
+    List<CallRecord.Record.Expert> experts;
     //获取最新三条记录
     private void getCallRecord() {
         experts_list=new ArrayList<>();
+        callRecord=new ArrayList<>();
         Constant.TOKEN= SharedPreferences.getInstance().getString("checktoken","");
         Constant.REGISTRATION=SharedPreferences.getInstance().getString("RegistrationId","");
         HttpRequestApi.getInstance().getCallRecord(new HttpSubscriber<CallRecord>(new SubscriberOnListener<CallRecord>() {
             @Override
             public void onSucceed(CallRecord data) {
                 Log.e(TAG,"----"+data.getData().size()+"");
-                for (int i = 0;i<data.getData().size();i++)
-                {
-                    experts=new Experts_datas();
-                    String date_time=data.getData().get(i).getBeginOnUtc();
-                    experts.setDate_time(date_time);
-//                    experts_list.add(experts);
-                    for (int j =0;j<data.getData().get(i).getExpertList().size();j++){
-                        String avatar=data.getData().get(i).getExpertList().get(j).getAvatar();
-                        String brandInfo=data.getData().get(i).getExpertList().get(j).getBrandInfo();
-                        String nickName=data.getData().get(i).getExpertList().get(j).getNickName();
-                        String skillInfo=data.getData().get(i).getExpertList().get(j).getSkillInfo();
-                        String stationName=data.getData().get(i).getExpertList().get(j).getStationName();
-                        String experts_id =data.getData().get(i).getExpertList().get(j).getExpertId();
-                        experts.setAvatar(avatar);
-                        experts.setBrandInfo(brandInfo);
-                        experts.setNickName(nickName);
-                        experts.setSkillInfo(skillInfo);
-                        experts.setStationName(stationName);
-                        experts.setExperts_id(experts_id);
-                        experts_list.add(experts);
-                    }
+                callRecord=data.getData();
+                experts =new ArrayList<>();
+                for (int i = 0;i<callRecord.size();i++){
+                    experts=callRecord.get(i).getExpertList();
                 }
-//                Log.e(TAG,experts_list.size()+"");
+//                for (int i = 0;i<data.getData().size();i++)
+//                {
+//                    experts=new Experts_datas();
+//                    String date_time=data.getData().get(i).getBeginOnUtc();
+//                    String str_time=date_time.substring(0,date_time.indexOf("T"));
+//                    experts.setDate_time(str_time);
+//                    Log.e(TAG,"获取的时间-------"+ str_time);
+////                    experts_list.add(experts);
+//                    for (int j =0;j<data.getData().get(i).getExpertList().size();j++){
+//                        String avatar=data.getData().get(i).getExpertList().get(j).getAvatar();
+//                        String brandInfo=data.getData().get(i).getExpertList().get(j).getBrandInfo();
+//                        String nickName=data.getData().get(i).getExpertList().get(j).getNickName();
+//                        String skillInfo=data.getData().get(i).getExpertList().get(j).getSkillInfo();
+//                        String stationName=data.getData().get(i).getExpertList().get(j).getStationName();
+//                        String experts_id =data.getData().get(i).getExpertList().get(j).getExpertId();
+//                        experts.setAvatar(avatar);
+//                        experts.setBrandInfo(brandInfo);
+//                        experts.setNickName(nickName);
+//                        experts.setSkillInfo(skillInfo);
+//                        experts.setStationName(stationName);
+//                        experts.setExperts_id(experts_id);
+//                        experts_list.add(experts);
+//                    }
+//                }
                 initView();
             }
 
@@ -125,8 +135,15 @@ public class DiagnoseFragment extends Fragment {
 
     private void initView() {
         if (adapter==null){
-            adapter=new DiagnoseAdapter(context,experts_list,R.layout.item_record_layout);
+//            adapter=new DiagnoseAdapter(context,callRecord,R.layout.item_record_layout);
+            adapter=new DiagnoseBaseAdapter(context,callRecord,experts);
+            listView.setGroupIndicator(null);
             listView.setAdapter(adapter);
+            //默认加载完页面数据 自动展开所有父节点
+            int intgroupCount =listView.getCount();
+            for (int i = 0;i<intgroupCount ; i++){
+                listView.expandGroup(i);
+            }
         }else {
             adapter.notifyDataSetChanged();
         }

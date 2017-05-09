@@ -67,11 +67,19 @@
 		android:layout_width="match_parent"
 		android:layout_height="5dp"
 		android:background="@color/white"/>
-	<ListView
+	<!--<ListView-->
+		<!--android:id="@+id/listView"-->
+		<!--android:background="@color/gray"-->
+		<!--android:scrollbars="none"-->
+		<!--android:divider="@null"-->
+		<!--android:layout_width="match_parent"-->
+		<!--android:layout_height="match_parent"/>-->
+	<ExpandableListView
 		android:id="@+id/listView"
 		android:background="@color/gray"
 		android:scrollbars="none"
 		android:divider="@null"
+		android:listSelector="@color/gray"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"/>
 

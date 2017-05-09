@@ -21,7 +21,14 @@
         android:layout_height="153dp"
         android:layout_below="@id/rela_abov"
         android:layout_marginTop="15dp">
-
+        <ImageView
+            android:id="@+id/arrow_right1"
+            android:layout_width="@dimen/image_size"
+            android:layout_height="@dimen/image_size"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/image_marg"
+            android:layout_marginRight="@dimen/image_marg"
+            android:src="@drawable/right_arrow" />
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/image_user"
             android:layout_width="@dimen/user_image_size"
@@ -77,12 +84,14 @@
             android:stepSize="0.5" />
 
         <ImageView
+            android:id="@+id/arrow_right"
             android:layout_width="@dimen/image_size"
             android:layout_height="@dimen/image_size"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/image_marg"
-            android:src="@drawable/right_arrow" />
+            android:src="@drawable/right_arrow"
+            android:visibility="invisible"/>
 
         <com.sinoautodiagnoseos.ui.personcenterui.FlowLayout
             android:id="@+id/fl_keyword"

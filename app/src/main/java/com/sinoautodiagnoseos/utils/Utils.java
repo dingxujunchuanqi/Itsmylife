@@ -9,6 +9,9 @@ import android.os.Bundle;
 
 import com.sinoautodiagnoseos.app.AppContext;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 /**
  * Created by HQ_Demons on 17/4/25.
@@ -107,5 +110,16 @@ public class Utils {
 
     static String getString(Context context, int resId){
         return context.getResources().getString(resId);
+    }
+
+    /**
+     * 判断是否是手机号
+     * @param mobiles
+     * @return
+     */
+    public static boolean isMobileNO(String mobiles) {
+        Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0-9]))\\d{8}$");
+        Matcher m = p.matcher(mobiles);
+        return m.matches();
     }
 }

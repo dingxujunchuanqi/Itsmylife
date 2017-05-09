@@ -11,11 +11,13 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.sinoautodiagnoseos.R;
+import com.sinoautodiagnoseos.app.AppContext;
 import com.sinoautodiagnoseos.entity.CallRecord.ReCall;
 import com.sinoautodiagnoseos.entity.User.Directexpert;
 import com.sinoautodiagnoseos.net.requestApi.HttpRequestApi;
 import com.sinoautodiagnoseos.net.requestSubscribers.HttpSubscriber;
 import com.sinoautodiagnoseos.net.requestSubscribers.SubscriberOnListener;
+import com.sinoautodiagnoseos.openvcall.model.CurrentUserSettings;
 import com.sinoautodiagnoseos.utils.Constant;
 
 import java.text.SimpleDateFormat;
@@ -159,6 +161,10 @@ public class ExpertsActivity extends Activity {
             }
         }
     };
+
+    protected static CurrentUserSettings vSettings() {
+        return AppContext.getInstance().mVideoSettings;
+    }
 
 
     @Override

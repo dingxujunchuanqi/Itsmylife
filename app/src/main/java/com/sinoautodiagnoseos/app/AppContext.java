@@ -7,6 +7,7 @@ import com.sinoautodiagnoseos.entity.User.UserInfo;
 import com.sinoautodiagnoseos.net.requestApi.HttpRequestApi;
 import com.sinoautodiagnoseos.net.requestSubscribers.HttpSubscriber;
 import com.sinoautodiagnoseos.net.requestSubscribers.SubscriberOnListener;
+import com.sinoautodiagnoseos.openvcall.model.CurrentUserSettings;
 import com.sinoautodiagnoseos.openvcall.model.WorkerThread;
 import com.sinoautodiagnoseos.utils.Constant;
 import com.sinoautodiagnoseos.utils.SharedPreferences;
@@ -53,6 +54,8 @@ public class AppContext extends Application {
         }
         mWorkerThread = null;
     }
+
+    public static final CurrentUserSettings mVideoSettings = new CurrentUserSettings();
 
 
 

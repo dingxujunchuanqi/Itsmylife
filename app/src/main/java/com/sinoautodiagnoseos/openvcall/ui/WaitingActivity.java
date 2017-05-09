@@ -15,14 +15,18 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.sinoautodiagnoseos.R;
+import com.sinoautodiagnoseos.app.AppContext;
 import com.sinoautodiagnoseos.entity.User.Skill;
 import com.sinoautodiagnoseos.net.requestApi.HttpRequestApi;
 import com.sinoautodiagnoseos.net.requestSubscribers.HttpSubscriber;
 import com.sinoautodiagnoseos.net.requestSubscribers.SubscriberOnListener;
 import com.sinoautodiagnoseos.openvcall.model.Faults;
 import com.sinoautodiagnoseos.openvcall.model.ListExpertsSearchDto;
+import com.sinoautodiagnoseos.openvcall.model.RoomInfo;
 import com.sinoautodiagnoseos.propeller.ui.TimeCountDown;
 import com.sinoautodiagnoseos.utils.Constant;
+import com.sinoautodiagnoseos.utils.SharedPreferences;
+import com.sinoautodiagnoseos.utils.ToastUtils;
 import com.skyfishjy.library.RippleBackground;
 
 import org.json.JSONArray;
@@ -128,31 +132,33 @@ public class WaitingActivity extends BaseActivity implements TimeCountDown.OnTim
      * 匹配专家方法入口
      */
     private void findoneexperts() {
+        Constant.TOKEN= SharedPreferences.getInstance().getString("checktoken","");
+        Constant.REGISTRATION=SharedPreferences.getInstance().getString("RegistrationId","");
         ReadJSON(json);
         Gson gson = new Gson();
         String json = gson.toJson(les);
 
         Log.e("JSON", json);
         RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json);
-//        HttpRequestApi.getInstance().findoneexperts(requestBody,
-//                new HttpSubscriber<RoomInfo>(new SubscriberOnListener<RoomInfo>() {
-//                    @Override
-//                    public void onSucceed(RoomInfo data) {
-//                        if (data.getData().getRoomId().equals("")){
-//                           countDown.cancel();
-//                            ToastUtils.showShort(AppContext.getInstance(),"暂时没有空闲专家，请稍后再试！");
-//                        }else {
-//                            Constant.ROOMID=data.getData().getRoomId();//保存房间号
-////                            forwardToRoom();//匹配成功，直接进入创建好房间进入
-//                            Constant.SACCOUNT = Constant.USERNAME;
-//                            countDown.cancel();
-//                        }
-//                    }
-//                    @Override
-//                    public void onError(int code, String msg) {
-//                        countDown.cancel();
-//                    }
-//                }, WaitingActivity.this));
+        HttpRequestApi.getInstance().findoneexperts(requestBody,
+                new HttpSubscriber<RoomInfo>(new SubscriberOnListener<RoomInfo>() {
+                    @Override
+                    public void onSucceed(RoomInfo data) {
+                        if (data.getData().getRoomId().equals("")){
+                           countDown.cancel();
+                            ToastUtils.showShort(AppContext.getInstance(),"暂时没有空闲专家，请稍后再试！");
+                        }else {
+                            Constant.ROOMID=data.getData().getRoomId();//保存房间号
+//                            forwardToRoom();//匹配成功，直接进入创建好房间进入
+                            Constant.SACCOUNT = Constant.USERNAME;
+                            countDown.cancel();
+                        }
+                    }
+                    @Override
+                    public void onError(int code, String msg) {
+                        countDown.cancel();
+                    }
+                }, WaitingActivity.this));
     }
 
     Faults fault;
@@ -242,6 +248,8 @@ public class WaitingActivity extends BaseActivity implements TimeCountDown.OnTim
     @Override
     public void onCountDownFinish() {
         showLongToast(getResources().getString(R.string.not_response_from_experts));
+        Constant.TOKEN=SharedPreferences.getInstance().getString("checktoken","");
+        Constant.REGISTRATION=SharedPreferences.getInstance().getString("RegistrationId","");
         HttpRequestApi.getInstance().getCallStatus(Constant.ROOMID,
                 new HttpSubscriber<Skill>(new SubscriberOnListener<Skill>() {
                     @Override

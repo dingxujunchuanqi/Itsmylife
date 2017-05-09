@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.sinoautodiagnoseos.app.AppContext;
 import com.sinoautodiagnoseos.app.AppManager;
 import com.sinoautodiagnoseos.openvcall.model.ConstantApp;
+import com.sinoautodiagnoseos.openvcall.model.CurrentUserSettings;
 import com.sinoautodiagnoseos.openvcall.model.EngineConfig;
 import com.sinoautodiagnoseos.openvcall.model.MyEngineEventHandler;
 import com.sinoautodiagnoseos.openvcall.model.WorkerThread;
@@ -204,6 +205,10 @@ public abstract class BaseActivity extends AppCompatActivity {
                 break;
             }
         }
+    }
+
+    protected CurrentUserSettings vSettings() {
+        return AppContext.getInstance().mVideoSettings;
     }
 
 

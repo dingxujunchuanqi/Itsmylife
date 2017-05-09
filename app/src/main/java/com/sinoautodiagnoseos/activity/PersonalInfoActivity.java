@@ -1,17 +1,24 @@
 package com.sinoautodiagnoseos.activity;
 
+import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 
 import com.sinoautodiagnoseos.R;
+import com.sinoautodiagnoseos.entity.User.UserInfo;
 import com.sinoautodiagnoseos.ui.loginui.SwipeBackActivity;
+import com.sinoautodiagnoseos.utils.LogUtils;
+
+import java.io.Serializable;
 
 /**
  * Created by dingxujun on 2017/5/4.
  */
 
 public class PersonalInfoActivity extends SwipeBackActivity implements View.OnClickListener {
+    private static final String TAG = "PersonalInfoActivity";
     private FrameLayout image_back;
 
     @Override
@@ -20,7 +27,10 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
         setContentView(R.layout.activity_personal_info);
         initView();
         initListenerOclick();
+        getUserInfo();
     }
+
+
 
     private void initView() {
         image_back = (FrameLayout) findViewById(R.id.back_click);
@@ -39,6 +49,13 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
             default:
                 break;
         }
+    }
+
+    private void getUserInfo() {
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        UserInfo userdata = (UserInfo) bundle.getSerializable("userdata");
+        LogUtils.deBug(TAG,"=================="+userdata.getData().getRoleName());
     }
 }
 

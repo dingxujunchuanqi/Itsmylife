@@ -42,7 +42,7 @@
     <string name="tel_record">呼叫记录</string>
     <!--个人中心-->
     <string name="personal_centter">个人中心</string>
-    <string name="user_name">张三</string>
+    <string name="user_name">未设置</string>
     <string name="more_content">更多内容敬请期待!!!</string>
     <!--个人信息-->
     <string name="head_portrait">头像</string>
@@ -96,4 +96,5 @@
     <string name="msg_no_network_connection">No network connection, please check the network settings</string>
 
     <string name="not_response_from_experts">目前暂无空闲的专家为您诊断，请稍后再试</string>
+    <string name="domestic_consumer">普通用户</string>
 </resources>

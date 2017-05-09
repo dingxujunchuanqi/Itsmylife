@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.view.View;
 
 import com.sinoautodiagnoseos.R;
-import com.sinoautodiagnoseos.entity.CallRecord.Experts_datas;
+import com.sinoautodiagnoseos.entity.CallRecord.CallRecord;
 import com.sinoautodiagnoseos.entity.Experts.SearchExpertsData;
 import com.sinoautodiagnoseos.net.requestApi.HttpRequestApi;
 import com.sinoautodiagnoseos.net.requestSubscribers.HttpSubscriber;
@@ -22,26 +22,29 @@ import java.util.List;
  * Created by HQ_Demos on 2017/5/4.
  */
 
-public class DiagnoseAdapter extends CommonAdapter<Experts_datas>{
-    public DiagnoseAdapter(Context context, List<Experts_datas> data, int layoutId) {
+public class DiagnoseAdapter extends CommonAdapter<CallRecord.Record>{
+    public DiagnoseAdapter(Context context, List<CallRecord.Record> data, int layoutId) {
         super(context, data, layoutId);
     }
 
     @Override
     public void convert(ViewHolder holder, final int position) {
-        holder.setText(R.id.name,mData.get(position).getNickName());
-        holder.setText(R.id.pingpai,mData.get(position).getBrandInfo());
-        holder.setText(R.id.jineng,mData.get(position).getSkillInfo());
-        holder.setImageResource(R.id.video_play,R.drawable.video_play);
-        holder.setImageUrl(R.id.head_avatar,mData.get(position).getAvatar());
+        String data_time = mData.get(position).getBeginOnUtc();
+        String str_time=data_time.substring(0,data_time.indexOf("T"));
+        holder.setText(R.id.record_time,str_time);
+//        holder.setText(R.id.name,mData.get(position).getNickName());
+//        holder.setText(R.id.pingpai,mData.get(position).getBrandInfo());
+//        holder.setText(R.id.jineng,mData.get(position).getSkillInfo());
+//        holder.setImageResource(R.id.video_play,R.drawable.video_play);
+//        holder.setImageUrl(R.id.head_avatar,mData.get(position).getAvatar());
 
         //处理局部点击事件
         holder.getView(R.id.video_play).setOnClickListener(new OnMultiClickListener() {
             @Override
             public void onMultiClick(View v) {
-                String expertsId = mData.get(position).getExperts_id();
-                String roomId = "";
-                directCallProfessor(expertsId,roomId);
+//                String expertsId = mData.get(position).getExperts_id();
+//                String roomId = "";
+//                directCallProfessor(expertsId,roomId);
             }
         });
     }

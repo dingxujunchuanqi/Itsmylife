@@ -3,11 +3,14 @@ package com.sinoautodiagnoseos.ui;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
 import android.widget.Toast;
 
 import com.sinoautodiagnoseos.activity.LoginActivity;
 import com.sinoautodiagnoseos.activity.MainActivity;
 import com.sinoautodiagnoseos.activity.PersonalInfoActivity;
+import com.sinoautodiagnoseos.entity.User.UserInfo;
 
 /**
  * 应用程序UI工具包：封装UI相关的一些操作
@@ -61,12 +64,15 @@ public class UIHelper {
         context.startActivity(intent);
     }
        /*
-        * 跳到个人信息界面
+        * 跳到个人信息界面并传递数据
         *
         */
-    public static void showPersonInfo(Activity context){
-        Intent intent = new Intent(context, PersonalInfoActivity.class);
-        context.startActivity(intent);
+    public static void showPersonInfo(Activity context ,UserInfo data ){
+        Intent mIntent = new Intent(context, PersonalInfoActivity.class);
+        Bundle mBundle =new Bundle();
+        mBundle.putSerializable("userdata",data);
+        mIntent.putExtras(mBundle);
+        context.startActivity(mIntent);
     }
     public static void showLogin(Activity context){
         Intent intent = new Intent(context, LoginActivity.class);

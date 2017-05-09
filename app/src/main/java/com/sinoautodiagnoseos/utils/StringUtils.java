@@ -300,7 +300,7 @@ public class StringUtils {
      * @param data
      * @return yyyy-MM-dd
      */
-    private static String toNYR(long data) {
+    public static String toNYR(long data) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-M-d");
         try {
             return dateFormat.format(data);

@@ -59,7 +59,9 @@ import com.sinoautodiagnoseos.openvcall.model.AGEventHandler;
 import com.sinoautodiagnoseos.openvcall.model.CallHistoriesExpertsDtos;
 import com.sinoautodiagnoseos.openvcall.model.ConstantApp;
 import com.sinoautodiagnoseos.openvcall.model.ExpertsData;
+import com.sinoautodiagnoseos.openvcall.model.ExpertsInfoList;
 import com.sinoautodiagnoseos.openvcall.model.ListExpertsSearchDto;
+import com.sinoautodiagnoseos.openvcall.model.ListExpertsSearchLists;
 import com.sinoautodiagnoseos.openvcall.model.ListResult;
 import com.sinoautodiagnoseos.openvcall.model.Message;
 import com.sinoautodiagnoseos.openvcall.model.UploadDatas;
@@ -75,6 +77,7 @@ import com.sinoautodiagnoseos.propeller.ui.expandButton.ButtonData;
 import com.sinoautodiagnoseos.propeller.ui.expandButton.ButtonEventListener;
 import com.sinoautodiagnoseos.propeller.ui.specialProgressBar.SpecialProgressBarView;
 import com.sinoautodiagnoseos.utils.MyIntent;
+import com.sinoautodiagnoseos.utils.ToastUtils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -83,6 +86,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -763,19 +767,21 @@ public class ChatActivity extends BaseActivity implements AGEventHandler {
     }
     private ListExpertsSearchDto les=new ListExpertsSearchDto();
     private void expertsRequests(){
-//        HttpRequestApi.getInstance().expertsRequestExperts(com.sinoautodiagnoseos.utils.Constant.ROOMID,
-//                new HttpSubscriber<ListExpertsSearchLists>(new SubscriberOnListener<ListExpertsSearchLists>()
-//                {
-//                    @Override
-//                    public void onSucceed(ListExpertsSearchLists data) {
-//                        com.sinoautodiagnoseos.utils.Constant.Experts=data.getListExpertsSearchDto();
-//                        Log.e("-----onSucceed------",data.getListExpertsSearchDto().getFaults()+"----"+data.getListExpertsSearchDto().getCarBrandId());
-//                    }
-//
-//                    @Override
-//                    public void onError(int code, String msg) {
-//                    }
-//                },ChatActivity.this));
+        com.sinoautodiagnoseos.utils.Constant.TOKEN= com.sinoautodiagnoseos.utils.SharedPreferences.getInstance().getString("checktoken","");
+        com.sinoautodiagnoseos.utils.Constant.REGISTRATION= com.sinoautodiagnoseos.utils.SharedPreferences.getInstance().getString("RegistrationId","");
+        HttpRequestApi.getInstance().expertsRequestExperts(com.sinoautodiagnoseos.utils.Constant.ROOMID,
+                new HttpSubscriber<ListExpertsSearchLists>(new SubscriberOnListener<ListExpertsSearchLists>()
+                {
+                    @Override
+                    public void onSucceed(ListExpertsSearchLists data) {
+                        com.sinoautodiagnoseos.utils.Constant.Experts=data.getListExpertsSearchDto();
+                        Log.e("-----onSucceed------",data.getListExpertsSearchDto().getFaults()+"----"+data.getListExpertsSearchDto().getCarBrandId());
+                    }
+
+                    @Override
+                    public void onError(int code, String msg) {
+                    }
+                },ChatActivity.this));
     }
 
     /**
@@ -785,6 +791,8 @@ public class ChatActivity extends BaseActivity implements AGEventHandler {
     private static final int REQUEST_EXPERTS = 1000;
     private void findexpertslist() {
 //        les=expertsRequests();
+        com.sinoautodiagnoseos.utils.Constant.TOKEN= com.sinoautodiagnoseos.utils.SharedPreferences.getInstance().getString("checktoken","");
+        com.sinoautodiagnoseos.utils.Constant.REGISTRATION= com.sinoautodiagnoseos.utils.SharedPreferences.getInstance().getString("RegistrationId","");
         expertsRequests();
         Gson gson=new Gson();
 //        System.out.println("ChatActivity_Constant.Experts="+ com.sinoautodiagnoseos.utils.Constant.Experts.getCarBrandId());
@@ -793,33 +801,33 @@ public class ChatActivity extends BaseActivity implements AGEventHandler {
         Log.e("JSON",json);
 
         RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),json);
-//        HttpRequestApi.getInstance().findexpertslist(requestBody,
-//                new HttpSubscriber<ExpertsInfoList>(new SubscriberOnListener<ExpertsInfoList>()
-//                {
-//                    @Override
-//                    public void onSucceed(ExpertsInfoList data) {
-//                        System.out.println("--------onSucceed-------");
-//                        System.out.println("listSize="+data.getData().size()+"\n"+"counts="+data.getTotalCount());
-//                        List<ExpertsData> expertsDatas = data.getData();
-////                        int counts=data.getTotalCount();
-//                        if (expertsDatas.size()==0||expertsDatas==null){
-//                            showToast("暂无空闲在线的专家");
-//                        }else {
-//                            System.out.println("----执行了-----");
-//                            Intent intent = new Intent();
-//                            intent.setClass(ChatActivity.this,RequestOthersActivity.class);
-//                            Bundle bundle = new Bundle();
-//                            bundle.putSerializable("extersDatas", (Serializable) expertsDatas);
-//                            intent.putExtras(bundle);
-//                            startActivityForResult(intent,REQUEST_EXPERTS);
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(int code, String msg) {
-//                        System.out.println("--------onError-------");
-//                    }
-//                },ChatActivity.this));
+        HttpRequestApi.getInstance().findexpertslist(requestBody,
+                new HttpSubscriber<ExpertsInfoList>(new SubscriberOnListener<ExpertsInfoList>()
+                {
+                    @Override
+                    public void onSucceed(ExpertsInfoList data) {
+                        System.out.println("--------onSucceed-------");
+                        System.out.println("listSize="+data.getData().size()+"\n"+"counts="+data.getTotalCount());
+                        List<ExpertsData> expertsDatas = data.getData();
+//                        int counts=data.getTotalCount();
+                        if (expertsDatas.size()==0||expertsDatas==null){
+                            showToast("暂无空闲在线的专家");
+                        }else {
+                            System.out.println("----执行了-----");
+                            Intent intent = new Intent();
+                            intent.setClass(ChatActivity.this,RequestOthersActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("extersDatas", (Serializable) expertsDatas);
+                            intent.putExtras(bundle);
+                            startActivityForResult(intent,REQUEST_EXPERTS);
+                        }
+                    }
+
+                    @Override
+                    public void onError(int code, String msg) {
+                        System.out.println("--------onError-------");
+                    }
+                },ChatActivity.this));
     }
 
 
@@ -856,6 +864,8 @@ public class ChatActivity extends BaseActivity implements AGEventHandler {
                     finish();
                     che_list.clear();//退出清除集合
                     che_lists.clear();
+                com.sinoautodiagnoseos.utils.Constant.TOKEN= com.sinoautodiagnoseos.utils.SharedPreferences.getInstance().getString("checktoken","");
+                com.sinoautodiagnoseos.utils.Constant.REGISTRATION= com.sinoautodiagnoseos.utils.SharedPreferences.getInstance().getString("RegistrationId","");
                     HttpRequestApi.getInstance().onLine( new HttpSubscriber<Skill>(new SubscriberOnListener<Skill>() {
                     @Override
                     public void onSucceed(Skill data) {
@@ -922,6 +932,8 @@ public class ChatActivity extends BaseActivity implements AGEventHandler {
     List<CallHistoriesExpertsDtos> che_list = new ArrayList<CallHistoriesExpertsDtos>();
     List<CallHistoriesExpertsDtos> che_lists = new ArrayList<CallHistoriesExpertsDtos>();
     private void updatecallhistoriesresult() {
+        com.sinoautodiagnoseos.utils.Constant.TOKEN= com.sinoautodiagnoseos.utils.SharedPreferences.getInstance().getString("checktoken","");
+        com.sinoautodiagnoseos.utils.Constant.REGISTRATION= com.sinoautodiagnoseos.utils.SharedPreferences.getInstance().getString("RegistrationId","");
         Log.e("result",che_list.size()+"");
         lr=new ListResult();
         for (int i=0;i<che_list.size();i++){
@@ -943,26 +955,28 @@ public class ChatActivity extends BaseActivity implements AGEventHandler {
         String json = gson.toJson(lr);
         Log.e("JSON",json);
         RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json);
-//        HttpRequestApi.getInstance().updatecallhistoriesresult(requestBody,
-//                new HttpSubscriber<ListResult>(new SubscriberOnListener<ListResult>()
-//                {
-//                    @Override
-//                    public void onSucceed(ListResult data) {
-//                        endCall();
-////                        Toast.makeText(ChatActivity.this,getString(R.string.score_str), Toast.LENGTH_SHORT).show();
-//                        ToastUtils.showShort(ChatActivity.this,getString(R.string.score_str));
-//                    }
-//
-//                    @Override
-//                    public void onError(int code, String msg) {
-//
-//                    }
-//                },ChatActivity.this));
+        HttpRequestApi.getInstance().updatecallhistoriesresult(requestBody,
+                new HttpSubscriber<ListResult>(new SubscriberOnListener<ListResult>()
+        {
+            @Override
+            public void onSucceed(ListResult data) {
+                endCall();
+                ToastUtils.showShort(ChatActivity.this,getString(R.string.score_str));
+            }
+
+            @Override
+            public void onError(int code, String msg) {
+
+            }
+        },ChatActivity.this)
+        );
     }
 
     //呼叫主动挂断电话
     private void endCall(){
         System.out.println("RoomId------"+ com.sinoautodiagnoseos.utils.Constant.ROOMID);
+        com.sinoautodiagnoseos.utils.Constant.TOKEN= com.sinoautodiagnoseos.utils.SharedPreferences.getInstance().getString("checktoken","");
+        com.sinoautodiagnoseos.utils.Constant.REGISTRATION= com.sinoautodiagnoseos.utils.SharedPreferences.getInstance().getString("RegistrationId","");
         HttpRequestApi.getInstance().getCallStatus(com.sinoautodiagnoseos.utils.Constant.ROOMID,
                 new HttpSubscriber<Skill>(new SubscriberOnListener<Skill>() {
                     @Override
@@ -1170,82 +1184,6 @@ public class ChatActivity extends BaseActivity implements AGEventHandler {
                         });
                         fileName= com.sinoautodiagnoseos.utils.Constant.FILENAME;
                         fileUrl= com.sinoautodiagnoseos.utils.Constant.DOWNLOADURL;
-//                        download_filename.setText(fileName);
-//                        download_img.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                String sdcardDir = Environment.getExternalStorageDirectory().getPath()+"/SinoAuto/";
-//                                String fileAllPath=sdcardDir+fileName;
-//                                getFilePath(sdcardDir,fileName);
-//                                if (filesExists(fileAllPath)){
-//                                    if (fileName.contains(".jpg")||fileName.contains(".png")||fileName.contains(".bmp")||
-//                                            fileName.contains(".gif")){
-//                                        startActivity( MyIntent.getImageFileIntent(fileAllPath));
-//                                    } else if(fileName.contains(".html")){
-//                                        startActivity(MyIntent.getHtmlFileIntent(fileAllPath));
-//                                    }
-//                                    else if (fileName.contains(".txt")){
-//                                        startActivity(MyIntent.getTextFileIntent(fileAllPath,true));
-//                                    }
-//                                    else if (fileName.contains(".pdf")){
-//                                        startActivity(MyIntent.getPdfFileIntent(fileAllPath));
-//                                    }
-//                                    else if (fileName.contains(".mp3")||fileName.contains(".wav"))
-//                                    {
-//                                        startActivity(MyIntent.getAudioFileIntent(fileAllPath));
-//                                    }
-//                                    else if (fileName.contains(".mp4")||fileName.contains(".avi")||
-//                                            fileName.contains(".rmvb")||fileName.contains(".3gp"))
-//                                    {
-//                                        startActivity(MyIntent.getVideoFileIntent(fileAllPath));
-//                                    }
-//                                    else if (fileName.contains(".doc")||fileName.contains(".docx")){
-//                                        startActivity(MyIntent.getWordFileIntent(fileAllPath));
-//                                    }
-//                                    else if (fileName.contains(".xls")||fileName.contains(".xlsx")){
-//                                        startActivity(MyIntent.getExcelFileIntent(fileAllPath));
-//                                    }
-//                                    else if (fileName.contains(".ppt")){
-//                                        startActivity( MyIntent.getPptFileIntent(fileAllPath));
-//                                    }
-//                                }else{
-//                                    d_sp.setVisibility(View.VISIBLE);
-//                                    num = 0;
-//                                    d_sp.beginStarting();//启动开始开始动画
-//                                    downloadAsyn(fileUrl,sdcardDir,fileName);
-//                                    if (fileName.contains(".jpg")||fileName.contains(".png")||fileName.contains(".bmp")||
-//                                            fileName.contains(".gif")){
-//                                        startActivity( MyIntent.getImageFileIntent(fileAllPath));
-//                                    } else if(fileName.contains(".html")){
-//                                        startActivity(MyIntent.getHtmlFileIntent(fileAllPath));
-//                                    }
-//                                    else if (fileName.contains(".txt")){
-//                                        startActivity(MyIntent.getTextFileIntent(fileAllPath,true));
-//                                    }
-//                                    else if (fileName.contains(".pdf")){
-//                                        startActivity(MyIntent.getPdfFileIntent(fileAllPath));
-//                                    }
-//                                    else if (fileName.contains(".mp3")||fileName.contains(".wav"))
-//                                    {
-//                                        startActivity(MyIntent.getAudioFileIntent(fileAllPath));
-//                                    }
-//                                    else if (fileName.contains(".mp4")||fileName.contains(".avi")||
-//                                            fileName.contains(".rmvb")||fileName.contains(".3gp"))
-//                                    {
-//                                        startActivity(MyIntent.getVideoFileIntent(fileAllPath));
-//                                    }
-//                                    else if (fileName.contains(".doc")||fileName.contains(".docx")){
-//                                        startActivity(MyIntent.getWordFileIntent(fileAllPath));
-//                                    }
-//                                    else if (fileName.contains(".xls")||fileName.contains(".xlsx")){
-//                                        startActivity(MyIntent.getExcelFileIntent(fileAllPath));
-//                                    }
-//                                    else if (fileName.contains(".ppt")){
-//                                        startActivity( MyIntent.getPptFileIntent(fileAllPath));
-//                                    }
-//                                }
-//                            }
-//                        });
                     }
                 })
                 .setTitle("下载文件列表")
@@ -1568,6 +1506,8 @@ public class ChatActivity extends BaseActivity implements AGEventHandler {
     String download_url,download_fileName,download_id,extensio;
     UploadDatas uploadDatas;
     private void uploadFile1() {
+        com.sinoautodiagnoseos.utils.Constant.TOKEN= com.sinoautodiagnoseos.utils.SharedPreferences.getInstance().getString("checktoken","");
+        com.sinoautodiagnoseos.utils.Constant.REGISTRATION= com.sinoautodiagnoseos.utils.SharedPreferences.getInstance().getString("RegistrationId","");
         String path = et.getText().toString().trim();
         final String fileName = path.substring(path.lastIndexOf("/")+1);
         if (path.equals("")&&path==null){
@@ -1592,6 +1532,8 @@ public class ChatActivity extends BaseActivity implements AGEventHandler {
                     String json = gson.toJson(uploadDatas);
 
                     Log.e("JSON", json);
+                    com.sinoautodiagnoseos.utils.Constant.TOKEN= com.sinoautodiagnoseos.utils.SharedPreferences.getInstance().getString("checktoken","");
+                    com.sinoautodiagnoseos.utils.Constant.REGISTRATION= com.sinoautodiagnoseos.utils.SharedPreferences.getInstance().getString("RegistrationId","");
                     RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json);
                     HttpRequestApi.getInstance().uploadFiles(requestBody, new HttpSubscriber<String>(new SubscriberOnListener<String>() {
                         @Override

@@ -1,10 +1,12 @@
 package com.sinoautodiagnoseos.entity.User;
 
+import java.io.Serializable;
+
 /**
  * Created by Lanye on 2017/3/2.
  */
 
-public class UserInfo {
+public class UserInfo implements Serializable {
 
     public int getCode() {
         return code;
@@ -45,7 +47,7 @@ public class UserInfo {
         this.data = data;
     }
 
-    public class UserData{
+    public class UserData implements Serializable{
         public String areaNames;
         public String avatar;
         public String birthday;
@@ -149,7 +151,7 @@ public class UserInfo {
             return memberId;
         }
 
-        public class OtherInfo{
+        public class OtherInfo implements Serializable{
             public String carBrandName;
             public String skillInfo;
             public String skillRangeName;

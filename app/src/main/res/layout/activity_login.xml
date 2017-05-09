@@ -6,10 +6,10 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/background">
 
         <LinearLayout
             android:id="@+id/phone_number"
@@ -154,35 +154,6 @@
         </RelativeLayout>
 -->
         <RelativeLayout
-            android:id="@+id/relativeLayout_mima"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/linearLayout"
-            android:layout_marginLeft="@dimen/margin"
-            android:layout_marginRight="@dimen/margin">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="46dp"
-                android:background="@color/dark_gray" />
-
-            <EditText
-                android:id="@+id/password_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-
-                android:layout_centerVertical="true"
-                android:background="@null"
-                android:hint="@string/input_pasword"
-                android:password="true"
-                android:textColorHint="@color/gray"
-                android:textSize="@dimen/hint_size" />
-        </RelativeLayout>
-
-        <RelativeLayout
             android:id="@+id/relativeLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -209,5 +180,38 @@
                 android:layout_marginTop="156dp"
                 android:background="@color/dark_gray" />
         </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout_mima"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linearLayout"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginRight="@dimen/margin">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="46dp"
+                android:background="@color/dark_gray" />
+
+            <EditText
+                android:id="@+id/password_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:hint="@string/input_pasword"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:maxLines="1"
+                android:password="true"
+                android:singleLine="true"
+                android:textColorHint="@color/gray"
+                android:textSize="@dimen/hint_size" />
+        </RelativeLayout>
+
+
     </RelativeLayout>
 </RelativeLayout>

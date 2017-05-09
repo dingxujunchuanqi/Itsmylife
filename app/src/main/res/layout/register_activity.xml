@@ -61,14 +61,17 @@
 
             <EditText
                 android:id="@+id/password_edit"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:hint="@string/register_pasword"
-                android:maxLength="11"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:maxLines="1"
                 android:password="true"
-                android:textSize="@dimen/hint_size"
+                android:singleLine="true"
                 android:textColorHint="@color/gray"
+                android:textSize="@dimen/hint_size"
 
                 />
 
@@ -86,8 +89,8 @@
             android:layout_height="@dimen/image_size"
             android:layout_alignBottom="@id/ly"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/margin"
             android:layout_marginBottom="8dp"
+            android:layout_marginRight="@dimen/margin"
             android:src="@drawable/password_hide_icon" />
 
         <Button

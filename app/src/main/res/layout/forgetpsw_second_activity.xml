@@ -63,10 +63,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
+            android:inputType="text"
+            android:maxLines="1"
             android:hint="@string/register_pasword"
-            android:inputType="number"
-            android:maxLength="11"
-            android:phoneNumber="true"
             android:textColorHint="@color/gray"
             android:textSize="@dimen/hint_size" />
 
@@ -117,9 +116,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
+            android:inputType="text"
+            android:maxLines="1"
             android:hint="@string/again_register_pasword"
-            android:inputType="number"
-            android:maxLength="11"
             android:textColorHint="@color/gray"
             android:textSize="@dimen/hint_size" />
 

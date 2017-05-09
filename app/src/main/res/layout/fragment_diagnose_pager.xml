@@ -82,5 +82,12 @@
 		android:listSelector="@color/gray"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"/>
+	<TextView
+		android:id="@android:id/empty"
+		android:textSize="@dimen/margin_large"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:gravity="center"
+		android:text="暂无信息!" />
 
 </LinearLayout>

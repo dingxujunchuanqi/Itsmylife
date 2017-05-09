@@ -34,6 +34,7 @@ public class ForgetPsswordActivity extends SwipeBackActivity implements View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forgetpsw_activity);
+        //防止按钮上弹
         int mode = WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN;
         getWindow().setSoftInputMode(mode);
         initView();

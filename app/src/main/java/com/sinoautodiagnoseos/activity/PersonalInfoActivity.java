@@ -31,7 +31,6 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
     }
 
 
-
     private void initView() {
         image_back = (FrameLayout) findViewById(R.id.back_click);
     }
@@ -50,7 +49,11 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
                 break;
         }
     }
-
+/**
+*接收传过来的对象
+*@author dingxujun
+*created at 2017/5/9 9:40
+*/
     private void getUserInfo() {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();

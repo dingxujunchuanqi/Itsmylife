@@ -5,9 +5,14 @@ import com.sinoautodiagnoseos.openvcall.model.CallHistoriesExpertsDtos;
 import com.sinoautodiagnoseos.openvcall.model.ListExpertsSearchDto;
 
 import java.util.ArrayList;
+import android.widget.ImageView;
+
+import java.io.File;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Lanye on 2017/2/22.
@@ -38,4 +43,18 @@ public class Constant {
     public static List<FileDownload> file_list = new ArrayList<>();
     public static boolean is_close = false;
     public static final int PAGE_SIZE = 10;
+    //请求相机
+    public static final int REQUEST_CAPTURE = 100;
+    //请求相册
+    public static final int REQUEST_PICK = 101;
+    //请求截图
+    public static final int REQUEST_CROP_PHOTO = 102;
+    //请求访问外部存储
+    public static final int READ_EXTERNAL_STORAGE_REQUEST_CODE = 103;
+    //请求写入外部存储
+    public static final int WRITE_EXTERNAL_STORAGE_REQUEST_CODE = 104;
+    //头像1
+    public CircleImageView headImage1;
+    //头像2
+    public ImageView headImage2;
 }

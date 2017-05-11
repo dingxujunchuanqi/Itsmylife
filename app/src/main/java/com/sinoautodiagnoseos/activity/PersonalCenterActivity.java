@@ -19,6 +19,11 @@ import com.sinoautodiagnoseos.ui.loginui.SwipeBackActivity;
 import com.sinoautodiagnoseos.ui.personcenterui.FlowLayout;
 import com.sinoautodiagnoseos.utils.LogUtils;
 import com.sinoautodiagnoseos.utils.PicassoUtils;
+import com.sinoautodiagnoseos.utils.SharedPreferences;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +31,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.R.attr.data;
+import static cn.jiguang.c.a.m;
 
 
 /**
@@ -35,7 +41,7 @@ import static android.R.attr.data;
 
 public class PersonalCenterActivity extends SwipeBackActivity implements View.OnClickListener {
 
-    private static  String USER_DATA ="user";
+    private static String USER_DATA = "user";
     private FlowLayout flow_layout;
     private List list;
     private CircleImageView image_user;
@@ -56,6 +62,7 @@ public class PersonalCenterActivity extends SwipeBackActivity implements View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_center);
+        EventBus.getDefault().register(this);
         initView();
         userInfo();
         initListenerOclick();
@@ -68,7 +75,7 @@ public class PersonalCenterActivity extends SwipeBackActivity implements View.On
 
     private void userInfo() {
         userData = AppContext.userInfo;
-        System.out.println(userData.getData().getRoleName()+"--------------");
+        System.out.println(userData.getData().getRoleName() + "--------------");
         if (userData != null) {
             if (userData.getData() != null) {
                 mobile = userData.getData().getMobile();
@@ -82,7 +89,9 @@ public class PersonalCenterActivity extends SwipeBackActivity implements View.On
             }
         }
 
-        if (mobile != null && roleName.equals("普通用户")) {
+        if (roleName.equals("普通用户")) {
+            String  avatar5 = SharedPreferences.getInstance().getString("avatar", "");
+            PicassoUtils.loadImageViewSize(this, avatar5, 200, 300, image_user);
             mobile_number.setText(mobile);
             flow_layout.setVisibility(View.GONE);
             ratingbar.setVisibility(View.GONE);
@@ -163,11 +172,29 @@ public class PersonalCenterActivity extends SwipeBackActivity implements View.On
                 UIHelper.showIm(this);
                 break;
             case R.id.re_layout:
-                UIHelper.showPersonInfo(this,userData);
+                UIHelper.showPersonInfo(this, userData);
                 break;
             default:
                 break;
         }
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void receive(String s){
+        System.out.println("===========我是url"+s);
+        PicassoUtils.loadImageViewSize(this, s, 200, 300, image_user);
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }
 

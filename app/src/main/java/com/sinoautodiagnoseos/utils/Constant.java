@@ -38,4 +38,6 @@ public class Constant {
     public static List<FileDownload> file_list = new ArrayList<>();
     public static boolean is_close = false;
     public static final int PAGE_SIZE = 10;
+    public static int TYPE_HEADER =      999;
+    public static int TYPE_DATA =        998;
 }

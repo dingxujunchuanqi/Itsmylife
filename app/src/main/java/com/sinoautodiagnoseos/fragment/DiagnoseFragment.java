@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 
 import com.sinoautodiagnoseos.R;
 import com.sinoautodiagnoseos.activity.MainActivity;
+import com.sinoautodiagnoseos.activity.VideoHelpActivity;
 import com.sinoautodiagnoseos.entity.CallRecord.CallRecord;
 import com.sinoautodiagnoseos.entity.CallRecord.Experts_datas;
 import com.sinoautodiagnoseos.net.requestApi.HttpRequestApi;
@@ -52,7 +53,7 @@ public class DiagnoseFragment extends Fragment {
         voice_btn= (LinearLayout) view.findViewById(R.id.btn_voice);
         video_btn= (LinearLayout) view.findViewById(R.id.btn_video);
         voice_btn.setOnClickListener(listener);
-        voice_btn.setOnClickListener(listener);
+        video_btn.setOnClickListener(listener);
         return view;
     }
 
@@ -72,6 +73,8 @@ public class DiagnoseFragment extends Fragment {
                     callServiceTel();
                     break;
                 case R.id.btn_video:
+                    Log.e(TAG,"CLICKED-----------");
+                    videoService();
                     break;
             }
         }
@@ -217,5 +220,13 @@ public class DiagnoseFragment extends Fragment {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
 //        }
+    }
+
+    /**
+     * 视频求助
+     */
+    public void videoService(){
+        Intent intent = new Intent(getActivity(), VideoHelpActivity.class);
+        startActivity(intent);
     }
 }

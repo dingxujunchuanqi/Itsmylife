@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <!-- 索引头 -->
+    <TextView
+            android:id="@+id/tv_item_citys_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#E3E3E3"
+            android:padding="15dp"
+            android:text="A"
+            android:textColor="#666666"
+            android:textSize="14sp"
+            android:visibility="gone"/>
+
+    <!-- 内容 -->
+    <TextView
+            android:id="@+id/tv_item_citys_context"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:padding="15dp"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:visibility="gone"/>
+
+</LinearLayout>

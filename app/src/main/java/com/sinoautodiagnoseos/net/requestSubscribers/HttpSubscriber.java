@@ -54,7 +54,8 @@ public class HttpSubscriber<T> extends Subscriber<T>{
                 subscriberOnListener.onError(-1002, "网络链接中断，请检查您的网络状态");
             } else if (e instanceof ExceptionBean) {
                 subscriberOnListener.onError(((ExceptionBean) e).getCode(), ((ExceptionBean) e).getMsg());
-            } else {
+            }
+            else {
                 subscriberOnListener.onError(-1003, "未知错误:" + e.getMessage());
             }
         } else {

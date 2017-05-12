@@ -55,6 +55,7 @@
         <activity android:name=".activity.ForgetPswSecondActivity"/>
         <activity android:name=".activity.PersonalCenterActivity"/>
         <activity android:name=".activity.PersonalInfoActivity"/>
+        <activity android:name=".activity.VideoHelpActivity" android:screenOrientation="portrait"/>
 
 
         <!-- Rich push 核心功能 since 2.0.6-->

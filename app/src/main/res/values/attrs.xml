@@ -79,4 +79,23 @@
         <attr name="canDragable" format="boolean|reference"/><!-- 是否可以拖拽-->
     </declare-styleable>
 
+    <!--SideBar相关-->
+    <!--普通时的颜色-->
+    <attr name="normalColor" format="color"/>
+    <!--选中时的颜色-->
+    <attr name="chooseColor" format="color"/>
+    <!--普通时的背景图-->
+    <attr name="normalBackground" format="reference"/>
+    <!--选中时的背景图-->
+    <attr name="chooseBackground" format="reference"/>
+    <!--索引栏文字大小-->
+    <attr name="sideTextSize" format="dimension"/>
+    <declare-styleable name="SideBar">
+        <attr name="normalColor"/>
+        <attr name="chooseColor"/>
+        <attr name="normalBackground"/>
+        <attr name="chooseBackground"/>
+        <attr name="sideTextSize"/>
+    </declare-styleable>
+
 </resources>

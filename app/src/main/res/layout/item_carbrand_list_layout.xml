@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+        <TextView
+            android:paddingLeft="15dp"
+            android:id="@+id/tab_tag"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:background="@color/text_color_gray_light"
+            android:text="A" android:textSize="@dimen/text_size_20"/>
+    <com.sinoautodiagnoseos.ui.gridView.NoScrollGridView
+        android:background="@color/white"
+        android:scrollbars="none"
+        android:padding="10dp"
+        android:horizontalSpacing="10dip"
+        android:verticalSpacing="10dip"
+        android:numColumns="4"
+        android:id="@+id/carbrand_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <!--<Button-->
+        <!--android:layout_below="@+id/tag_layout"-->
+        <!--android:id="@+id/carbrand_btn"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/btn_unselector"-->
+        <!--android:text="阿斯顿马丁"/>-->
+</LinearLayout>

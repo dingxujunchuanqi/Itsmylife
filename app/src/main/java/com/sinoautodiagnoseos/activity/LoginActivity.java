@@ -178,22 +178,30 @@ public class LoginActivity extends SwipeBackActivity implements View.OnClickList
                  * 获取用户信息
                  */
               // data.getData().getName();
+               AppContext.userInfo=data;
+                saveUserInfo();
                 System.out.println("--------请求用户信息成功-----------");
                 Constant.USERROLE = data.getData().getRoleName();
                 Constant.MEMBERID = data.getData().getMemberId();
                 SharedPreferences.getInstance().putString("userId", data.getData().getUserId());
-                AppContext.userInfo=data;
-//                SharedPreferences.getInstance().putString("userName",data.getData().getName());
-//                SharedPreferences.getInstance().putString("mobile",data.getData().getMobile());
-//                SharedPreferences.getInstance().putString("starRating",data.getData().getOtherInfo().getStarRating());
-//                SharedPreferences.getInstance().putString("avatar",data.getData().getAvatar());
-//                SharedPreferences.getInstance().putString("stationName",data.getData().getStationName());
+                SharedPreferences.getInstance().putString("userName",data.getData().getName());
+                SharedPreferences.getInstance().putString("mobile",data.getData().getMobile());
+                SharedPreferences.getInstance().putString("starRating",data.getData().getOtherInfo().getStarRating());
+                SharedPreferences.getInstance().putString("rolename",data.getData().getRoleName());
+                SharedPreferences.getInstance().putString("stationName",data.getData().getStationName());
+                SharedPreferences.getInstance().putString("starrating",data.getData().getOtherInfo().getStarRating());
                 System.out.println("用户ID=======" + data.getData().getUserId());
                 System.out.println("用户权限-" + data.getData().getRoleName());
+                System.out.println("--------------------dengluchdntg----------------------");
                 /**
                  * 更新用户在线状态
                  */
                 ChageUserState(1);
+            }
+            private void saveUserInfo() {
+                SharedPreferences.getInstance().putString("areaNames", AppContext.userInfo.getData().getAreaNames());//地址
+                SharedPreferences.getInstance().putString("realName", AppContext.userInfo.getData().getRealName());//姓名
+                SharedPreferences.getInstance().putString("birthday", AppContext.userInfo.getData().getBirthday());//出生日期
             }
 
             @Override
@@ -205,6 +213,7 @@ public class LoginActivity extends SwipeBackActivity implements View.OnClickList
             }
         }, LoginActivity.this));
     }
+
 
     /**
      * 更新用户状态

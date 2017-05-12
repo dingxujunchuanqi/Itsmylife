@@ -96,7 +96,9 @@
                 android:background="@color/gray" />
         </RelativeLayout>
 
-        <RelativeLayout style="@style/person_center_Rl">
+        <RelativeLayout
+            android:id="@+id/birthday_update"
+            style="@style/person_center_Rl">
 
             <TextView
                 style="@style/person_center_tv"
@@ -107,8 +109,16 @@
             <ImageView
                 android:id="@+id/right_back2"
                 style="@style/person_center_image" />
-
             <TextView
+                android:id="@+id/birthday_tv"
+                style="@style/person_center_tv"
+                android:layout_marginRight="@dimen/view_hight1"
+                android:layout_toLeftOf="@id/right_back2"
+                android:text="08"
+                android:textColor="@color/text_color_black"
+                android:textSize="@dimen/text_size_17" />
+
+         <!--   <TextView
                 android:id="@+id/day"
                 style="@style/person_center_tv"
                 android:layout_marginRight="@dimen/view_hight1"
@@ -149,13 +159,25 @@
                 android:layout_toLeftOf="@id/month"
                 android:text="1988"
                 android:textColor="@color/text_color_black"
-                android:textSize="@dimen/text_size_17" />
+                android:textSize="@dimen/text_size_17" />-->
 
             <View style="@style/person_center_view" />
         </RelativeLayout>
 
-        <RelativeLayout style="@style/person_center_Rl">
-
+        <RelativeLayout
+            android:id="@+id/address_update"
+            style="@style/person_center_Rl">
+            <TextView
+                android:id="@+id/city_tv"
+                style="@style/person_center_tv"
+                android:background="@drawable/address_shape"
+                android:text="@string/city"
+                android:textColor="@color/text_color_black"
+                android:textSize="@dimen/text_size_17"
+                android:layout_alignBaseline="@+id/textView2"
+                android:layout_alignBottom="@+id/textView2"
+                android:layout_toLeftOf="@+id/textView3"
+                android:layout_toStartOf="@+id/textView3" />
             <TextView
                 style="@style/person_center_tv"
                 android:text="@string/address"
@@ -178,22 +200,13 @@
 
 
             <TextView
-                android:id="@+id/city_tv"
-                style="@style/person_center_tv"
-                android:layout_marginRight="@dimen/view_hight1"
-                android:layout_toLeftOf="@id/country_tv"
-                android:background="@drawable/address_shape"
-                android:text="@string/city"
-                android:textColor="@color/text_color_black"
-                android:textSize="@dimen/text_size_17" />
-
-            <TextView
                 style="@style/person_center_tv"
                 android:layout_marginRight="2.5dp"
                 android:layout_toLeftOf="@id/country_tv"
                 android:text="—"
                 android:textColor="@color/text_color_black"
-                android:textSize="@dimen/text_size_17" />
+                android:textSize="@dimen/text_size_17"
+                android:id="@+id/textView3" />
 
             <TextView
                 android:id="@+id/provincial_tv"
@@ -211,7 +224,10 @@
                 android:layout_toLeftOf="@id/city_tv"
                 android:text="—"
                 android:textColor="@color/text_color_black"
-                android:textSize="@dimen/text_size_17" />
+                android:textSize="@dimen/text_size_17"
+                android:id="@+id/textView2" />
+
+
         </RelativeLayout>
 
         <RelativeLayout

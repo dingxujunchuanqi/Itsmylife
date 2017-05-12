@@ -58,7 +58,14 @@ public class UserInfo implements Serializable {
         public String userId;
         public String userName;
         public String memberId;
+        public String realName;
+        public String getRealName() {
+            return realName;
+        }
 
+        public void setRealName(String realName) {
+            this.realName = realName;
+        }
         public void setAreaNames(String areaNames) {
             this.areaNames = areaNames;
         }

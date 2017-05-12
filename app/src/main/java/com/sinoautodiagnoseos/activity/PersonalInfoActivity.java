@@ -1,6 +1,8 @@
 package com.sinoautodiagnoseos.activity;
 
 import android.Manifest;
+import android.annotation.TargetApi;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -10,6 +12,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -26,6 +29,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.PopupWindow;
@@ -45,9 +49,11 @@ import com.sinoautodiagnoseos.openvcall.model.UploadDatas;
 import com.sinoautodiagnoseos.ui.loginui.SwipeBackActivity;
 import com.sinoautodiagnoseos.ui.personinfoui.ClipImageActivity;
 import com.sinoautodiagnoseos.ui.personinfoui.HeadPortrait;
+import com.sinoautodiagnoseos.ui.personinfoui.LoginDialogFragment;
 import com.sinoautodiagnoseos.utils.OnMultiClickListener;
 import com.sinoautodiagnoseos.utils.PicassoUtils;
 import com.sinoautodiagnoseos.utils.SharedPreferences;
+import com.sinoautodiagnoseos.utils.ToastUtils;
 import com.sinoautodiagnoseos.utils.UpBitmapUtils;
 import com.sinoautodiagnoseos.utils.Constant;
 import com.sinoautodiagnoseos.utils.LogUtils;
@@ -55,26 +61,31 @@ import com.sinoautodiagnoseos.utils.LogUtils;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
+import static android.R.attr.button;
 import static android.R.id.empty;
 import static com.sinoautodiagnoseos.R.id.avatar;
 import static com.sinoautodiagnoseos.R.id.view;
 import static com.sinoautodiagnoseos.R.style.dialog;
 import static com.sinoautodiagnoseos.utils.Constant.READ_EXTERNAL_STORAGE_REQUEST_CODE;
 import static com.sinoautodiagnoseos.utils.Constant.REQUEST_CAPTURE;
+import static com.sinoautodiagnoseos.utils.LogUtils.deBug;
 
 /**
  * Created by dingxujun on 2017/5/4.
  */
 
-public class PersonalInfoActivity extends SwipeBackActivity implements View.OnClickListener {
+public class PersonalInfoActivity extends SwipeBackActivity implements View.OnClickListener, LoginDialogFragment.LoginInputListener {
     private static final String TAG = "PersonalInfoActivity";
+    private static final int DATE_DIALOG = 1;
     private FrameLayout image_back;
     private RelativeLayout headPtClick;
     private File tempFile;
@@ -88,6 +99,13 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
     private String birthday;
     private String avatarimage,avatar;
     private String download_id;
+    private TextView birthdtv;
+    private int mYear, mMonth, mDay;
+    private RelativeLayout birthday_update;
+    private RelativeLayout addressupd;
+    private TextView provicialtv;
+    private TextView citytv;
+    private TextView countrytv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,26 +114,79 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
         initView();
         initListenerOclick();
         getUserInfo();
+        initDialog();
         createCameraTempFile(savedInstanceState);
 
-        avatarimage = SharedPreferences.getInstance().getString("avatar", "");
-        LogUtils.deBug(TAG, "=我是oncreat" + avatarimage);
-        if (avatarimage !=null&&!TextUtils.isEmpty(avatarimage)) {
-                PicassoUtils.loadImageView(PersonalInfoActivity.this, avatarimage, circlrimage);
-            }
-        userId = userdata.getData().userId;
-        this.avatar = userdata.getData().getAvatar();
-        birthday = userdata.getData().getBirthday();
-
+//        avatarimage = SharedPreferences.getInstance().getString("avatar", "");
+//        LogUtils.deBug(TAG, "=我是oncreat" + avatarimage);
+//        if (avatarimage !=null&&!TextUtils.isEmpty(avatarimage)) {
+//                PicassoUtils.loadImageView(PersonalInfoActivity.this, avatarimage, circlrimage);
+//            }
+//        userId = userdata.getData().userId;
+//        this.avatar = userdata.getData().getAvatar();
+//        birthday = userdata.getData().getBirthday();
         System.out.println("----------------userid----------------"+ userId);
     }
+/**
+* 初始化dialog常量
+*@author dingxujun
+*created at 2017/5/11 14:07
+*/
+    private void initDialog() {
+        final Calendar ca = Calendar.getInstance();
+        mYear = ca.get(Calendar.YEAR);
+        mMonth = ca.get(Calendar.MONTH);
+        mDay = ca.get(Calendar.DAY_OF_MONTH);
+        deBug(TAG,"\\\\\\\\\\\\\\\\\\\\\\\\"+mYear);
+        deBug(TAG,"\\\\\\\\\\\\\\\\\\\\\\\\"+mMonth);
+        deBug(TAG,"\\\\\\\\\\\\\\\\\\\\\\\\"+mDay);
+    }
 
+    /**
+    * 设置日期 利用StringBuffer追加
+    *@author dingxujun
+    *created at 2017/5/11 14:11
+    */
 
+    public void display() {
+        birthdtv.setText(new StringBuffer().append(mYear).append("-").append(mMonth+1).append("-").append(mDay).append(" "));
+        String birthdata = birthdtv.getText().toString().trim();
+
+      //  uPDateUsermod(userBaseData,3,userId,birthdata);
+        updateUserBaseData(3,userId,birthdata);
+        System.out.println("====================我是UserID"+userId+birthdata);
+        System.out.println("============================"+birthdata);
+    }
+
+    private DatePickerDialog.OnDateSetListener mdateListener = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                              int dayOfMonth) {
+            mYear = year;
+            mMonth = monthOfYear;
+            mDay = dayOfMonth;
+            display();
+        }
+    };
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+            case DATE_DIALOG:
+                return new DatePickerDialog(this, mdateListener, mYear, mMonth, mDay);
+        }
+        return null;
+    }
     private void initView() {
         image_back = (FrameLayout) findViewById(R.id.back_click);
         headPtClick = (RelativeLayout) findViewById(R.id.head_pt_click);
         circlrimage = (CircleImageView) findViewById(R.id.round_head);
         setpetnamee = (RelativeLayout) findViewById(R.id.set_petname);
+        birthdtv = (TextView) findViewById(R.id.birthday_tv);
+        birthday_update = (RelativeLayout) findViewById(R.id.birthday_update);
+        addressupd = (RelativeLayout) findViewById(R.id.address_update);
+        provicialtv = (TextView) findViewById(R.id.provincial_tv);
+        citytv = (TextView) findViewById(R.id.city_tv);
+        countrytv = (TextView) findViewById(R.id.country_tv);
 
     }
 
@@ -123,6 +194,8 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
         image_back.setOnClickListener(this);
         headPtClick.setOnClickListener(this);
         setpetnamee.setOnClickListener(this);
+        birthday_update.setOnClickListener(this);
+        addressupd.setOnClickListener(this);
     }
     /**
     *修改昵称的方法 dialog
@@ -145,11 +218,11 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
                 if (isNullEmptyBlank(str)) {
                     etContent.setError(String.valueOf(R.string.Input_box_cannot_be_empty));
                 } else {
-                    uPusermod();
+                    updateUserBaseData(2,"",str);
                     dialog.dismiss();
                     Toast.makeText(PersonalInfoActivity.this, "修改成功", Toast.LENGTH_LONG).show();
                     download_id = SharedPreferences.getInstance().getString("download_id", "");
-                    LogUtils.deBug(TAG,"44444444444444444444444444444"+ download_id);
+                    deBug(TAG,"44444444444444444444444444444"+ download_id);
                 }
             }
         });
@@ -174,30 +247,104 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
     }
 
     /**
+     * 修改用户信息
+     *
+     * @param code    标示修改的信息 1-头像 2-昵称 3-生日 4-地区
+     * @param id      头像id／地区id
+     * @param value   头像Url／昵称／生日／地区名称（第三级地址）
+     */
+    public void updateUserBaseData(final int code, final String id, final String value) {
+        System.out.println("Token============" + Constant.TOKEN);
+        Constant.TOKEN=SharedPreferences.getInstance().getString("checktoken","");
+        Constant.REGISTRATION=SharedPreferences.getInstance().getString("RegistrationId","");
+        final UserBaseData userBaseData = new UserBaseData();
+        switch (code) {
+            case 1:
+                File identityBackfFile = new File(value);
+                RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), identityBackfFile);
+                MultipartBody.Builder builder = new MultipartBody.Builder();
+                builder.addFormDataPart("image", identityBackfFile.getName(), requestFile);
+                builder.addFormDataPart("title", "image");
+                builder.addFormDataPart("alt", "image");
+                builder.setType(MultipartBody.FORM);
+                MultipartBody multipartBody = builder.build();
+                HttpRequestApi.getInstance().uploadFile(multipartBody, new HttpSubscriber<Upload>(new SubscriberOnListener<Upload>() {
+                    @Override
+                    public void onSucceed(final Upload upload) {
+                        userBaseData.setAvatarId(upload.getData().getId());
+                        userBaseData.setAvatorUrl(upload.getData().downloadUrl);
+                        uPDateUsermod(userBaseData, code, id, value);
+
+                    }
+
+                    @Override
+                    public void onError(int code, String msg) {
+
+                    }
+                }, PersonalInfoActivity.this));
+                break;
+            case 2:
+                userBaseData.setName(value);
+                uPDateUsermod(userBaseData, code, id, value);
+                break;
+            case 3:
+                userBaseData.setBirthday(value);
+                uPDateUsermod(userBaseData, code, id, value);
+                break;
+            case 4:
+                userBaseData.setAreaId(id);
+                userBaseData.setAreaNames(value);
+                uPDateUsermod(userBaseData, code, id, value);
+                break;
+        }
+
+    }
+
+    /**
     *修改用户信息的接口
     *@author dingxujun
     *created at 2017/5/11 10:59
     */
-    private void uPusermod() {
-        final Map<String, Object> map = new HashMap<>();
-        map.put("userid", userId);
-        map.put("avatar", avatar);
-        map.put("download_id",download_id);
+    private void uPDateUsermod(UserBaseData userBaseData, int code, final String id, final String value) {
         Gson gson = new Gson();
-        String updatejson = gson.toJson(map);
-        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), updatejson);
+        String userJson = gson.toJson(userBaseData);
+        Log.e("TAG",userJson);
+        RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), userJson);
+        Log.e("TAG",requestBody.toString()+"44444444444444444444444444444444444444444444");
         HttpRequestApi.getInstance().updateUserbaseData(requestBody,new HttpSubscriber<UserBaseData>(new SubscriberOnListener<UserBaseData>() {
             @Override
             public void onSucceed(UserBaseData data) {
-
+                ToastUtils.makeShortText("设置成功",PersonalInfoActivity.this);
+                System.out.println("--------------------请求成功我是用户信息-------------------");
             }
 
             @Override
             public void onError(int code, String msg) {
-
+                System.out.println("--------------------请求失败我是用户信息-------------------"+"\n"
+                +code+"----"+msg);
             }
         },PersonalInfoActivity.this));
+//        final Map<String, Object> map = new HashMap<>();
+//        map.put("userid", userId);
+//        map.put("avatar", avatar);
+//        map.put("download_id",download_id);
+//        Gson gson = new Gson();
+//        String updatejson = gson.toJson(map);
+//        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), updatejson);
+//        HttpRequestApi.getInstance().updateUserbaseData(requestBody,new HttpSubscriber<UserBaseData>(new SubscriberOnListener<UserBaseData>() {
+//            @Override
+//            public void onSucceed(UserBaseData data) {
+//
+//            }
+//
+//            @Override
+//            public void onError(int code, String msg) {
+//
+//            }
+//        },PersonalInfoActivity.this));
     }
+
+
 
     @Override
     public void onClick(View view) {
@@ -211,10 +358,27 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
                 break;
             case R.id.set_petname:
                 showSubmitAlertDialog();
+                break;
+            case R.id.birthday_update:
+                showDialog(DATE_DIALOG);
+                break;
+            case R.id.address_update:
+                showSelectDialog();
+                break;
             default:
                 break;
         }
     }
+/**
+*显示省市区的dialog
+*@author dingxujun
+*created at 2017/5/12 9:49
+*/
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+public void showSelectDialog() {
+    LoginDialogFragment dialog = new LoginDialogFragment();
+    dialog.show(getFragmentManager(), "loginDialog");
+}
 
     /**
      * 外部存储权限申请返回
@@ -252,7 +416,11 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         userdata = (UserInfo) bundle.getSerializable("userdata");
-        LogUtils.deBug(TAG, "==================" + userdata.getData().getRoleName());
+        userId = userdata.getData().getUserId();
+        download_id= SharedPreferences.getInstance().getString("download_id", "");
+
+       // userdata.getData().
+        //.deBug(TAG, "==================" + userdata.getData().getRoleName());
     }
 
     /**
@@ -406,8 +574,8 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
                     //文件的名字
                     imageNme = cropImagePath.substring(cropImagePath.lastIndexOf("/") + 1);
                     //将bitmap文件转换为bitmap对象
-                    LogUtils.deBug(TAG, cropImagePath);
-                    LogUtils.deBug(TAG, imageNme);
+                    deBug(TAG, cropImagePath);
+                    deBug(TAG, imageNme);
 
                     //此处后面可以将bitMap转为二进制上传后台网络
 
@@ -438,7 +606,7 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
 
                     @Override
                     public void onSucceed(Upload upload) {
-                        LogUtils.deBug(TAG, "==============请求成功1");
+                        deBug(TAG, "==============请求成功1");
                         //图片下载文件地址
                         download_url = upload.getData().getDownloadUrl();
                         String download_fileName = upload.getData().getFilename();//图片名
@@ -470,7 +638,7 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
 
                     @Override
                     public void onError(int code, String msg) {
-                        LogUtils.deBug(TAG, "==============请求失败1");
+                        deBug(TAG, "==============请求失败1");
                     }
                 }, PersonalInfoActivity.this));
     }
@@ -523,5 +691,13 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
             }
         }
         return data;
+    }
+
+    @Override
+    public void onLoginInputComplete(String username1,String username2,String username3) {
+        Toast.makeText(PersonalInfoActivity.this,"设置成功",Toast.LENGTH_SHORT).show();
+        provicialtv.setText(username1);
+        citytv.setText(username2);
+        countrytv.setText(username3);
     }
 }

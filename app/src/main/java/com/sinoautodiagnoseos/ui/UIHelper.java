@@ -12,6 +12,8 @@ import com.sinoautodiagnoseos.activity.MainActivity;
 import com.sinoautodiagnoseos.activity.PersonalInfoActivity;
 import com.sinoautodiagnoseos.entity.User.UserInfo;
 
+import static android.R.attr.data;
+
 /**
  * 应用程序UI工具包：封装UI相关的一些操作
  * Created by HQ_Demos on 2017/4/24.
@@ -67,12 +69,15 @@ public class UIHelper {
         * 跳到个人信息界面并传递数据
         *
         */
-    public static void showPersonInfo(Activity context ,UserInfo data ){
+    public static void showPersonInfo(Activity context,  UserInfo data){
         Intent mIntent = new Intent(context, PersonalInfoActivity.class);
         Bundle mBundle =new Bundle();
         mBundle.putSerializable("userdata",data);
         mIntent.putExtras(mBundle);
         context.startActivity(mIntent);
+//        Intent mIntent = new Intent(context, PersonalInfoActivity.class);
+//        context.startActivity(mIntent);
+
     }
     public static void showLogin(Activity context){
         Intent intent = new Intent(context, LoginActivity.class);

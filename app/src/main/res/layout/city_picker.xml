@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:su="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal" >
+
+    <com.sinoautodiagnoseos.ui.personinfoui.personUtils.ScrollerNumberPicker
+        android:id="@+id/province"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_weight="1"
+        su:itemNumber="3"
+        su:lineColor="@color/gray"
+        su:maskHight="32dp"
+        su:noEmpty="true"
+        su:normalTextColor="@color/text_apha80"
+        su:normalTextSize="20sp"
+        su:selecredTextColor="@color/text_apha80"
+        su:selecredTextSize="@dimen/text_size_17"
+        su:unitHight="50dp" />
+
+    <com.sinoautodiagnoseos.ui.personinfoui.personUtils.ScrollerNumberPicker
+        android:id="@+id/city"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_weight="1"
+        su:itemNumber="3"
+        su:lineColor="@color/gray"
+        su:maskHight="32dp"
+        su:noEmpty="true"
+        su:normalTextColor="@color/text_apha80"
+        su:normalTextSize="20sp"
+        su:selecredTextColor="@color/text_apha80"
+        su:selecredTextSize="@dimen/text_size_17"
+        su:unitHight="50dp" />
+
+    <com.sinoautodiagnoseos.ui.personinfoui.personUtils.ScrollerNumberPicker
+        android:id="@+id/couny"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_weight="1"
+        su:itemNumber="3"
+        su:lineColor="@color/gray"
+        su:maskHight="32dp"
+        su:noEmpty="true"
+        su:normalTextColor="@color/text_apha80"
+        su:normalTextSize="20sp"
+        su:selecredTextColor="@color/text_apha80"
+        su:selecredTextSize="@dimen/text_size_17"
+        su:unitHight="50dp" />
+
+</LinearLayout>

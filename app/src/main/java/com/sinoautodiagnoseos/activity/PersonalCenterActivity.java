@@ -50,13 +50,18 @@ public class PersonalCenterActivity extends SwipeBackActivity implements View.On
     private FrameLayout image_back;
     private TextView mobile_number, car_shop, person_tv;
     private ImageView setting_image;
-    private String name, starRating, mobile, avatar;
-    private String stationName;
     private RelativeLayout rl_goin;
-    private String roleName;
     private ImageView right_arrow;
     private ImageView right_arrow1;
-    private UserInfo userData;
+    private String userName;
+    private String mobile;
+    private String starRating;
+    private String avatar;
+    private String stationName;
+    private String rolename;
+    private String starrating;
+    private String realName;
+     private UserInfo userData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,24 +79,35 @@ public class PersonalCenterActivity extends SwipeBackActivity implements View.On
     }
 
     private void userInfo() {
-        userData = AppContext.userInfo;
-        System.out.println(userData.getData().getRoleName() + "--------------");
-        if (userData != null) {
-            if (userData.getData() != null) {
-                mobile = userData.getData().getMobile();
-                stationName = userData.getData().getStationName();
-                roleName = userData.getData().getRoleName();
-                avatar = userData.getData().getAvatar();
-                name = userData.getData().getName();
-                if (userData.getData().getOtherInfo() != null) {
-                    starRating = userData.getData().getOtherInfo().getStarRating();
-                }
-            }
-        }
+       userData = AppContext.userInfo;
+//        System.out.println(userData.getData().getRoleName() + "--------------");
+//        if (userData != null) {
+//            if (userData.getData() != null) {
+//                mobile = userData.getData().getMobile();
+//                stationName = userData.getData().getStationName();
+//                roleName = userData.getData().getRoleName();
+//                avatar = userData.getData().getAvatar();
+//                name = userData.getData().getName();
+//                if (userData.getData().getOtherInfo() != null) {
+//                    starRating = userData.getData().getOtherInfo().getStarRating();
+//                }
+//            }
+//        }
 
-        if (roleName.equals("普通用户")) {
-            String  avatar5 = SharedPreferences.getInstance().getString("avatar", "");
-            PicassoUtils.loadImageViewSize(this, avatar5, 200, 300, image_user);
+        userName = SharedPreferences.getInstance().getString("userName", "");
+        mobile = SharedPreferences.getInstance().getString("mobile", "");
+        starRating = SharedPreferences.getInstance().getString("starRating", "");
+        avatar = SharedPreferences.getInstance().getString("avatar", "");
+        stationName = SharedPreferences.getInstance().getString("stationName", "");
+        rolename = SharedPreferences.getInstance().getString("rolename", "");
+        starrating = SharedPreferences.getInstance().getString("starrating", "");
+        //姓名
+        realName = SharedPreferences.getInstance().getString("realName", "");
+        System.out.println("==============="+ rolename);
+        if (rolename.equals("普通用户")) {
+           if (avatar != null && !TextUtils.isEmpty(avatar)) {
+             PicassoUtils.loadImageView(this, avatar, image_user);
+           }
             mobile_number.setText(mobile);
             flow_layout.setVisibility(View.GONE);
             ratingbar.setVisibility(View.GONE);
@@ -99,19 +115,15 @@ public class PersonalCenterActivity extends SwipeBackActivity implements View.On
         } else {
             shoWexperTauthority();
         }
-//            String userName = SharedPreferences.getInstance().getString("userName", "");
-//            String mobile = SharedPreferences.getInstance().getString("mobile", "");
-//            String starRating = SharedPreferences.getInstance().getString("starRating", "");
-//            String avatar = SharedPreferences.getInstance().getString("avatar", "");
-//            String stationName = SharedPreferences.getInstance().getString("stationName", "");
+
         setting_image.setImageResource(R.drawable.setting);
         person_tv.setText(R.string.personal_centter);
 
     }
 
     private void shoWexperTauthority() {
-        if (name != null) {
-            user_name.setText(name);
+        if (realName != null) {
+            user_name.setText(realName);
         }
         if (mobile != null) {
             mobile_number.setText(mobile);
@@ -122,12 +134,12 @@ public class PersonalCenterActivity extends SwipeBackActivity implements View.On
         }
 
         if (avatar != null && !TextUtils.isEmpty(avatar)) {
-            PicassoUtils.loadImageView(this, avatar, image_user);
+            PicassoUtils.loadImageViewSize(this,avatar,300,200, image_user);
         }
-        if (starRating != null && !TextUtils.isEmpty(starRating)) {
+        if (starrating != null && !TextUtils.isEmpty(starrating)) {
 
-            ratingbar.setRating(Float.parseFloat(starRating));
-            user_grade.setText(starRating);
+            ratingbar.setRating(Float.parseFloat(starrating));
+            user_grade.setText(starrating);
         }
         right_arrow.setVisibility(View.VISIBLE);
         right_arrow1.setVisibility(View.GONE);
@@ -173,6 +185,8 @@ public class PersonalCenterActivity extends SwipeBackActivity implements View.On
                 break;
             case R.id.re_layout:
                 UIHelper.showPersonInfo(this, userData);
+               // UIHelper.showPersonInfo(this);
+
                 break;
             default:
                 break;
@@ -181,7 +195,7 @@ public class PersonalCenterActivity extends SwipeBackActivity implements View.On
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void receive(String s){
         System.out.println("===========我是url"+s);
-        PicassoUtils.loadImageViewSize(this, s, 200, 300, image_user);
+     //   PicassoUtils.loadImageView(this, s, image_user);
 
     }
 

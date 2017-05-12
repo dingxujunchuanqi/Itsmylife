@@ -58,7 +58,8 @@
     <string name="commit_certificat_info">*提交认证信息可升级为技师哦</string>
     <string name="go_authentication">去认证</string>
     <string name="specialist_certificat">专家认证</string>
-
+    <string name="domestic_consumer">普通用户</string>
+    <string name="Input_box_cannot_be_empty">输入框内容不能为空</string>
     <!-- 直通-->
     <string name="str_wait">等待倒计时</string>
 
@@ -96,5 +97,5 @@
     <string name="msg_no_network_connection">No network connection, please check the network settings</string>
 
     <string name="not_response_from_experts">目前暂无空闲的专家为您诊断，请稍后再试</string>
-    <string name="domestic_consumer">普通用户</string>
+
 </resources>

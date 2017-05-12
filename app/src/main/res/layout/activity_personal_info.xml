@@ -2,11 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:fadeScrollbars="true"
     android:fillViewport="true"
-    android:fitsSystemWindows="true">
-<!--加上fadeScrollbars,fillViewport,fitsSystemWindows以确保布局兼容-->
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+    <!--加上fadeScrollbars,fillViewport,fitsSystemWindows以确保布局兼容-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,7 +38,12 @@
 
         <View style="@style/person_center_view" />
 
-        <RelativeLayout style="@style/person_center_Rl">
+        <RelativeLayout
+            android:id="@+id/head_pt_click"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/pinfo_height75"
+            android:layout_marginLeft="@dimen/image_marg"
+            android:layout_marginRight="@dimen/image_marg">
 
             <TextView
                 style="@style/person_center_tv"
@@ -51,6 +56,7 @@
                 style="@style/person_center_image" />
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/round_head"
                 android:layout_width="@dimen/user_image_size"
                 android:layout_height="@dimen/user_image_size"
                 android:layout_centerVertical="true"
@@ -63,7 +69,9 @@
 
         </RelativeLayout>
 
-        <RelativeLayout style="@style/person_center_Rl">
+        <RelativeLayout
+            android:id="@+id/set_petname"
+            style="@style/person_center_Rl">
 
             <TextView
                 style="@style/person_center_tv"

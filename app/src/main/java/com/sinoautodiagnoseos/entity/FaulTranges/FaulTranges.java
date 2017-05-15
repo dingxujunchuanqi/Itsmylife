@@ -24,6 +24,16 @@ public class FaulTranges {
         public String text;
         public String value;
 
+        public boolean isSelect() {
+            return select;
+        }
+
+        public void setSelect(boolean select) {
+            this.select = select;
+        }
+
+        public boolean select;
+
         public void setText(String text) {
             this.text = text;
         }

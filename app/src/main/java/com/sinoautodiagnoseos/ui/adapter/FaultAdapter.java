@@ -10,7 +10,6 @@ import android.widget.Button;
 import com.sinoautodiagnoseos.R;
 import com.sinoautodiagnoseos.entity.FaulTranges.FaulTranges;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,14 +20,20 @@ public class FaultAdapter extends BaseAdapter{
     private Context context;
     private LayoutInflater inflater;
     private List<FaulTranges.Faul> faults;
-//    View.OnClickListener onClickListener;
-    int flag = 0;
+
+    final int itemLength = 16;
+    private int clickTemp = -1;//标识被选择的item
+    private int[] clickedList=new int[itemLength];//这个数组用来存放item的点击状态
+
 
     public FaultAdapter(Context context, List<FaulTranges.Faul> faults){
         this.context=context;
         this.faults=faults;
         inflater=LayoutInflater.from(context);
-//        this.onClickListener=onClickListener;
+        for (int i =0;i<itemLength;i++){
+            clickedList[i]=0;      //初始化item点击状态的数组
+        }
+
     }
 
     @Override
@@ -61,31 +66,24 @@ public class FaultAdapter extends BaseAdapter{
         final String fault_txt=faults.get(position).getText();
         final String fault_value=faults.get(position).getValue();
         holder.carbrand_btn.setText(fault_txt);
-        final FaultHolder finalHolder = holder;
-        final List<String>car_txt_list=new ArrayList<>();
-//        holder.carbrand_btn.setOnClickListener(onClickListener);
-        holder.carbrand_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch (flag){
-                    case 0:
-                        flag = 1;
-                        car_txt_list.add(fault_txt);
-                        System.out.println("选择了："+fault_txt);
-                        finalHolder.carbrand_btn.setBackgroundResource(R.drawable.btn_selector);
-                        System.out.println("剩余的："+car_txt_list);
-                        break;
-                    case 1:
-                        car_txt_list.remove(fault_txt);
-                        System.out.println("删除了："+fault_txt);
-                        finalHolder.carbrand_btn.setBackgroundResource(R.drawable.btn_unselector);
-                        flag = 0;
-                        System.out.println("剩余的："+car_txt_list);
-                        break;
-                }
+        if(clickTemp==position){    //根据点击的Item当前状态设置背景
+            if (clickedList[position]==0){
+                holder.carbrand_btn.setBackgroundResource(R.drawable.btn_selector);
+                clickedList[position]=1;
+                faults.get(position).setSelect(true);
             }
-        });
+            else {
+                holder.carbrand_btn.setBackgroundResource(R.drawable.btn_unselector);
+                clickedList[position]=0;
+                faults.get(position).setSelect(false);
+            }
+        }
+
         return convertView;
+    }
+
+    public void setSelection(int selection) {
+        this.clickTemp = selection;
     }
 
     static class FaultHolder {

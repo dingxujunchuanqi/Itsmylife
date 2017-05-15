@@ -102,30 +102,6 @@ public class DiagnoseFragment extends Fragment {
                 for (int i = 0;i<callRecord.size();i++){
                     experts=callRecord.get(i).getExpertList();
                 }
-//                for (int i = 0;i<data.getData().size();i++)
-//                {
-//                    experts=new Experts_datas();
-//                    String date_time=data.getData().get(i).getBeginOnUtc();
-//                    String str_time=date_time.substring(0,date_time.indexOf("T"));
-//                    experts.setDate_time(str_time);
-//                    Log.e(TAG,"获取的时间-------"+ str_time);
-////                    experts_list.add(experts);
-//                    for (int j =0;j<data.getData().get(i).getExpertList().size();j++){
-//                        String avatar=data.getData().get(i).getExpertList().get(j).getAvatar();
-//                        String brandInfo=data.getData().get(i).getExpertList().get(j).getBrandInfo();
-//                        String nickName=data.getData().get(i).getExpertList().get(j).getNickName();
-//                        String skillInfo=data.getData().get(i).getExpertList().get(j).getSkillInfo();
-//                        String stationName=data.getData().get(i).getExpertList().get(j).getStationName();
-//                        String experts_id =data.getData().get(i).getExpertList().get(j).getExpertId();
-//                        experts.setAvatar(avatar);
-//                        experts.setBrandInfo(brandInfo);
-//                        experts.setNickName(nickName);
-//                        experts.setSkillInfo(skillInfo);
-//                        experts.setStationName(stationName);
-//                        experts.setExperts_id(experts_id);
-//                        experts_list.add(experts);
-//                    }
-//                }
                 initView();
             }
 
@@ -138,7 +114,6 @@ public class DiagnoseFragment extends Fragment {
 
     private void initView() {
         if (adapter==null){
-//            adapter=new DiagnoseAdapter(context,callRecord,R.layout.item_record_layout);
             adapter=new DiagnoseBaseAdapter(context,callRecord,experts);
             listView.setGroupIndicator(null);
             listView.setAdapter(adapter);

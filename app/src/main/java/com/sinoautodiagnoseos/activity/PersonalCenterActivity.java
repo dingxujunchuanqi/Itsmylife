@@ -30,9 +30,6 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static android.R.attr.data;
-import static cn.jiguang.c.a.m;
-
 
 /**
  * 个人中心界面
@@ -59,9 +56,8 @@ public class PersonalCenterActivity extends SwipeBackActivity implements View.On
     private String avatar;
     private String stationName;
     private String rolename;
-    private String starrating;
     private String realName;
-     private UserInfo userData;
+    private UserInfo userData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +67,7 @@ public class PersonalCenterActivity extends SwipeBackActivity implements View.On
         initView();
         userInfo();
         initListenerOclick();
+
     }
 
     private void initListenerOclick() {
@@ -79,7 +76,7 @@ public class PersonalCenterActivity extends SwipeBackActivity implements View.On
     }
 
     private void userInfo() {
-       userData = AppContext.userInfo;
+        userData = AppContext.userInfo;
 //        System.out.println(userData.getData().getRoleName() + "--------------");
 //        if (userData != null) {
 //            if (userData.getData() != null) {
@@ -93,21 +90,20 @@ public class PersonalCenterActivity extends SwipeBackActivity implements View.On
 //                }
 //            }
 //        }
-
+        avatar = SharedPreferences.getInstance().getString("avatar", "");
+        System.out.println("--------woshiurl----"+avatar);
         userName = SharedPreferences.getInstance().getString("userName", "");
         mobile = SharedPreferences.getInstance().getString("mobile", "");
         starRating = SharedPreferences.getInstance().getString("starRating", "");
-        avatar = SharedPreferences.getInstance().getString("avatar", "");
         stationName = SharedPreferences.getInstance().getString("stationName", "");
         rolename = SharedPreferences.getInstance().getString("rolename", "");
-        starrating = SharedPreferences.getInstance().getString("starrating", "");
         //姓名
         realName = SharedPreferences.getInstance().getString("realName", "");
         System.out.println("==============="+ rolename);
         if (rolename.equals("普通用户")) {
-           if (avatar != null && !TextUtils.isEmpty(avatar)) {
-             PicassoUtils.loadImageView(this, avatar, image_user);
-           }
+            if (avatar != null && !TextUtils.isEmpty(avatar)) {
+                PicassoUtils.loadImageView(this, avatar, image_user);
+            }
             mobile_number.setText(mobile);
             flow_layout.setVisibility(View.GONE);
             ratingbar.setVisibility(View.GONE);
@@ -134,12 +130,13 @@ public class PersonalCenterActivity extends SwipeBackActivity implements View.On
         }
 
         if (avatar != null && !TextUtils.isEmpty(avatar)) {
-            PicassoUtils.loadImageViewSize(this,avatar,300,200, image_user);
+            PicassoUtils.loadImageViewSize(this,avatar,300,300, image_user);
+            System.out.println("---------55555555555555-----------"+avatar);
         }
-        if (starrating != null && !TextUtils.isEmpty(starrating)) {
+        if (starRating != null && !TextUtils.isEmpty(starRating)) {
 
-            ratingbar.setRating(Float.parseFloat(starrating));
-            user_grade.setText(starrating);
+            ratingbar.setRating(Float.parseFloat(starRating));
+            user_grade.setText(starRating);
         }
         right_arrow.setVisibility(View.VISIBLE);
         right_arrow1.setVisibility(View.GONE);
@@ -185,7 +182,7 @@ public class PersonalCenterActivity extends SwipeBackActivity implements View.On
                 break;
             case R.id.re_layout:
                 UIHelper.showPersonInfo(this, userData);
-               // UIHelper.showPersonInfo(this);
+                // UIHelper.showPersonInfo(this);
 
                 break;
             default:
@@ -195,14 +192,14 @@ public class PersonalCenterActivity extends SwipeBackActivity implements View.On
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void receive(String s){
         System.out.println("===========我是url"+s);
-     //   PicassoUtils.loadImageView(this, s, image_user);
+        //   PicassoUtils.loadImageView(this, s, image_user);
 
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-
+        userInfo();
     }
 
     @Override

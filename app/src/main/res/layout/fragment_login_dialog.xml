@@ -3,14 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:background="@color/text_color_blue1"
         android:contentDescription="@string/app_name"
         android:scaleType="center" />
-
     <com.sinoautodiagnoseos.ui.personinfoui.personUtils.CityPicker
         android:id="@+id/citypicker"
         android:layout_width="match_parent"

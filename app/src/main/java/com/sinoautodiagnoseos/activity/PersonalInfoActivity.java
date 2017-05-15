@@ -15,8 +15,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -50,31 +48,21 @@ import com.sinoautodiagnoseos.ui.loginui.SwipeBackActivity;
 import com.sinoautodiagnoseos.ui.personinfoui.ClipImageActivity;
 import com.sinoautodiagnoseos.ui.personinfoui.HeadPortrait;
 import com.sinoautodiagnoseos.ui.personinfoui.LoginDialogFragment;
-import com.sinoautodiagnoseos.utils.OnMultiClickListener;
 import com.sinoautodiagnoseos.utils.PicassoUtils;
 import com.sinoautodiagnoseos.utils.SharedPreferences;
 import com.sinoautodiagnoseos.utils.ToastUtils;
 import com.sinoautodiagnoseos.utils.UpBitmapUtils;
 import com.sinoautodiagnoseos.utils.Constant;
-import com.sinoautodiagnoseos.utils.LogUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-
-import static android.R.attr.button;
-import static android.R.id.empty;
-import static com.sinoautodiagnoseos.R.id.avatar;
-import static com.sinoautodiagnoseos.R.id.view;
-import static com.sinoautodiagnoseos.R.style.dialog;
 import static com.sinoautodiagnoseos.utils.Constant.READ_EXTERNAL_STORAGE_REQUEST_CODE;
 import static com.sinoautodiagnoseos.utils.Constant.REQUEST_CAPTURE;
 import static com.sinoautodiagnoseos.utils.LogUtils.deBug;
@@ -97,7 +85,7 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
     private UserInfo userdata;
     private String userId;
     private String birthday;
-    private String avatarimage,avatar;
+    private String avatarimage;
     private String download_id;
     private TextView birthdtv;
     private int mYear, mMonth, mDay;
@@ -106,15 +94,20 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
     private TextView provicialtv;
     private TextView citytv;
     private TextView countrytv;
+    private String areaNames;
+    private String userName;
+    private TextView petnametv;
+    private RelativeLayout jishi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_info);
         initView();
-        initListenerOclick();
-        getUserInfo();
+        refreshUserInfo();
         initDialog();
+        getUserInfo();
+        initListenerOclick();
         createCameraTempFile(savedInstanceState);
 
 //        avatarimage = SharedPreferences.getInstance().getString("avatar", "");
@@ -127,11 +120,45 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
 //        birthday = userdata.getData().getBirthday();
         System.out.println("----------------userid----------------"+ userId);
     }
-/**
-* 初始化dialog常量
-*@author dingxujun
-*created at 2017/5/11 14:07
-*/
+
+    /**
+     * 刷新用户信息
+     */
+    private void refreshUserInfo() {
+        avatarimage = SharedPreferences.getInstance().getString("avatar", "");
+        areaNames = SharedPreferences.getInstance().getString("areaNames", "");
+        birthday = SharedPreferences.getInstance().getString("birthday", "");
+        userName = SharedPreferences.getInstance().getString("userName", "");   //昵称
+        if(avatarimage!=null&&!TextUtils.isEmpty(avatarimage)){
+            PicassoUtils.loadImageViewSize(this,avatarimage,300,300,circlrimage);
+        }  if (areaNames!=null){
+            String[] split = areaNames.split("-");
+            citytv.setText(split[0]);
+            for (int i = 0; i < split.length; i++) {
+                if(i==0){
+                    provicialtv.setText(split[0]);
+                }else if(i== split.length-2)
+                    citytv.setText(split[split.length-2]);
+                else if (i==split.length-1)
+                    countrytv.setText(split[split.length-1]);
+
+            }
+
+        }
+        if (birthday!=null){
+            String birthdaylast = birthday.substring(0,birthday.indexOf("00:") - 1);//截取需要的部分
+            birthdtv.setText(birthdaylast);
+        }
+        if (userName!=null){
+            petnametv.setText(userName);
+        }
+    }
+
+    /**
+     * 初始化dialog常量
+     *@author dingxujun
+     *created at 2017/5/11 14:07
+     */
     private void initDialog() {
         final Calendar ca = Calendar.getInstance();
         mYear = ca.get(Calendar.YEAR);
@@ -143,16 +170,16 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
     }
 
     /**
-    * 设置日期 利用StringBuffer追加
-    *@author dingxujun
-    *created at 2017/5/11 14:11
-    */
+     * 设置日期 利用StringBuffer追加
+     *@author dingxujun
+     *created at 2017/5/11 14:11
+     */
 
     public void display() {
         birthdtv.setText(new StringBuffer().append(mYear).append("-").append(mMonth+1).append("-").append(mDay).append(" "));
         String birthdata = birthdtv.getText().toString().trim();
 
-      //  uPDateUsermod(userBaseData,3,userId,birthdata);
+        //  uPDateUsermod(userBaseData,3,userId,birthdata);
         updateUserBaseData(3,userId,birthdata);
         System.out.println("====================我是UserID"+userId+birthdata);
         System.out.println("============================"+birthdata);
@@ -187,6 +214,7 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
         provicialtv = (TextView) findViewById(R.id.provincial_tv);
         citytv = (TextView) findViewById(R.id.city_tv);
         countrytv = (TextView) findViewById(R.id.country_tv);
+        petnametv = (TextView) findViewById(R.id.petname);
 
     }
 
@@ -198,10 +226,10 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
         addressupd.setOnClickListener(this);
     }
     /**
-    *修改昵称的方法 dialog
-    *@author dingxujun
-    *created at 2017/5/10 16:19
-    */
+     *修改昵称的方法 dialog
+     *@author dingxujun
+     *created at 2017/5/10 16:19
+     */
     private void showSubmitAlertDialog() {
         final AlertDialog dialog = new AlertDialog.Builder(this,R.style.DialogTheme).create();
         dialog.setView(LayoutInflater.from(this).inflate(R.layout.pesonrinfo_alert_dialog, null));
@@ -218,10 +246,11 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
                 if (isNullEmptyBlank(str)) {
                     etContent.setError(String.valueOf(R.string.Input_box_cannot_be_empty));
                 } else {
-                    updateUserBaseData(2,"",str);
+                    download_id = SharedPreferences.getInstance().getString("download_id", "");
+                    updateUserBaseData(2,userId,str);
+                    petnametv.setText(str);
                     dialog.dismiss();
                     Toast.makeText(PersonalInfoActivity.this, "修改成功", Toast.LENGTH_LONG).show();
-                    download_id = SharedPreferences.getInstance().getString("download_id", "");
                     deBug(TAG,"44444444444444444444444444444"+ download_id);
                 }
             }
@@ -236,10 +265,10 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
     }
 
     /**
-    *输入框内容不能为空的方法
-    *@author dingxujun
-    *created at 2017/5/10 16:24
-    */
+     *输入框内容不能为空的方法
+     *@author dingxujun
+     *created at 2017/5/10 16:24
+     */
     private static boolean isNullEmptyBlank(String str) {
         if (str == null || "".equals(str) || "".equals(str.trim()))
             return true;
@@ -274,38 +303,43 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
                         userBaseData.setAvatarId(upload.getData().getId());
                         userBaseData.setAvatorUrl(upload.getData().downloadUrl);
                         uPDateUsermod(userBaseData, code, id, value);
+                        System.out.println("========我是成功提价=========");
 
                     }
 
                     @Override
                     public void onError(int code, String msg) {
-
                     }
                 }, PersonalInfoActivity.this));
+
                 break;
             case 2:
                 userBaseData.setName(value);
                 uPDateUsermod(userBaseData, code, id, value);
+
+
                 break;
             case 3:
                 userBaseData.setBirthday(value);
                 uPDateUsermod(userBaseData, code, id, value);
+
                 break;
             case 4:
                 userBaseData.setAreaId(id);
                 userBaseData.setAreaNames(value);
                 uPDateUsermod(userBaseData, code, id, value);
                 break;
+
         }
 
     }
 
     /**
-    *修改用户信息的接口
-    *@author dingxujun
-    *created at 2017/5/11 10:59
-    */
-    private void uPDateUsermod(UserBaseData userBaseData, int code, final String id, final String value) {
+     *修改用户信息的接口
+     *@author dingxujun
+     *created at 2017/5/11 10:59
+     */
+    private void uPDateUsermod(final UserBaseData userBaseData, int code, final String id, final String value) {
         Gson gson = new Gson();
         String userJson = gson.toJson(userBaseData);
         Log.e("TAG",userJson);
@@ -320,8 +354,10 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
 
             @Override
             public void onError(int code, String msg) {
-                System.out.println("--------------------请求失败我是用户信息-------------------"+"\n"
-                +code+"----"+msg);
+                String name = userBaseData.getName();
+
+                System.out.println("--------------------请求失败我是用户信息-------------------"+name+"\n"
+                        +code+"----"+msg);
             }
         },PersonalInfoActivity.this));
 //        final Map<String, Object> map = new HashMap<>();
@@ -343,8 +379,6 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
 //            }
 //        },PersonalInfoActivity.this));
     }
-
-
 
     @Override
     public void onClick(View view) {
@@ -369,16 +403,16 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
                 break;
         }
     }
-/**
-*显示省市区的dialog
-*@author dingxujun
-*created at 2017/5/12 9:49
-*/
-@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-public void showSelectDialog() {
-    LoginDialogFragment dialog = new LoginDialogFragment();
-    dialog.show(getFragmentManager(), "loginDialog");
-}
+    /**
+     *显示省市区的dialog
+     *@author dingxujun
+     *created at 2017/5/12 9:49
+     */
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    public void showSelectDialog() {
+        LoginDialogFragment dialog = new LoginDialogFragment();
+        dialog.show(getFragmentManager(), "loginDialog");
+    }
 
     /**
      * 外部存储权限申请返回
@@ -419,7 +453,7 @@ public void showSelectDialog() {
         userId = userdata.getData().getUserId();
         download_id= SharedPreferences.getInstance().getString("download_id", "");
 
-       // userdata.getData().
+        // userdata.getData().
         //.deBug(TAG, "==================" + userdata.getData().getRoleName());
     }
 
@@ -579,7 +613,7 @@ public void showSelectDialog() {
 
                     //此处后面可以将bitMap转为二进制上传后台网络
 
-                  //  byte[] mbitmapByte = UpBitmapUtils.getBitmapByte(bitMap);
+                    //  byte[] mbitmapByte = UpBitmapUtils.getBitmapByte(bitMap);
                     uploadBitmap();
 
                 }
@@ -601,9 +635,6 @@ public void showSelectDialog() {
         com.sinoautodiagnoseos.utils.Constant.REGISTRATION = com.sinoautodiagnoseos.utils.SharedPreferences.getInstance().getString("RegistrationId", "");
         HttpRequestApi.getInstance().uploadFile(UpBitmapUtils.upImage(cropImagePath, imageNme),
                 new HttpSubscriber<Upload>(new SubscriberOnListener<Upload>() {
-
-
-
                     @Override
                     public void onSucceed(Upload upload) {
                         deBug(TAG, "==============请求成功1");
@@ -617,7 +648,7 @@ public void showSelectDialog() {
                         avatarimage= SharedPreferences.getInstance().getString("avatar", "");
                         if (type == 1) {
                             if (avatarimage !=null&&!TextUtils.isEmpty(avatarimage)) {
-                                PicassoUtils.loadImageViewSize(PersonalInfoActivity.this, download_url, 200, 300, circlrimage);
+                                PicassoUtils.loadImageViewSize(PersonalInfoActivity.this, avatarimage, 300, 300, circlrimage);
                                 EventBus.getDefault().post(avatarimage);
                             }
                         }

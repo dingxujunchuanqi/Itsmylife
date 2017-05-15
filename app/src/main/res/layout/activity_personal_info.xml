@@ -84,9 +84,12 @@
                 style="@style/person_center_image" />
 
             <TextView
+                android:id="@+id/petname"
                 style="@style/person_center_tv"
                 android:layout_marginRight="@dimen/view_hight1"
+                android:textSize="@dimen/text_size_17"
                 android:layout_toLeftOf="@id/right_back1"
+                android:textColor="@color/text_color_black"
                 android:text="@string/to_set_up" />
 
             <View
@@ -118,48 +121,48 @@
                 android:textColor="@color/text_color_black"
                 android:textSize="@dimen/text_size_17" />
 
-         <!--   <TextView
-                android:id="@+id/day"
-                style="@style/person_center_tv"
-                android:layout_marginRight="@dimen/view_hight1"
-                android:layout_toLeftOf="@id/right_back2"
-                android:text="08"
-                android:textColor="@color/text_color_black"
-                android:textSize="@dimen/text_size_17" />
+            <!--   <TextView
+                   android:id="@+id/day"
+                   style="@style/person_center_tv"
+                   android:layout_marginRight="@dimen/view_hight1"
+                   android:layout_toLeftOf="@id/right_back2"
+                   android:text="08"
+                   android:textColor="@color/text_color_black"
+                   android:textSize="@dimen/text_size_17" />
 
-            <TextView
-                style="@style/person_center_tv"
-                android:layout_marginRight="2.5dp"
-                android:layout_toLeftOf="@id/day"
-                android:text="—"
-                android:textColor="@color/text_color_black"
-                android:textSize="@dimen/text_size_17" />
+               <TextView
+                   style="@style/person_center_tv"
+                   android:layout_marginRight="2.5dp"
+                   android:layout_toLeftOf="@id/day"
+                   android:text="—"
+                   android:textColor="@color/text_color_black"
+                   android:textSize="@dimen/text_size_17" />
 
-            <TextView
-                android:id="@+id/month"
-                style="@style/person_center_tv"
-                android:layout_marginRight="@dimen/view_hight1"
-                android:layout_toLeftOf="@id/day"
-                android:text="08"
-                android:textColor="@color/text_color_black"
-                android:textSize="@dimen/text_size_17" />
+               <TextView
+                   android:id="@+id/month"
+                   style="@style/person_center_tv"
+                   android:layout_marginRight="@dimen/view_hight1"
+                   android:layout_toLeftOf="@id/day"
+                   android:text="08"
+                   android:textColor="@color/text_color_black"
+                   android:textSize="@dimen/text_size_17" />
 
-            <TextView
-                style="@style/person_center_tv"
-                android:layout_marginRight="2.5dp"
-                android:layout_toLeftOf="@id/month"
-                android:text="—"
-                android:textColor="@color/text_color_black"
-                android:textSize="@dimen/text_size_17" />
+               <TextView
+                   style="@style/person_center_tv"
+                   android:layout_marginRight="2.5dp"
+                   android:layout_toLeftOf="@id/month"
+                   android:text="—"
+                   android:textColor="@color/text_color_black"
+                   android:textSize="@dimen/text_size_17" />
 
-            <TextView
-                android:id="@+id/year"
-                style="@style/person_center_tv"
-                android:layout_marginRight="@dimen/view_hight1"
-                android:layout_toLeftOf="@id/month"
-                android:text="1988"
-                android:textColor="@color/text_color_black"
-                android:textSize="@dimen/text_size_17" />-->
+               <TextView
+                   android:id="@+id/year"
+                   style="@style/person_center_tv"
+                   android:layout_marginRight="@dimen/view_hight1"
+                   android:layout_toLeftOf="@id/month"
+                   android:text="1988"
+                   android:textColor="@color/text_color_black"
+                   android:textSize="@dimen/text_size_17" />-->
 
             <View style="@style/person_center_view" />
         </RelativeLayout>
@@ -244,7 +247,9 @@
             <View style="@style/person_center_view" />
         </RelativeLayout>
 
-        <RelativeLayout style="@style/person_center_Rl">
+        <RelativeLayout
+            android:id="@+id/jishi"
+            style="@style/person_center_Rl">
 
             <TextView
                 android:id="@+id/tech_certifi"

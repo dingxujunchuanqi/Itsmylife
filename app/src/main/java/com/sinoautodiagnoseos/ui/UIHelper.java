@@ -10,6 +10,8 @@ import android.widget.Toast;
 import com.sinoautodiagnoseos.activity.LoginActivity;
 import com.sinoautodiagnoseos.activity.MainActivity;
 import com.sinoautodiagnoseos.activity.PersonalInfoActivity;
+import com.sinoautodiagnoseos.activity.SelectStoresActivity;
+import com.sinoautodiagnoseos.activity.TechnicianCertifActivity;
 import com.sinoautodiagnoseos.entity.User.UserInfo;
 
 import static android.R.attr.data;
@@ -69,16 +71,34 @@ public class UIHelper {
         * 跳到个人信息界面并传递数据
         *
         */
-    public static void showPersonInfo(Activity context,  UserInfo data){
+    public static void showPersonInfo(Activity context,  UserInfo data) {
         Intent mIntent = new Intent(context, PersonalInfoActivity.class);
-        Bundle mBundle =new Bundle();
-        mBundle.putSerializable("userdata",data);
+        Bundle mBundle = new Bundle();
+        mBundle.putSerializable("userdata", data);
         mIntent.putExtras(mBundle);
         context.startActivity(mIntent);
 //        Intent mIntent = new Intent(context, PersonalInfoActivity.class);
 //        context.startActivity(mIntent);
-
     }
+/**
+*
+ * 跳转到技师认证界面
+*@author dingxujun
+*created at 2017/5/15 13:21
+*/
+        public static void showTechCertification(Activity context){
+            Intent intent = new Intent(context, TechnicianCertifActivity.class);
+            context.startActivity(intent);
+        }
+/**
+*跳到门店选择界面
+*@author dingxujun
+*created at 2017/5/16 13:19
+*/
+public static void showSelectStore(Activity context){
+    Intent intent =new Intent(context,SelectStoresActivity.class);
+    context.startActivity(intent);
+}
     public static void showLogin(Activity context){
         Intent intent = new Intent(context, LoginActivity.class);
         context.startActivity(intent);

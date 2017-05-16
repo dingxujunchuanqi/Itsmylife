@@ -248,7 +248,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/jishi"
+            android:id="@+id/techcertifi_goin"
             style="@style/person_center_Rl">
 
             <TextView

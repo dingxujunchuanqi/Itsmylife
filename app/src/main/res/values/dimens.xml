@@ -113,4 +113,8 @@
 	<dimen name="pinfo_height75">75dp</dimen>
 	<dimen name="personInf_height1">44dp</dimen>
 	<dimen name="certifi_commit10">5dp</dimen>
+	<dimen name="identitywh_256">256dp</dimen>
+	<!--技能认证-->
+	<dimen name="identityht_144">144dp</dimen>
+	<dimen name="space_44">44dp</dimen>
 </resources>

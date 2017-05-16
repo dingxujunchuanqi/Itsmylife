@@ -130,7 +130,7 @@ public class PersonalCenterActivity extends SwipeBackActivity implements View.On
         }
 
         if (avatar != null && !TextUtils.isEmpty(avatar)) {
-            PicassoUtils.loadImageViewSize(this,avatar,300,300, image_user);
+            PicassoUtils.loadImageView(this,avatar,image_user);
             System.out.println("---------55555555555555-----------"+avatar);
         }
         if (starRating != null && !TextUtils.isEmpty(starRating)) {

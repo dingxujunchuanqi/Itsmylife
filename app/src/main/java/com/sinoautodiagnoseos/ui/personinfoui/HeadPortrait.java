@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 
 import java.io.File;
 
@@ -17,11 +20,12 @@ import static com.sinoautodiagnoseos.utils.Constant.REQUEST_PICK;
 
 public class HeadPortrait {
     //调用照相机返回图片临时文件
-    private File tempFile;
+
     /**
-     *跳到系统相册页面
-     *@author dingxujun
-     *created at 2017/5/9 14:38
+     * 跳到系统相册页面
+     *
+     * @author dingxujun
+     * created at 2017/5/9 14:38
      */
 
     public static void gotoPhoto(Activity context) {

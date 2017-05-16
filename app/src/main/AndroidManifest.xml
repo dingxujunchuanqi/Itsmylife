@@ -59,7 +59,10 @@
         <activity android:name=".activity.PersonalCenterActivity"/>
         <activity android:name=".activity.PersonalInfoActivity"/>
         <activity android:name=".activity.VideoHelpActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.personinfoui.ClipImageActivity"/>
+        <activity android:name=".ui.personinfoui.ClipImageActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:name=".activity.TechnicianCertifActivity"/>
+        <activity android:name=".activity.SelectStoresActivity"/>
 
 
         <!-- Rich push 核心功能 since 2.0.6-->

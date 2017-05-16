@@ -265,7 +265,7 @@ public interface HttpRequestService {
      * @return
      */
     @POST("diag/members/updatemember")
-    Observable<UserBaseData> updateUserBaseData(@Body RequestBody json);
+    Observable<Skill> updateUserBaseData(@Body RequestBody json);
 
     /**
      * 获取工种

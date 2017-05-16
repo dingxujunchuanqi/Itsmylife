@@ -32,7 +32,7 @@ public class PicassoUtils {
      * @param height     高
      * @param mImageView 控件
      */
-    public static void loadImageViewSize(Context mContext, String path, int width, int height, CircleImageView mImageView) {
+    public static void loadImageViewSize(Context mContext, String path, int width, int height, ImageView mImageView) {
         Picasso.with(mContext).load(path).resize(width, height).placeholder(R.drawable.default_image)
                 .error(R.drawable.default_image).centerCrop().into(mImageView);
     }
@@ -42,10 +42,9 @@ public class PicassoUtils {
      *
      * @param mContext   上下文
      * @param path       图片路径
-     * @param resId      默认图片资源
      * @param mImageView 控件
      */
-    public static void loadImageViewHolder(Context mContext, String path, int resId, ImageView mImageView) {
-        Picasso.with(mContext).load(path).fit().placeholder(resId).into(mImageView);
+    public static void loadImageViewHolder(Context mContext, String path,ImageView mImageView) {
+        Picasso.with(mContext).load(path).fit(). placeholder(R.drawable.default_image).into(mImageView);
     }
 }

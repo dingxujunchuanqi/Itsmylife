@@ -328,9 +328,9 @@ public class HttpRequestApi extends BaseApi {
      * @param body
      * @param subscriber
      */
-    public void updateUserbaseData(RequestBody body, Subscriber<UserBaseData> subscriber) {
+    public void updateUserbaseData(RequestBody body, Subscriber<Skill> subscriber) {
         Observable observable = httpRequestService.updateUserBaseData(body)
-                .map(new HttpResultFunc<UserBaseData>());
+                .map(new HttpResultFunc<Skill>());
         toSubscribe(observable, subscriber);
     }
 

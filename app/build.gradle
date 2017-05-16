@@ -95,7 +95,7 @@ dependencies {
     compile 'org.slf4j:slf4j-api:1.7.21'
     compile files('libs/android-support-v8-renderscript.jar')
     compile files('libs/android-viewbadger.jar')
-    compile files('libs/classes.jar')
     compile 'org.slf4j:slf4j-api:1.7.21'
     compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
 }

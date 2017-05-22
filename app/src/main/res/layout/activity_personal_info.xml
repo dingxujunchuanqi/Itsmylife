@@ -281,7 +281,9 @@
             <View style="@style/person_center_view" />
         </RelativeLayout>
 
-        <RelativeLayout style="@style/person_center_Rl">
+        <RelativeLayout
+            android:id="@+id/experts_certifiRl"
+            style="@style/person_center_Rl">
 
             <TextView
                 android:id="@+id/specialist_certifi"

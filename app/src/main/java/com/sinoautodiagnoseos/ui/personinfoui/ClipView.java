@@ -61,21 +61,21 @@ public class ClipView extends View {
         //通过Xfermode的DST_OUT来产生中间的透明裁剪区域，一定要另起一个Layer（层）
         canvas.saveLayer(0, 0, this.getWidth(), this.getHeight(), null, LAYER_FLAGS);
         //设置背景
-        canvas.drawColor(Color.parseColor("#a8000000"));
+        canvas.drawColor(Color.parseColor("#00000000"));
         paint.setXfermode(xfermode);
         //绘制圆形裁剪框
         if (clipType == ClipType.CIRCLE) {
             //中间的透明的圆
             canvas.drawCircle(this.getWidth() / 2, this.getHeight() / 2, clipRadiusWidth, paint);
             //白色的圆边框
-            canvas.drawCircle(this.getWidth() / 2, this.getHeight() / 2, clipRadiusWidth, borderPaint);
+//            canvas.drawCircle(this.getWidth() / 2, this.getHeight() / 2, clipRadiusWidth, borderPaint);
         } else if (clipType == ClipType.RECTANGLE) { //绘制矩形裁剪框
             //绘制中间的矩形
             canvas.drawRect(mHorizontalPadding, this.getHeight() / 2 - clipWidth / 2,
                     this.getWidth() - mHorizontalPadding, this.getHeight() / 2 + clipWidth / 2, paint);
             //绘制白色的矩形边框
-            canvas.drawRect(mHorizontalPadding, this.getHeight() / 2 - clipWidth / 2,
-                    this.getWidth() - mHorizontalPadding, this.getHeight() / 2 + clipWidth / 2, borderPaint);
+//            canvas.drawRect(mHorizontalPadding, this.getHeight() / 2 - clipWidth / 2,
+//                    this.getWidth() - mHorizontalPadding, this.getHeight() / 2 + clipWidth / 2, borderPaint);
         }
         //出栈，恢复到之前的图层，意味着新建的图层会被删除，新建图层上的内容会被绘制到canvas (or the previous layer)
         canvas.restore();

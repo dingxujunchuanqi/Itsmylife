@@ -63,6 +63,8 @@
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity android:name=".activity.TechnicianCertifActivity"/>
         <activity android:name=".activity.SelectStoresActivity"/>
+        <activity android:name=".activity.ExpertsCertificationActivity"/>
+        <activity android:name=".activity.SkillManagementActivity"/>
 
 
         <!-- Rich push 核心功能 since 2.0.6-->

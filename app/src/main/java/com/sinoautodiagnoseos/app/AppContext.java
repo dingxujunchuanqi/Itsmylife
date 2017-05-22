@@ -62,6 +62,7 @@ public class AppContext extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        app=this;
         LeakCanary.install(this);
         registerUncaughtExceptionHandler();
 

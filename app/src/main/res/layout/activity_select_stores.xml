@@ -1,12 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:fadeScrollbars="true"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.sinoautodiagnoseos.activity.SelectStoresActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_hight">
 
+        <FrameLayout
+            android:id="@+id/back_click"
+            android:layout_width="@dimen/back_width"
+            android:layout_height="@dimen/view_hight">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/view_hight1"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/image_marg"
+                android:src="@drawable/back_button" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/person_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="门店搜索"
+            android:textColor="@color/text_apha80"
+            android:textSize="@dimen/text_size" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/gray" />
+    </RelativeLayout>
     <TextView
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <android.support.v7.widget.RecyclerView
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/image_marg"
+        android:text="门店"
+        android:textSize="@dimen/text_size_14" />
+
+    <RelativeLayout
+        android:layout_marginTop="@dimen/space_10"
+        android:layout_marginLeft="@dimen/image_marg"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+        <com.sinoautodiagnoseos.ui.selectstoresui.MySlideView
+            android:id="@+id/my_slide_view"
+            android:layout_width="25dp"
+            android:paddingBottom="@dimen/space_20"
+            android:layout_marginBottom="@dimen/space_20"
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/space_20"
+            android:layout_alignParentRight="true" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/my_slide_view">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_sticky_example"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none" />
+
+        </FrameLayout>
+
+        <com.sinoautodiagnoseos.ui.selectstoresui.CircleTextView
+            android:id="@+id/my_circle_view"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@color/gray"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            android:visibility="gone"
+
+            />
+
+    </RelativeLayout>
+
 </LinearLayout>

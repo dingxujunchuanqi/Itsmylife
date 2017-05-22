@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/space_22"
+    android:visibility="gone"
+    android:id="@+id/technology_info"
+    android:orientation="vertical">
+
+    <View
+        style="@style/person_center_view"
+        android:layout_marginLeft="@dimen/image_marg"
+        android:layout_marginRight="@dimen/image_marg" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/personInf_height1"
+        android:layout_marginLeft="@dimen/image_marg"
+        android:layout_marginRight="@dimen/image_marg"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/craftsman"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/techinfoji"
+            android:textColor="@color/text_apha50"
+            android:textSize="@dimen/hint_size" />
+
+        <TextView
+            android:id="@+id/xingxing"
+            style="@style/person_center_tv"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="2dp"
+            android:layout_toRightOf="@id/craftsman"
+            android:text="@string/real_information1"
+            android:textColor="@color/red1"
+            android:textSize="@dimen/text_size_15" />
+
+    </LinearLayout>
+
+    <View
+        style="@style/person_center_view"
+        android:layout_marginLeft="@dimen/image_marg"
+        android:layout_marginRight="@dimen/image_marg" />
+</LinearLayout>

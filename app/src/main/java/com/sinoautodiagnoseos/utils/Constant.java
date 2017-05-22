@@ -56,4 +56,12 @@ public class Constant {
     public CircleImageView headImage1;
     //头像2
     public ImageView headImage2;
+    /*
+ * 用于门店选择
+ * */
+    public static final int REQUEST_CODE_105= 105;
+    /*
+   * 用于门店选择
+   * */
+    public static final int REQUEST_CODE_106= 106;
 }

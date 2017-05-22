@@ -42,7 +42,7 @@
         <View style="@style/person_center_view" />
 
         <RelativeLayout
-            android:id="@+id/set_petname"
+            android:id="@+id/set_namerl"
             style="@style/person_center_Rl">
 
             <TextView
@@ -68,7 +68,7 @@
                 style="@style/person_center_image" />
 
             <TextView
-                android:id="@+id/petname"
+                android:id="@+id/setname"
                 style="@style/person_center_tv"
                 android:layout_marginRight="@dimen/view_hight1"
                 android:layout_toLeftOf="@id/right_back1"
@@ -116,24 +116,10 @@
                 android:layout_width="@dimen/identitywh_256"
                 android:layout_height="@dimen/identityht_144"
                 android:layout_centerHorizontal="true"
+                android:background="@drawable/techniciancertif_shape"
                 android:layout_marginTop="@dimen/space_22">
-
-                <ImageView
-                    android:id="@+id/identity_frontage_img"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/techniciancertif_shape" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="@dimen/space_20"
-                    android:src="@drawable/plus_sign"
-
-                    />
-
                 <TextView
+                    android:id="@+id/text01"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -141,6 +127,21 @@
                     android:text="@string/the_frontof_identity_card"
                     android:textColor="@color/text_apha50"
                     android:textSize="@dimen/hint_size" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/space_20"
+                    android:src="@drawable/plus_sign"
+                    android:id="@+id/imageView3" />
+                <ImageView
+                    android:id="@+id/identity_frontage_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    />
             </FrameLayout>
 
             <FrameLayout
@@ -148,13 +149,8 @@
                 android:layout_height="@dimen/identityht_144"
                 android:layout_below="@id/identity_fl"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/space_20">
-
-                <ImageView
-                    android:id="@+id/identity_contrary_img"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/techniciancertif_shape" />
+                android:layout_marginTop="@dimen/space_20"
+                android:background="@drawable/techniciancertif_shape">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -164,7 +160,6 @@
                     android:src="@drawable/plus_sign"
 
                     />
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -173,10 +168,19 @@
                     android:text="@string/Id_is_opposite"
                     android:textColor="@color/text_apha50"
                     android:textSize="@dimen/hint_size" />
+                <ImageView
+                    android:id="@+id/identity_contrary_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    />
             </FrameLayout>
 
         </RelativeLayout>
-
+        <include
+            layout="@layout/techinfo"
+            />
         <RelativeLayout
             android:id="@+id/shop_place_rl"
             style="@style/person_center_Rl">
@@ -191,6 +195,7 @@
                 android:textSize="@dimen/text_size_15" />
 
             <TextView
+                android:id="@+id/xingxing"
                 style="@style/person_center_tv"
                 android:layout_marginLeft="2dp"
                 android:layout_toRightOf="@id/shop_place"
@@ -203,21 +208,24 @@
                 style="@style/person_center_image" />
 
             <TextView
+                android:id="@+id/store_tv"
                 style="@style/person_center_tv"
+                android:layout_toRightOf="@id/xingxing"
+                android:gravity="right"
                 android:layout_marginRight="@dimen/view_hight1"
                 android:layout_toLeftOf="@id/right_backa"
                 android:text="@string/please_select"
+                android:maxLines="1"
+                android:singleLine="true"
                 android:textColor="@color/text_color_black"
                 android:textSize="@dimen/text_size_17" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_alignParentBottom="true"
-                android:background="@color/gray" />
-
-
         </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/gray" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -239,6 +247,12 @@
                 android:layout_height="@dimen/personInf_height"
                 android:layout_weight="1" />
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/gray" />
 
         <RelativeLayout
             android:id="@+id/years_of_working"
@@ -266,7 +280,7 @@
                 style="@style/person_center_image" />
 
             <TextView
-                android:id="@+id/petnamea"
+                android:id="@+id/yeardata"
                 style="@style/person_center_tv"
                 android:layout_marginRight="@dimen/view_hight1"
                 android:layout_toLeftOf="@id/right_backb"
@@ -284,7 +298,8 @@
 
         <RelativeLayout
             android:id="@+id/type_work_rl"
-            style="@style/person_center_Rl">
+            style="@style/person_center_Rl"
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/type_work"
@@ -308,6 +323,7 @@
                 style="@style/person_center_image" />
 
             <TextView
+                android:id="@+id/type_workTV1"
                 style="@style/person_center_tv"
                 android:layout_marginRight="@dimen/view_hight1"
                 android:layout_toLeftOf="@id/right_backc"
@@ -322,19 +338,22 @@
                 android:background="@color/gray" />
 
         </RelativeLayout>
-
+        <RelativeLayout style="@style/person_center_Rl">
+            <TextView
+                style="@style/person_center_tv"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:text="@string/certificate_tv"
+                android:textColor="@color/text_apha50"
+                android:textSize="@dimen/text_size_15" />
+        </RelativeLayout>
         <FrameLayout
             android:id="@+id/credential_fl"
             android:layout_width="@dimen/identitywh_256"
             android:layout_height="@dimen/identityht_144"
             android:layout_gravity="center_horizontal"
+            android:background="@drawable/techniciancertif_shape"
             android:layout_marginTop="@dimen/space_22">
-
-            <ImageView
-                android:id="@+id/identity_credentia_img"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/techniciancertif_shape" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -351,10 +370,16 @@
                 android:text="@string/People_club_department_certificate"
                 android:textColor="@color/text_apha50"
                 android:textSize="@dimen/hint_size" />
+            <ImageView
+                android:id="@+id/identity_credentia_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY" />
         </FrameLayout>
 
         <Button
-            android:id="@+id/login_button"
+            android:id="@+id/commit_check_button"
             android:layout_width="@dimen/button_below_with"
             android:layout_height="@dimen/button_below_high"
             android:layout_gravity="center_horizontal"

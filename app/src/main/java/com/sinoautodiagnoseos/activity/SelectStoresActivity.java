@@ -6,7 +6,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
+
 import com.github.promeg.pinyinhelper.Pinyin;
 import com.sinoautodiagnoseos.R;
 import com.sinoautodiagnoseos.entity.Station.MCity;
@@ -22,7 +24,9 @@ import com.sinoautodiagnoseos.ui.selectstoresui.MySlideView;
 import com.sinoautodiagnoseos.ui.selectstoresui.StickyDecoration;
 import com.sinoautodiagnoseos.utils.Constant;
 import com.sinoautodiagnoseos.utils.SharedPreferences;
+
 import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;

@@ -119,5 +119,11 @@
     <string name="techinfoji">技能信息</string>
     <string name="certificate_tv">证书</string>
     <string name="Microsoft_Office_User_Specialist">专家认证</string>
-
+    <string name="add_a_new_skill">添加新技能</string>
+    <string name="transportation_vehicle_selection">车辆选择</string>
+    <string name="Management_Applied_Personal_Skills_Training">技能管理</string>
+    <!--车辆选择界面-->
+    <string name="Good_at_brand">擅长品牌</string>
+    <string name="Please_choose_your_range">请选择擅长范围</string>
+    <string name="Good_at_range_tv">擅长范围:</string>
 </resources>

@@ -119,4 +119,5 @@
 	<!--技能认证-->
 	<dimen name="identityht_144">144dp</dimen>
 	<dimen name="space_44">44dp</dimen>
+	<dimen name="space_35">35dp</dimen>
 </resources>

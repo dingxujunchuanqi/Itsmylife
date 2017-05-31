@@ -1,13 +1,14 @@
 package com.sinoautodiagnoseos.entity.FaulTranges;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Lanye on 2017/3/1.
- * 故障范围
+ * 擅长故障范围实体类
  */
 
-public class FaulTranges {
+public class FaulTranges  implements Serializable{
 
     public List<Faul> data;
 
@@ -20,7 +21,16 @@ public class FaulTranges {
         return data;
     }
 
-    public class Faul{
+    public class Faul implements Serializable{
+        @Override
+        public String toString() {
+            return "Faul{" +
+                    "select=" + select +
+                    ", text='" + text + '\'' +
+                    ", value='" + value + '\'' +
+                    '}';
+        }
+
         public String text;
         public String value;
 

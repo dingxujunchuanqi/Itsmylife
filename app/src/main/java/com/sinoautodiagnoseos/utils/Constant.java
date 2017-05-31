@@ -64,4 +64,12 @@ public class Constant {
    * 用于门店选择
    * */
     public static final int REQUEST_CODE_106= 106;
+    /*
+    * 用于车辆品牌
+    * */
+    public static final int REQUEST_CODE_107= 107;
+    /*
+   * 用于车辆品牌finish的结果码
+   * */
+    public static final int REQUEST_CODE_108= 108;
 }

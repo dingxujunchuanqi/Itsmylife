@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="@dimen/space_10"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/range_gridview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_dialog_one_button_submit01"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:padding="@dimen/space_10"
+        android:textColor="@color/font_text"
+        android:textSize="@dimen/text_size_15"
+        tools:text="发动机"
+        />
+</LinearLayout>

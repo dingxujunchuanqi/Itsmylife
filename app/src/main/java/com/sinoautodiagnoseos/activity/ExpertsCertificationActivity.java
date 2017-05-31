@@ -31,25 +31,38 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.sinoautodiagnoseos.R;
 import com.sinoautodiagnoseos.app.AppContext;
 import com.sinoautodiagnoseos.entity.CarBrands.CarBrands;
+import com.sinoautodiagnoseos.entity.ExceptionBean.ErrMessage;
+import com.sinoautodiagnoseos.entity.FaulTranges.MyGoodRrange;
+import com.sinoautodiagnoseos.entity.Upload.Upload;
 import com.sinoautodiagnoseos.entity.User.Skill;
+import com.sinoautodiagnoseos.net.requestApi.HttpRequestApi;
+import com.sinoautodiagnoseos.net.requestSubscribers.HttpSubscriber;
+import com.sinoautodiagnoseos.net.requestSubscribers.SubscriberOnListener;
 import com.sinoautodiagnoseos.openvcall.ui.ExpertsActivity;
 import com.sinoautodiagnoseos.propeller.ui.specialProgressBar.PetDiaLog;
 import com.sinoautodiagnoseos.ui.UIHelper;
+import com.sinoautodiagnoseos.ui.adapter.MyrangeAapter;
 import com.sinoautodiagnoseos.ui.loginui.SwipeBackActivity;
 import com.sinoautodiagnoseos.ui.personinfoui.ClipImageActivity;
 import com.sinoautodiagnoseos.ui.personinfoui.HeadPortraitUtils;
 import com.sinoautodiagnoseos.utils.Constant;
 import com.sinoautodiagnoseos.utils.OnMultiClickListener;
+import com.sinoautodiagnoseos.utils.SharedPreferences;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -107,7 +120,8 @@ public class ExpertsCertificationActivity extends SwipeBackActivity implements V
         initView();
         initListenerOclick();
         initDialog();
-      HeadPortraitUtils.createCameraTempFile(savedInstanceState);
+        HeadPortraitUtils.createCameraTempFile(savedInstanceState);
+        EventBus.getDefault().register(this);
     }
 
     /*
@@ -136,6 +150,7 @@ public class ExpertsCertificationActivity extends SwipeBackActivity implements V
         storetv = (TextView) findViewById(R.id.store_tv);
         type_workTV1 = (TextView) findViewById(R.id.type_workTV1);
     }
+
     /*
     * 点击监听事件
     *
@@ -169,8 +184,229 @@ public class ExpertsCertificationActivity extends SwipeBackActivity implements V
                 HeadPortraitUtils.uploadHeadImage(ExpertsCertificationActivity.this);
             }
         });
+        commitCheckbt.setOnClickListener(new OnMultiClickListener() {
+            @Override
+            public void onMultiClick(View v) {//专家界面提交审核
+
+            }
+        });
 
     }
+
+
+    /**
+     * 专家认证
+     *
+     * @param identityBackUrl  身份证背面path
+     * @param identityFrontUrl 身份证正面path
+     * @param fileUrl          资质证明path
+     * @param realName         真实姓名
+     * @param skillJson        技能json（里面是技能实体）
+     * @param station          门店Id
+     * @param workYears        工作年限
+     * @param promise
+     */
+//    public void professorAuth(final String identityBackUrl, final String identityFrontUrl, final String fileUrl, final String realName, final String skillJson, final String station, final String workYears, final Promise promise) {
+//
+//        System.out.println("=====================>");
+//        System.out.println(identityBackUrl);
+//        System.out.println(identityFrontUrl);
+//        System.out.println(fileUrl);
+//        System.out.println(realName);
+//        System.out.println(skillJson);
+//        System.out.println(station);
+//        System.out.println(workYears);
+//        System.out.println("=====================>");
+//        Constant.TOKEN = SharedPreferences.getInstance().getString("checktoken", "");
+//        Constant.REGISTRATION = SharedPreferences.getInstance().getString("RegistrationId", "");
+//        HttpRequestApi.getInstance().uploadFile(upImage(identityBackUrl), new HttpSubscriber<Upload>(new SubscriberOnListener<Upload>() {
+//            @Override
+//            public void onSucceed(final Upload identityBackfFile) {
+//                System.out.println("成功");
+//                HttpRequestApi.getInstance().uploadFile(upImage(identityFrontUrl), new HttpSubscriber<Upload>(new SubscriberOnListener<Upload>() {
+//                    @Override
+//                    public void onSucceed(final Upload identityFrontfFile) {
+//
+//                        if (!fileUrl.equals("")) {
+//                            HttpRequestApi.getInstance().uploadFile(upImage(fileUrl), new HttpSubscriber<Upload>(new SubscriberOnListener<Upload>() {
+//                                @Override
+//                                public void onSucceed(Upload file) {
+//                                    System.out.println("证明成功" + skillJson);
+//                                    CarBrand = new CarBrand();
+//                                    List<CarBrand> carBrandList = JsonUtils.GsonJsonToObjectList(skillJson, carBrand);
+//                                    List<ExpertsCres> expertsCresList = new ArrayList<ExpertsCres>();
+//                                    ExpertsCres expertsCres = new ExpertsCres();
+//                                    expertsCres.setContentType(file.getData().getExtension());
+//                                    expertsCres.setCredentialType("21C8BF22-7E2C-4CF7-BAF9-938522A589A4");
+//                                    expertsCres.setCredentialTypeName("人社部证书");
+//                                    expertsCres.setFileId(file.getData().getId());
+//                                    expertsCres.setFileName(file.getData().filename);
+//                                    expertsCres.setFileSize(0);
+//                                    expertsCres.setFileUrl(file.getData().getDownloadUrl());
+//                                    expertsCresList.add(expertsCres);
+//                                    ProfessorAuth professorAuth = new ProfessorAuth();
+//                                    professorAuth.setExpertsCres(expertsCresList);
+//                                    professorAuth.setIdentityBackUrl(identityBackfFile.getData().getDownloadUrl());
+//                                    professorAuth.setIdentityFrontUrl(identityFrontfFile.getData().getDownloadUrl());
+//                                    professorAuth.setName(realName);
+//                                    professorAuth.setCarBrands(carBrandList);
+//                                    professorAuth.setStationId(station);
+//                                    professorAuth.setWorkYears(workYears);
+//                                    professorAuth.setIdentityBackId(identityBackfFile.getData().getId());
+//                                    professorAuth.setIdentityFrontId(identityFrontfFile.getData().getId());
+//                                    Gson gson = new Gson();
+//                                    String verifyAuthCodeJson = gson.toJson(professorAuth);
+//                                    System.out.println("Json字符串" + verifyAuthCodeJson);
+//                                    RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), verifyAuthCodeJson);
+//                                    HttpRequestApi.getInstance().professor(requestBody, new HttpSubscriber<ErrMessage>(new SubscriberOnListener<ErrMessage>() {
+//                                        @Override
+//                                        public void onSucceed(ErrMessage demo) {
+//                                            Toast.makeText(mContext, "提交成功！", Toast.LENGTH_SHORT).show();
+//                                            promise.resolve("true");
+//                                        }
+//
+//                                        @Override
+//                                        public void onError(int code, String msg) {
+//                                            System.out.println("响应吗==@==" + Constant.RESPONSECODE);
+//                                            if (Constant.RESPONSECODE == 401 || Constant.RESPONSECODE == 403) {
+//                                                AuthLogin();
+//                                                if (AuthLogin = true) {
+//                                                    System.out.println("自动登录成功");
+//                                                    professorAuth(identityBackUrl, identityBackUrl, fileUrl, realName, skillJson, station, workYears, promise);
+//                                                } else {
+//                                                    System.out.println("自动登录失败");
+//                                                    promise.resolve("AuthLogin Fail");
+//                                                }
+//                                            } else if (Constant.RESPONSECODE == 500) {
+////                                                Toast.makeText(mContext, "服务器异常请稍后再试！", Toast.LENGTH_SHORT).show();
+//                                                Toast.makeText(mContext, "请填写全提交资料！", Toast.LENGTH_SHORT).show();
+//                                                promise.resolve("verify failure");
+//                                            } else if (Constant.RESPONSECODE == 400) {
+//                                                Gson gson = new Gson();
+//                                                ErrMessage errMessage = null;
+//                                                errMessage = gson.fromJson(Constant.ERRMESSAGE, ErrMessage.class);
+//                                                if (errMessage.getCode() != null && errMessage.getCode().size() > 0) {
+//                                                    Toast.makeText(mContext, errMessage.getCode().get(0), Toast.LENGTH_SHORT).show();
+//                                                }
+//                                                promise.resolve(errMessage.getCode().get(0));
+//                                            } else if (Constant.RESPONSECODE == 200) {
+//                                                Toast.makeText(mContext, "提交成功！", Toast.LENGTH_SHORT).show();
+//                                                promise.resolve("true");
+//                                            }
+//                                        }
+//                                    }, mContext));
+//                                }
+//
+//                                @Override
+//                                public void onError(int code, String msg) {
+//                                    Toast.makeText(mContext, "证书上传失败，请重新尝试！", Toast.LENGTH_SHORT).show();
+//                                }
+//                            }, mContext));
+//                        } else {
+//                            CarBrand carBrand = new CarBrand();
+//                            List<CarBrand> carBrandList = JsonUtils.GsonJsonToObjectList(skillJson, carBrand);
+//                            List<ExpertsCres> expertsCresList = new ArrayList<ExpertsCres>();
+//                            ExpertsCres expertsCres = new ExpertsCres();
+//                            expertsCres.setContentType("");
+//                            expertsCres.setCredentialType("");
+//                            expertsCres.setCredentialTypeName("");
+//                            expertsCres.setFileId("");
+//                            expertsCres.setFileName("");
+//                            expertsCres.setFileSize(0);
+//                            expertsCres.setFileUrl("");
+//                            expertsCresList.add(expertsCres);
+//                            ProfessorAuth professorAuth = new ProfessorAuth();
+//                            professorAuth.setExpertsCres(expertsCresList);
+//                            professorAuth.setIdentityBackUrl(identityBackfFile.getData().getDownloadUrl());
+//                            professorAuth.setIdentityFrontUrl(identityFrontfFile.getData().getDownloadUrl());
+//                            professorAuth.setName(realName);
+//                            professorAuth.setCarBrands(carBrandList);
+//                            professorAuth.setStationId(station);
+//                            professorAuth.setWorkYears(workYears);
+//                            professorAuth.setIdentityBackId(identityBackfFile.getData().getId());
+//                            professorAuth.setIdentityFrontId(identityFrontfFile.getData().getId());
+//                            Gson gson = new Gson();
+//                            String verifyAuthCodeJson = gson.toJson(professorAuth);
+//                            RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), verifyAuthCodeJson);
+//                            HttpRequestApi.getInstance().professor(requestBody, new HttpSubscriber<ErrMessage>(new SubscriberOnListener<ErrMessage>() {
+//                                @Override
+//                                public void onSucceed(ErrMessage demo) {
+//                                    Toast.makeText(mContext, "提交成功！", Toast.LENGTH_SHORT).show();
+//                                    promise.resolve("true");
+//                                }
+//
+//                                @Override
+//                                public void onError(int code, String msg) {
+//                                    if (Constant.RESPONSECODE == 401 || Constant.RESPONSECODE == 403) {
+//                                        AuthLogin();
+//                                        if (AuthLogin = true) {
+//                                            System.out.println("自动登录成功");
+//                                            professorAuth(identityBackUrl, identityBackUrl, fileUrl, realName, skillJson, station, workYears, promise);
+//                                        } else {
+//                                            System.out.println("自动登录失败");
+//                                            promise.resolve("AuthLogin Fail");
+//                                        }
+//                                    } else if (Constant.RESPONSECODE == 500) {
+////                                        Toast.makeText(mContext, "服务器异常请稍后再试！", Toast.LENGTH_SHORT).show();
+//                                        Toast.makeText(mContext, "请填写全提交资料！", Toast.LENGTH_SHORT).show();
+//                                        promise.resolve("verify failure");
+//                                    } else if (Constant.RESPONSECODE == 400) {
+//                                        Gson gson = new Gson();
+//                                        ErrMessage errMessage = null;
+//                                        errMessage = gson.fromJson(Constant.ERRMESSAGE, ErrMessage.class);
+//                                        if (errMessage.getCode() != null && errMessage.getCode().size() > 0) {
+//                                            Toast.makeText(mContext, errMessage.getCode().get(0), Toast.LENGTH_SHORT).show();
+//                                        }
+//                                        promise.resolve(errMessage.getCode().get(0));
+//                                    } else if (Constant.RESPONSECODE == 200) {
+//                                        Toast.makeText(mContext, "提交成功！", Toast.LENGTH_SHORT).show();
+//                                        promise.resolve("true");
+//                                    }
+//                                }
+//                            }, mContext));
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(int code, String msg) {
+//                        Toast.makeText(mContext, "身份证正面上传失败，请重新尝试！", Toast.LENGTH_SHORT).show();
+//                    }
+//                }, mContext));
+//            }
+//
+//            @Override
+//            public void onError(int code, String msg) {
+//                if (Constant.RESPONSECODE == 417) {
+//                    promise.resolve("417");
+//                } else {
+//                    Toast.makeText(mContext, "身份证反面上传失败，请重新尝试！", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        }, mContext));
+//    }
+
+
+
+
+    /**
+     * 上传图片的请求封装
+     * @param imageUri
+     * @return
+     */
+    public MultipartBody upImage(String imageUri) {
+        System.out.println("11111====" + imageUri);
+        File identityBackfFile = new File(String.valueOf(imageUri));
+        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), identityBackfFile);
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        builder.addFormDataPart("image", identityBackfFile.getName(), requestFile);
+        builder.addFormDataPart("title", "image");
+        builder.addFormDataPart("alt", "image");
+        builder.setType(MultipartBody.FORM);
+        MultipartBody multipartBody = builder.build();
+        return multipartBody;
+    }
+
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -271,23 +507,6 @@ public class ExpertsCertificationActivity extends SwipeBackActivity implements V
         petDiaLog.show();
     }
 
-    /**
-     * 上传图片的请求封装
-     * @param imageUri
-     * @return
-     */
-    public MultipartBody upImage(String imageUri) {
-        System.out.println("11111====" + imageUri);
-        File identityBackfFile = new File(String.valueOf(imageUri));
-        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), identityBackfFile);
-        MultipartBody.Builder builder = new MultipartBody.Builder();
-        builder.addFormDataPart("image", identityBackfFile.getName(), requestFile);
-        builder.addFormDataPart("title", "image");
-        builder.addFormDataPart("alt", "image");
-        builder.setType(MultipartBody.FORM);
-        MultipartBody multipartBody = builder.build();
-        return multipartBody;
-    }
 
     /**
      * 获取新的Activity返回过来的数据
@@ -366,6 +585,10 @@ public class ExpertsCertificationActivity extends SwipeBackActivity implements V
         System.out.println("===========我是UserId" + storesId);
         //   PicassoUtils.loadImageView(this, s, image_user);
     }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void myreceive(List<MyGoodRrange> trademarkName) {//接收到 那边传过来的集合数据
+        System.out.println("===========技能list集合=====-----、、、、" + trademarkName);
+    }
     /**
      * 检查文件是否存在
      *
@@ -381,5 +604,11 @@ public class ExpertsCertificationActivity extends SwipeBackActivity implements V
             dir.mkdirs();
         }
         return dirPath;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

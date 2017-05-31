@@ -14,6 +14,9 @@ import com.sinoautodiagnoseos.activity.PersonalInfoActivity;
 import com.sinoautodiagnoseos.activity.SelectStoresActivity;
 import com.sinoautodiagnoseos.activity.SkillManagementActivity;
 import com.sinoautodiagnoseos.activity.TechnicianCertifActivity;
+import com.sinoautodiagnoseos.activity.TransportationSelectionActivity;
+import com.sinoautodiagnoseos.entity.CarBrands.CarBrands;
+import com.sinoautodiagnoseos.entity.FaulTranges.FaulTranges;
 import com.sinoautodiagnoseos.entity.User.Skill;
 import com.sinoautodiagnoseos.entity.User.UserInfo;
 import com.sinoautodiagnoseos.utils.Constant;
@@ -75,7 +78,7 @@ public class UIHelper {
         context.startActivity(intent);
     }
     /*
-    * 跳到个人信息界面并传递数据
+    * 跳到个人信息界面 携带数据传送过去
     *
     */
     public static void showPersonInfo(Activity context,  UserInfo data) {
@@ -89,7 +92,7 @@ public class UIHelper {
     }
     /**
      *
-     * 跳转到技师认证界面
+     * 跳转到技师认证界面,携带数据传送过去
      *@author dingxujun
      *created at 2017/5/15 13:21
      */
@@ -123,15 +126,23 @@ public class UIHelper {
     *
     * */
 
-    /*
-   * 跳到专家认证界面
-   *
-   * */
     public static void showSkillManagement(Activity context){
         Intent intent =new Intent(context,SkillManagementActivity.class);
         context.startActivity(intent);
     }
+  /*
+    * 跳到车辆选择界面
+    *
+    * */
 
+    public static void showTransportionSelection(Activity context, CarBrands carBrands, FaulTranges faulTranges){
+        Intent intent =new Intent(context,TransportationSelectionActivity.class);
+        Bundle mbundle =new Bundle();
+         mbundle.putSerializable("carBrands",carBrands);
+         mbundle.putSerializable("faulTranges",faulTranges);
+        intent.putExtras(mbundle);
+        context.startActivityForResult(intent,Constant.REQUEST_CODE_107);
+    }
     public static void showLogin(Activity context){
         Intent intent = new Intent(context, LoginActivity.class);
         context.startActivity(intent);

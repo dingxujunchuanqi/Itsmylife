@@ -1,5 +1,6 @@
 package com.sinoautodiagnoseos.entity.CarBrands;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -7,7 +8,7 @@ import java.util.Map;
  * Created by Lanye on 2017/3/2.
  */
 
-public class CarBrands {
+public class CarBrands implements Serializable{
     public Map<String, List<Brand>> getData() {
         return data;
     }
@@ -263,7 +264,7 @@ public class CarBrands {
 //            return Z;
 //        }
 
-        public class Brand {
+        public class Brand  implements Serializable {
             public String value;
             public String text;
 

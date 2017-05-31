@@ -24,7 +24,6 @@ import com.sinoautodiagnoseos.entity.User.ForgetPassword;
 import com.sinoautodiagnoseos.entity.User.Skill;
 import com.sinoautodiagnoseos.entity.User.Token;
 import com.sinoautodiagnoseos.entity.User.User;
-import com.sinoautodiagnoseos.entity.User.UserBaseData;
 import com.sinoautodiagnoseos.entity.User.UserInfo;
 import com.sinoautodiagnoseos.entity.Version.Version;
 import com.sinoautodiagnoseos.openvcall.model.ExpertsInfoList;
@@ -270,7 +269,7 @@ public interface HttpRequestService {
      * @return
      */
     @POST("diag/members/updatemember")
-    Observable<UserBaseData> updateUserBaseData(@Body RequestBody json);
+    Observable<Skill> updateUserBaseData(@Body RequestBody json);
 
     /**
      * 获取工种

@@ -84,6 +84,16 @@
             android:label="@string/str_request_others"
             android:screenOrientation="portrait"/>
 
+        <activity android:name=".ui.personinfoui.ClipImageActivity"
+            />
+
+        <activity android:name=".activity.TechnicianCertifActivity"/>
+        <activity android:name=".activity.SelectStoresActivity"/>
+        <activity android:name=".activity.ExpertsCertificationActivity"/>
+        <activity android:name=".activity.SkillManagementActivity"/>
+        <!--车辆选择Activity-->
+        <activity android:name=".activity.TransportationSelectionActivity"/>
+
         <!-- 专家页面 -->
         <activity android:name=".openvcall.ui.ExpertsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -153,7 +163,7 @@
         <service
             android:name="cn.jpush.android.service.PushService"
             android:process=":mult">
-            <intent-filter>
+            <intent-filter >
                 <action android:name="cn.jpush.android.intent.REGISTER" />
                 <action android:name="cn.jpush.android.intent.REPORT" />
                 <action android:name="cn.jpush.android.intent.PushService" />

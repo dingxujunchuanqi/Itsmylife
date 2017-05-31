@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fadeScrollbars="true"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+    <!--加上fadeScrollbars,fillViewport,fitsSystemWindows以确保布局兼容-->
+    <RelativeLayout
+        android:id="@+id/relativout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_hight">
+        <RelativeLayout
+            android:id="@+id/add_newSkill"
+            android:layout_width="100dp"
+            android:layout_height="@dimen/view_hight"
+            android:layout_alignParentRight="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="15dp"
+                android:text="@string/add_a_new_skill"
+                android:textColor="@color/text_apha50"
+                android:textSize="@dimen/text_size_15" />
+        </RelativeLayout>
+        <include layout="@layout/action_title" />
+    </RelativeLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/skillrecyclerview"
+        android:layout_below="@id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>

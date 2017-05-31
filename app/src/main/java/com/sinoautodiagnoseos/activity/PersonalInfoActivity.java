@@ -18,7 +18,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -26,7 +25,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -38,31 +36,36 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.sinoautodiagnoseos.R;
 import com.sinoautodiagnoseos.entity.Upload.Upload;
+import com.sinoautodiagnoseos.entity.User.Skill;
 import com.sinoautodiagnoseos.entity.User.UserBaseData;
 import com.sinoautodiagnoseos.entity.User.UserInfo;
 import com.sinoautodiagnoseos.net.requestApi.HttpRequestApi;
 import com.sinoautodiagnoseos.net.requestSubscribers.HttpSubscriber;
 import com.sinoautodiagnoseos.net.requestSubscribers.SubscriberOnListener;
 import com.sinoautodiagnoseos.openvcall.model.UploadDatas;
+import com.sinoautodiagnoseos.propeller.ui.specialProgressBar.PetDiaLog;
+import com.sinoautodiagnoseos.ui.UIHelper;
 import com.sinoautodiagnoseos.ui.loginui.SwipeBackActivity;
 import com.sinoautodiagnoseos.ui.personinfoui.ClipImageActivity;
-import com.sinoautodiagnoseos.ui.personinfoui.HeadPortrait;
+import com.sinoautodiagnoseos.ui.personinfoui.HeadPortraitUtils;
 import com.sinoautodiagnoseos.ui.personinfoui.LoginDialogFragment;
+import com.sinoautodiagnoseos.utils.Constant;
 import com.sinoautodiagnoseos.utils.PicassoUtils;
 import com.sinoautodiagnoseos.utils.SharedPreferences;
 import com.sinoautodiagnoseos.utils.ToastUtils;
 import com.sinoautodiagnoseos.utils.UpBitmapUtils;
-import com.sinoautodiagnoseos.utils.Constant;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 import java.util.Calendar;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+
 import static com.sinoautodiagnoseos.utils.Constant.READ_EXTERNAL_STORAGE_REQUEST_CODE;
 import static com.sinoautodiagnoseos.utils.Constant.REQUEST_CAPTURE;
 import static com.sinoautodiagnoseos.utils.LogUtils.deBug;
@@ -76,7 +79,6 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
     private static final int DATE_DIALOG = 1;
     private FrameLayout image_back;
     private RelativeLayout headPtClick;
-    private File tempFile;
     private int type;
     private CircleImageView circlrimage;
     private String cropImagePath, imageNme;
@@ -97,7 +99,11 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
     private String areaNames;
     private String userName;
     private TextView petnametv;
-    private RelativeLayout jishi;
+    private File tempFile;
+    private RelativeLayout techcertifi_goin;
+    private List<Skill.DataBean> arraylist;
+    private  Skill data;
+    private RelativeLayout experts_certifiRl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +127,7 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
         System.out.println("----------------userid----------------"+ userId);
     }
 
+
     /**
      * 刷新用户信息
      */
@@ -130,7 +137,7 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
         birthday = SharedPreferences.getInstance().getString("birthday", "");
         userName = SharedPreferences.getInstance().getString("userName", "");   //昵称
         if(avatarimage!=null&&!TextUtils.isEmpty(avatarimage)){
-            PicassoUtils.loadImageViewSize(this,avatarimage,300,300,circlrimage);
+            PicassoUtils.loadImageView(this,avatarimage,circlrimage);
         }  if (areaNames!=null){
             String[] split = areaNames.split("-");
             citytv.setText(split[0]);
@@ -154,6 +161,41 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        typeWorkRequest();
+    }
+    /*
+    *
+    * 技师工种请求接口
+    * */
+    private void typeWorkRequest() {
+        Constant.TOKEN=SharedPreferences.getInstance().getString("checktoken","");
+        Constant.REGISTRATION=SharedPreferences.getInstance().getString("RegistrationId","");
+        HttpRequestApi.getInstance().getSkill(new HttpSubscriber<Skill>(new SubscriberOnListener<Skill>() {
+            @Override
+            public void onSucceed(final Skill data) {
+                PersonalInfoActivity.this.data=data;
+
+                System.out.println("工种请求成功" + Constant.RESPONSECODE + Constant.ERRMESSAGE);
+            }
+
+            @Override
+            public void onError(int code, String msg) {
+                System.out.println("工种请求失败" + Constant.RESPONSECODE + Constant.ERRMESSAGE);
+
+            }
+        }, PersonalInfoActivity.this));
+    }
+
+    public  void showTechCertification( Skill skill){
+        Intent intent = new Intent(this, TechnicianCertifActivity.class);
+        Bundle mBundle = new Bundle();
+        mBundle.putSerializable("skill", skill);
+        intent.putExtras(mBundle);
+        startActivity(intent);
+    }
     /**
      * 初始化dialog常量
      *@author dingxujun
@@ -215,6 +257,8 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
         citytv = (TextView) findViewById(R.id.city_tv);
         countrytv = (TextView) findViewById(R.id.country_tv);
         petnametv = (TextView) findViewById(R.id.petname);
+        techcertifi_goin = (RelativeLayout) findViewById(R.id.techcertifi_goin);
+        experts_certifiRl = (RelativeLayout) findViewById(R.id.experts_certifiRl);
 
     }
 
@@ -224,6 +268,8 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
         setpetnamee.setOnClickListener(this);
         birthday_update.setOnClickListener(this);
         addressupd.setOnClickListener(this);
+        techcertifi_goin.setOnClickListener(this);
+        experts_certifiRl.setOnClickListener(this);
     }
     /**
      *修改昵称的方法 dialog
@@ -231,48 +277,49 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
      *created at 2017/5/10 16:19
      */
     private void showSubmitAlertDialog() {
-        final AlertDialog dialog = new AlertDialog.Builder(this,R.style.DialogTheme).create();
-        dialog.setView(LayoutInflater.from(this).inflate(R.layout.pesonrinfo_alert_dialog, null));
-        dialog.show();
-        dialog.getWindow().setContentView(R.layout.pesonrinfo_alert_dialog);
-        Button btnCommit = (Button) dialog.findViewById(R.id.commit_but);
-        Button btnNegative = (Button) dialog.findViewById(R.id.btn_cancel);
-        final EditText etContent = (EditText) dialog.findViewById(R.id.et_content);
-        btnCommit.setOnClickListener(new View.OnClickListener() {
 
+        final PetDiaLog petDiaLog =new PetDiaLog(this, new PetDiaLog.OnEditInputFinishedListener() {
             @Override
-            public void onClick(View arg0) {
-                String str = etContent.getText().toString();
-                if (isNullEmptyBlank(str)) {
-                    etContent.setError(String.valueOf(R.string.Input_box_cannot_be_empty));
-                } else {
-                    download_id = SharedPreferences.getInstance().getString("download_id", "");
-                    updateUserBaseData(2,userId,str);
-                    petnametv.setText(str);
-                    dialog.dismiss();
-                    Toast.makeText(PersonalInfoActivity.this, "修改成功", Toast.LENGTH_LONG).show();
-                    deBug(TAG,"44444444444444444444444444444"+ download_id);
-                }
+            public void editInputFinished(String str) {
+                download_id = SharedPreferences.getInstance().getString("download_id", "");
+                updateUserBaseData(2,userId,str);
+                petnametv.setText(str);
+                deBug(TAG,"44444444444444444444444444444"+ download_id);
             }
-        });
-        btnNegative.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                dialog.dismiss();
-            }
-        });
-    }
-
-    /**
-     *输入框内容不能为空的方法
-     *@author dingxujun
-     *created at 2017/5/10 16:24
-     */
-    private static boolean isNullEmptyBlank(String str) {
-        if (str == null || "".equals(str) || "".equals(str.trim()))
-            return true;
-        return false;
+        },R.style.DialogTheme,1);
+        petDiaLog.setView(new EditText(this));
+        petDiaLog.show();
+//        final AlertDialog dialog = new AlertDialog.Builder(this,R.style.DialogTheme).create();
+//        dialog.setView(LayoutInflater.from(this).inflate(R.layout.pesonrinfo_alert_dialog, null));
+//        dialog.show();
+//        dialog.getWindow().setContentView(R.layout.pesonrinfo_alert_dialog);
+//        Button btnCommit = (Button) dialog.findViewById(R.id.commit_but);
+//        Button btnNegative = (Button) dialog.findViewById(R.id.btn_cancel);
+//        final EditText etContent = (EditText) dialog.findViewById(et_content);
+//        btnCommit.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View arg0) {
+//                String str = etContent.getText().toString();
+//                if (CommitDialogUtils.isNullEmptyBlank(str)) {
+//                    etContent.setError("输入框内容不能为空");
+//                } else {
+//                    download_id = SharedPreferences.getInstance().getString("download_id", "");
+//                    updateUserBaseData(2,userId,str);
+//                    petnametv.setText(str);
+//                    dialog.dismiss();
+//                    Toast.makeText(PersonalInfoActivity.this, "修改成功", Toast.LENGTH_LONG).show();
+//                    deBug(TAG,"44444444444444444444444444444"+ download_id);
+//                }
+//            }
+//        });
+//        btnNegative.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View arg0) {
+//                dialog.dismiss();
+//            }
+//        });
     }
 
     /**
@@ -302,6 +349,15 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
                     public void onSucceed(final Upload upload) {
                         userBaseData.setAvatarId(upload.getData().getId());
                         userBaseData.setAvatorUrl(upload.getData().downloadUrl);
+                        String downloadUrl = upload.getData().downloadUrl;
+                        SharedPreferences.getInstance().putString("avatar",downloadUrl);
+                        avatarimage= SharedPreferences.getInstance().getString("avatar", "");
+                        if (type == 1) {
+                            if (avatarimage !=null&&!TextUtils.isEmpty(avatarimage)) {
+                                PicassoUtils.loadImageView(PersonalInfoActivity.this, avatarimage, circlrimage);
+                                EventBus.getDefault().post(avatarimage);
+                            }
+                        }
                         uPDateUsermod(userBaseData, code, id, value);
                         System.out.println("========我是成功提价=========");
 
@@ -345,7 +401,7 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
         Log.e("TAG",userJson);
         RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), userJson);
         Log.e("TAG",requestBody.toString()+"44444444444444444444444444444444444444444444");
-        HttpRequestApi.getInstance().updateUserbaseData(requestBody,new HttpSubscriber<UserBaseData>(new SubscriberOnListener<UserBaseData>() {
+        HttpRequestApi.getInstance().updateUserbaseData(requestBody,new HttpSubscriber<Skill>(new SubscriberOnListener<UserBaseData>() {
             @Override
             public void onSucceed(UserBaseData data) {
                 ToastUtils.makeShortText("设置成功",PersonalInfoActivity.this);
@@ -360,24 +416,6 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
                         +code+"----"+msg);
             }
         },PersonalInfoActivity.this));
-//        final Map<String, Object> map = new HashMap<>();
-//        map.put("userid", userId);
-//        map.put("avatar", avatar);
-//        map.put("download_id",download_id);
-//        Gson gson = new Gson();
-//        String updatejson = gson.toJson(map);
-//        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), updatejson);
-//        HttpRequestApi.getInstance().updateUserbaseData(requestBody,new HttpSubscriber<UserBaseData>(new SubscriberOnListener<UserBaseData>() {
-//            @Override
-//            public void onSucceed(UserBaseData data) {
-//
-//            }
-//
-//            @Override
-//            public void onError(int code, String msg) {
-//
-//            }
-//        },PersonalInfoActivity.this));
     }
 
     @Override
@@ -399,6 +437,11 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
             case R.id.address_update:
                 showSelectDialog();
                 break;
+            case R.id.techcertifi_goin:
+                UIHelper.showTechCertification(this,data);
+                break;
+            case R.id.experts_certifiRl:
+                UIHelper.showExpertsCertification(this);
             default:
                 break;
         }
@@ -430,15 +473,30 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
             } else {
                 // Permission Denied
             }
-        } else if (requestCode == Constant.READ_EXTERNAL_STORAGE_REQUEST_CODE) {
+        } else if (requestCode == Constant.READ_EXTERNAL_STORAGE_REQUEST_CODE)
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission Granted
-                HeadPortrait.gotoPhoto(PersonalInfoActivity.this);
+                HeadPortraitUtils.gotoPhoto(PersonalInfoActivity.this);
             } else {
                 // Permission Denied
             }
+    }
+
+    /**
+     * 创建调用系统照相机待存储的临时文件
+     *
+     * @author dingxujun
+     * created at 2017/5/9 15:08
+     */
+    private  void createCameraTempFile(Bundle savedInstanceState) {
+        if (savedInstanceState != null && savedInstanceState.containsKey("tempFile")) {
+            tempFile    = (File) savedInstanceState.getSerializable("tempFile");
+        } else {
+            tempFile = new File(checkDirPath(Environment.getExternalStorageDirectory().getPath() + "/image/"),
+                    System.currentTimeMillis() + ".jpg");
         }
     }
+
 
     /**
      * 接收传过来的对象
@@ -450,9 +508,9 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         userdata = (UserInfo) bundle.getSerializable("userdata");
-        userId = userdata.getData().getUserId();
+        userId = SharedPreferences.getInstance().getString("userId", "");
         download_id= SharedPreferences.getInstance().getString("download_id", "");
-
+        System.out.println("=======我是个人中心UserId==="+userId);
         // userdata.getData().
         //.deBug(TAG, "==================" + userdata.getData().getRoleName());
     }
@@ -512,7 +570,7 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
                             READ_EXTERNAL_STORAGE_REQUEST_CODE);
                 } else {
                     //跳转到调用系统图库
-                    HeadPortrait.gotoPhoto(PersonalInfoActivity.this);
+                    HeadPortraitUtils.gotoPhoto(PersonalInfoActivity.this);
                 }
                 popupWindow.dismiss();
             }
@@ -540,27 +598,12 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
     }
 
     /**
-     * 创建调用系统照相机待存储的临时文件
-     *
-     * @author dingxujun
-     * created at 2017/5/9 15:08
-     */
-    private void createCameraTempFile(Bundle savedInstanceState) {
-        if (savedInstanceState != null && savedInstanceState.containsKey("tempFile")) {
-            tempFile = (File) savedInstanceState.getSerializable("tempFile");
-        } else {
-            tempFile = new File(checkDirPath(Environment.getExternalStorageDirectory().getPath() + "/image/"),
-                    System.currentTimeMillis() + ".jpg");
-        }
-    }
-
-    /**
      * 检查文件是否存在
      *
      * @author dingxujun
      * created at 2017/5/9 15:07
      */
-    private static String checkDirPath(String dirPath) {
+    private  String checkDirPath(String dirPath) {
         if (TextUtils.isEmpty(dirPath)) {
             return "";
         }
@@ -614,7 +657,8 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
                     //此处后面可以将bitMap转为二进制上传后台网络
 
                     //  byte[] mbitmapByte = UpBitmapUtils.getBitmapByte(bitMap);
-                    uploadBitmap();
+                    //uploadBitmap();
+                    updateUserBaseData(1,userId,cropImagePath);
 
                 }
                 break;
@@ -648,7 +692,7 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
                         avatarimage= SharedPreferences.getInstance().getString("avatar", "");
                         if (type == 1) {
                             if (avatarimage !=null&&!TextUtils.isEmpty(avatarimage)) {
-                                PicassoUtils.loadImageViewSize(PersonalInfoActivity.this, avatarimage, 300, 300, circlrimage);
+                                PicassoUtils.loadImageView(PersonalInfoActivity.this, avatarimage, circlrimage);
                                 EventBus.getDefault().post(avatarimage);
                             }
                         }
@@ -727,6 +771,7 @@ public class PersonalInfoActivity extends SwipeBackActivity implements View.OnCl
     @Override
     public void onLoginInputComplete(String username1,String username2,String username3) {
         Toast.makeText(PersonalInfoActivity.this,"设置成功",Toast.LENGTH_SHORT).show();
+
         provicialtv.setText(username1);
         citytv.setText(username2);
         countrytv.setText(username3);

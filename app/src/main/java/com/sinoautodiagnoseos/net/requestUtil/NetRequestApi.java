@@ -24,7 +24,6 @@ import com.sinoautodiagnoseos.entity.User.ForgetPassword;
 import com.sinoautodiagnoseos.entity.User.Skill;
 import com.sinoautodiagnoseos.entity.User.Token;
 import com.sinoautodiagnoseos.entity.User.User;
-import com.sinoautodiagnoseos.entity.User.UserBaseData;
 import com.sinoautodiagnoseos.entity.User.UserInfo;
 import com.sinoautodiagnoseos.entity.Version.Version;
 import com.sinoautodiagnoseos.net.requestApi.BaseApi;
@@ -333,9 +332,9 @@ public class NetRequestApi extends BaseApi {
      * @param body
      * @param subscriber
      */
-    public void updateUserbaseData(RequestBody body, Subscriber<UserBaseData> subscriber) {
+    public void updateUserbaseData(RequestBody body, Subscriber<Skill> subscriber) {
         Observable observable = httpRequestService.updateUserBaseData(body)
-                .map(new HttpResultFunc<UserBaseData>());
+                .map(new HttpResultFunc<Skill>());
         toSubscribe(observable, subscriber);
     }
 

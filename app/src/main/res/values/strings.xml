@@ -128,4 +128,33 @@
 
     <!--维修案例-->
 
+    <!--技师认证-->
+    <string name="real_information">真实姓名</string>
+    <string name="real_information1">*</string>
+    <string name="identity_card">身份证</string>
+    <string name="the_frontof_identity_card">上传身份证正面</string>
+    <string name="Id_is_opposite">上传身份证反面</string>
+    <string name="shop_place">门店</string>
+    <string name="please_select">请选择</string>
+    <string name="authentication_information">认证信息</string>
+    <string name="years_of_working">参加工作</string>
+    <string name="type_of_work">工种</string>
+    <string name="People_club_department_certificate">上传人社部证书</string>
+    <string name="Submit_audit">提交审核</string>
+    <string name="Before_completion_of_auditunchangeable">审核完成前，信息不可修改，请谨慎填写</string>
+    <string name="select_type_work">请选择工种</string>
+    <string name="A_technician_certification">技师认证</string>
+    <string name="please_input">请输入...........</string>
+    <string name="Congratulations_on_your_success">恭喜提交成功！</string>
+    <string name="the_information_should_be_complete">信息要填写完整哦!</string>
+    <string name="techinfoji">技能信息</string>
+    <string name="certificate_tv">证书</string>
+    <string name="Microsoft_Office_User_Specialist">专家认证</string>
+    <string name="add_a_new_skill">添加新技能</string>
+    <string name="transportation_vehicle_selection">车辆选择</string>
+    <string name="Management_Applied_Personal_Skills_Training">技能管理</string>
+    <!--车辆选择界面-->
+    <string name="Good_at_brand">擅长品牌</string>
+    <string name="Please_choose_your_range">请选择擅长范围</string>
+    <string name="Good_at_range_tv">擅长范围:</string>
 </resources>

@@ -11,14 +11,13 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.sinoautodiagnoseos.R;
-import com.sinoautodiagnoseos.app.AppContext;
 import com.sinoautodiagnoseos.entity.CallRecord.ReCall;
 import com.sinoautodiagnoseos.entity.User.Directexpert;
 import com.sinoautodiagnoseos.net.requestApi.HttpRequestApi;
 import com.sinoautodiagnoseos.net.requestSubscribers.HttpSubscriber;
 import com.sinoautodiagnoseos.net.requestSubscribers.SubscriberOnListener;
-import com.sinoautodiagnoseos.openvcall.model.CurrentUserSettings;
 import com.sinoautodiagnoseos.utils.Constant;
+import com.sinoautodiagnoseos.utils.SharedPreferences;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,16 +37,18 @@ public class ExpertsActivity extends Activity {
     public String SAccount;
     public String SName;
     private String which_activity;
-    private MediaPlayer mp;//mediaPlayer对象
+    private MediaPlayer mp=null;//mediaPlayer对象
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_experts);
-        play();
+//        play();
         initData();
         initView();
     }
+
+
 
     private void initData(){
         System.out.println("专家手机="+PAccount+"技师手机="+SAccount);
@@ -87,6 +88,9 @@ public class ExpertsActivity extends Activity {
     View.OnClickListener listener=new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+//            stop();
+            Constant.TOKEN= SharedPreferences.getInstance().getString("checktoken","");
+            Constant.REGISTRATION=SharedPreferences.getInstance().getString("RegistrationId","");
             SimpleDateFormat formatter   =   new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
             Date curDate =  new Date(System.currentTimeMillis());
             String str   =   formatter.format(curDate);
@@ -162,15 +166,35 @@ public class ExpertsActivity extends Activity {
         }
     };
 
-    protected static CurrentUserSettings vSettings() {
-        return AppContext.getInstance().mVideoSettings;
-    }
+//    protected static CurrentUserSettings vSettings() {
+//        return AppContext.getInstance().mVideoSettings;
+//    }
 
+    public void stop(){
+        if (mp!=null){
+            try {
+                mp.stop();
+            }catch (IllegalStateException e){
+                mp=null;
+                mp=new MediaPlayer();
+                mp.stop();
+            }
+            mp.release();
+            mp=null;
+        }
+    }
 
     @Override
     protected void onDestroy() {
-        mp.stop();
-        mp.release();
+//        mp.stop();
+//        mp.release();
         super.onDestroy();
+    }
+
+    @Override
+    protected void onStop() {
+//        mp.stop();
+//        mp.release();
+        super.onStop();
     }
 }

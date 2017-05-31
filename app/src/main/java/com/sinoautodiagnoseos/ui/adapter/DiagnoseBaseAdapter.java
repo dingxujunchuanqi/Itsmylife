@@ -169,9 +169,12 @@ public class DiagnoseBaseAdapter extends BaseExpandableListAdapter {
                 Constant.ISFROM = "0";
                 Constant.ROOMID = directexpert.getData().getRoomId();
                 System.out.println(" Constant.ROOMID=" + Constant.ROOMID);
-                if (directexpert.getData().getRoomId().equals("2") || directexpert.getData().getRoomId().equals("3")) {
-                    ToastUtils.makeShortText("该专家正在问诊中",context);
-                } else {
+                if (directexpert.getData().getRoomId().equals("3")) {
+                    ToastUtils.makeShortText("该专家忙线中",context);
+                }else if (directexpert.getData().getRoomId().equals("2") ){
+                    ToastUtils.makeShortText("该专家不在线",context);
+                }
+                else {
                     Constant.ROOMID = directexpert.getData().getRoomId();
                     Intent intent = new Intent(context, DirectWaitingActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

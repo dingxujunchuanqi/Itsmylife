@@ -48,4 +48,18 @@ public class PicassoUtils {
     public static void loadImageViewHolder(Context mContext, String path, int resId, ImageView mImageView) {
         Picasso.with(mContext).load(path).fit().placeholder(resId).into(mImageView);
     }
+
+    /**
+     * 加载网络图片
+     * @param mContext
+     * @param url
+     * @param mImageView
+     */
+    public static void loadLocalImageView(Context mContext, String url, ImageView mImageView) {
+        Picasso.with(mContext).load(url)
+                .placeholder(R.drawable.default_image)
+                .error(R.drawable.default_image)
+                .tag(mContext)
+                .into(mImageView);
+    }
 }

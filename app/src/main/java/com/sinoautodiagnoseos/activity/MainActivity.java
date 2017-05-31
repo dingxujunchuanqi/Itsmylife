@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -26,7 +27,6 @@ import com.sinoautodiagnoseos.net.requestSubscribers.HttpSubscriber;
 import com.sinoautodiagnoseos.net.requestSubscribers.SubscriberOnListener;
 import com.sinoautodiagnoseos.ui.UIHelper;
 import com.sinoautodiagnoseos.utils.Constant;
-import com.sinoautodiagnoseos.utils.OnMultiClickListener;
 import com.sinoautodiagnoseos.utils.SharedPreferences;
 import com.sinoautodiagnoseos.utils.ToastUtils;
 
@@ -48,6 +48,7 @@ public class MainActivity extends BaseFragmentActivity {
     private ArrayList<String> fragmentTags;
     private FragmentManager fragmentManager;
     private RelativeLayout user;
+    private ImageView left_icon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +85,7 @@ public class MainActivity extends BaseFragmentActivity {
 
     private TextView textHeadTitle;
     private void initView() {
+        left_icon= (ImageView) findViewById(R.id.left_icon);
         user = (RelativeLayout)findViewById(R.id.user);
         textHeadTitle= (TextView) findViewById(R.id.textHeadTitle);
         textHeadTitle.setText("圈子");
@@ -100,6 +102,7 @@ public class MainActivity extends BaseFragmentActivity {
                     case R.id.foot_bar_diagnose:
                         currIndex=1;
                         textHeadTitle.setText("云诊");
+                        left_icon.setImageResource(R.drawable.personal_center);
                         user.setVisibility(View.VISIBLE);
                         break;
                     case R.id.foot_bar_im:
@@ -109,8 +112,9 @@ public class MainActivity extends BaseFragmentActivity {
                         break;
                     case R.id.main_footbar_study:
                         currIndex=3;
-                        textHeadTitle.setText("学习");
-                        user.setVisibility(View.GONE);
+                        textHeadTitle.setText("智库");
+                        left_icon.setImageResource(R.drawable.left_search);
+                        user.setVisibility(View.VISIBLE);
                         break;
                     default:break;
                 }
@@ -119,12 +123,20 @@ public class MainActivity extends BaseFragmentActivity {
         });
         showFragment();
     }
+
     private void initListenerOclick() {
-        user.setOnClickListener(new OnMultiClickListener() {
+        user.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onMultiClick(View v) {
-                Intent intent = new Intent(MainActivity.this, PersonalCenterActivity.class);
-                startActivity(intent);
+            public void onClick(View v) {
+                switch (currIndex){
+                    case 1:
+                        Intent intent = new Intent(MainActivity.this, PersonalCenterActivity.class);
+                        startActivity(intent);
+                        break;
+//                    case 3:
+//
+//                        break;
+                }
             }
         });
     }

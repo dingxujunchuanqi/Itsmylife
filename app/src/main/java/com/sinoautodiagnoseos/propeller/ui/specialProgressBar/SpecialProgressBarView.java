@@ -178,7 +178,7 @@ public class SpecialProgressBarView extends View {
         textSize =  typedArray.getDimension(R.styleable.SpecialProgressBarStyle_textSize, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, getResources().getDisplayMetrics()));
         progressBarHeight = typedArray.getDimension(R.styleable.SpecialProgressBarStyle_progressBarHeight, dip2px(getContext(), 4));
         textColorSuccess = typedArray.getColor(R.styleable.SpecialProgressBarStyle_textColorSuccess, Color.parseColor("#66A269"));
-        textColorError = typedArray.getColor(R.styleable.SpecialProgressBarStyle_textColorError, Color.parseColor("#BC5246"));
+        textColorError = typedArray.getColor(R.styleable.SpecialProgressBarStyle_textColorErr, Color.parseColor("#BC5246"));
         textColorNormal = typedArray.getColor(R.styleable.SpecialProgressBarStyle_textColorNormal, Color.parseColor("#491C14"));
         startDrawable = typedArray.getResourceId(R.styleable.SpecialProgressBarStyle_startDrawable, R.drawable.ic_file_upload_white_36dp);
         endSuccessDrawable = typedArray.getResourceId(R.styleable.SpecialProgressBarStyle_endSuccessDrawable, R.drawable.ic_done_white_36dp);

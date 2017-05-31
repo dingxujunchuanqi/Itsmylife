@@ -1,5 +1,6 @@
 package com.sinoautodiagnoseos.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,7 +11,7 @@ import com.sinoautodiagnoseos.R;
  * Created by HQ_Demos on 2017/5/8.
  */
 
-public class WelcomeActivity extends BaseFragmentActivity {
+public class WelcomeActivity extends Activity {
     private final long SPLASH_LENGTH = 2000;
     Handler handler = new Handler();
 

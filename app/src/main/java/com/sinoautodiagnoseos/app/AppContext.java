@@ -25,7 +25,7 @@ public class AppContext extends Application {
         app = this;
     }
 
-    public static synchronized AppContext getInstance() {
+    public static  AppContext getInstance() {
         if (app == null) {
             app = new AppContext();
         }
@@ -35,13 +35,16 @@ public class AppContext extends Application {
     private WorkerThread mWorkerThread;
 
     public synchronized void initWorkerThread() {
+        System.out.println("-----initWorkerThread");
         if (mWorkerThread == null) {
+            System.out.println("----mWorkerThread==null");
             mWorkerThread = new WorkerThread(getApplicationContext());
             mWorkerThread.start();
             mWorkerThread.waitForReady();
         }
     }
     public synchronized WorkerThread getWorkerThread() {
+        System.out.println("-----getWorkerThread");
         return mWorkerThread;
     }
 
@@ -62,6 +65,7 @@ public class AppContext extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        app=this;
         LeakCanary.install(this);
         registerUncaughtExceptionHandler();
 

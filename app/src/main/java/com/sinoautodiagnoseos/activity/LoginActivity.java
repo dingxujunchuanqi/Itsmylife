@@ -54,8 +54,20 @@ public class LoginActivity extends SwipeBackActivity implements View.OnClickList
         int mode = WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN;
         getWindow().setSoftInputMode(mode);
         initView();
+        checkAccount();//验证账号是否存在
 //        registerMessageReceiver();
         initListenerOclick();
+    }
+
+    private void checkAccount() {
+        String userName=SharedPreferences.getInstance().getString("account","");
+        String password=SharedPreferences.getInstance().getString("password","");
+        if (userName!=null){
+            phone_edit.setText(userName);
+        }
+        if (password!=null){
+            password_edit.setText(password);
+        }
     }
 
     public void initView() {

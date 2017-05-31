@@ -129,7 +129,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="13dp"
                 android:layout_toRightOf="@+id/agree_xieyi"
-                android:text="同意《"
+                android:text="同意"
                 android:textColor="@color/text_apha50"
                 android:textSize="@dimen/text_size2" />
 
@@ -139,16 +139,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/text_1"
-                android:text="蓝领驿家用户"
-                android:textColor="@color/blue_light"
-                android:textSize="@dimen/text_size2" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/xieyi"
-                android:text="协议》"
+                android:text="《蓝领驿家用户协议》"
                 android:textColor="@color/blue_light"
                 android:textSize="@dimen/text_size2" />
         </RelativeLayout>

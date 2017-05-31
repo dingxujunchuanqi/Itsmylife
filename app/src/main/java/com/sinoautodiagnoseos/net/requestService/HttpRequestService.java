@@ -2,17 +2,22 @@ package com.sinoautodiagnoseos.net.requestService;
 
 import com.sinoautodiagnoseos.entity.Area.Area;
 import com.sinoautodiagnoseos.entity.AuthCode.AuthCode;
+import com.sinoautodiagnoseos.entity.Brand.Brand;
 import com.sinoautodiagnoseos.entity.CallRecord.CallRecord;
 import com.sinoautodiagnoseos.entity.CarBrands.CarBrands;
+import com.sinoautodiagnoseos.entity.CarBrands.ZKCarBrands;
+import com.sinoautodiagnoseos.entity.CaseDetail.CaseDetail;
 import com.sinoautodiagnoseos.entity.ExceptionBean.ErrMessage;
 import com.sinoautodiagnoseos.entity.Experts.SearchExpertsData;
 import com.sinoautodiagnoseos.entity.FaulTranges.FaulTranges;
+import com.sinoautodiagnoseos.entity.Fault.Fault;
 import com.sinoautodiagnoseos.entity.Feedback.Feedback;
 import com.sinoautodiagnoseos.entity.LogBean.LogBean;
 import com.sinoautodiagnoseos.entity.Password.Password;
 import com.sinoautodiagnoseos.entity.Push.PushResult;
 import com.sinoautodiagnoseos.entity.Station.Station;
 import com.sinoautodiagnoseos.entity.Station.StationList;
+import com.sinoautodiagnoseos.entity.ThinkTank.ThinkTank;
 import com.sinoautodiagnoseos.entity.Upload.Upload;
 import com.sinoautodiagnoseos.entity.User.Directexpert;
 import com.sinoautodiagnoseos.entity.User.ForgetPassword;
@@ -347,4 +352,49 @@ public interface HttpRequestService {
     @GET("/diag/callHistoryFaults/findcallhistoryfaultlist")
     Observable<ListExpertsSearchLists> expertsRequestExperts(@Query("callHistoryId")String callHistoryId);
 
+    /**
+     * 智库 1-维修案例  2-技术通报 3-汽车资料
+     * @param caseCategory
+     * @param pageIndex
+     * @param pageSize
+     * @return
+     */
+    @GET("/thinkcaselist")
+    Observable<ThinkTank>getThinkTank(@Query("caseCategory")int caseCategory//案例类型
+                                      ,@Query("caseType")String caseType//汽车资料-子类型
+                                      ,@Query("keyword") String keyword//关键字
+                                      ,@Query("brandId")String brandId//品牌ID
+                                      ,@Query("faultId")String faultId//系统ID
+                                      ,@Query("carYear")String carYear//年限
+                                      ,@Query("pageIndex")int pageIndex
+                                      ,@Query("pageSize")int pageSize);
+
+    /**
+     * 详情页
+     * @param caseId
+     * @return
+     */
+    @GET("/findcasedetail")
+    Observable<CaseDetail> findcasedetail(@Query("caseId") int caseId);
+
+    /**
+     * 品牌 查询所有
+     * @return
+     */
+    @GET("/findallbrand")
+    Observable<ZKCarBrands> findbrandpage();
+
+    /**
+     * 品牌 分页查询
+     * @param pageIndex
+     * @param pageSize
+     * @return
+     */
+    @GET("/findbrandpage")
+    Observable<Brand> findbrandpage(@Query("pageIndex")int pageIndex
+                                    ,@Query("pageSize")int pageSize);
+
+
+    @GET("/findallfault")
+    Observable<Fault> findallfault();
 }

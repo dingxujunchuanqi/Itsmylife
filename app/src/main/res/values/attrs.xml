@@ -82,7 +82,7 @@
         <attr name="textSize" format="dimension|reference"/><!-- 字体大小 -->
         <attr name="textColorSuccess" format="color|reference"/><!-- 成功字体颜色 -->
         <attr name="textColorNormal" format="color|reference"/><!-- 默认进度字体颜色 -->
-        <attr name="textColorError" format="color|reference"/><!-- 错误失败字体颜色 -->
+        <attr name="textColorErr" format="color|reference"/><!-- 错误失败字体颜色 -->
         <attr name="startDrawable" format="integer|reference"/><!-- 内部图片 -->
         <attr name="endSuccessDrawable" format="integer|reference"/><!-- 成功图片 -->
         <attr name="progressBarHeight" format="dimension|reference"/><!--进度条高度 -->

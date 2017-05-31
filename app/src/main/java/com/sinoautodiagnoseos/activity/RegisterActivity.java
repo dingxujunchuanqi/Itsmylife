@@ -8,14 +8,18 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.sinoautodiagnoseos.R;
+import com.sinoautodiagnoseos.propeller.ui.MDDialog;
 import com.sinoautodiagnoseos.ui.loginui.SwipeBackActivity;
 import com.sinoautodiagnoseos.utils.OnMultiClickListener;
 import com.sinoautodiagnoseos.utils.RegexUtils;
+import com.sinoautodiagnoseos.utils.SharedPreferences;
+import com.sinoautodiagnoseos.utils.StringUtils;
 import com.sinoautodiagnoseos.utils.ToastUtils;
 
 /**
@@ -28,6 +32,8 @@ public class RegisterActivity extends SwipeBackActivity implements View.OnClickL
     private TextView verifi_send;
     private Button register_andlogin;
     private RelativeLayout image_back;
+    private CheckBox agree_xieyi;
+    private TextView xieyi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +48,7 @@ public class RegisterActivity extends SwipeBackActivity implements View.OnClickL
 
     private void initListenerOclick() {
         image_back.setOnClickListener(this);
+        xieyi.setOnClickListener(this);
         verifi_send.setOnClickListener(new OnMultiClickListener() {
             @Override
             public void onMultiClick(View v) {
@@ -76,6 +83,8 @@ public class RegisterActivity extends SwipeBackActivity implements View.OnClickL
         verifi_send = (TextView) findViewById(R.id.verifi_send);
         image_back = (RelativeLayout) findViewById(R.id.back_click);
         register_andlogin = (Button) findViewById(R.id.register_andlogin);
+        agree_xieyi= (CheckBox) findViewById(R.id.agree_xieyi);
+        xieyi= (TextView) findViewById(R.id.xieyi);
     }
 
 
@@ -86,6 +95,8 @@ public class RegisterActivity extends SwipeBackActivity implements View.OnClickL
         String verification = verifi_edit.getText().toString().trim();
         if (checkInput(phone, password, verification)) {
             //TODO：验证数据成功后，请求服务端注册账号,并提交注册数据
+            SharedPreferences.getInstance().putString("account",phone);
+            SharedPreferences.getInstance().putString("password",password);
             //SMSSDK.submitVerificationCode("86", phone, verification);
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
@@ -107,7 +118,10 @@ public class RegisterActivity extends SwipeBackActivity implements View.OnClickL
             ToastUtils.showShort(this, R.string.tip_please_input_code);
         } else if (password.length() < 6 || password.length() > 32 || TextUtils.isEmpty(password)) {
             ToastUtils.showShort(this, R.string.tip_please_input_6_32_password);
-        } else {
+        } else if(agree_xieyi.isChecked()==false){
+            ToastUtils.showShort(this,R.string.agree_xieyi);
+        }
+        else {
             return true;
         }
 
@@ -121,8 +135,53 @@ public class RegisterActivity extends SwipeBackActivity implements View.OnClickL
             case R.id.back_click:
                 finish();
                 break;
+            case R.id.xieyi:
+                showXiyiDialog();
             default:
                 break;
         }
     }
+
+    MDDialog.Builder dialog;
+    TextView xieyi_content;
+    //显示协议文字内容
+    private void showXiyiDialog() {
+        dialog= new MDDialog.Builder(this);
+        dialog .setContentView(R.layout.xieyi_dialog)
+                .setContentViewOperator(new MDDialog.ContentViewOperator() {
+                    @Override
+                    public void operate(View contentView) {
+                        xieyi_content= (TextView) contentView.findViewById(R.id.content_txt);
+                        String txt= StringUtils.readAssetsTxt(RegisterActivity.this,"xieyi");
+                        xieyi_content.setText(txt);
+                    }
+                }) .setTitle("蓝领驿家用户协议")
+                .setNegativeButton(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                })
+                .setPositiveButton(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                })
+                .setPositiveButtonMultiListener(new MDDialog.OnMultiClickListener() {
+                    @Override
+                    public void onClick(View clickedView, View contentView) {
+                    }
+                })
+                .setOnItemClickListener(new MDDialog.OnItemClickListener() {
+                    @Override
+                    public void onItemClicked(int index) {
+                    }
+                })
+                .setWidthMaxDp(600)
+                .setShowButtons(true)
+                .create()
+                .show();
+    }
+
 }

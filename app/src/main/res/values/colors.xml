@@ -82,4 +82,15 @@
     <color name="text_apha80">#cf000000</color>
     <color name="text_apha50">#99000000</color>
     <color name="orange1">#E5BD33</color>
+
+    <!--图片选择颜色列表-->
+    <color name="action_text_color_normal" >#cfcfcf</color>
+    <color name="action_text_color_pressed" >#353535</color>
+    <color name="action_text_color_enabled" >#818585</color>
+
+    <color name="background_tab_pressed">#6633B5E5</color>
+
+    <!--智库的色调-->
+    <color name="btn_year">#F7F7F7</color>
+    <color name="stroke">#FF00A0EB</color>
 </resources>

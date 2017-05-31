@@ -113,4 +113,13 @@
 	<dimen name="pinfo_height75">75dp</dimen>
 	<dimen name="personInf_height1">44dp</dimen>
 	<dimen name="certifi_commit10">5dp</dimen>
+
+	<!--多图上传size-->
+	<dimen name="folder_padding" >10dp</dimen>
+	<dimen name="folder_cover_size">72dp</dimen>
+	<dimen name="pic_image_size" >120dp</dimen>
+	<dimen name="space_size" >2dp</dimen>
+	<dimen name="action_text_size" >16sp</dimen>
+
+
 </resources>

@@ -32,15 +32,6 @@ public class DirectWaitingActivity extends BaseActivity implements TimeCountDown
     private Handler handler;
     Timer timer = new Timer();
 
-    @Override
-    protected void initUIandEvent() {
-
-    }
-
-    @Override
-    protected void deInitUIandEvent() {
-
-    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +42,17 @@ public class DirectWaitingActivity extends BaseActivity implements TimeCountDown
 //        getFlag();
         initView();
     }
+
+    @Override
+    protected void initUIandEvent() {
+
+    }
+
+    @Override
+    protected void deInitUIandEvent() {
+
+    }
+
 
     String finish_activity="";
     //获取标识码

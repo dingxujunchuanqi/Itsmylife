@@ -1,6 +1,5 @@
 package com.sinoautodiagnoseos.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -17,7 +16,6 @@ import com.sinoautodiagnoseos.entity.User.UserInfo;
 import com.sinoautodiagnoseos.ui.UIHelper;
 import com.sinoautodiagnoseos.ui.loginui.SwipeBackActivity;
 import com.sinoautodiagnoseos.ui.personcenterui.FlowLayout;
-import com.sinoautodiagnoseos.utils.LogUtils;
 import com.sinoautodiagnoseos.utils.PicassoUtils;
 import com.sinoautodiagnoseos.utils.SharedPreferences;
 
@@ -73,6 +71,7 @@ public class PersonalCenterActivity extends SwipeBackActivity implements View.On
     private void initListenerOclick() {
         image_back.setOnClickListener(this);
         rl_goin.setOnClickListener(this);
+        setting_image.setOnClickListener(this);
     }
 
     private void userInfo() {
@@ -183,7 +182,8 @@ public class PersonalCenterActivity extends SwipeBackActivity implements View.On
             case R.id.re_layout:
                 UIHelper.showPersonInfo(this, userData);
                 // UIHelper.showPersonInfo(this);
-
+            case R.id.setting_image:
+                UIHelper.showSettingActivity(this);
                 break;
             default:
                 break;

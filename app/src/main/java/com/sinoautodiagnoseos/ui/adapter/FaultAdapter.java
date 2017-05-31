@@ -69,11 +69,13 @@ public class FaultAdapter extends BaseAdapter{
         if(clickTemp==position){    //根据点击的Item当前状态设置背景
             if (clickedList[position]==0){
                 holder.carbrand_btn.setBackgroundResource(R.drawable.btn_selector);
+                holder.carbrand_btn.setTextColor(context.getResources().getColor(R.color.btn_blue_normal));
                 clickedList[position]=1;
                 faults.get(position).setSelect(true);
             }
             else {
                 holder.carbrand_btn.setBackgroundResource(R.drawable.btn_unselector);
+                holder.carbrand_btn.setTextColor(context.getResources().getColor(R.color.black));
                 clickedList[position]=0;
                 faults.get(position).setSelect(false);
             }

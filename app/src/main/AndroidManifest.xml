@@ -24,6 +24,10 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+
     <!-- Required -->
     <permission
         android:name="com.sinoautodiagnoseos.permission.JPUSH_MESSAGE"
@@ -60,7 +64,63 @@
         <activity android:name=".activity.PersonalInfoActivity"/>
         <activity android:name=".activity.VideoHelpActivity" android:screenOrientation="portrait"/>
         <activity android:name=".ui.personinfoui.ClipImageActivity"/>
+        <!-- 专家等待页面 -->
+        <activity android:name=".openvcall.ui.WaitingActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"/>
+        <!-- 直通专家页面 -->
+        <activity android:name=".openvcall.ui.DirectWaitingActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/call_experts"
+            android:screenOrientation="portrait"/>
+        <!-- 视频通信 -->
+        <activity android:name=".openvcall.ui.ChatActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/FullscreenTheme"/>
 
+        <!-- 邀请他人 -->
+        <activity android:name=".openvcall.ui.RequestOthersActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/str_request_others"
+            android:screenOrientation="portrait"/>
+
+        <!-- 专家页面 -->
+        <activity android:name=".openvcall.ui.ExpertsActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/call_experts"
+            android:screenOrientation="portrait"/>
+
+        <!-- 设置页面-->
+        <activity android:name=".activity.SettingActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/setting_str"
+            android:screenOrientation="portrait"/>
+
+        <!--意见反馈-->
+        <activity android:name=".activity.FeedBackActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/yijian"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.photopicker.PhotoPickerActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".ui.photopicker.PhotoPreviewActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+
+        <!--维修详情页面-->
+        <activity android:name=".activity.ServiceDetailActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"/>
+
+        <!--智库车辆品牌-->
+        <activity android:name=".activity.CarInfoActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"/>
 
         <!-- Rich push 核心功能 since 2.0.6-->
         <activity

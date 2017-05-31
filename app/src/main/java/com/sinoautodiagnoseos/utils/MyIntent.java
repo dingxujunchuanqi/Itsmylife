@@ -15,6 +15,7 @@ public class MyIntent {
         Uri uri = Uri.parse(param ).buildUpon().encodedAuthority("com.android.htmlfileprovider")
                 .scheme("content").encodedPath(param ).build();
         Intent intent = new Intent("android.intent.action.VIEW");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.setDataAndType(uri, "text/html");
         return intent;
     }

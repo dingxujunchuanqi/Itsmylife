@@ -1,5 +1,6 @@
 package com.sinoautodiagnoseos.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +20,8 @@ import com.sinoautodiagnoseos.net.requestApi.HttpRequestApi;
 import com.sinoautodiagnoseos.net.requestSubscribers.HttpSubscriber;
 import com.sinoautodiagnoseos.net.requestSubscribers.SubscriberOnListener;
 import com.sinoautodiagnoseos.openvcall.model.Faults;
+import com.sinoautodiagnoseos.openvcall.model.ListExpertsSearchDto;
+import com.sinoautodiagnoseos.openvcall.ui.WaitingActivity;
 import com.sinoautodiagnoseos.ui.adapter.CarBrandListAdapter;
 import com.sinoautodiagnoseos.ui.adapter.FaultAdapter;
 import com.sinoautodiagnoseos.ui.loginui.SwipeBackActivity;
@@ -27,6 +30,7 @@ import com.sinoautodiagnoseos.utils.CommUtil;
 import com.sinoautodiagnoseos.utils.Constant;
 import com.sinoautodiagnoseos.utils.OnMultiClickListener;
 import com.sinoautodiagnoseos.utils.SharedPreferences;
+import com.sinoautodiagnoseos.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -81,9 +85,29 @@ public class VideoHelpActivity extends SwipeBackActivity{
         search_for_help.setOnClickListener(new OnMultiClickListener() {
             @Override
             public void onMultiClick(View v) {
+                if (searchDto==null){
+                    ToastUtils.showShort(VideoHelpActivity.this,"请选择");
+                }else {
+                    if(searchDto.getCarBrandId()==null){
+                        ToastUtils.showShort(VideoHelpActivity.this,"请选择车辆品牌");
+                    }else if (searchDto.getFaults()==null){
+                        ToastUtils.showShort(VideoHelpActivity.this,"请选择故障范围");
+                    }else {
+                        getHelpData();
+                    }
+                }
             }
         });
 
+    }
+
+    private void getHelpData() {
+        System.out.println("--------"+searchDto.getCarBrandId());
+        Intent to_waitActivity=new Intent(VideoHelpActivity.this, WaitingActivity.class);
+        to_waitActivity.putExtra("data",searchDto);
+        to_waitActivity.putExtra("from_where","0");
+        to_waitActivity.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(to_waitActivity);
     }
 
     private List<FaulTranges.Faul> faults=new ArrayList<>();
@@ -116,28 +140,24 @@ public class VideoHelpActivity extends SwipeBackActivity{
 //                        f_adapter.notifyDataSetChanged();
                         f_adapter.setSelection(position);
                         f_adapter.notifyDataSetChanged();
-                        faults_bean=new Faults();
                         if (faults.get(position).isSelect()==false){
                             String txt=faults.get(position).getText();
                             String value=faults.get(position).getValue();
-                            faults_bean.setText(txt);
-                            faults_bean.setValue(value);
+                            faults_bean=new Faults(position,txt,value);
+//                            faults_bean.setText(txt);
+//                            faults_bean.setValue(value);
+//                            faults_bean.setPosition(position);
                             fault_list.add(faults_bean);
-                            System.out.println("选择了-"+faults.get(position).getText());
+                            System.out.println("选择了-"+position+"\n"+faults.get(position).getText());
                         }else{
-                            String txt=faults.get(position).getText();
-                            String value=faults.get(position).getValue();
-                            faults_bean.setText(txt);
-                            faults_bean.setValue(value);
-                            for (int i=fault_list.size()-1;i>=0;i--){
-                                if (faults_bean.equals(fault_list.get(i))){
-                                    fault_list.remove(faults_bean);
+                            for (Faults fault:fault_list){
+                                if (fault.getPosition()==position){
+                                    fault_list.remove(fault);
+                                    System.out.println("移除了-"+position+"\n"+faults.get(position).getText());
                                 }
                             }
-//                            remove_list.add(faults_bean);
-//                            fault_list.removeAll(remove_list);
-                            System.out.println("移除了-"+faults.get(position).getText());
                         }
+                        searchDto.setFaults(fault_list);
                         System.out.println("------------"+fault_list.size());
                     }
                 });
@@ -158,6 +178,7 @@ public class VideoHelpActivity extends SwipeBackActivity{
     private Map<String, List<CarBrands.Brand>> carbrands_list;
     private List<CarInfo>carInfoList=new ArrayList<>();
     private CarInfo carInfo=null;
+    ListExpertsSearchDto searchDto=new ListExpertsSearchDto();
     /**
      * 获取车辆品牌
      */
@@ -197,6 +218,17 @@ public class VideoHelpActivity extends SwipeBackActivity{
                         if (position != -1) {
                             carbrand_gridview.setSelection(position);
                         }
+                    }
+                });
+                carbrand_gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        String carName=carInfoList.get(position).getCarName();
+                        String carValue=carInfoList.get(position).getCarValue();
+                        searchDto.setCarBrandId(carValue);
+                        System.out.println(carName+"\n"+carValue);
+                        cb_adapter.setSeclection(position);
+                        cb_adapter.notifyDataSetChanged();
                     }
                 });
             }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/zkroot">
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent">
+        <ListView
+            android:background="@color/white"
+            android:scrollbars="none"
+            android:divider="@null"
+            android:id="@+id/zkcarbrand_gridview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+    <!--索引栏-->
+    <com.sinoautodiagnoseos.ui.sidebar.SideBar
+        android:id="@+id/zksb_city"
+        android:layout_width="wrap_content"
+        android:layout_height="400dp"
+        android:layout_gravity="center_vertical"
+        app:sideTextSize="13sp"/>
+</LinearLayout>

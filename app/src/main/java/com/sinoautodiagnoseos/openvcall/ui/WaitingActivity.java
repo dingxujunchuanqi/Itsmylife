@@ -51,17 +51,9 @@ public class WaitingActivity extends BaseActivity implements TimeCountDown.OnTim
     private Handler handler;
     private String flag;//<===来源哪个页面的操作标识
     private String json;//RN封装好的json格式数据
+    private ListExpertsSearchDto lesd=new ListExpertsSearchDto();
     Timer timer = new Timer();
 
-    @Override
-    protected void initUIandEvent() {
-
-    }
-
-    @Override
-    protected void deInitUIandEvent() {
-
-    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,6 +69,17 @@ public class WaitingActivity extends BaseActivity implements TimeCountDown.OnTim
     }
 
     @Override
+    protected void initUIandEvent() {
+
+    }
+
+    @Override
+    protected void deInitUIandEvent() {
+
+    }
+
+
+    @Override
     protected void onStop() {
         countDown.cancel();
         super.onStop();
@@ -87,8 +90,11 @@ public class WaitingActivity extends BaseActivity implements TimeCountDown.OnTim
     //获取标识码
     private void getFlag() {
         flag = getIntent().getStringExtra("from_where");
-        json = getIntent().getStringExtra("json");
-        System.out.println("intent_json="+json);
+        lesd= (ListExpertsSearchDto) getIntent().getExtras().get("data");
+        if (lesd==null){
+            lesd=new ListExpertsSearchDto();
+        }
+        System.out.println("--"+lesd.getCarBrandId());
     }
 
     private void initView() {
@@ -134,9 +140,9 @@ public class WaitingActivity extends BaseActivity implements TimeCountDown.OnTim
     private void findoneexperts() {
         Constant.TOKEN= SharedPreferences.getInstance().getString("checktoken","");
         Constant.REGISTRATION=SharedPreferences.getInstance().getString("RegistrationId","");
-        ReadJSON(json);
+//        ReadJSON(json);
         Gson gson = new Gson();
-        String json = gson.toJson(les);
+        String json = gson.toJson(lesd);
 
         Log.e("JSON", json);
         RequestBody requestBody = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), json);
@@ -177,7 +183,7 @@ public class WaitingActivity extends BaseActivity implements TimeCountDown.OnTim
             JSONArray array = parser.getJSONArray("faults");
             for (int i = 0;i<array.length();i++){
                 JSONObject faultsObject = array.getJSONObject(i);
-                fault = new Faults();
+//                fault = new Faults();
                 String faults_text=faultsObject.get("text").toString();
                 String faults_value=faultsObject.get("value").toString();
                 fault.setText(faults_text);fault.setValue(faults_value);
@@ -247,7 +253,7 @@ public class WaitingActivity extends BaseActivity implements TimeCountDown.OnTim
 
     @Override
     public void onCountDownFinish() {
-        showLongToast(getResources().getString(R.string.not_response_from_experts));
+        ToastUtils.makeLongText(getResources().getString(R.string.not_response_from_experts),WaitingActivity.this);
         Constant.TOKEN=SharedPreferences.getInstance().getString("checktoken","");
         Constant.REGISTRATION=SharedPreferences.getInstance().getString("RegistrationId","");
         HttpRequestApi.getInstance().getCallStatus(Constant.ROOMID,
@@ -262,6 +268,6 @@ public class WaitingActivity extends BaseActivity implements TimeCountDown.OnTim
 
                     }
                 },WaitingActivity.this));
-        finish();
+//        finish();
     }
 }

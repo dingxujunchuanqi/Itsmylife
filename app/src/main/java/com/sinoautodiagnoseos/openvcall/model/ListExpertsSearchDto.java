@@ -1,5 +1,6 @@
 package com.sinoautodiagnoseos.openvcall.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * Created by HQ_Demos on 2017/3/7.
  */
 
-public class ListExpertsSearchDto {
+public class ListExpertsSearchDto implements Serializable{
     public String getCarBrandId() {
         return carBrandId;
     }

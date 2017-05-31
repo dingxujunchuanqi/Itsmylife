@@ -35,7 +35,7 @@
         android:src="@drawable/phone2"
         android:visibility="invisible"/>
 
-    <com.sinoautodiagnoseos.ui.timecount.TimeCountDown
+    <com.sinoautodiagnoseos.propeller.ui.TimeCountDown
         android:visibility="gone"
         android:id="@+id/countDown"
         android:layout_below="@+id/press_txt"

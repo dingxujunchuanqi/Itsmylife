@@ -3,16 +3,22 @@ package com.sinoautodiagnoseos.ui;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.sinoautodiagnoseos.activity.CarInfoActivity;
+import com.sinoautodiagnoseos.activity.FeedBackActivity;
+import com.sinoautodiagnoseos.activity.ForgetPsswordActivity;
 import com.sinoautodiagnoseos.activity.LoginActivity;
 import com.sinoautodiagnoseos.activity.MainActivity;
 import com.sinoautodiagnoseos.activity.PersonalInfoActivity;
+import com.sinoautodiagnoseos.activity.ServiceDetailActivity;
+import com.sinoautodiagnoseos.activity.SettingActivity;
+import com.sinoautodiagnoseos.entity.CarBrands.CarInfo;
 import com.sinoautodiagnoseos.entity.User.UserInfo;
 
-import static android.R.attr.data;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * 应用程序UI工具包：封装UI相关的一些操作
@@ -83,5 +89,45 @@ public class UIHelper {
         Intent intent = new Intent(context, LoginActivity.class);
         context.startActivity(intent);
 //        ToastMessage(AppContext.getInstance().getApplicationContext(),"此处需要登录");
+    }
+
+    /**
+     * 个人中心中的设置页面
+     * @param context
+     */
+    public static void showSettingActivity(Activity context){
+        Intent intent=new Intent(context,SettingActivity.class);
+        context.startActivity(intent);
+    }
+
+    /**
+     *  修改密码页面
+     * @param context
+     */
+    public static void showFgtPsd(Activity context){
+        Intent intent =new Intent(context, ForgetPsswordActivity.class);
+        context.startActivity(intent);
+    }
+
+    /**
+     *  意见反馈页面
+     * @param context
+     */
+    public static void showFeedBack(Activity context){
+        Intent intent =new Intent(context, FeedBackActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void showServiceDetail(Activity context,int caseId,String title){
+        Intent intent =new Intent(context, ServiceDetailActivity.class);
+        intent.putExtra("caseId",caseId);
+        intent.putExtra("title",title);
+        context.startActivity(intent);
+    }
+
+    public static void showCarInfoActivity(Activity context, List<CarInfo> carInfoList){
+        Intent intent =new Intent(context, CarInfoActivity.class);
+        intent.putExtra("carInfoList", (Serializable) carInfoList);
+        context.startActivityForResult(intent, 1000);
     }
 }

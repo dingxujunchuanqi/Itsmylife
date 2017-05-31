@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        >
+    <RelativeLayout
+        android:id="@+id/feedback_back_click"
+        android:layout_width="@dimen/back_width"
+        android:layout_height="@dimen/view_hight">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/back_button" />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/view_hight"
+        android:background="@color/gray" />
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_hight">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/yijian"
+            android:textColor="@color/text_apha80"
+            android:textSize="@dimen/text_size" />
+    </FrameLayout>
+        <EditText
+            android:layout_below="@+id/frame_layout"
+            android:id="@+id/content_edit"
+            android:padding="5dp"
+            android:hint="请输入您的宝贵意见"
+            android:gravity="left"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="250dp" />
+        <GridView
+            android:layout_below="@+id/content_edit"
+            android:id="@+id/upload_gridview"
+            android:numColumns="3"
+            android:horizontalSpacing="5dp"
+            android:verticalSpacing="5dp"
+            android:scrollbars="none"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/send_button"
+                android:layout_width="@dimen/button_below_with"
+                android:layout_height="@dimen/button_below_high"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/login_shape"
+                android:text="@string/send_feedback"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

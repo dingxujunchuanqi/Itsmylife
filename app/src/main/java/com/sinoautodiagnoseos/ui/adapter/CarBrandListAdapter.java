@@ -21,6 +21,7 @@ public class CarBrandListAdapter extends BaseAdapter {
     private Context mContext;
     private List<CarInfo> brandsList;
     private LayoutInflater inflater;
+    private int location;
 
     public CarBrandListAdapter(Context context,List<CarInfo> brandsList){
         super();
@@ -67,6 +68,13 @@ public class CarBrandListAdapter extends BaseAdapter {
             viewHolder.contentTv.setVisibility(View.VISIBLE);
         }
         viewHolder.contentTv.setText(carInfo.getCarName());
+        if (location==position){
+            viewHolder.contentTv.setTextColor(mContext.getResources().getColor(R.color.white));
+            viewHolder.contentTv.setBackgroundColor(mContext.getResources().getColor(R.color.agora_blue));
+        }else{
+            viewHolder.contentTv.setTextColor(mContext.getResources().getColor(R.color.black));
+            viewHolder.contentTv.setBackgroundColor(mContext.getResources().getColor(R.color.white));
+        }
 //            viewHolder.tab_tag.setText(brandsList.get(position).getCarHeader());
         return convertView;
     }
@@ -74,5 +82,9 @@ public class CarBrandListAdapter extends BaseAdapter {
     static class ViewHolder{
         TextView headerTv;
         TextView contentTv;
+    }
+
+    public void setSeclection(int position) {
+        location = position;
     }
 }

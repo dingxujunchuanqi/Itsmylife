@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layoutFooter"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="55dp"
     android:background="@color/main_footer_bg">
     <!--android:background="@color/main_footer_bg"-->
 
@@ -47,7 +47,10 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:background="@null"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <View
             android:layout_width="0dp"
@@ -86,11 +89,11 @@
                 android:layout_marginTop="2dp"
                 android:layout_toEndOf="@+id/viewSplitLine"
                 android:layout_toRightOf="@+id/viewSplitLine"
-                android:background="@drawable/ic_bg_unread_count"
                 android:gravity="center"
                 android:text="1"
                 android:textColor="#ffffff"
                 android:textSize="@dimen/text_size_13" />
+            <!--android:background="@drawable/ic_bg_unread_count"-->
         </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>

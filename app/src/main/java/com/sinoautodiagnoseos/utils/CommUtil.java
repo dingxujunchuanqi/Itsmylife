@@ -1,6 +1,11 @@
 package com.sinoautodiagnoseos.utils;
 
 
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.GridView;
+import android.widget.ListAdapter;
+
 import com.sinoautodiagnoseos.entity.CarBrands.SideBase;
 
 import java.util.ArrayList;
@@ -69,5 +74,27 @@ public class CommUtil {
             }
         }
         return (String[]) letters.toArray(new String[letters.size()]);
+    }
+
+    /**
+     *  根据列数 让item 的高度自适应
+     * @param gridView
+     */
+    public static void setViewHeightBasedOnChildren(GridView gridView){
+        ListAdapter listAdapter=gridView.getAdapter();
+        if (listAdapter==null){
+            return;
+        }
+        int col=4;
+        int totalHeight=0;
+        for (int i=0;i<listAdapter.getCount();i+=col){
+            View listItem=listAdapter.getView(i,null,gridView);
+            listItem.measure(0,0);
+            totalHeight+=listItem.getMeasuredHeight();
+        }
+        ViewGroup.LayoutParams params=gridView.getLayoutParams();
+        params.height=totalHeight;
+        ((ViewGroup.MarginLayoutParams)params).setMargins(10,10,10,10);
+        gridView.setLayoutParams(params);
     }
 }

@@ -186,7 +186,7 @@ public class SearchView extends LinearLayout implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.search_et_input:
-                lvTips.setVisibility(VISIBLE);
+                lvTips.setVisibility(GONE);
                 break;
         }
     }

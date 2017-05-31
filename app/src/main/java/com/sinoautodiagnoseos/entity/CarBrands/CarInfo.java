@@ -1,10 +1,12 @@
 package com.sinoautodiagnoseos.entity.CarBrands;
 
+import java.io.Serializable;
+
 /**
  * Created by HQ_Demos on 2017/5/12.
  */
 
-public class CarInfo implements SideBase{
+public class CarInfo implements SideBase,Serializable{
     public String getCarName() {
         return carName;
     }

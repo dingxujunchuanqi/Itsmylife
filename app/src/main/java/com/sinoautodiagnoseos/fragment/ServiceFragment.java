@@ -31,6 +31,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.sinoautodiagnoseos.R;
+import com.sinoautodiagnoseos.activity.MainActivity;
 import com.sinoautodiagnoseos.entity.Brand.Brand;
 import com.sinoautodiagnoseos.entity.Brand.BrandResult;
 import com.sinoautodiagnoseos.entity.CarBrands.CarInfo;
@@ -92,8 +93,10 @@ public class ServiceFragment extends Fragment {
     private String faultId="";
     private String carYear="";
     private Context context;
-
-
+    private  MainActivity activity;
+    public void setThis(MainActivity activity){
+        this.activity=activity;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (view==null){
@@ -111,6 +114,15 @@ public class ServiceFragment extends Fragment {
         if (isVisibleToUser){
             isViewVisible=true;
             initData(keyword);
+            user= (RelativeLayout) activity.findViewById(R.id.user);
+            user.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    System.out.println("ServiceFragment");
+                    showSearchDialog();
+                    getAllCar();
+                }
+            });
         }
     }
 
@@ -271,19 +283,19 @@ public class ServiceFragment extends Fragment {
         });
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        user= (RelativeLayout) getActivity().findViewById(R.id.user);
-        user.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println("ServiceFragment");
-                showSearchDialog();
-                getAllCar();
-            }
-        });
-    }
+//    @Override
+//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+//        super.onActivityCreated(savedInstanceState);
+//        user= (RelativeLayout) getActivity().findViewById(R.id.user);
+//        user.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                System.out.println("ServiceFragment");
+//                showSearchDialog();
+//                getAllCar();
+//            }
+//        });
+//    }
     String[] array={"A","B","C","D","E","F","G"
             ,"H","I","J","K","L","M","N"
             ,"O","P","Q","R","S","T"
@@ -487,6 +499,7 @@ public class ServiceFragment extends Fragment {
                         mRecyclerView.setAdapter(myAdapter);
                         myAdapter.notifyDataSetChanged();
                         data_list=new ArrayList<Data>();
+                        caseType="";keyword="";brandId="";faultId="";selectDate="";
                         dialog.dismiss();
                     }
 

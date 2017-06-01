@@ -49,6 +49,7 @@ public class MainActivity extends BaseFragmentActivity {
     private FragmentManager fragmentManager;
     private RelativeLayout user;
     private ImageView left_icon;
+    private StudyFragment studyFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,6 +167,8 @@ public class MainActivity extends BaseFragmentActivity {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         Fragment fragment = fragmentManager.findFragmentByTag(fragmentTags.get(currIndex));
         if (fragment==null){
+            studyFragment = new StudyFragment();
+            studyFragment.setThis(this);
             fragment=instantFragment(currIndex);
         }
         for (int i = 0;i<fragmentTags.size();i++){
@@ -194,7 +197,7 @@ public class MainActivity extends BaseFragmentActivity {
             //消息
             case 2: return new ImFragment();
             //学习
-            case 3: return new StudyFragment();
+            case 3: return studyFragment;
 
             default: return null;
         }

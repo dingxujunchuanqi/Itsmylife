@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.sinoautodiagnoseos.R;
+import com.sinoautodiagnoseos.activity.MainActivity;
 
 import java.lang.reflect.Field;
 
@@ -28,12 +29,18 @@ public class StudyFragment extends Fragment{
 
     private TabLayout mTabLayout;
     private ViewPager pager;
-
+    public MainActivity activity;
+    private ServiceFragment serviceFragment;
+    public void setThis(MainActivity activity){
+        this.activity=activity;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_study_pager,container,false);
         initViews(view);
         initData();
+        serviceFragment = new ServiceFragment();
+        serviceFragment.setThis(activity);
         return view;
     }
 
@@ -96,7 +103,7 @@ public class StudyFragment extends Fragment{
             switch (position) {
                 case 0:
                     System.out.println("----ServiceFragment----"+position);
-                    return new ServiceFragment();
+                    return serviceFragment;
                 case 1:
                     System.out.println("----TechnicalFragment----"+position);
                     return new TechnicalFragment();

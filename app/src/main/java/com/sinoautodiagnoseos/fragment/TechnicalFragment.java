@@ -107,6 +107,15 @@ public class TechnicalFragment extends Fragment {
         if (isVisibleToUser){
             isViewVisible=true;
             initData(keyword);
+            user= (RelativeLayout) getActivity().findViewById(R.id.user);
+            user.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    System.out.println("TechnicalFragment");
+                    showSearchDialog();
+                    getAllCar();
+                }
+            });
         }
     }
 
@@ -247,19 +256,19 @@ public class TechnicalFragment extends Fragment {
         isViewVisible=false;
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        user= (RelativeLayout) getActivity().findViewById(R.id.user);
-        user.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.out.println("TechnicalFragment");
-                showSearchDialog();
-                getAllCar();
-            }
-        });
-    }
+//    @Override
+//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+//        super.onActivityCreated(savedInstanceState);
+//        user= (RelativeLayout) getActivity().findViewById(R.id.user);
+//        user.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                System.out.println("TechnicalFragment");
+//                showSearchDialog();
+//                getAllCar();
+//            }
+//        });
+//    }
 
     String[] array={"A","B","C","D","E","F","G"
             ,"H","I","J","K","L","M","N"
@@ -461,6 +470,7 @@ public class TechnicalFragment extends Fragment {
                         myAdapter=new MyAdapter(result_list);
                         mRecyclerView.setAdapter(myAdapter);
                         myAdapter.notifyDataSetChanged();
+                        caseType="";keyword="";brandId="";faultId="";selectDate="";
                         data_list=new ArrayList<Data>();
                         dialog.dismiss();
                     }

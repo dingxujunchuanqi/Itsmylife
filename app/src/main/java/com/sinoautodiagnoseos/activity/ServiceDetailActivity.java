@@ -1,12 +1,18 @@
 package com.sinoautodiagnoseos.activity;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
@@ -15,10 +21,12 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sinoautodiagnoseos.R;
 import com.sinoautodiagnoseos.ui.loginui.SwipeBackActivity;
 import com.sinoautodiagnoseos.utils.MyIntent;
+import com.sinoautodiagnoseos.utils.PermissionUtils;
 import com.sinoautodiagnoseos.utils.ToastUtils;
 
 import java.io.File;
@@ -37,6 +45,10 @@ import okhttp3.Response;
  */
 
 public class ServiceDetailActivity extends SwipeBackActivity{
+    private String permission = Manifest.permission.READ_PHONE_STATE;
+    private String[] permissionArray = new String[]{
+            Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
     private RelativeLayout service_back_click;
     private TextView service_title_txt;
     private WebView webview;
@@ -104,9 +116,11 @@ public class ServiceDetailActivity extends SwipeBackActivity{
                 progressDialog.show();
             }
 
+            @TargetApi(Build.VERSION_CODES.M)
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 System.out.println("--------url-----"+url);
+                PermissionUtils.checkPermissionArray(ServiceDetailActivity.this,permissionArray,2);
                 File tempFile=new File(url.trim());
                 fileName=tempFile.getName();
                 System.out.println("---fileName--"+fileName);
@@ -267,5 +281,33 @@ public class ServiceDetailActivity extends SwipeBackActivity{
         });
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case PermissionUtils.PERMISSION_REQUEST_CODE:
+                if (PermissionUtils.verifyPermissions(grantResults)) {
+                    //do action
+                    System.out.println("-----------1111111");
+                }else {
+                    ToastUtils.showShort(this, "权限被拒绝");
+                }
+                break;
+            default:super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PermissionUtils.PERMISSION_SETTING_REQ_CODE) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (Settings.canDrawOverlays(this)) {
+                    //do action
+                    System.out.println("-----------222222222");
+                } else {
+                    Toast.makeText(this, "没有设置程序运行所需权限", Toast.LENGTH_LONG).show();
+                    finish();
+                }
+            }
+        }
+    }
 }

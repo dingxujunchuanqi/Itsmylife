@@ -48,8 +48,8 @@ public class CarInfoActivity extends SwipeBackActivity {
     }
 
     private void initView() {
-        back_click= (FrameLayout) findViewById(R.id.back_click);
-        person_tv= (TextView) findViewById(R.id.person_tv);
+        back_click= (FrameLayout) findViewById(R.id.car_back_click);
+        person_tv= (TextView) findViewById(R.id.choise_tv);
         setting_image= (ImageView) findViewById(R.id.setting_image);
         person_tv.setText("请选择");
         setting_image.setVisibility(View.GONE);

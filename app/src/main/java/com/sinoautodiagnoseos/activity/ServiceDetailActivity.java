@@ -128,7 +128,42 @@ public class ServiceDetailActivity extends SwipeBackActivity{
                     String sdcardDir = Environment.getExternalStorageDirectory().getPath()+"/SinoAuto/";
                     fileAllPath=sdcardDir+fileName;
                     getFilePath(sdcardDir,fileName);
-                    downloadAsyn(url,sdcardDir,fileName);
+                    if (filesExists(fileAllPath)){
+                        if (fileName.contains(".jpg")||fileName.contains(".png")||fileName.contains(".bmp")||
+                                fileName.contains(".gif")){
+                            startActivity( MyIntent.getImageFileIntent(fileAllPath));
+                        } else if(fileName.contains(".html")){
+                            startActivity(MyIntent.getHtmlFileIntent(fileAllPath));
+                        }
+                        else if (fileName.contains(".txt")){
+                            startActivity(MyIntent.getTextFileIntent(fileAllPath,true));
+                        }
+                        else if (fileName.contains(".pdf")){
+                            startActivity(MyIntent.getPdfFileIntent(fileAllPath));
+                        }
+                        else if (fileName.contains(".mp3")||fileName.contains(".wav"))
+                        {
+                            startActivity(MyIntent.getAudioFileIntent(fileAllPath));
+                        }
+                        else if (fileName.contains(".mp4")||fileName.contains(".avi")||
+                                fileName.contains(".rmvb")||fileName.contains(".3gp"))
+                        {
+                            startActivity(MyIntent.getVideoFileIntent(fileAllPath));
+                        }
+                        else if (fileName.contains(".doc")||fileName.contains(".docx")){
+                            startActivity(MyIntent.getWordFileIntent(fileAllPath));
+                        }
+                        else if (fileName.contains(".xls")||fileName.contains(".xlsx")){
+                            startActivity(MyIntent.getExcelFileIntent(fileAllPath));
+                        }
+                        else if (fileName.contains(".ppt")){
+                            startActivity( MyIntent.getPptFileIntent(fileAllPath));
+                        }else {
+                            ToastUtils.showShort(ServiceDetailActivity.this,"无法打开该格式文件");
+                        }
+                    }else {
+                        downloadAsyn(url,sdcardDir,fileName);
+                    }
                     return true;
                 }else {
                     return false;

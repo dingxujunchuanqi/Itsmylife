@@ -34,6 +34,7 @@ public class CarInfoActivity extends SwipeBackActivity {
     List<CarInfo> carInfoList=new ArrayList<>();
     private CarBrandListAdapter cb_adapter;
     private String carValue="";
+    private String carName="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +59,7 @@ public class CarInfoActivity extends SwipeBackActivity {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.putExtra("carValue", carValue);
+                intent.putExtra("carName",carName);
                 setResult(1001, intent);
                 finish();
             }
@@ -81,11 +83,16 @@ public class CarInfoActivity extends SwipeBackActivity {
         carbrand_gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String carName=carInfoList.get(position).getCarName();
                 carValue=carInfoList.get(position).getCarValue();
+                carName=carInfoList.get(position).getCarName();
                 System.out.println(carName+"\n"+carValue);
                 cb_adapter.setSeclection(position);
                 cb_adapter.notifyDataSetChanged();
+                Intent intent = new Intent();
+                intent.putExtra("carValue", carValue);
+                intent.putExtra("carName",carName);
+                setResult(1001, intent);
+                finish();;
             }
         });
     }

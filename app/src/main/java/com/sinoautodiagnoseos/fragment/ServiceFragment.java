@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -64,6 +63,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
+import static com.sinoautodiagnoseos.R.id.gz_layout;
 import static com.sinoautodiagnoseos.R.id.item_title;
 
 /**
@@ -92,6 +92,9 @@ public class ServiceFragment extends Fragment {
     private String brandId="";
     private String faultId="";
     private String carYear="";
+    private int pageIndex=1;//起始页
+    private int pageSize=5;//每次搜索的条数
+    private int totalCount;//总条数
     private Context context;
     private  MainActivity activity;
     public void setThis(MainActivity activity){
@@ -134,9 +137,12 @@ public class ServiceFragment extends Fragment {
     private Data data=null;
     private void initData(String keyword) {
         if (isViewVisible&&isViewCreate){
-        NetRequestApi.getInstance().getThinkTank(2,"",keyword,"","","",1,10,new HttpSubscriber<ThinkTank>(new SubscriberOnListener<ThinkTank>() {
+        pageIndex=1;
+        NetRequestApi.getInstance().getThinkTank(2,"",keyword,"","","",pageIndex,pageSize,new HttpSubscriber<ThinkTank>(new SubscriberOnListener<ThinkTank>() {
             @Override
             public void onSucceed(ThinkTank data) {
+                totalCount=data.getTotalCount();
+                System.out.println("--totalCount--"+totalCount);
                 result_list=data.getResult();
                 myAdapter=new MyAdapter(result_list);
                 mRecyclerView.setAdapter(myAdapter);
@@ -208,6 +214,7 @@ public class ServiceFragment extends Fragment {
 
             @Override
             public void onSearch(String text) {
+                System.out.println("---onClick----");
                 //调用键盘搜索键逻辑 业务处理在此
                 search_or_cancle.setText("清除");
                 search_or_cancle.setVisibility(View.VISIBLE);
@@ -272,11 +279,26 @@ public class ServiceFragment extends Fragment {
                 h.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-//                        for(int i=0;i<5;i++){
+//                        for (int i=pageIndex;i<totalCount/5)
+//                        NetRequestApi.getInstance().getThinkTank(2,"",keyword,"","","",2,1,new HttpSubscriber<ThinkTank>(new SubscriberOnListener<ThinkTank>() {
+//                            @Override
+//                            public void onSucceed(ThinkTank data) {
+//                                result_list=data.getResult();
+//                                myAdapter.data.addAll(result_list);
+//                                myAdapter.notifyDataSetChanged();
+//                                mRecyclerView.setLoadMoreComplete();
+//                            }
+//
+//                            @Override
+//                            public void onError(int code, String msg) {
+//
+//                            }
+//                        },getContext()));
+//                        for(int i=0;i<10;i++){
 //                            myAdapter.data.add(i+"ok");
 //                        }
-                        myAdapter.notifyDataSetChanged();
-                        mRecyclerView.setLoadMoreComplete();
+//                        myAdapter.notifyDataSetChanged();
+//                        mRecyclerView.setLoadMoreComplete();
                     }
                 },1000);
             }
@@ -341,6 +363,8 @@ public class ServiceFragment extends Fragment {
     private PpAdapter ppAdapter;
     private GzAdapter gzAdapter;
     private ZlAdapter zlAdapter;
+    private TextView pp,gz,zl;
+    private RelativeLayout p_layout,g_layout,z_layout;
     //显示搜索dialog
     private void showSearchDialog() {
         dialog=new Search_Dialog(getContext(),R.style.DialogTheme);
@@ -353,6 +377,14 @@ public class ServiceFragment extends Fragment {
         btn_ok= (TextView) view.findViewById(R.id.search_btn_ok);
         btn_cancle= (TextView) view.findViewById(R.id.search_btn_cancle);
         zl_layout= (LinearLayout) view.findViewById(R.id.zl_layout);
+
+        pp=(TextView)view.findViewById(R.id.choise_pp_txt);
+        gz=(TextView)view.findViewById(R.id.choise_gz_txt);
+        zl=(TextView)view.findViewById(R.id.choise_z_txt);
+
+        p_layout=(RelativeLayout)view.findViewById(R.id.pp_layout);
+        g_layout=(RelativeLayout)view.findViewById(gz_layout);
+        z_layout=(RelativeLayout)view.findViewById(R.id.z_layout);
 
         zl_layout.setVisibility(View.GONE);
 
@@ -391,6 +423,9 @@ public class ServiceFragment extends Fragment {
                         ppAdapter.setSeclection(position);
                         ppAdapter.notifyDataSetChanged();
                         brandId=String.valueOf(brand_list1.get(position).getBrandId());
+                        String p_txt=brand_list1.get(position).getBrandName();
+                        pp.setText(p_txt);
+                        p_layout.setVisibility(View.VISIBLE);
                         System.out.println("---brand_list1--"+brandId);
                         if (brand_list1.get(position).getBrandName().contains("更多"))
                         {
@@ -437,6 +472,9 @@ public class ServiceFragment extends Fragment {
                         gzAdapter.setSeclection(position);
                         gzAdapter.notifyDataSetChanged();
                         faultId=fault_list.get(position).getValue().toString();
+                        String g_txt=fault_list.get(position).getText();
+                        gz.setText(g_txt);
+                        g_layout.setVisibility(View.VISIBLE);
                         System.out.println("---faultId--"+faultId);
                     }
                 });
@@ -473,6 +511,9 @@ public class ServiceFragment extends Fragment {
                 zlAdapter.setSeclection(position);
                 zlAdapter.notifyDataSetChanged();
                 caseType=data_list.get(position).getValue().toString();
+                String z_txt=data_list.get(position).getText();
+                zl.setText(z_txt);
+                z_layout.setVisibility(View.VISIBLE);
                 System.out.println("---caseType--"+caseType);
             }
         });
@@ -483,6 +524,12 @@ public class ServiceFragment extends Fragment {
             public void onClick(View v) {
                 dialog.dismiss();
                 data_list=new ArrayList<Data>();
+                pp.setText("");
+                gz.setText("");
+                zl.setText("");
+                p_layout.setVisibility(View.GONE);
+                g_layout.setVisibility(View.GONE);
+                z_layout.setVisibility(View.GONE);
             }
         });
 
@@ -500,6 +547,12 @@ public class ServiceFragment extends Fragment {
                         myAdapter.notifyDataSetChanged();
                         data_list=new ArrayList<Data>();
                         caseType="";keyword="";brandId="";faultId="";selectDate="";
+                        pp.setText("");
+                        gz.setText("");
+                        zl.setText("");
+                        p_layout.setVisibility(View.GONE);
+                        g_layout.setVisibility(View.GONE);
+                        z_layout.setVisibility(View.GONE);
                         dialog.dismiss();
                     }
 
@@ -526,7 +579,9 @@ public class ServiceFragment extends Fragment {
         if(requestCode == 1000 && resultCode == 1001)
         {
             brandId=data.getStringExtra("carValue");
-            System.out.println("brandId------"+brandId);
+            pp.setText(data.getStringExtra("carName"));
+            p_layout.setVisibility(View.VISIBLE);
+            System.out.println("brandId------"+brandId+pp.getText());
         }
     }
 
@@ -555,10 +610,9 @@ public class ServiceFragment extends Fragment {
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectDate = wl_start_year.getCurrentItem() + 2000 + "";//年
+                selectDate = wl_start_year.getCurrentItem() + 1998 + "";//年
                 popupWindow.dismiss();
                 btn_year.setText(selectDate);
-                System.out.println("--selectDate--"+selectDate);
             }
         });
         btn_cancel.setOnClickListener(new View.OnClickListener() {
@@ -578,14 +632,14 @@ public class ServiceFragment extends Fragment {
         /*****************开始时间***********************/
         wl_start_year = (WheelView) view.findViewById(R.id.wl_start_year);
 
-        mWheelAdapter = new NumericWheelAdapter(getContext(), 2000, 2100);
+        mWheelAdapter = new NumericWheelAdapter(getContext(), curYear-19, curYear);
         mWheelAdapter.setLabel(" ");
         wl_start_year.setViewAdapter(mWheelAdapter);
         mWheelAdapter.setTextColor(R.color.black);
         mWheelAdapter.setTextSize(20);
         wl_start_year.setCyclic(true);//是否可循环滑动
         wl_start_year.addScrollingListener(startScrollListener);
-        wl_start_year.setCurrentItem(curYear - 2000);
+        wl_start_year.setCurrentItem(curYear - 1998);
         wl_start_year.addChangingListener(new OnWheelChangedListener() {
             @Override
             public void onChanged(WheelView wheel, int oldValue, int newValue) {

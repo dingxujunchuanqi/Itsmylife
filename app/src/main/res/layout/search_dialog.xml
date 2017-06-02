@@ -19,17 +19,42 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical" >
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:gravity="center_vertical"
-        android:layout_height="40dp" android:orientation="vertical">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="品牌" android:textSize="14dp"
-        android:textColor="@color/black"
-        android:paddingLeft="12dp"/>
-    </LinearLayout>
+        android:layout_height="40dp" >
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="品牌" android:textSize="14dp"
+            android:textColor="@color/black"
+            android:paddingLeft="12dp"/>
+        <RelativeLayout
+            android:id="@+id/pp_layout"
+            android:visibility="gone"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/pp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="已选:" android:textSize="14dp"
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:id="@+id/choise_pp_txt"
+                android:layout_toRightOf="@+id/pp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="宝马" android:textSize="14dp"
+                android:singleLine="true"
+                android:textColor="@color/agora_blue"
+                android:paddingLeft="5dp"/>
+        </RelativeLayout>
+    </RelativeLayout>
     <View
         android:layout_width="fill_parent"
         android:layout_height="1px"
@@ -44,17 +69,42 @@
         android:verticalSpacing="5dp"
         android:scrollbars="none"
         android:layout_height="170dp"/>
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:gravity="center_vertical"
-        android:layout_height="40dp" android:orientation="vertical">
+        android:layout_height="40dp" >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
             android:text="故障范围" android:textSize="14dp"
             android:textColor="@color/black"
             android:paddingLeft="12dp"/>
-    </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/gz_layout"
+            android:visibility="gone"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/gz"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="已选:" android:textSize="14dp"
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:id="@+id/choise_gz_txt"
+                android:layout_toRightOf="@+id/gz"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="宝马" android:textSize="14dp"
+                android:singleLine="true"
+                android:textColor="@color/agora_blue"
+                android:paddingLeft="5dp"/>
+        </RelativeLayout>
+    </RelativeLayout>
     <View
         android:layout_width="fill_parent"
         android:layout_height="1px"
@@ -75,17 +125,18 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
     </LinearLayout>
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:gravity="center_vertical"
-        android:layout_height="40dp" android:orientation="vertical">
+        android:layout_height="40dp" >
         <TextView
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="年限" android:textSize="14dp"
             android:textColor="@color/black"
             android:paddingLeft="12dp"/>
-    </LinearLayout>
+    </RelativeLayout>
     <View
         android:layout_width="fill_parent"
         android:layout_height="1px"
@@ -105,7 +156,7 @@
             android:padding="5dp"
             style="?android:attr/borderlessButtonStyle"
             android:background="@drawable/year_button_bg"
-            android:text="2016"
+            android:text="选择年份"
             android:textColor="@color/black"
             android:textSize="@dimen/md_dialog_bottom_button_textsize" />
     </LinearLayout>
@@ -119,17 +170,42 @@
             android:id="@+id/zl_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:orientation="vertical">
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:gravity="center_vertical"
-            android:layout_height="40dp" android:orientation="vertical">
+            android:layout_height="40dp">
             <TextView
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="资料" android:textSize="14dp"
                 android:textColor="@color/black"
                 android:paddingLeft="12dp"/>
-        </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/z_layout"
+                android:visibility="gone"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/z"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="已选:" android:textSize="14dp"
+                    android:textColor="@color/black"
+                    />
+                <TextView
+                    android:id="@+id/choise_z_txt"
+                    android:layout_toRightOf="@+id/z"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="宝马" android:textSize="14dp"
+                    android:singleLine="true"
+                    android:textColor="@color/agora_blue"
+                    android:paddingLeft="5dp"/>
+            </RelativeLayout>
+        </RelativeLayout>
         <View
             android:layout_width="fill_parent"
             android:layout_height="1px"

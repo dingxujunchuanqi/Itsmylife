@@ -85,9 +85,10 @@ public class ServiceDetailActivity extends SwipeBackActivity{
 
         WebSettings webSettings = webview.getSettings();
         webSettings.setDomStorageEnabled(true);
-        webSettings.setLoadWithOverviewMode(true);
-        webSettings.setUseWideViewPort(true);
+        webSettings.setLoadWithOverviewMode(true);// 缩放至屏幕的大小
+        webSettings.setUseWideViewPort(true);//将图片调整到适合webview的大小
         webSettings.setJavaScriptEnabled(true);
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
         webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
         webview.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         webview.setWebChromeClient(new WebChromeClient(){

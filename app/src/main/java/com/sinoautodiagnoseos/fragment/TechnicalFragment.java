@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -316,6 +315,8 @@ public class TechnicalFragment extends Fragment {
     private PpAdapter ppAdapter;
     private GzAdapter gzAdapter;
     private ZlAdapter zlAdapter;
+    private TextView pp,gz,zl;
+    private RelativeLayout p_layout,g_layout,z_layout;
     private void showSearchDialog() {
         dialog=new Search_Dialog(getContext(),R.style.DialogTheme);
         View view=View.inflate(getContext(),R.layout.search_dialog,null);
@@ -326,6 +327,14 @@ public class TechnicalFragment extends Fragment {
         btn_year= (Button) view.findViewById(R.id.btn_year);
         btn_ok= (TextView) view.findViewById(R.id.search_btn_ok);
         btn_cancle= (TextView) view.findViewById(R.id.search_btn_cancle);
+
+        pp=(TextView)view.findViewById(R.id.choise_pp_txt);
+        gz=(TextView)view.findViewById(R.id.choise_gz_txt);
+        zl=(TextView)view.findViewById(R.id.choise_z_txt);
+
+        p_layout=(RelativeLayout)view.findViewById(R.id.pp_layout);
+        g_layout=(RelativeLayout)view.findViewById(R.id.gz_layout);
+        z_layout=(RelativeLayout)view.findViewById(R.id.z_layout);
 
         zl_layout= (LinearLayout) view.findViewById(R.id.zl_layout);
         zl_layout.setVisibility(View.GONE);
@@ -364,6 +373,9 @@ public class TechnicalFragment extends Fragment {
                         ppAdapter.setSeclection(position);
                         ppAdapter.notifyDataSetChanged();
                         brandId=String.valueOf(brand_list1.get(position).getBrandId());
+                        String p_txt=brand_list1.get(position).getBrandName();
+                        pp.setText(p_txt);
+                        p_layout.setVisibility(View.VISIBLE);
                         System.out.println("---brand_list1--"+brandId);
                         if (brand_list1.get(position).getBrandName().contains("更多"))
                         {
@@ -410,6 +422,9 @@ public class TechnicalFragment extends Fragment {
                         gzAdapter.setSeclection(position);
                         gzAdapter.notifyDataSetChanged();
                         faultId=fault_list.get(position).getValue().toString();
+                        String g_txt=fault_list.get(position).getText();
+                        gz.setText(g_txt);
+                        g_layout.setVisibility(View.VISIBLE);
                         System.out.println("---faultId--"+faultId);
                     }
                 });
@@ -446,6 +461,9 @@ public class TechnicalFragment extends Fragment {
                 zlAdapter.setSeclection(position);
                 zlAdapter.notifyDataSetChanged();
                 caseType=data_list.get(position).getValue().toString();
+                String z_txt=data_list.get(position).getText();
+                zl.setText(z_txt);
+                z_layout.setVisibility(View.VISIBLE);
                 System.out.println("---caseType--"+caseType);
             }
         });
@@ -455,6 +473,12 @@ public class TechnicalFragment extends Fragment {
             public void onClick(View v) {
                 dialog.dismiss();
                 data_list=new ArrayList<Data>();
+                pp.setText("");
+                gz.setText("");
+                zl.setText("");
+                p_layout.setVisibility(View.GONE);
+                g_layout.setVisibility(View.GONE);
+                z_layout.setVisibility(View.GONE);
             }
         });
 
@@ -472,6 +496,12 @@ public class TechnicalFragment extends Fragment {
                         myAdapter.notifyDataSetChanged();
                         caseType="";keyword="";brandId="";faultId="";selectDate="";
                         data_list=new ArrayList<Data>();
+                        pp.setText("");
+                        gz.setText("");
+                        zl.setText("");
+                        p_layout.setVisibility(View.GONE);
+                        g_layout.setVisibility(View.GONE);
+                        z_layout.setVisibility(View.GONE);
                         dialog.dismiss();
                     }
 
@@ -491,7 +521,9 @@ public class TechnicalFragment extends Fragment {
         if(requestCode == 1000 && resultCode == 1001)
         {
             brandId=data.getStringExtra("carValue");
-            System.out.println("brandId------"+brandId);
+            pp.setText(data.getStringExtra("carName"));
+            p_layout.setVisibility(View.VISIBLE);
+            System.out.println("brandId------"+brandId+pp.getText());
         }
     }
 
@@ -585,7 +617,7 @@ public class TechnicalFragment extends Fragment {
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectDate = wl_start_year.getCurrentItem() + 2000 + "";//年
+                selectDate = wl_start_year.getCurrentItem() + 1998 + "";//年
                 popupWindow.dismiss();
                 btn_year.setText(selectDate);
             }
@@ -607,14 +639,14 @@ public class TechnicalFragment extends Fragment {
         /*****************开始时间***********************/
         wl_start_year = (WheelView) view.findViewById(R.id.wl_start_year);
 
-        mWheelAdapter = new NumericWheelAdapter(getContext(), 2000, 2100);
+        mWheelAdapter = new NumericWheelAdapter(getContext(), curYear-19, curYear);
         mWheelAdapter.setLabel(" ");
         wl_start_year.setViewAdapter(mWheelAdapter);
         mWheelAdapter.setTextColor(R.color.black);
         mWheelAdapter.setTextSize(20);
         wl_start_year.setCyclic(true);//是否可循环滑动
         wl_start_year.addScrollingListener(startScrollListener);
-        wl_start_year.setCurrentItem(curYear - 2000);
+        wl_start_year.setCurrentItem(curYear - 1998);
         wl_start_year.addChangingListener(new OnWheelChangedListener() {
             @Override
             public void onChanged(WheelView wheel, int oldValue, int newValue) {

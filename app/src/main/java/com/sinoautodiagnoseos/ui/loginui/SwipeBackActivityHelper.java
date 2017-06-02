@@ -33,7 +33,8 @@ public class SwipeBackActivityHelper {
 
             @Override
             public void onEdgeTouch(int edgeFlag) {
-                Utils.convertActivityToTranslucent(mActivity);
+//                Utils.convertActivityToTranslucent(mActivity);
+                mActivity.finish();//解决滑动出现的黑屏现象
             }
 
             @Override

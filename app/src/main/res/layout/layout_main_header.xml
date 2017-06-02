@@ -3,7 +3,7 @@
     android:id="@+id/layout_header"
     android:layout_width="match_parent"
     android:layout_height="48dip"
-    android:background="@color/agora_blue">
+    android:background="@color/gray">
 
     <!-- 返回按钮 -->
 
@@ -25,13 +25,17 @@
         android:maxWidth="180dp"
         android:singleLine="true"
         android:text="@string/app_name"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="@dimen/text_size_20" />
     <RelativeLayout
-        android:id="@+id/user"
-        android:layout_alignParentRight="true"
+        android:id="@+id/user1"
         android:layout_width="@dimen/view_hight"
-        android:layout_height="@dimen/view_hight">
+        android:layout_height="@dimen/view_hight"
+        android:layout_alignParentRight="true">
+        <RelativeLayout
+            android:id="@+id/user"
+            android:layout_width="@dimen/view_hight"
+            android:layout_height="@dimen/view_hight">
     <ImageView
         android:id="@+id/left_icon"
         android:layout_marginRight="15dp"
@@ -40,5 +44,6 @@
         android:layout_height="@dimen/image_size"
         android:src="@drawable/personal_center"
         />
+    </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

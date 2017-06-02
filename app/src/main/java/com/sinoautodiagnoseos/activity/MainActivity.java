@@ -1,6 +1,5 @@
 package com.sinoautodiagnoseos.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -8,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -47,7 +47,7 @@ public class MainActivity extends BaseFragmentActivity {
     private RadioGroup group;
     private ArrayList<String> fragmentTags;
     private FragmentManager fragmentManager;
-    private RelativeLayout user;
+    private RelativeLayout user,user1;
     private ImageView left_icon;
     private StudyFragment studyFragment;
 
@@ -55,6 +55,9 @@ public class MainActivity extends BaseFragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //防止软键盘把按钮上弹
+        int mode = WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN;
+        getWindow().setSoftInputMode(mode);
         fragmentManager = getSupportFragmentManager();
         initData(savedInstanceState);
         initView();
@@ -88,6 +91,7 @@ public class MainActivity extends BaseFragmentActivity {
     private void initView() {
         left_icon= (ImageView) findViewById(R.id.left_icon);
         user = (RelativeLayout)findViewById(R.id.user);
+        user1 = (RelativeLayout)findViewById(R.id.user1);
         textHeadTitle= (TextView) findViewById(R.id.textHeadTitle);
         textHeadTitle.setText("圈子");
         group = (RadioGroup) findViewById(R.id.group);
@@ -105,6 +109,8 @@ public class MainActivity extends BaseFragmentActivity {
                         textHeadTitle.setText("云诊");
                         left_icon.setImageResource(R.drawable.personal_center);
                         user.setVisibility(View.VISIBLE);
+                        user.setClickable(false);//不可点击
+                        user.setEnabled(false);//不可点击
                         break;
                     case R.id.foot_bar_im:
                         currIndex=2;
@@ -116,6 +122,8 @@ public class MainActivity extends BaseFragmentActivity {
                         textHeadTitle.setText("智库");
                         left_icon.setImageResource(R.drawable.left_search);
                         user.setVisibility(View.VISIBLE);
+                        user.setClickable(true);//可点击
+                        user.setEnabled(true);//可点击
                         break;
                     default:break;
                 }
@@ -126,13 +134,12 @@ public class MainActivity extends BaseFragmentActivity {
     }
 
     private void initListenerOclick() {
-        user.setOnClickListener(new View.OnClickListener() {
+        user1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switch (currIndex){
                     case 1:
-                        Intent intent = new Intent(MainActivity.this, PersonalCenterActivity.class);
-                        startActivity(intent);
+                        UIHelper.showPersonalCenter(MainActivity.this);
                         break;
 //                    case 3:
 //

@@ -7,34 +7,28 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.sinoautodiagnoseos.activity.CarInfoActivity;
+import com.sinoautodiagnoseos.activity.ExpertsCertificationActivity;
 import com.sinoautodiagnoseos.activity.FeedBackActivity;
 import com.sinoautodiagnoseos.activity.ForgetPsswordActivity;
 import com.sinoautodiagnoseos.activity.LoginActivity;
 import com.sinoautodiagnoseos.activity.MainActivity;
-import com.sinoautodiagnoseos.activity.PersonalInfoActivity;
-import com.sinoautodiagnoseos.activity.ServiceDetailActivity;
-import com.sinoautodiagnoseos.activity.SettingActivity;
-import com.sinoautodiagnoseos.entity.CarBrands.CarInfo;
-import com.sinoautodiagnoseos.activity.ExpertsCertificationActivity;
-import com.sinoautodiagnoseos.activity.LoginActivity;
-import com.sinoautodiagnoseos.activity.MainActivity;
+import com.sinoautodiagnoseos.activity.PersonalCenterActivity;
 import com.sinoautodiagnoseos.activity.PersonalInfoActivity;
 import com.sinoautodiagnoseos.activity.SelectStoresActivity;
+import com.sinoautodiagnoseos.activity.ServiceDetailActivity;
+import com.sinoautodiagnoseos.activity.SettingActivity;
 import com.sinoautodiagnoseos.activity.SkillManagementActivity;
 import com.sinoautodiagnoseos.activity.TechnicianCertifActivity;
 import com.sinoautodiagnoseos.activity.TransportationSelectionActivity;
 import com.sinoautodiagnoseos.entity.CarBrands.CarBrands;
+import com.sinoautodiagnoseos.entity.CarBrands.CarInfo;
 import com.sinoautodiagnoseos.entity.FaulTranges.FaulTranges;
 import com.sinoautodiagnoseos.entity.User.Skill;
 import com.sinoautodiagnoseos.entity.User.UserInfo;
 import com.sinoautodiagnoseos.utils.Constant;
 
-import java.util.List;
-
 import java.io.Serializable;
 import java.util.List;
-import static android.R.attr.data;
-import static android.R.id.list;
 
 /**
  * 应用程序UI工具包：封装UI相关的一些操作
@@ -152,6 +146,16 @@ public class UIHelper {
          mbundle.putSerializable("faulTranges",faulTranges);
         intent.putExtras(mbundle);
         context.startActivityForResult(intent,Constant.REQUEST_CODE_107);
+    }
+    /**
+    *跳到个人中心界面
+    *@author dingxujun
+    *created at 2017/6/2 9:09
+    */
+
+    public static void showPersonalCenter(Activity context){
+        Intent intent =new Intent(context,PersonalCenterActivity.class);
+        context.startActivity(intent);
     }
     public static void showLogin(Activity context){
         Intent intent = new Intent(context, LoginActivity.class);

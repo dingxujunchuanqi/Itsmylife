@@ -83,6 +83,7 @@
     <color name="text_apha80">#cf000000</color>
     <color name="text_apha50">#99000000</color>
     <color name="text_apha70">#ba000000</color>
+    <color name="text_apha40" >#cccccc</color>
     <color name="font_text">#666</color>
     <color name="orange1">#E5BD33</color>
 

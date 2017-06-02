@@ -39,7 +39,7 @@ public class RegisterActivity extends SwipeBackActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_activity);
-        //防止按钮上弹
+        //防止软键盘把按钮上弹
         int mode = WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN | WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN;
         getWindow().setSoftInputMode(mode);
         initView();//初始化数据

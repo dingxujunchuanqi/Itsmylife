@@ -31,6 +31,8 @@ public class StudyFragment extends Fragment{
     private ViewPager pager;
     public MainActivity activity;
     private ServiceFragment serviceFragment;
+    private CarInfoFragment carInfoFragment;
+
     public void setThis(MainActivity activity){
         this.activity=activity;
     }
@@ -40,6 +42,8 @@ public class StudyFragment extends Fragment{
         initViews(view);
         initData();
         serviceFragment = new ServiceFragment();
+        carInfoFragment = new CarInfoFragment();
+        carInfoFragment.setThis(activity);
         serviceFragment.setThis(activity);
         return view;
     }
@@ -75,7 +79,12 @@ public class StudyFragment extends Fragment{
 
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                pager.setCurrentItem(tab.getPosition());
+                System.out.println("------我是位置条目----------"+tab.getPosition());
+                System.out.println("------我是位置----------"+pager);
+                if (pager!=null) {
+                    pager.setCurrentItem(tab.getPosition());
+                }
+                System.out.println("------我是位置下----------"+pager);
             }
 
             @Override
@@ -109,7 +118,7 @@ public class StudyFragment extends Fragment{
                     return new TechnicalFragment();
                 case 2:
                     System.out.println("----CarInfoFragment----"+position);
-                    return new CarInfoFragment();
+                    return carInfoFragment;
             }
             return null;
         }

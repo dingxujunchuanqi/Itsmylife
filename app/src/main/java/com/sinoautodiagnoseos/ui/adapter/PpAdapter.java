@@ -59,8 +59,14 @@ public class PpAdapter extends BaseAdapter{
             holder.brand_btn.setBackgroundResource(R.drawable.yuanjiao_btn_selector);
             holder.brand_btn.setTextColor(context.getResources().getColor(R.color.white));
         }else {
-            holder.brand_btn.setBackgroundResource(R.drawable.yuanjiao_btn_unselector);
-            holder.brand_btn.setTextColor(context.getResources().getColor(R.color.black));
+            holder.brand_btn.setBackgroundResource(R.drawable.pinpai_shape);
+            holder.brand_btn.setTextColor(context.getResources().getColor(R.color.text_apha40));
+        }
+        if (list.get(position).getBrandName().equals("更多")
+                ||list.get(position).getBrandName().equals("全部"))
+        {
+            holder.brand_btn.setBackground(null);
+            holder.brand_btn.setTextColor(context.getResources().getColor(R.color.text_apha40));
         }
         Log.e("brand_btn",list.get(position).getBrandName());
         holder.brand_btn.setText(list.get(position).getBrandName());

@@ -29,7 +29,7 @@ public class SearchView extends LinearLayout implements View.OnClickListener{
     /**
      * 输入框
      */
-    private EditText etInput;
+    public EditText etInput;
 
     /**
      * 删除键
@@ -125,6 +125,7 @@ public class SearchView extends LinearLayout implements View.OnClickListener{
      */
     private void notifyStartSearching(String str) {
         if (mListener!=null){
+            System.out.println("----------我是回调搜索------");
             mListener.onSearch(etInput.getText().toString());
         }
         //隐藏软键盘
@@ -166,6 +167,7 @@ public class SearchView extends LinearLayout implements View.OnClickListener{
                 }
                 //更新autoComplete数据
                 if (mListener != null) {
+                    System.out.println("----------我是回调搜索onRefreshAutoComplete------");
                     mListener.onRefreshAutoComplete(charSequence + "");
                 }
             }else {

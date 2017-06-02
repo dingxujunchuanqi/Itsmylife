@@ -59,8 +59,8 @@ public class GzAdapter extends BaseAdapter{
             holder.fault_btn.setBackgroundResource(R.drawable.yuanjiao_btn_selector);
             holder.fault_btn.setTextColor(context.getResources().getColor(R.color.white));
         }else {
-            holder.fault_btn.setBackgroundResource(R.drawable.yuanjiao_btn_unselector);
-            holder.fault_btn.setTextColor(context.getResources().getColor(R.color.black));
+            holder.fault_btn.setBackgroundResource(R.drawable.pinpai_shape);
+            holder.fault_btn.setTextColor(context.getResources().getColor(R.color.text_apha40));
         }
         Log.e("fault_btn",list.get(position).getText());
         holder.fault_btn.setText(list.get(position).getText());

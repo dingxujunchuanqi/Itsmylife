@@ -5,12 +5,15 @@
     android:layout_height="wrap_content"
     android:background="@drawable/search_dialog_bg"
     android:orientation="vertical" >
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
         android:layout_weight="1">
     <LinearLayout
+        android:layout_marginLeft="@dimen/space_12"
+        android:layout_marginRight="@dimen/space_12"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" >
@@ -26,7 +29,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="品牌" android:textSize="14dp"
+        android:text="品牌" android:textSize="@dimen/text_size_17"
         android:textColor="@color/black"
         android:paddingLeft="12dp"/>
     </LinearLayout>
@@ -36,7 +39,7 @@
         android:layout_marginLeft="@dimen/md_dialog_margin"
         android:layout_marginRight="@dimen/md_dialog_margin"
         android:background="@color/md_dialog_divider_dark" />
-    <GridView
+    <com.sinoautodiagnoseos.ui.adapter.FaultCoverageGridview
         android:id="@+id/search_pinpai"
         android:layout_width="match_parent"
         android:numColumns="4"
@@ -51,7 +54,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="故障范围" android:textSize="14dp"
+            android:text="故障范围" android:textSize="@dimen/text_size_17"
             android:textColor="@color/black"
             android:paddingLeft="12dp"/>
     </LinearLayout>
@@ -61,7 +64,7 @@
         android:layout_marginLeft="@dimen/md_dialog_margin"
         android:layout_marginRight="@dimen/md_dialog_margin"
         android:background="@color/md_dialog_divider_dark" />
-    <GridView
+    <com.sinoautodiagnoseos.ui.adapter.FaultCoverageGridview
         android:id="@+id/search_guzhang"
         android:layout_width="match_parent"
         android:numColumns="4"
@@ -82,7 +85,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="年限" android:textSize="14dp"
+            android:text="年限" android:textSize="@dimen/text_size_17"
             android:textColor="@color/black"
             android:paddingLeft="12dp"/>
     </LinearLayout>
@@ -126,7 +129,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="资料" android:textSize="14dp"
+                android:text="资料" android:textSize="@dimen/text_size_17"
                 android:textColor="@color/black"
                 android:paddingLeft="12dp"/>
         </LinearLayout>
@@ -136,7 +139,7 @@
             android:layout_marginLeft="@dimen/md_dialog_margin"
             android:layout_marginRight="@dimen/md_dialog_margin"
             android:background="@color/md_dialog_divider_dark" />
-        <GridView
+        <com.sinoautodiagnoseos.ui.adapter.FaultCoverageGridview
             android:id="@+id/search_ziliao"
             android:layout_width="match_parent"
             android:numColumns="3"
@@ -148,6 +151,7 @@
     </LinearLayout>
     </LinearLayout>
     </ScrollView>
+
     <RelativeLayout
         android:id="@+id/rl_buttons"
         android:layout_width="match_parent"

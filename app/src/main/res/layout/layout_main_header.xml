@@ -28,10 +28,14 @@
         android:textColor="@color/white"
         android:textSize="@dimen/text_size_20" />
     <RelativeLayout
-        android:id="@+id/user"
-        android:layout_alignParentRight="true"
+        android:id="@+id/user1"
         android:layout_width="@dimen/view_hight"
-        android:layout_height="@dimen/view_hight">
+        android:layout_height="@dimen/view_hight"
+        android:layout_alignParentRight="true">
+        <RelativeLayout
+            android:id="@+id/user"
+            android:layout_width="@dimen/view_hight"
+            android:layout_height="@dimen/view_hight">
     <ImageView
         android:id="@+id/left_icon"
         android:layout_marginRight="15dp"
@@ -40,5 +44,6 @@
         android:layout_height="@dimen/image_size"
         android:src="@drawable/personal_center"
         />
+    </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

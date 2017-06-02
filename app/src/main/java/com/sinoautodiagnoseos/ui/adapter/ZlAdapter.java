@@ -60,8 +60,8 @@ public class ZlAdapter extends BaseAdapter{
             holder.data_btn.setBackgroundResource(R.drawable.yuanjiao_btn_selector);
             holder.data_btn.setTextColor(context.getResources().getColor(R.color.white));
         }else {
-            holder.data_btn.setBackgroundResource(R.drawable.yuanjiao_btn_unselector);
-            holder.data_btn.setTextColor(context.getResources().getColor(R.color.black));
+            holder.data_btn.setBackgroundResource(R.drawable.pinpai_shape);
+            holder.data_btn.setTextColor(context.getResources().getColor(R.color.text_apha40));
         }
         Log.e("data_btn",list.get(position).getText());
         holder.data_btn.setText(list.get(position).getText());

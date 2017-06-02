@@ -11,6 +11,7 @@ import com.sinoautodiagnoseos.activity.FeedBackActivity;
 import com.sinoautodiagnoseos.activity.ForgetPsswordActivity;
 import com.sinoautodiagnoseos.activity.LoginActivity;
 import com.sinoautodiagnoseos.activity.MainActivity;
+import com.sinoautodiagnoseos.activity.PersonalCenterActivity;
 import com.sinoautodiagnoseos.activity.PersonalInfoActivity;
 import com.sinoautodiagnoseos.activity.ServiceDetailActivity;
 import com.sinoautodiagnoseos.activity.SettingActivity;
@@ -152,6 +153,16 @@ public class UIHelper {
          mbundle.putSerializable("faulTranges",faulTranges);
         intent.putExtras(mbundle);
         context.startActivityForResult(intent,Constant.REQUEST_CODE_107);
+    }
+    /**
+    *跳到个人中心界面
+    *@author dingxujun
+    *created at 2017/6/2 9:09
+    */
+
+    public static void showPersonalCenter(Activity context){
+        Intent intent =new Intent(context,PersonalCenterActivity.class);
+        context.startActivity(intent);
     }
     public static void showLogin(Activity context){
         Intent intent = new Intent(context, LoginActivity.class);

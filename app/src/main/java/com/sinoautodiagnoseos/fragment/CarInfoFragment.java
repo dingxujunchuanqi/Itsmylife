@@ -31,6 +31,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.sinoautodiagnoseos.R;
+import com.sinoautodiagnoseos.activity.MainActivity;
 import com.sinoautodiagnoseos.entity.Brand.Brand;
 import com.sinoautodiagnoseos.entity.Brand.BrandResult;
 import com.sinoautodiagnoseos.entity.CarBrands.CarInfo;
@@ -93,11 +94,13 @@ public class CarInfoFragment extends Fragment {
     private String faultId="";
     private String carYear="";
 
-
+    private MainActivity activity;
+    public void setThis(MainActivity activity){
+        this.activity=activity;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (view==null){
-            isViewCreate=true;//view已创建
             view = inflater.inflate(R.layout.fragment_service,container,false);
             initData(keyword);
             initView(view);
@@ -110,8 +113,9 @@ public class CarInfoFragment extends Fragment {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser){
             isViewVisible=true;
+            isViewCreate=true;//view已创建
             initData(keyword);
-            user= (RelativeLayout) getActivity().findViewById(R.id.user);
+            user= (RelativeLayout) activity.findViewById(R.id.user);
             user.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -134,6 +138,7 @@ public class CarInfoFragment extends Fragment {
             NetRequestApi.getInstance().getThinkTank(3,"",keyword,"","","",1,10, new HttpSubscriber<ThinkTank>(new SubscriberOnListener<ThinkTank>() {
                 @Override
                 public void onSucceed(ThinkTank data) {
+                    System.out.println("-------我是汽车资料搜索接口---------");
                     result_list = data.getResult();
                     myAdapter = new MyAdapter(result_list);
                     mRecyclerView.setAdapter(myAdapter);
@@ -150,7 +155,7 @@ public class CarInfoFragment extends Fragment {
 
                 @Override
                 public void onError(int code, String msg) {
-
+                    System.out.println("-------我是汽车资料搜索失败接口---------");
                 }
             }, getContext()));
 
@@ -178,6 +183,7 @@ public class CarInfoFragment extends Fragment {
 
             @Override
             public void onSearch(String text) {
+                System.out.println("------我是搜索被点击了汽车资料-----");
                 //调用键盘搜索键逻辑 业务处理在此
                 search_or_cancle.setText("清除");
                 search_or_cancle.setVisibility(View.VISIBLE);
@@ -213,6 +219,7 @@ public class CarInfoFragment extends Fragment {
                         layoutParams1.width=w1;
                         case_search_view.setLayoutParams(layoutParams1);
                         search_or_cancle.setVisibility(View.GONE);
+                        case_search_view.etInput.setText("");//点击清除，清空输入框
                         keyword="";
                         initData(keyword);
                         break;

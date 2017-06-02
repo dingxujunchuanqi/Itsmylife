@@ -100,7 +100,6 @@ public class ServiceFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (view==null){
-            isViewCreate=true;//view已创建
             view = inflater.inflate(R.layout.fragment_service,container,false);
             initData(keyword);
             initView(view);
@@ -113,6 +112,7 @@ public class ServiceFragment extends Fragment {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser){
             isViewVisible=true;
+            isViewCreate=true;//view已创建
             initData(keyword);
             user= (RelativeLayout) activity.findViewById(R.id.user);
             user.setOnClickListener(new View.OnClickListener() {
@@ -137,6 +137,7 @@ public class ServiceFragment extends Fragment {
         NetRequestApi.getInstance().getThinkTank(2,"",keyword,"","","",1,10,new HttpSubscriber<ThinkTank>(new SubscriberOnListener<ThinkTank>() {
             @Override
             public void onSucceed(ThinkTank data) {
+                System.out.println("-------我是服务搜索接口---------");
                 result_list=data.getResult();
                 myAdapter=new MyAdapter(result_list);
                 mRecyclerView.setAdapter(myAdapter);
@@ -208,6 +209,7 @@ public class ServiceFragment extends Fragment {
 
             @Override
             public void onSearch(String text) {
+                System.out.println("------我是搜索被点击了服务-----");
                 //调用键盘搜索键逻辑 业务处理在此
                 search_or_cancle.setText("清除");
                 search_or_cancle.setVisibility(View.VISIBLE);
@@ -243,6 +245,7 @@ public class ServiceFragment extends Fragment {
                         layoutParams1.width=w1;
                         case_search_view.setLayoutParams(layoutParams1);
                         search_or_cancle.setVisibility(View.GONE);
+                        case_search_view.etInput.setText("");//点击清除，清空输入框
 //                        search_or_cancle.setText("取消");
                         keyword="";
                         initData(keyword);
@@ -338,9 +341,9 @@ public class ServiceFragment extends Fragment {
     private Button btn_year;
     private TextView btn_ok,btn_cancle;
     private LinearLayout zl_layout;
-    private PpAdapter ppAdapter;
-    private GzAdapter gzAdapter;
-    private ZlAdapter zlAdapter;
+    private PpAdapter ppAdapter;//品牌Adapter
+    private GzAdapter gzAdapter;//故障Adapter
+    private ZlAdapter zlAdapter;//资料的Adapter
     //显示搜索dialog
     private void showSearchDialog() {
         dialog=new Search_Dialog(getContext(),R.style.DialogTheme);
@@ -375,13 +378,13 @@ public class ServiceFragment extends Fragment {
                     brand_list1.add(brandResult);
                     ppAdapter=new PpAdapter(getContext(),brand_list1);
                     search_pinpai.setAdapter(ppAdapter);
-                    CommUtil.setViewHeightBasedOnChildren(search_pinpai);
+                   CommUtil.setViewHeightBasedOnChildren(search_pinpai);
                     ppAdapter.notifyDataSetChanged();
                 }else{
                     //品牌adapter
                     ppAdapter=new PpAdapter(getContext(),brand_list);
                     search_pinpai.setAdapter(ppAdapter);
-                    CommUtil.setViewHeightBasedOnChildren(search_pinpai);
+                 CommUtil.setViewHeightBasedOnChildren(search_pinpai);
                     ppAdapter.notifyDataSetChanged();
                 }
 
@@ -401,7 +404,7 @@ public class ServiceFragment extends Fragment {
                             brand_list1.add(brandResult);
                             ppAdapter=new PpAdapter(getContext(),brand_list1);
                             search_pinpai.setAdapter(ppAdapter);
-                            CommUtil.setViewHeightBasedOnChildren(search_pinpai);
+                           CommUtil.setViewHeightBasedOnChildren(search_pinpai);
                             ppAdapter.notifyDataSetChanged();
                         }else if (brand_list1.get(position).getBrandName().contains("全部"))
                         {
@@ -429,7 +432,7 @@ public class ServiceFragment extends Fragment {
                 Log.e("--故障adapter--",fault_list.size()+"");
                 gzAdapter=new GzAdapter(getContext(),fault_list);
                 search_guzhang.setAdapter(gzAdapter);
-                CommUtil.setViewHeightBasedOnChildren(search_guzhang);
+               CommUtil.setViewHeightBasedOnChildren(search_guzhang);
                 gzAdapter.notifyDataSetChanged();
                 search_guzhang.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -465,7 +468,7 @@ public class ServiceFragment extends Fragment {
         data_list.add(data);
         zlAdapter=new ZlAdapter(getContext(),data_list);
         search_ziliao.setAdapter(zlAdapter);
-        CommUtil.setViewHeightBasedOnChildren(search_ziliao);
+       CommUtil.setViewHeightBasedOnChildren(search_ziliao);
         zlAdapter.notifyDataSetChanged();
         search_ziliao.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

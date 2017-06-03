@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
@@ -57,6 +58,7 @@ import com.sinoautodiagnoseos.ui.wheelview.OnWheelScrollListener;
 import com.sinoautodiagnoseos.ui.wheelview.WheelView;
 import com.sinoautodiagnoseos.ui.wheelview.adapter.NumericWheelAdapter;
 import com.sinoautodiagnoseos.utils.CommUtil;
+import com.sinoautodiagnoseos.utils.ToastUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -189,19 +191,23 @@ public class CarInfoFragment extends Fragment {
                 System.out.println("------我是搜索被点击了汽车资料-----");
                 //调用键盘搜索键逻辑 业务处理在此
                 // search_or_cancle.setText("清除");
-                WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
-                Display display = wm.getDefaultDisplay();
-                int w = display.getWidth();
-                RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) case_search_view.getLayoutParams();
-                layoutParams.width = w + 140;
-                case_search_view.setLayoutParams(layoutParams);
-                cancel_image.setVisibility(View.VISIBLE);
-                search_or_cancle.setVisibility(View.GONE);
-                //搜索完成 隐藏软键盘
-                InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
-                initData(text);
-                btn_searchorcacle=1;
+                if (TextUtils.isEmpty(text)) {
+                    ToastUtils.showShort(getActivity(), "请输入关键词");
+                } else {
+                    WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+                    Display display = wm.getDefaultDisplay();
+                    int w = display.getWidth();
+                    RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) case_search_view.getLayoutParams();
+                    layoutParams.width = w + 140;
+                    case_search_view.setLayoutParams(layoutParams);
+                    cancel_image.setVisibility(View.VISIBLE);
+                    search_or_cancle.setVisibility(View.GONE);
+                    //搜索完成 隐藏软键盘
+                    InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+                    initData(text);
+                    btn_searchorcacle = 1;
+                }
             }
         });
 

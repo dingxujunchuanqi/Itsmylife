@@ -298,9 +298,9 @@ public class TechnicalFragment extends Fragment {
                                         resultInfo.setPictureUrl(result_list1.get(i).getPictureUrl());
                                         resultInfo.setCreateTime(result_list1.get(i).getCreateTime());
                                         myAdapter.data.add(0,resultInfo);
-                                        myAdapter.notifyDataSetChanged();
-                                        mRecyclerView.setRefreshComplete();
                                     }
+                                    mRecyclerView.getAdapter().notifyDataSetChanged();
+                                    mRecyclerView.setRefreshComplete();
                                 }
                             }
 

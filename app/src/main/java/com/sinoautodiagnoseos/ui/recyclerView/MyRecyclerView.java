@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -84,6 +83,7 @@ public class MyRecyclerView extends RecyclerView {
                 }
                 break;
             case MotionEvent.ACTION_UP:
+
             case MotionEvent.ACTION_CANCEL:
                 isRefresh = false;
                 isOnTouching = false;

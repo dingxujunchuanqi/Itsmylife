@@ -339,8 +339,8 @@ public class CarInfoFragment extends Fragment {
                                         resultInfo.setCreateTime(result_list1.get(i).getCreateTime());
                                         myAdapter.data.add(resultInfo);
                                     }
-                                    mRecyclerView.setLoadMoreComplete();
-                                    myAdapter.notifyDataSetChanged();
+                                    mRecyclerView.getAdapter().notifyDataSetChanged();
+                                    mRecyclerView.setRefreshComplete();
                                 }
                             }
 

@@ -349,8 +349,9 @@ public class ServiceFragment extends Fragment {
                                         resultInfo.setCreateTime(result_list1.get(i).getCreateTime());
                                         myAdapter.data.add(0,resultInfo);
                                         }
-                                    myAdapter.notifyDataSetChanged();
+                                    mRecyclerView.getAdapter().notifyDataSetChanged();
                                     mRecyclerView.setRefreshComplete();
+
                                 }
                             }
 
@@ -386,8 +387,8 @@ public class ServiceFragment extends Fragment {
                                         resultInfo.setCreateTime(result_list1.get(i).getCreateTime());
                                         myAdapter.data.add(resultInfo);
                                     }
-                                    mRecyclerView.setLoadMoreComplete();
                                     myAdapter.notifyDataSetChanged();
+                                    mRecyclerView.setLoadMoreComplete();
                                 }
                             }
 

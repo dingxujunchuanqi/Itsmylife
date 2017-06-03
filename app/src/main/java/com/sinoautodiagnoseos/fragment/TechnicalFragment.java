@@ -256,6 +256,7 @@ public class TechnicalFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        case_search_view.etInput.setText("");
         isViewCreate=false;
         isViewVisible=false;
     }
@@ -360,6 +361,10 @@ public class TechnicalFragment extends Fragment {
                 faultId="";
                 caseType="";
                 btn_year.setText("不限");
+                ppAdapter.setSeclection(-1);//刷新adapter的样式预留方法 让选择框失去焦点
+                ppAdapter.notifyDataSetChanged();
+                gzAdapter.setSeclection(-1);
+                gzAdapter.notifyDataSetChanged();
             }
         });
 

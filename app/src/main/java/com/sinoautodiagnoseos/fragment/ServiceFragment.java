@@ -186,6 +186,12 @@ public class ServiceFragment extends Fragment {
 //        },getContext()));
 //    }
 
+    //搜索完成 隐藏软键盘
+    private void hideInputMethod(){
+        InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+    }
+
     private void initView(View view) {
 //        user.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -212,7 +218,6 @@ public class ServiceFragment extends Fragment {
                 case_search_view.setLayoutParams(layoutParams);
                 search_or_cancle.setVisibility(View.VISIBLE);
                 search_or_cancle.setText("取消");
-
             }
 
             @Override
@@ -222,9 +227,9 @@ public class ServiceFragment extends Fragment {
                 //调用键盘搜索键逻辑 业务处理在此
                 search_or_cancle.setText("清除");
                 search_or_cancle.setVisibility(View.VISIBLE);
-                //搜索完成 隐藏软键盘
-                InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+//                InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+//                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+                hideInputMethod();
                 initData(text);
                 btn_searchorcacle=1;
             }
@@ -235,6 +240,7 @@ public class ServiceFragment extends Fragment {
             public void onClick(View v) {
                 switch (btn_searchorcacle){
                     case 0:
+                        hideInputMethod();
                         System.out.println("11111我点击了----"+search_or_cancle.getText());
                         search_or_cancle.setText("取消");
                         WindowManager wm = (WindowManager)getContext().getSystemService(Context.WINDOW_SERVICE);
@@ -246,6 +252,7 @@ public class ServiceFragment extends Fragment {
                         search_or_cancle.setVisibility(View.GONE);
                         break;
                     case 1:
+                        hideInputMethod();
                         System.out.println("222222我点击了----"+search_or_cancle.getText());
                         WindowManager wm1 = (WindowManager)getContext().getSystemService(Context.WINDOW_SERVICE);
                         Display display1 = wm1.getDefaultDisplay();
@@ -410,6 +417,13 @@ public class ServiceFragment extends Fragment {
                 faultId="";
                 caseType="";
                 btn_year.setText("不限");
+                p_layout.setVisibility(View.GONE);
+                g_layout.setVisibility(View.GONE);
+                z_layout.setVisibility(View.GONE);
+                ppAdapter.setSeclection(-1);//刷新adapter的样式预留方法 让选择框失去焦点
+                ppAdapter.notifyDataSetChanged();
+                gzAdapter.setSeclection(-1);
+                gzAdapter.notifyDataSetChanged();
 //                brand_btn.setBackgroundResource(R.drawable.pinpai_shape);
 //                brand_btn.setTextColor(getContext().getResources().getColor(R.color.text_apha40));
 //                ppAdapter.notifyDataSetChanged();
@@ -564,9 +578,6 @@ public class ServiceFragment extends Fragment {
                 pp.setText("");
                 gz.setText("");
                 zl.setText("");
-                p_layout.setVisibility(View.GONE);
-                g_layout.setVisibility(View.GONE);
-                z_layout.setVisibility(View.GONE);
             }
         });
 
@@ -609,9 +620,17 @@ public class ServiceFragment extends Fragment {
 
     @Override
     public void onDestroyView() {
+        System.out.println("---Service---onDestroyView");
         super.onDestroyView();
+        case_search_view.etInput.setText("");
         isViewCreate=false;
         isViewVisible=false;
+    }
+
+    @Override
+    public void onStop() {
+        System.out.println("---Service---onStop");
+        super.onStop();
     }
 
     @Override

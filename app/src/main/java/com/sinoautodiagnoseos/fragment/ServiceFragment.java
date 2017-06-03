@@ -65,7 +65,6 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
-import static com.sinoautodiagnoseos.R.id.cancel_image;
 import static com.sinoautodiagnoseos.R.id.gz_layout;
 import static com.sinoautodiagnoseos.R.id.item_title;
 
@@ -294,20 +293,20 @@ public class ServiceFragment extends Fragment {
                     @Override
                     public void run() {
 //                        for (int i=pageIndex;i<totalCount/5)
-//                        NetRequestApi.getInstance().getThinkTank(2,"",keyword,"","","",2,1,new HttpSubscriber<ThinkTank>(new SubscriberOnListener<ThinkTank>() {
-//                            @Override
-//                            public void onSucceed(ThinkTank data) {
-//                                result_list=data.getResult();
-//                                myAdapter.data.addAll(result_list);
-//                                myAdapter.notifyDataSetChanged();
-//                                mRecyclerView.setLoadMoreComplete();
-//                            }
-//
-//                            @Override
-//                            public void onError(int code, String msg) {
-//
-//                            }
-//                        },getContext()));
+                        NetRequestApi.getInstance().getThinkTank(2,"",keyword,"","","",2,1,new HttpSubscriber<ThinkTank>(new SubscriberOnListener<ThinkTank>() {
+                            @Override
+                            public void onSucceed(ThinkTank data) {
+                                result_list=data.getResult();
+                                myAdapter.data.addAll(result_list);
+                                myAdapter.notifyDataSetChanged();
+                                mRecyclerView.setLoadMoreComplete();
+                            }
+
+                            @Override
+                            public void onError(int code, String msg) {
+
+                            }
+                        },getContext()));
 //                        for(int i=0;i<10;i++){
 //                            myAdapter.data.add(i+"ok");
 //                        }

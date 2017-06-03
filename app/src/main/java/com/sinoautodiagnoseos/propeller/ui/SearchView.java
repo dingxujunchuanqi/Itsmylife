@@ -71,6 +71,10 @@ public class SearchView extends LinearLayout implements View.OnClickListener{
      */
 
     private SearchViewListener mListener;
+    /*
+    * 删除图片按钮
+    * */
+    public ImageView search_delete;
 
     /**
      * 设置搜索回调接口
@@ -92,6 +96,7 @@ public class SearchView extends LinearLayout implements View.OnClickListener{
     private void initViews() {
         etInput= (EditText) findViewById(R.id.search_et_input);
         lvTips = (ListView) findViewById(R.id.search_lv_tips);
+        search_delete = (ImageView) findViewById(R.id.search_iv_delete);
         lvTips.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -104,7 +109,7 @@ public class SearchView extends LinearLayout implements View.OnClickListener{
                 notifyStartSearching(text);
             }
         });
-
+        search_delete.setOnClickListener(this);
         etInput.addTextChangedListener(new EditChangedListener());
         etInput.setOnClickListener(this);
         etInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -159,8 +164,12 @@ public class SearchView extends LinearLayout implements View.OnClickListener{
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
             if (!"".equals(charSequence.toString())) {
+                search_delete.setVisibility(VISIBLE);
+                System.out.println("删除图片监听");
                 lvTips.setVisibility(VISIBLE);
+
                 if (mAutoCompleteAdapter!=null&&lvTips.getAdapter()!=mAutoCompleteAdapter)
                 {
                     lvTips.setAdapter(mAutoCompleteAdapter);
@@ -174,6 +183,8 @@ public class SearchView extends LinearLayout implements View.OnClickListener{
                     lvTips.setAdapter(mHintAdapter);
                 }
                 lvTips.setVisibility(GONE);
+
+                search_delete.setVisibility(GONE);
             }
         }
 

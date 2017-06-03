@@ -35,6 +35,8 @@
     <!-- Required  一些系统要求的权限，如访问网络等-->
     <uses-permission android:name="com.sinoautodiagnoseos.permission.JPUSH_MESSAGE" />
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <!-- 手机震动权限-->
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".app.AppContext"

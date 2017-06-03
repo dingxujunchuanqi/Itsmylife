@@ -366,7 +366,8 @@ public interface HttpRequestService {
                                       ,@Query("faultId")String faultId//系统ID
                                       ,@Query("carYear")String carYear//年限
                                       ,@Query("pageIndex")int pageIndex
-                                      ,@Query("pageSize")int pageSize);
+                                      ,@Query("pageSize")int pageSize
+                                      ,@Query("caseId")Integer caseId );//下拉刷新最新数据的标识
 
     /**
      * 详情页

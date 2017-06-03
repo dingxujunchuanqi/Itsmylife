@@ -15,13 +15,11 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -72,7 +70,6 @@ import java.util.Map;
 
 import static com.sinoautodiagnoseos.R.id.gz_layout;
 import static com.sinoautodiagnoseos.R.id.item_title;
-import static java.security.AccessController.getContext;
 
 /**
  * 维修方案
@@ -100,6 +97,7 @@ public class ServiceFragment extends Fragment {
     private String brandId="";
     private String faultId="";
     private String carYear="";
+    private Integer caseId=null;
     private int pageIndex=1;//起始页
     private int pageSize=5;//每次搜索的条数
     private int totalCount;//总条数
@@ -148,21 +146,29 @@ public class ServiceFragment extends Fragment {
     private void initData(String keyword) {
         if (isViewVisible&&isViewCreate){
         pageIndex=1;
-        NetRequestApi.getInstance().getThinkTank(2,"",keyword,"","","",pageIndex,pageSize,new HttpSubscriber<ThinkTank>(new SubscriberOnListener<ThinkTank>() {
+        NetRequestApi.getInstance().getThinkTank(2,"",keyword,"","","",pageIndex,pageSize,null,new HttpSubscriber<ThinkTank>(new SubscriberOnListener<ThinkTank>() {
             @Override
             public void onSucceed(ThinkTank data) {
                 totalCount=data.getTotalCount();
                 System.out.println("--totalCount--"+totalCount);
                 System.out.println("-------我是服务搜索接口---------");
                 result_list=data.getResult();
+                if (result_list.size()!=0){
+                    caseId=result_list.get(0).getCaseId();
+                }else{
+                    caseId=null;
+                }
                 myAdapter=new MyAdapter(result_list);
                 mRecyclerView.setAdapter(myAdapter);
                 myAdapter.notifyDataSetChanged();
                 myAdapter.setOnItemClickListener(new onRecyclerViewItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
+                        System.out.println("--1---position------"+position);
                         int caseId=result_list.get(position).getCaseId();
+                        System.out.println("--1---caseId------"+caseId);
                         String title=result_list.get(position).getTitle();
+                        System.out.println("--1---title------"+title);
                         UIHelper.showServiceDetail(getActivity(),caseId,title);
 //                        intentDetail(caseId);
                     }
@@ -323,7 +329,36 @@ public class ServiceFragment extends Fragment {
                 h.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        mRecyclerView.setRefreshComplete();;
+                        int pageIndex=1;
+                        NetRequestApi.getInstance().getThinkTank(2,"",keyword,"","","",pageIndex,pageSize,caseId,new HttpSubscriber<ThinkTank>(new SubscriberOnListener<ThinkTank>() {
+                            @Override
+                            public void onSucceed(ThinkTank data) {
+                                List<ResultInfo>result_list1=new ArrayList<ResultInfo>();
+                                ResultInfo resultInfo;
+                                result_list1=data.getResult();
+                                if (data.getTotalCount()==0){
+                                    ToastUtils.showShort(getActivity(),"暂无最新数据");
+                                    mRecyclerView.setRefreshComplete();
+                                }else {
+                                    caseId=result_list1.get(0).getCaseId();
+                                    for (int i=0;i<result_list1.size();i++){
+                                        resultInfo=new ResultInfo();
+                                        resultInfo.setCaseId(result_list1.get(i).getCaseId());
+                                        resultInfo.setTitle(result_list1.get(i).getTitle());
+                                        resultInfo.setPictureUrl(result_list1.get(i).getPictureUrl());
+                                        resultInfo.setCreateTime(result_list1.get(i).getCreateTime());
+                                        myAdapter.data.add(0,resultInfo);
+                                        myAdapter.notifyDataSetChanged();
+                                        mRecyclerView.setRefreshComplete();
+                                        }
+                                }
+                            }
+
+                            @Override
+                            public void onError(int code, String msg) {
+
+                            }
+                        },getContext()));
                     }
                 },1500);
             }
@@ -333,14 +368,27 @@ public class ServiceFragment extends Fragment {
                 h.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-//                        for (int i=pageIndex;i<totalCount/5)
-                        NetRequestApi.getInstance().getThinkTank(2,"",keyword,"","","",2,1,new HttpSubscriber<ThinkTank>(new SubscriberOnListener<ThinkTank>() {
+                        pageIndex=pageIndex+1;
+                        NetRequestApi.getInstance().getThinkTank(2,"",keyword,"","","",pageIndex,pageSize,null,new HttpSubscriber<ThinkTank>(new SubscriberOnListener<ThinkTank>() {
                             @Override
                             public void onSucceed(ThinkTank data) {
-                                result_list=data.getResult();
-                                myAdapter.data.addAll(result_list);
-                                myAdapter.notifyDataSetChanged();
-                                mRecyclerView.setLoadMoreComplete();
+                                List<ResultInfo>result_list1=new ArrayList<ResultInfo>();
+                                ResultInfo resultInfo;
+                                result_list1=data.getResult();
+                                if (result_list1==null){
+                                    ToastUtils.showShort(getActivity(),"数据已加载完了");
+                                }else {
+                                    for (int i = 0; i < result_list1.size(); i++) {
+                                        resultInfo = new ResultInfo();
+                                        resultInfo.setCaseId(result_list1.get(i).getCaseId());
+                                        resultInfo.setTitle(result_list1.get(i).getTitle());
+                                        resultInfo.setPictureUrl(result_list1.get(i).getPictureUrl());
+                                        resultInfo.setCreateTime(result_list1.get(i).getCreateTime());
+                                        myAdapter.data.add(resultInfo);
+                                    }
+                                    mRecyclerView.setLoadMoreComplete();
+                                    myAdapter.notifyDataSetChanged();
+                                }
                             }
 
                             @Override
@@ -348,11 +396,6 @@ public class ServiceFragment extends Fragment {
 
                             }
                         },getContext()));
-//                        for(int i=0;i<10;i++){
-//                            myAdapter.data.add(i+"ok");
-//                        }
-//                        myAdapter.notifyDataSetChanged();
-//                        mRecyclerView.setLoadMoreComplete();
                     }
                 },1000);
             }
@@ -661,7 +704,7 @@ public class ServiceFragment extends Fragment {
                     carYear="";
                 }
                 System.out.println("入参----"+caseType+"-"+brandId+"-"+faultId+"-"+carYear);
-                NetRequestApi.getInstance().getThinkTank(2,caseType,keyword,brandId,faultId,selectDate,1,10,new HttpSubscriber<ThinkTank>(new SubscriberOnListener<ThinkTank>() {
+                NetRequestApi.getInstance().getThinkTank(2,caseType,keyword,brandId,faultId,selectDate,1,10,null,new HttpSubscriber<ThinkTank>(new SubscriberOnListener<ThinkTank>() {
 
                     @Override
                     public void onSucceed(ThinkTank data) {
@@ -850,7 +893,6 @@ public class ServiceFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(MyViewHolder holder, final int position) {
-
             holder.title.setText(data.get(position).getTitle());
             holder.time.setText(data.get(position).getCreateTime());
             String img_url=data.get(position).getPictureUrl();
@@ -863,7 +905,6 @@ public class ServiceFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     if (itemClickListener!=null){
-                        System.out.println("------"+position);
                         itemClickListener.onItemClick(position);
                     }
                 }

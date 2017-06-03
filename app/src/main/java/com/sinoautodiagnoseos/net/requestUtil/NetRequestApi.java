@@ -473,10 +473,10 @@ public class NetRequestApi extends BaseApi {
      * @param subscriber
      */
     public void getThinkTank(int caseCategory,String caseType,String keyword,String brandId,String faultId,
-                             String carYear,int pageIndex,int pageSize,
+                             String carYear,int pageIndex,int pageSize,Integer caseId,
                                 Subscriber<ThinkTank> subscriber){
         Observable observable = httpRequestService.getThinkTank(caseCategory,caseType,
-                                        keyword,brandId,faultId,carYear,pageIndex,pageSize)
+                                        keyword,brandId,faultId,carYear,pageIndex,pageSize,caseId)
                 .map(new HttpResultFunc<ThinkTank>());
         toSubscribe(observable,subscriber);
     }

@@ -7,19 +7,33 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="60dp" android:orientation="horizontal">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp">
                 <com.sinoautodiagnoseos.propeller.ui.SearchView
                     android:id="@+id/case_search_view"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="60dp"/>
+                        <ImageView
+                            android:id="@+id/cancel_image"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:visibility="gone"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="@dimen/space_30"
+                           android:layout_alignParentRight="true"
+                            android:src="@drawable/cancel"/>
+                </RelativeLayout>
                 <TextView
                     android:id="@+id/search_or_clear"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:visibility="gone"
                     android:text="取消"
                     android:textColor="@color/agora_blue"
-                    android:textSize="@dimen/text_size_18"
                     android:gravity="center"
+                    android:textSize="@dimen/text_size_18"
                     android:layout_height="60dp" />
+
         </LinearLayout>
         <com.sinoautodiagnoseos.ui.recyclerView.MyRecyclerView
             android:id="@+id/list"

@@ -65,6 +65,7 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
+import static com.sinoautodiagnoseos.R.id.cancel_image;
 import static com.sinoautodiagnoseos.R.id.gz_layout;
 import static com.sinoautodiagnoseos.R.id.item_title;
 
@@ -99,6 +100,7 @@ public class ServiceFragment extends Fragment {
     private int totalCount;//总条数
     private Context context;
     private  MainActivity activity;
+    private ImageView cancel_image;
     public void setThis(MainActivity activity){
         this.activity=activity;
     }

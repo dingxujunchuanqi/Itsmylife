@@ -348,9 +348,9 @@ public class ServiceFragment extends Fragment {
                                         resultInfo.setPictureUrl(result_list1.get(i).getPictureUrl());
                                         resultInfo.setCreateTime(result_list1.get(i).getCreateTime());
                                         myAdapter.data.add(0,resultInfo);
-                                        myAdapter.notifyDataSetChanged();
-                                        mRecyclerView.setRefreshComplete();
                                         }
+                                    myAdapter.notifyDataSetChanged();
+                                    mRecyclerView.setRefreshComplete();
                                 }
                             }
 
@@ -375,7 +375,7 @@ public class ServiceFragment extends Fragment {
                                 List<ResultInfo>result_list1=new ArrayList<ResultInfo>();
                                 ResultInfo resultInfo;
                                 result_list1=data.getResult();
-                                if (result_list1==null){
+                                if (result_list1.size()==0){
                                     ToastUtils.showShort(getActivity(),"数据已加载完了");
                                 }else {
                                     for (int i = 0; i < result_list1.size(); i++) {

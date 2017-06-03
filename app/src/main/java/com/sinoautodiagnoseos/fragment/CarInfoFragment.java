@@ -283,7 +283,7 @@ public class CarInfoFragment extends Fragment {
                     @Override
                     public void run() {
                         int pageIndex=1;
-                        NetRequestApi.getInstance().getThinkTank(2,"",keyword,"","","",pageIndex,pageSize,caseId,new HttpSubscriber<ThinkTank>(new SubscriberOnListener<ThinkTank>() {
+                        NetRequestApi.getInstance().getThinkTank(3,"",keyword,"","","",pageIndex,pageSize,caseId,new HttpSubscriber<ThinkTank>(new SubscriberOnListener<ThinkTank>() {
                             @Override
                             public void onSucceed(ThinkTank data) {
                                 List<ResultInfo>result_list1=new ArrayList<ResultInfo>();
@@ -328,7 +328,7 @@ public class CarInfoFragment extends Fragment {
                                 List<ResultInfo>result_list1=new ArrayList<ResultInfo>();
                                 ResultInfo resultInfo;
                                 result_list1=data.getResult();
-                                if (result_list1==null){
+                                if (result_list1.size()==0){
                                     ToastUtils.showShort(getActivity(),"数据已加载完了");
                                 }else {
                                     for (int i = 0; i < result_list1.size(); i++) {

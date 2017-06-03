@@ -129,8 +129,8 @@ public class SearchView extends LinearLayout implements View.OnClickListener{
             mListener.onSearch(etInput.getText().toString());
         }
         //隐藏软键盘
-        InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+//        InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+//        imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
     }
 
     /**
@@ -167,7 +167,6 @@ public class SearchView extends LinearLayout implements View.OnClickListener{
                 }
                 //更新autoComplete数据
                 if (mListener != null) {
-                    System.out.println("----------我是回调搜索onRefreshAutoComplete------");
                     mListener.onRefreshAutoComplete(charSequence + "");
                 }
             }else {

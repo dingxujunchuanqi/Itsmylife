@@ -6,18 +6,22 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -57,6 +61,7 @@ import com.sinoautodiagnoseos.ui.wheelview.OnWheelScrollListener;
 import com.sinoautodiagnoseos.ui.wheelview.WheelView;
 import com.sinoautodiagnoseos.ui.wheelview.adapter.NumericWheelAdapter;
 import com.sinoautodiagnoseos.utils.CommUtil;
+import com.sinoautodiagnoseos.utils.ToastUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -68,6 +73,7 @@ import java.util.Map;
 import static com.sinoautodiagnoseos.R.id.cancel_image;
 import static com.sinoautodiagnoseos.R.id.gz_layout;
 import static com.sinoautodiagnoseos.R.id.item_title;
+import static java.security.AccessController.getContext;
 
 /**
  * 维修方案
@@ -110,6 +116,7 @@ public class ServiceFragment extends Fragment {
             view = inflater.inflate(R.layout.fragment_service,container,false);
             initData(keyword);
             initView(view);
+            System.out.println("------------我是服务oncreateview-");
         }
         return view;
     }
@@ -120,7 +127,7 @@ public class ServiceFragment extends Fragment {
         if (isVisibleToUser){
             isViewVisible=true;
             isViewCreate=true;//view已创建
-            initData(keyword);
+          //  initData(keyword);
             user= (RelativeLayout) activity.findViewById(R.id.user);
             user.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -207,6 +214,7 @@ public class ServiceFragment extends Fragment {
 
         case_search_view= (SearchView) view.findViewById(R.id.case_search_view);
         search_or_cancle= (TextView) view.findViewById(R.id.search_or_clear);
+        cancel_image = (ImageView) view.findViewById(R.id.cancel_image);
         case_search_view.setSearchViewListener(new SearchView.SearchViewListener() {
             @Override
             public void onRefreshAutoComplete(String text) {
@@ -215,60 +223,93 @@ public class ServiceFragment extends Fragment {
                 WindowManager wm = (WindowManager)getContext().getSystemService(Context.WINDOW_SERVICE);
                 Display display = wm.getDefaultDisplay();
                 int w = display.getWidth();
-                LinearLayout.LayoutParams layoutParams= (LinearLayout.LayoutParams) case_search_view.getLayoutParams();
-                layoutParams.width=w-200;
+                RelativeLayout.LayoutParams layoutParams= (RelativeLayout.LayoutParams) case_search_view.getLayoutParams();
+                layoutParams.width=w-140;
                 case_search_view.setLayoutParams(layoutParams);
                 search_or_cancle.setVisibility(View.VISIBLE);
+                cancel_image.setVisibility(View.GONE);
                 search_or_cancle.setText("取消");
+
             }
 
             @Override
-            public void onSearch(String text) {
-                System.out.println("---onClick----");
-                System.out.println("------我是搜索被点击了服务-----");
-                //调用键盘搜索键逻辑 业务处理在此
-                search_or_cancle.setText("清除");
-                search_or_cancle.setVisibility(View.VISIBLE);
-//                InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-//                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
-                hideInputMethod();
-                initData(text);
-                btn_searchorcacle=1;
+            public void onSearch(final String text) {
+                if (TextUtils.isEmpty(text)) {
+                    ToastUtils.showShort(getActivity(),"请输入关键词");
+                } else {
+                    System.out.println("---onClick----");
+                    System.out.println("------我是搜索被点击了服务-----");
+                    //调用键盘搜索键逻辑 业务处理在此
+                    search_or_cancle.setText("清除");
+                    search_or_cancle.setVisibility(View.VISIBLE);
+                    WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
+                    Display display = wm.getDefaultDisplay();
+                    int w = display.getWidth();
+                    RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) case_search_view.getLayoutParams();
+                    layoutParams.width = w + 140;
+                    case_search_view.setLayoutParams(layoutParams);
+                    cancel_image.setVisibility(View.VISIBLE);
+                    search_or_cancle.setVisibility(View.GONE);
+                    //搜索完成 隐藏软键盘
+                    hideInputMethod();
+                    initData(text);
+                    btn_searchorcacle = 1;
+                }
             }
         });
 
         search_or_cancle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (btn_searchorcacle){
-                    case 0:
-                        hideInputMethod();
+//case_search_view.etInput.clearFocus();
+             //   case_search_view.etInput.setFocusable(false);
                         System.out.println("11111我点击了----"+search_or_cancle.getText());
                         search_or_cancle.setText("取消");
+                //点击取消 隐藏软键盘
+                InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
                         WindowManager wm = (WindowManager)getContext().getSystemService(Context.WINDOW_SERVICE);
                         Display display = wm.getDefaultDisplay();
                         int w = display.getWidth();
-                        LinearLayout.LayoutParams layoutParams= (LinearLayout.LayoutParams) case_search_view.getLayoutParams();
+                        RelativeLayout.LayoutParams layoutParams= (RelativeLayout.LayoutParams) case_search_view.getLayoutParams();
                         layoutParams.width=w;
                         case_search_view.setLayoutParams(layoutParams);
                         search_or_cancle.setVisibility(View.GONE);
-                        break;
-                    case 1:
-                        hideInputMethod();
-                        System.out.println("222222我点击了----"+search_or_cancle.getText());
-                        WindowManager wm1 = (WindowManager)getContext().getSystemService(Context.WINDOW_SERVICE);
-                        Display display1 = wm1.getDefaultDisplay();
-                        int w1 = display1.getWidth();
-                        LinearLayout.LayoutParams layoutParams1= (LinearLayout.LayoutParams) case_search_view.getLayoutParams();
-                        layoutParams1.width=w1;
-                        case_search_view.setLayoutParams(layoutParams1);
-                        search_or_cancle.setVisibility(View.GONE);
-                        case_search_view.etInput.setText("");//点击清除，清空输入框
+                        case_search_view.etInput.setText("");
+//                        break;
+//                    case 1:
+//                        System.out.println("222222我点击了----"+search_or_cancle.getText());
+//                        WindowManager wm1 = (WindowManager)getContext().getSystemService(Context.WINDOW_SERVICE);
+//                        Display display1 = wm1.getDefaultDisplay();
+//                        int w1 = display1.getWidth();
+//                        LinearLayout.LayoutParams layoutParams1= (LinearLayout.LayoutParams) case_search_view.getLayoutParams();
+//                        layoutParams1.width=w1;
+//                        case_search_view.setLayoutParams(layoutParams1);
+//                        search_or_cancle.setVisibility(View.GONE);
+//                        case_search_view.etInput.setText("");//点击清除，清空输入框
+////                        search_or_cancle.setText("取消");
+//                        keyword="";
+//                        initData(keyword);
+//                        break;
+//                }
+            }
+        });
+        cancel_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("222222我点击了----"+search_or_cancle.getText());
+                WindowManager wm1 = (WindowManager)getContext().getSystemService(Context.WINDOW_SERVICE);
+                Display display1 = wm1.getDefaultDisplay();
+                int w1 = display1.getWidth();
+                RelativeLayout.LayoutParams layoutParams1= (RelativeLayout.LayoutParams) case_search_view.getLayoutParams();
+                layoutParams1.width=w1;
+                case_search_view.setLayoutParams(layoutParams1);
+                search_or_cancle.setVisibility(View.GONE);
+                cancel_image.setVisibility(View.GONE);
+                case_search_view.etInput.setText("");//点击清除，清空输入框
 //                        search_or_cancle.setText("取消");
-                        keyword="";
-                        initData(keyword);
-                        break;
-                }
+                keyword="";
+                initData(keyword);
             }
         });
 
@@ -319,7 +360,34 @@ public class ServiceFragment extends Fragment {
         });
     }
 
-//    @Override
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        case_search_view.etInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(b) {
+// 此处为得到焦点时的处理内容
+                    WindowManager wm = (WindowManager)getContext().getSystemService(Context.WINDOW_SERVICE);
+                    Display display = wm.getDefaultDisplay();
+                    int w = display.getWidth();
+                    RelativeLayout.LayoutParams layoutParams= (RelativeLayout.LayoutParams) case_search_view.getLayoutParams();
+                    layoutParams.width=w-140;
+                    case_search_view.setLayoutParams(layoutParams);
+                    search_or_cancle.setVisibility(View.VISIBLE);
+                    cancel_image.setVisibility(View.GONE);
+                    search_or_cancle.setText("取消");
+                    System.out.println("--------我有焦点--------");
+                } else {
+// 此处为失去焦点时的处理内容
+                    System.out.println("--------我没有有焦点--------");
+                }
+            }
+
+        });
+    }
+
+    //    @Override
 //    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 //        super.onActivityCreated(savedInstanceState);
 //        user= (RelativeLayout) getActivity().findViewById(R.id.user);
@@ -580,6 +648,9 @@ public class ServiceFragment extends Fragment {
                 pp.setText("");
                 gz.setText("");
                 zl.setText("");
+                p_layout.setVisibility(View.GONE);
+                g_layout.setVisibility(View.GONE);
+                z_layout.setVisibility(View.GONE);
             }
         });
 
